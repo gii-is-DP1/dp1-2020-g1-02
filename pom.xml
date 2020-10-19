@@ -68,6 +68,18 @@
 				
 			</properties>
 		</developer>
+		<developer>
+			<id>josrompoz1</id>
+			<name>Jose Carlos Romero</name>
+			<email>josrompoz1@alum.us.es</email>
+			<url></url>
+			<roles>
+			<role>Desarrollador</role>
+			</roles>
+			<properties>
+				
+			</properties>
+		</developer>
 	</developers>
     <dependencies>
         <!-- Spring and Spring Boot dependencies -->
