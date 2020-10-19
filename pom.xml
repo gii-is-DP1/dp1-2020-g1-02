@@ -33,15 +33,15 @@
     </properties>
 	<developers>
 		<developer>
-			<id>Leo</id>
-			<name>Leonardo</name>
-			<email>leo@tmht.com</email>
-			<url>http://www.tmht.com/leo</url>
+			<id>Pablo</id>
+			<name>Pablo</name>
+			<email>pablogonmon@gmail.com</email>
+			<url></url>
 			<roles>
-			<role>leader</role>
+			<role>Desarrollador</role>
 			</roles>
 			<properties>
-			
+				
 			</properties>
 		</developer>
 	</developers>
