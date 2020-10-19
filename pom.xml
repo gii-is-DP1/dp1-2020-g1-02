@@ -56,6 +56,18 @@
 				
 			</properties>
 		</developer>
+		<developer>
+			<id>fervalnav</id>
+			<name>Fernando</name>
+			<email>fervalnav@alum.us.es</email>
+			<url></url>
+			<roles>
+			<role>Desarrollador</role>
+			</roles>
+			<properties>
+				
+			</properties>
+		</developer>
 	</developers>
     <dependencies>
         <!-- Spring and Spring Boot dependencies -->
