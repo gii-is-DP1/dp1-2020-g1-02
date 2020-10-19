@@ -80,6 +80,18 @@
 				
 			</properties>
 		</developer>
+				<developer>
+			<id>josmorbor3</id>
+			<name>Jose Carlos Morales</name>
+			<email>jcmorales2400@gmail.com</email>
+			<url></url>
+			<roles>
+			<role>Desarrollador</role>
+			</roles>
+			<properties>
+				
+			</properties>
+		</developer>
 	</developers>
     <dependencies>
         <!-- Spring and Spring Boot dependencies -->
