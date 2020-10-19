@@ -31,7 +31,56 @@
         <spring-format.version>0.0.19</spring-format.version>
 
     </properties>
-
+    	<developers>
+		<developer>
+			<id>Pablo</id>
+			<name>Pablo</name>
+			<email>pablogonmon@gmail.com</email>
+			<url></url>
+			<roles>
+			<role>Desarrollador</role>
+			</roles>
+			<properties>
+				
+			</properties>
+		</developer>
+		<developer>
+			<id>carvilgar1</id>
+			<name>Carlos</name>
+			<email>carvilgar1@alum.us.es</email>
+			<url></url>
+			<roles>
+			<role>Desarrollador</role>
+			</roles>
+			<properties>
+				
+			</properties>
+		</developer>
+		<developer>
+			<id>fervalnav</id>
+			<name>Fernando</name>
+			<email>fervalnav@alum.us.es</email>
+			<url></url>
+			<roles>
+			<role>Desarrollador</role>
+			</roles>
+			<properties>
+				
+			</properties>
+		</developer>
+		<developer>
+			<id>josmorbor3</id>
+			<name>Jose Carlos</name>
+			<email>jcmorales2400@gmail.com</email>
+			<url></url>
+			<roles>
+			<role>Desarrollador</role>
+			</roles>
+			<properties>
+				
+			</properties>
+		</developer>
+	</developers>
     <dependencies>
         <!-- Spring and Spring Boot dependencies -->
         <dependency>
