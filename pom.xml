@@ -44,6 +44,18 @@
 				
 			</properties>
 		</developer>
+		<developer>
+			<id>carvilgar1</id>
+			<name>Carlos</name>
+			<email>carvilgar1@alum.us.es</email>
+			<url></url>
+			<roles>
+			<role>Desarrollador</role>
+			</roles>
+			<properties>
+				
+			</properties>
+		</developer>
 	</developers>
     <dependencies>
         <!-- Spring and Spring Boot dependencies -->
