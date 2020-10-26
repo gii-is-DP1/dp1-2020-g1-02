@@ -54,7 +54,7 @@ INSERT INTO owners VALUES (9, 'David', 'Schroeder', '2749 Blackhawk Trail', 'Mad
 INSERT INTO owners VALUES (10, 'Carlos', 'Estaban', '2335 Independence La.', 'Waunakee', '6085555487', 'owner1');
 
 INSERT INTO owners VALUES (11, 'Pablo', 'Gonzalez', '2335 Holanda Sev', 'Antique', '600000000', 'pabgonmon2');
-INSERT INTO owners VALUES (12, 'Fernando', 'Valdes', '41800 Sanlucar la Mayor', 'Sevilla', '671193543', 'fervaldes');
+INSERT INTO owners VALUES (12, 'Fernando', 'Valdes', '41800 Sanlucar la Mayor', 'Sevilla', '671193543', 'fervalnav');
 INSERT INTO owners VALUES (32, 'Carlos Jesus', 'Villadiego', '41800 Sevilla', 'Sion', '600000000', 'carvilgar1');
 
 INSERT INTO pets(id,name,birth_date,type_id,owner_id) VALUES (1, 'Leo', '2010-09-07', 1, 1);
