@@ -11,6 +11,9 @@ INSERT INTO authorities(id,username,authority) VALUES (11,'pabgonmon2','owner');
 INSERT INTO users(username,password,enabled) VALUES ('fervalnav','qwerty1',TRUE);
 INSERT INTO authorities(id,username,authority) VALUES (12,'fervalnav','owner');
 
+INSERT INTO users(username,password,enabled) VALUES ('carvilgar1','12345',TRUE);
+INSERT INTO authorities(id,username,authority) VALUES (32,'carvilgar1','owner');
+
 -- One vet user, named vet1 with passwor v3t
 INSERT INTO users(username,password,enabled) VALUES ('vet1','v3t',TRUE);
 INSERT INTO authorities(id,username,authority) VALUES (3,'vet1','veterinarian');
@@ -52,6 +55,7 @@ INSERT INTO owners VALUES (10, 'Carlos', 'Estaban', '2335 Independence La.', 'Wa
 
 INSERT INTO owners VALUES (11, 'Pablo', 'Gonzalez', '2335 Holanda Sev', 'Antique', '600000000', 'pabgonmon2');
 INSERT INTO owners VALUES (12, 'Fernando', 'Valdes', '41800 Sanlucar la Mayor', 'Sevilla', '671193543', 'fervalnav');
+INSERT INTO owners VALUES (32, 'Carlos Jesus', 'Villadiego', '41800 Sevilla', 'Sion', '600000000', 'carvilgar1');
 
 INSERT INTO pets(id,name,birth_date,type_id,owner_id) VALUES (1, 'Leo', '2010-09-07', 1, 1);
 INSERT INTO pets(id,name,birth_date,type_id,owner_id) VALUES (2, 'Basil', '2012-08-06', 6, 2);
