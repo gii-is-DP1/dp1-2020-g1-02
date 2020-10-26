@@ -92,6 +92,18 @@
 				
 			</properties>
 		</developer>
+		<developer>
+			<id>josbejpoz</id>
+			<name>Jose Manuel Bejarano</name>
+			<email>josbejpoz@alum.us.es</email>
+			<url></url>
+			<roles>
+			<role>Desarrollador</role>
+			</roles>
+			<properties>
+				
+			</properties>
+		</developer>
 	</developers>
     <dependencies>
         <!-- Spring and Spring Boot dependencies -->
