@@ -14,9 +14,8 @@
         <thead>
         <tr>
             <th style="width: 150px;">Name</th>
-            <th style="width: 200px;">Description</th>
-            <th>Start</th>
-            <th>End</th>
+            <th style="width: 200px;">apellidos</th>
+            <th>dni</th>
         </tr>
         </thead>
         <tbody>
@@ -26,15 +25,17 @@
                     <c:out value="${event.name}"/>
                 </td>
                 <td>
-                    <c:out value="${event.description}"/>
+                    <c:out value="${event.apellidos}"/>
+                </td>
+                 <td>
+                    <c:out value="${event.dni}"/>
                 </td>
                 <td>
-                    <c:out value="${owner.start}"/>
+                	<spring:url value="/events/delete/{eventId}" var="eventUrl">
+                		<spring:param name="eventId" value="${event.id}"/>
+                	</spring:url>
+                	<a href="${fn:escapeXml(eventUrl)}">Delete</a>
                 </td>
-                <td>
-                    <c:out value="${owner.end}"/>
-                </td>
-                
             </tr>
         </c:forEach>
         </tbody>
