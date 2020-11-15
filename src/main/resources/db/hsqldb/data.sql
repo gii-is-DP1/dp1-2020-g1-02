@@ -1,4 +1,4 @@
--- One admin user, named admin1 with passwor 4dm1n and authority admin
+/* -- One admin user, named admin1 with passwor 4dm1n and authority admin
 INSERT INTO users(username,password,enabled) VALUES ('admin1','4dm1n',TRUE);
 INSERT INTO authorities(id,username,authority) VALUES (1,'admin1','admin');
 -- One owner user, named owner1 with passwor 0wn3r
@@ -83,10 +83,11 @@ INSERT INTO pets(id,name,birth_date,type_id,owner_id) VALUES (27, 'Simba', '2011
 INSERT INTO pets(id,name,birth_date,type_id,owner_id) VALUES (32, 'Sion', '2019-04-1', 2, 32);
 INSERT INTO pets(id,name,birth_date,type_id,owner_id) VALUES (14, 'Sirka', '2010-06-03', 2, 11);
 INSERT INTO pets(id,name,birth_date,type_id,owner_id) VALUES (15, 'Lebron', '2020-05-01', 2, 12);
-INSERT INTO pets(id,name,birth_date,type_id,owner_id) VALUES (15, 'Hache', '2020-03-01', 2, 20);
+INSERT INTO pets(id,name,birth_date,type_id,owner_id) VALUES (16, 'Hache', '2020-03-01', 2, 20);
 
 INSERT INTO visits(id,pet_id,visit_date,description) VALUES (1, 7, '2013-01-01', 'rabies shot');
 INSERT INTO visits(id,pet_id,visit_date,description) VALUES (2, 8, '2013-01-02', 'rabies shot');
 INSERT INTO visits(id,pet_id,visit_date,description) VALUES (3, 8, '2013-01-03', 'neutered');
 INSERT INTO visits(id,pet_id,visit_date,description) VALUES (4, 7, '2013-01-04', 'spayed');
 
+*/
