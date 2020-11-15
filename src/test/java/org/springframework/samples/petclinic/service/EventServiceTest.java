@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 public class EventServiceTest {
 	
 	@Autowired
-	private EventService eventService;
+	private TrabajadorService eventService;
 	
 	@Test
 	public void testCountWithInitialData() {
