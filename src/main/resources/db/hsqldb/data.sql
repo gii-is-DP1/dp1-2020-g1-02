@@ -1,4 +1,5 @@
 INSERT INTO trabajador(id,name,apellidos,dni) VALUES (1,'Carlos Jesus', 'Villadiego', '78461836B');
+INSERT INTO cliente(nombre,apellidos,telefono,direccion,dni,email) VALUES ('Manolito', 'Pies de Plata', '624586245', 'Calle Agata', '25673519P', 'manolito@gmail.com');
 
 /* -- One admin user, named admin1 with passwor 4dm1n and authority admin
 INSERT INTO users(username,password,enabled) VALUES ('admin1','4dm1n',TRUE);
