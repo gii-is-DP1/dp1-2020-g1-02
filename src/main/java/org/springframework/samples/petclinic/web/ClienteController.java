@@ -39,7 +39,7 @@ public class ClienteController {
 		String view="clientes/listadoClientes";
 		if(result.hasErrors()) {
 			modelMap.addAttribute("cliente", cliente);
-			return "events/editEvent";
+			return "clientes/editCliente";
 		}else {
 			clienteService.save(cliente);
 			modelMap.addAttribute("message", "Cliente actualizado!");
