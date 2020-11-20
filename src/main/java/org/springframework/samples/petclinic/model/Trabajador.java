@@ -12,7 +12,7 @@ import lombok.Data;
 @Entity
 @Data
 @Table(name="trabajador")
-public class Trabajador extends NamedEntity{
+public class Trabajador extends NamedEntity {
 
     @Column(name="apellidos")
     @NotEmpty
