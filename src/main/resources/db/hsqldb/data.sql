@@ -12,7 +12,9 @@ INSERT INTO proveedor(name,telefono,email,direccion) VALUES ('Jabones SA', '6456
 INSERT INTO producto(id, name, precio) VALUES (1, 'Lejia', 2.5);
 INSERT INTO producto(id, name, precio) VALUES (2, 'jabon', 0.75);
 
-/*INSERT INTO factura(id, fecha, precio_total) VALUES (1, date('d/m/Y', strtotime('20/10/2020')), 10.0);
+INSERT INTO factura(id, fecha, precio_total) VALUES (1, '2020-10-20', 10.0);
+INSERT INTO factura(id, fecha, precio_total) VALUES (2, '2020-10-22', 137.89);
+INSERT INTO factura(id, fecha, precio_total) VALUES (3, '2020-10-22', 56.01);
 
 /* -- One admin user, named admin1 with passwor 4dm1n and authority admin
 INSERT INTO users(username,password,enabled) VALUES ('admin1','4dm1n',TRUE);
