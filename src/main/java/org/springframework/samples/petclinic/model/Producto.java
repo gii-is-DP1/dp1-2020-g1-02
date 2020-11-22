@@ -16,4 +16,8 @@ public class Producto extends NamedEntity {
 	@NotEmpty
 	private Double precio;
 	
+	@Column(name="cantidad")
+	@NotEmpty
+	private Integer cantidadStock;
+	
 }

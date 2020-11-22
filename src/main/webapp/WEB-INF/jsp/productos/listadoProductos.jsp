@@ -15,6 +15,7 @@
         <tr>
             <th style="width: 150px;">Nombre</th>
             <th style="width: 150px;">Precio</th>
+            <th style="width: 150px;">Cantidad en Stock</th>
 
 
         </tr>
@@ -28,12 +29,15 @@
                 <td>
                     <c:out value="${producto.precio}"/>
                 </td>
+                <td>
+                    <c:out value="${producto.cantidadStock}"/>
+                </td>
                 
                 <td>
-                	<spring:url value="/productos/delete/{productName}" var="productUrl">
-                		<spring:param name="productName" value="${producto.name}"/>
+                	<spring:url value="/productos/delete/{productId}" var="productUrl">
+                		<spring:param name="productId" value="${producto.id}"/>
                 	</spring:url>
-                	<a href="${fn:escapeXml(productUrl)}">Delete</a>
+                	<a href="${fn:escapeXml(productUrl)}">Restar</a>
                 </td>
             </tr>
         </c:forEach>

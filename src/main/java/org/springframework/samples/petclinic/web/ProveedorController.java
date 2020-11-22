@@ -6,8 +6,10 @@ import javax.validation.Valid;
 import javax.websocket.server.PathParam;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.samples.petclinic.model.Oferta;
+import org.springframework.samples.petclinic.model.Pedido;
 import org.springframework.samples.petclinic.model.Proveedor;
-
+import org.springframework.samples.petclinic.service.OfertaService;
 import org.springframework.samples.petclinic.service.ProveedorService;
 
 import org.springframework.stereotype.Controller;
@@ -24,6 +26,7 @@ public class ProveedorController {
 
 	@Autowired
 	private ProveedorService provService;
+	private OfertaService ofertaService;
 	
 	@GetMapping()
 	public String listadoProv(ModelMap modelMap) {
@@ -34,20 +37,20 @@ public class ProveedorController {
 	}
 	
 	@GetMapping(path="proveedores/new")
-	public String crearEvento(ModelMap modelMap) {
-		String view="proveedores/editProv";
-		modelMap.addAttribute("prov", new Proveedor());
+	public String crearOferta(ModelMap modelMap) {
+		String view="proveedores/editOferta";
+		modelMap.addAttribute("oferta", new Oferta());
 		return view;
 	}
 	
 	@PostMapping(path="proveedores/save")
-	public String salvarEvento(@Valid Proveedor prov, BindingResult result,ModelMap modelMap) {
+	public String salvarOfertas(@Valid Oferta oferta, BindingResult result,ModelMap modelMap) {
 		String view="proveedores/listadoProv";
 		if(result.hasErrors()) {
-			modelMap.addAttribute("prov", prov);
-			return "proveedores/editProv";
+			modelMap.addAttribute("oferta", oferta);
+			return "proveedores/editOferta";
 		}else {
-			provService.save(prov);
+			ofertaService.save(oferta);
 			modelMap.addAttribute("message", "Proveedor actualizado!");
 			view=listadoProv(modelMap);
 		}

@@ -9,8 +9,8 @@ INSERT INTO cliente(nombre,apellidos,telefono,direccion,dni,email) VALUES ('Mano
 INSERT INTO proveedor(name,telefono,email,direccion) VALUES ('Lejias SL', '645681128', 'lejiassl@gmail.com', 'Calle Reina 14, Sevilla'); 
 INSERT INTO proveedor(name,telefono,email,direccion) VALUES ('Jabones SA', '645681127', 'jabonessa@gmail.com', 'Calle Mercedes 14, Madrid'); 
 
-INSERT INTO producto(id, name, precio) VALUES (1, 'Lejia', 2.5);
-INSERT INTO producto(id, name, precio) VALUES (2, 'jabon', 0.75);
+INSERT INTO producto(id, name, precio, cantidad) VALUES (1, 'Lejia', 2.5, 30);
+INSERT INTO producto(id, name, precio, cantidad) VALUES (2, 'jabon', 0.75, 15);
 
 INSERT INTO factura(id, fecha, precio_total) VALUES (1, '2020-10-20', 10.0);
 INSERT INTO factura(id, fecha, precio_total) VALUES (2, '2020-10-22', 137.89);
