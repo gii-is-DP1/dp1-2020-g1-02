@@ -29,7 +29,7 @@ public class ClienteController {
 	
 	@GetMapping(path="/new")
 	public String crearCliente(ModelMap modelMap) {
-		String view="clientes/editCliente";
+		String view="clientes/newCliente";
 		modelMap.addAttribute("cliente", new Cliente());
 		return view;
 	}
@@ -39,7 +39,7 @@ public class ClienteController {
 		String view="clientes/listadoClientes";
 		if(result.hasErrors()) {
 			modelMap.addAttribute("cliente", cliente);
-			return "clientes/editCliente";
+			return "clientes/newCliente";
 		}else {
 			clienteService.save(cliente);
 			modelMap.addAttribute("message", "Cliente actualizado!");
