@@ -42,7 +42,7 @@ public class TrabajadorController {
 		String view="trabajadores/listadoTrabajadores";
 		if(result.hasErrors()) {
 			modelMap.addAttribute("trabajador", trabajador);
-			return "trabajadores/editTrabajador";
+			return "trabajadores/editTrabajadores";
 		}else {
 			trabajadorService.save(trabajador);
 			modelMap.addAttribute("message", "Trabajador actualizado!");
@@ -52,7 +52,7 @@ public class TrabajadorController {
 	}
 	
 	@GetMapping(path="/delete/{trabajadorId}")
-	public String borrarTrabajador(@PathVariable("eventId") int trabajadorId, ModelMap modelmap) {
+	public String borrarTrabajador(@PathVariable("trabajadorId") int trabajadorId, ModelMap modelmap) {
 		String view="trabajadores/listadoTrabajadores";
 		Optional<Trabajador> trabajador=trabajadorService.findTrabajadorById(trabajadorId);
 		if(trabajador.isPresent()) {
