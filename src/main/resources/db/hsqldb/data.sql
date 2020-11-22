@@ -16,6 +16,9 @@ INSERT INTO factura(id, fecha, precio_total) VALUES (1, '2020-10-20', 10.0);
 INSERT INTO factura(id, fecha, precio_total) VALUES (2, '2020-10-22', 137.89);
 INSERT INTO factura(id, fecha, precio_total) VALUES (3, '2020-10-22', 56.01);
 
+INSERT INTO curriculum(nombre, tipocategoria) VALUES ('Carlos Jesus', 0);
+INSERT INTO curriculum(nombre, tipocategoria) VALUES ('Carlos Jesus2', 2);
+
 /* -- One admin user, named admin1 with passwor 4dm1n and authority admin
 INSERT INTO users(username,password,enabled) VALUES ('admin1','4dm1n',TRUE);
 INSERT INTO authorities(id,username,authority) VALUES (1,'admin1','admin');
