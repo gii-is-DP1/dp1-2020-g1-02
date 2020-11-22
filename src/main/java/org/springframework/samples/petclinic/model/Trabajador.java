@@ -6,6 +6,8 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 
+import com.sun.istack.NotNull;
+
 import lombok.Data;
 
 
@@ -35,6 +37,6 @@ public class Trabajador extends NamedEntity {
     private String correo;
     
     @Column(name="tipocategoria")
-    @NotEmpty
+    @NotNull
     private TipoCategoria tipocategoria;
 }
