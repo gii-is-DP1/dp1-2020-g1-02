@@ -13,30 +13,30 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class TrabajadorService {
 	@Autowired
-	private TrabajadorRepository eventRepo;
+	private TrabajadorRepository trabajadorRepo;
 	
 	@Transactional
 	public int eventCount() {
-		return (int) eventRepo.count();
+		return (int) trabajadorRepo.count();
 	}
 	
 	@Transactional
 	public Iterable<Trabajador> findAll(){
-		return eventRepo.findAll();
+		return trabajadorRepo.findAll();
 	}
 
-	public void save(Trabajador event) {
-		eventRepo.save(event);
+	public void save(Trabajador trabajador) {
+		trabajadorRepo.save(trabajador);
 	}
 	
-	public void delete(Trabajador event) {
-		eventRepo.delete(event);
+	public void delete(Trabajador trabajador) {
+		trabajadorRepo.delete(trabajador);
 		
 	}
 
-	public Optional<Trabajador> findEventById(int eventId) {
+	public Optional<Trabajador> findTrabajadorById(int trabajadorId) {
 		// TODO Auto-generated method stub
-		return eventRepo.findById(eventId);
+		return trabajadorRepo.findById(trabajadorId);
 	}
 
 	

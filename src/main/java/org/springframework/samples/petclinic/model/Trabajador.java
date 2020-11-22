@@ -21,5 +21,20 @@ public class Trabajador extends NamedEntity {
     @Column(name="dni")
     @NotEmpty
     private String dni;
-
+    
+    @Column(name="telefono")
+    @NotEmpty
+    private String telefono;
+    
+    @Column(name="direccion")
+    @NotEmpty
+    private String direccion;
+    
+    @Column(name="correo")
+    @NotEmpty
+    private String correo;
+    
+    @Column(name="tipocategoria")
+    @NotEmpty
+    private TipoCategoria tipocategoria;
 }
