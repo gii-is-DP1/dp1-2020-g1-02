@@ -26,7 +26,7 @@ public class ContratoTrabajadorController {
 	
 	@GetMapping()
 	public String listadoContratosTrabajadores(ModelMap modelMap) {
-		String vista ="trabajadores/listadoTrabajadores";
+		String vista ="contratosTrabajadores/listadoContratosTrabajadores";
 		Iterable<ContratoTrabajador> contratos = contratoTrabajadorService.findAll();
 		modelMap.addAttribute("contratosTrabajadores", contratos);
 		return vista;
@@ -55,7 +55,7 @@ public class ContratoTrabajadorController {
 	
 	@GetMapping(path="/delete/{contratoTrabajadorId}")
 	public String borrarContratoTrabajador(@PathVariable("contratoTrabajadorId") int contratoTrabajadorId, ModelMap modelmap) {
-		String view="trabajadores/listadoTrabajadores";
+		String view="trabajadores/listadoContratosTrabajadores";
 		Optional<ContratoTrabajador> trabajador=contratoTrabajadorService.findContratoTrabajadorById(contratoTrabajadorId);
 		if(trabajador.isPresent()) {
 			contratoTrabajadorService.delete(trabajador.get());
