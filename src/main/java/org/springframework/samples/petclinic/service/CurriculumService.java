@@ -1,5 +1,6 @@
 package org.springframework.samples.petclinic.service;
 
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.samples.petclinic.model.Curriculum;
 import org.springframework.samples.petclinic.repository.CurriculumRepository;
@@ -31,8 +32,8 @@ public class CurriculumService {
 		
 	}
 
-//	public Optional<Curriculum> findCurriculumByNombre(String nombre) {
-//		return curriculumRepo.findByNombre(nombre);
-//	}
+	public Optional<Curriculum> findCurriculumById(Integer curriculumId) {
+		return curriculumRepo.findById(curriculumId);
+	}
 }
 
