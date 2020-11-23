@@ -1,5 +1,7 @@
 package org.springframework.samples.petclinic.web;
 
+import java.util.Optional;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -23,7 +26,7 @@ public class FacturaController {
 	public String listadoFacturas(ModelMap modelMap) {
 		String vista = "facturas/listadoFacturas";
 		Iterable<Factura> facturas = facturaService.findAll();
-		modelMap.addAttribute("factura", facturas);
+		modelMap.addAttribute("facturas", facturas);
 		return vista;
 	}
 	
@@ -44,6 +47,21 @@ public class FacturaController {
 			facturaService.save(factura);
 			modelMap.addAttribute("message", "Factura actualizada!");
 			view=listadoFacturas(modelMap);
+		}
+		return view;
+	}
+	
+	@GetMapping(path="/delete/{facturaId}")
+	public String borrarTrabajador(@PathVariable("facturaId") int facturaId, ModelMap modelmap) {
+		String view="facturas/listadoFacturas";
+		Optional<Factura> factura=facturaService.findFacturaById(facturaId);
+		if(factura.isPresent()) {
+			facturaService.delete(factura.get());
+			modelmap.addAttribute("message", "Trabajador borrado correctamente");
+			
+		}else {
+			modelmap.addAttribute("message", "Trabajador on encontrado");
+			view=listadoFacturas(modelmap);
 		}
 		return view;
 	}

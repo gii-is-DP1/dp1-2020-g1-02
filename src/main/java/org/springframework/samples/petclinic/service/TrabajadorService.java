@@ -31,7 +31,6 @@ public class TrabajadorService {
 	
 	public void delete(Trabajador trabajador) {
 		trabajadorRepo.delete(trabajador);
-		
 	}
 
 	public Optional<Trabajador> findTrabajadorById(int trabajadorId) {

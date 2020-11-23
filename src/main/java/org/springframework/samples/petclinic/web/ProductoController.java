@@ -7,6 +7,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.samples.petclinic.model.Producto;
 import org.springframework.samples.petclinic.model.Proveedor;
+import org.springframework.samples.petclinic.model.Trabajador;
 import org.springframework.samples.petclinic.service.ProductoService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -31,6 +32,13 @@ public class ProductoController {
 		return vista;
 	}
 	
+	@GetMapping(path="/edit")
+	public String editaProducto(ModelMap modelMap) {
+		String view="productos/editProducto";
+		modelMap.addAttribute("producto", new Producto());
+		return view;
+	}
+	
 	@GetMapping(path="/new")
 	public String crearProducto(ModelMap modelMap) {
 		String view="productos/editProducto";
@@ -48,6 +56,20 @@ public class ProductoController {
 			productService.save(producto);
 			modelMap.addAttribute("message", "Producto actualizado!");
 			view=listadoProductos(modelMap);
+		}
+		return view;
+	}
+	
+	@GetMapping(path="/delete/{productoId}")
+	public String restarStock(@PathVariable("productoId") int productoId, ModelMap modelmap) {
+		String view="productos/listadoProductos";
+		Optional<Producto> producto=productService.findProductoById(productoId);
+		if(producto.isPresent()) {
+			productService.restarProducto(producto.get());
+			modelmap.addAttribute("message", "Cantidad de producto actualizado correctamente");
+		}else {
+			modelmap.addAttribute("message", "Producto no encontrado");
+			view=listadoProductos(modelmap);
 		}
 		return view;
 	}
