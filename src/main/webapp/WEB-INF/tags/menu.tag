@@ -41,7 +41,7 @@
 				</petclinic:menuItem>
 				
 				<!--  -->
-				<petclinic:menuItem active="${name eq 'oferta'}" url="/contacto"
+				<petclinic:menuItem active="${name eq 'oferta'}" url="/proveedores/oferta"
 					title="contacto">
 					<span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
 					<span>Contacto</span>
