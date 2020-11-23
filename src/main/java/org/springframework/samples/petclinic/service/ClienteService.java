@@ -34,11 +34,8 @@ public class ClienteService {
 		
 	}
 
-//	public Optional<Cliente> findClienteByDNI(Cliente id) {
-//		// TODO Auto-generated method stub
-//		String dni = cliente.getDni();
-//		Integer dniCliente = Integer.valueOf(dni);
-//		return clienteRepo.findById(dniCliente);
-//		
-//	}
+	public Optional<Cliente> findClienteById(Integer clienteId) {
+		return clienteRepo.findById(clienteId);
+	}
+
 }

@@ -14,10 +14,10 @@
         <div class="form-group has-feedback">
             <petclinic:inputField label="Nombre" name="nombre"/>
             <petclinic:inputField label="Apellidos" name="apellidos"/>
-            <petclinic:inputField label="Telefono" name="telefono" placeholder="623123456" pattern="^[0-9]{9}"/>
+            <petclinic:inputField label="Telefono" name="telefono"/>
             <petclinic:inputField label="Direccion" name="direccion"/>
-            <petclinic:inputField label="Dni" name="dni" placeholder="12345678X" pattern="^[0-9]{8}[A-Z]" title="Ocho dígitos seguidos de una letra mayúscula" />
-            <petclinic:inputField label="Email" name="email" placeholder="usuario@dominio.extension"/>
+            <petclinic:inputField label="Dni" name="dni"/>
+            <petclinic:inputField label="Email" name="email"/>
         </div>
         <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">

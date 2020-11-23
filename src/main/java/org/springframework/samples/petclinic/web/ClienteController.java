@@ -3,7 +3,6 @@ package org.springframework.samples.petclinic.web;
 import java.util.Optional;
 
 import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.samples.petclinic.model.Cliente;
 import org.springframework.samples.petclinic.service.ClienteService;
@@ -51,18 +50,18 @@ public class ClienteController {
 		return view;
 	}
 	
-//	@GetMapping(path="/delete/{clienteId}")
-//	public String borrarCliente(@PathVariable("clienteDNI") String dni, ModelMap modelmap) {
-//		String view="events/listadoEventos";
-//		Optional<Cliente> event=clienteService.findEventById(dni);
-//		if(event.isPresent()) {
-//			clienteService.delete(event.get());
-//			modelmap.addAttribute("message", "Trabajador borrado correctamente");
-//		}else {
-//			modelmap.addAttribute("message", "Trabajador on encontrado");
-//			view=listadoClientes(modelmap);
-//		}
-//		return view;
-//	}
+	@GetMapping(path="/delete/{clienteId}")
+	public String borrarCliente(@PathVariable("clienteId") Integer clienteId, ModelMap modelmap) {
+		String view = "clientes/listadoClientes";
+		Optional<Cliente> cliente = clienteService.findClienteById(clienteId);
+		if(cliente.isPresent()) {
+			clienteService.delete(cliente.get());
+			modelmap.addAttribute("message", "Cliente borrado correctamente");
+		}else {
+			modelmap.addAttribute("message", "Cliente no encontrado");
+			view=listadoClientes(modelmap);
+		}
+		return view;
+	}
 
 }
