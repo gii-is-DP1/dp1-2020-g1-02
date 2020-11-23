@@ -37,6 +37,6 @@ public class Trabajador extends NamedEntity {
     private String correo;
     
     @Column(name="tipocategoria")
-    @NotNull
-    private TipoCategoria tipocategoria;
+    @NotEmpty
+    private String tipocategoria;
 }

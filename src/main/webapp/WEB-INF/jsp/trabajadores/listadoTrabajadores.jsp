@@ -56,6 +56,12 @@
                 	</spring:url>
                 	<a href="${fn:escapeXml(trabajadorUrl)}">Delete</a>
                 </td>
+                <td>
+                	<spring:url value="/trabajadores/{trabajadorId}/edit" var="trabajadorUrl">
+                		<spring:param name="trabajadorId" value="${trabajador.id}"/>
+                	</spring:url>
+                	<a href="${fn:escapeXml(trabajadorUrl)}">Editar</a>
+                </td>
             </tr>
         </c:forEach>
         </tbody>

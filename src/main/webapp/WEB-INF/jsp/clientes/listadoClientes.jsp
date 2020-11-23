@@ -43,8 +43,8 @@
                     <c:out value="${cliente.email}"/>
                 </td>
                 <td>
-                	<spring:url value="/clientes/delete/{clienteDNI}" var="clienteUrl">
-                		<spring:param name="clienteDNI" value="${cliente.dni}"/>
+                	<spring:url value="/clientes/delete/{clienteId}" var="clienteUrl">
+                		<spring:param name="clienteId" value="${cliente.id}"/>
                 	</spring:url>
                 	<a href="${fn:escapeXml(clienteUrl)}">Delete</a>
                 </td>

@@ -3,11 +3,9 @@ package org.springframework.samples.petclinic.web;
 import java.util.Optional;
 
 import javax.validation.Valid;
-import javax.websocket.server.PathParam;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.samples.petclinic.model.Oferta;
-import org.springframework.samples.petclinic.model.Pedido;
 import org.springframework.samples.petclinic.model.Proveedor;
 import org.springframework.samples.petclinic.service.OfertaService;
 import org.springframework.samples.petclinic.service.ProveedorService;
@@ -27,6 +25,7 @@ public class ProveedorController {
 	@Autowired
 	private ProveedorService provService;
 	private OfertaService ofertaService;
+
 	
 	@GetMapping()
 	public String listadoProv(ModelMap modelMap) {
@@ -36,16 +35,16 @@ public class ProveedorController {
 		return vista;
 	}
 	
-	@GetMapping(path="/oferta")
+	@GetMapping(path="/oferta/new")
 	public String crearOferta(ModelMap modelMap) {
 		String view="proveedores/editOferta";
 		modelMap.addAttribute("oferta", new Oferta());
 		return view;
 	}
 	
-	@PostMapping(path="/save")
+	@PostMapping(path="/oferta/save")
 	public String salvarOfertas(@Valid Oferta oferta, BindingResult result,ModelMap modelMap) {
-		String view="proveedores/listadoProv";
+		String view="proveedores/ofertas";
 		if(result.hasErrors()) {
 			modelMap.addAttribute("oferta", oferta);
 			return "proveedores/editOferta";
