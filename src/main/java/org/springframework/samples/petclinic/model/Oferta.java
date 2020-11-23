@@ -14,6 +14,6 @@ public class Oferta extends NamedEntity {
 	
 	@Column(name="precioU")
 	@NotEmpty
-	private Double precioU;
+	private String precioU;
 	
 }

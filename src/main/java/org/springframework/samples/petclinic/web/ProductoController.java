@@ -60,18 +60,12 @@ public class ProductoController {
 		return view;
 	}
 	
-	@GetMapping(path="/delete/{productoId}")
+	@PostMapping(path="/{productoId}/restar")
 	public String restarStock(@PathVariable("productoId") int productoId, ModelMap modelmap) {
-		String view="productos/listadoProductos";
-		Optional<Producto> producto=productService.findProductoById(productoId);
-		if(producto.isPresent()) {
-			productService.restarProducto(producto.get());
-			modelmap.addAttribute("message", "Cantidad de producto actualizado correctamente");
-		}else {
-			modelmap.addAttribute("message", "Producto no encontrado");
-			view=listadoProductos(modelmap);
-		}
-		return view;
+		Integer cantStock = this.productService.findProductoById(productoId).get().getCantidadStock()-1;
+		this.productService.findProductoById(productoId).get().setCantidadStock(cantStock);
+		productService.save(this.productService.findProductoById(productoId).get());
+		return listadoProductos(modelmap);
 	}
 
 }
