@@ -1,6 +1,8 @@
 package org.springframework.samples.petclinic.service;
 
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.samples.petclinic.model.Cliente;
 import org.springframework.samples.petclinic.repository.ClienteRepository;
@@ -32,8 +34,7 @@ public class ClienteService {
 		
 	}
 
-//	public Optional<Cliente> findClienteByDNI(String dni) {
-//		// TODO Auto-generated method stub
-//		return clienteRepo.findByDNI(dni);
-//	}
+	public Optional<Cliente> findClienteById(Integer clienteId) {
+		return clienteRepo.findById(clienteId);
+	}
 }
