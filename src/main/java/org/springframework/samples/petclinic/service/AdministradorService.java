@@ -32,9 +32,9 @@ public class AdministradorService {
 		administradorRepo.delete(administrador);
 	}
 
-	public Optional<Administrador> findEventById(int administradorName) {
+	public Optional<Administrador> findAdministradorById(int adminId) {
 		// TODO Auto-generated method stub
-		return administradorRepo.findById(administradorName);
+		return administradorRepo.findById(adminId);
 	}
 }
 

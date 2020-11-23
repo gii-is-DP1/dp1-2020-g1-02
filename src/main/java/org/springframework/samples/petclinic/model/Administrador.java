@@ -11,14 +11,19 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name="cliente")
-public class Administrador extends NamedEntity {
+@Table(name="administrador")
+public class Administrador extends BaseEntity {
+	
+	@Column(name="nombre")
+    @NotEmpty
+	private String nombre;
+	
+	@Column(name="apellidos")
+    @NotEmpty
+	private String apellidos;
 	
     @Column(name="tipocategoria")
     @NotNull
     private TipoCategoria tipocategoria; 
 	
-	@Column(name="nombre")
-    @NotEmpty
-	private String nombre;
 }
