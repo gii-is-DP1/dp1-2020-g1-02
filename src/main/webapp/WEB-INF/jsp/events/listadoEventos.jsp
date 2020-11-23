@@ -19,7 +19,7 @@
         </tr>
         </thead>
         <tbody>
-        <c:forEach items="${events}" var="event">
+        <c:forEach items="${trabajadores}" var="event">
             <tr>
                 <td>
                     <c:out value="${event.name}"/>
@@ -29,6 +29,9 @@
                 </td>
                  <td>
                     <c:out value="${event.dni}"/>
+                </td>
+                <td>
+                    <c:out value="${event.tipocategoria}"/>
                 </td>
                 <td>
                 	<spring:url value="/events/delete/{eventId}" var="eventUrl">

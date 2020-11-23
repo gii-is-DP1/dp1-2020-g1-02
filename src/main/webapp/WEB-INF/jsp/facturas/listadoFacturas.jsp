@@ -7,37 +7,33 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="petclinic" tagdir="/WEB-INF/tags" %>
 
-<petclinic:layout pageName="productos">
-    <h2>Productos</h2>
+<petclinic:layout pageName="facturas">
+    <h2>Facturas</h2>
 
-    <table id="productosTable" class="table table-striped">
+    <table id="facturasTable" class="table table-striped">
         <thead>
         <tr>
-            <th style="width: 150px;">Nombre</th>
-            <th style="width: 150px;">Precio</th>
-            <th style="width: 150px;">Cantidad en Stock</th>
+            <th style="width: 150px;">Fecha</th>
+            <th style="width: 150px;">Precio total</th>
 
 
         </tr>
         </thead>
         <tbody>
-        <c:forEach items="${producto}" var="producto">
+        <c:forEach items="${factura}" var="factura">
             <tr>
                 <td>
-                    <c:out value="${producto.name}"/>
+                    <c:out value="${factura.fecha}"/>
                 </td>
                 <td>
-                    <c:out value="${producto.precio}"/>
-                </td>
-                <td>
-                    <c:out value="${producto.cantidadStock}"/>
+                    <c:out value="${factura.precio_total}"/>
                 </td>
                 
                 <td>
-                	<spring:url value="/productos/delete/{productId}" var="productUrl">
-                		<spring:param name="productId" value="${producto.id}"/>
+                	<spring:url value="/facturas/delete/{facturaId}" var="facturaUrl">
+                		<spring:param name="facturaId" value="${factura.id}"/>
                 	</spring:url>
-                	<a href="${fn:escapeXml(productUrl)}">Restar</a>
+                	<a href="${fn:escapeXml(facturaUrl)}">Delete</a>
                 </td>
             </tr>
         </c:forEach>

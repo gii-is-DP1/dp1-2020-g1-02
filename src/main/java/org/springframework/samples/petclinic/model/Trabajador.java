@@ -6,6 +6,8 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 
+import com.sun.istack.NotNull;
+
 import lombok.Data;
 
 
@@ -21,5 +23,20 @@ public class Trabajador extends NamedEntity {
     @Column(name="dni")
     @NotEmpty
     private String dni;
-
+    
+    @Column(name="telefono")
+    @NotEmpty
+    private String telefono;
+    
+    @Column(name="direccion")
+    @NotEmpty
+    private String direccion;
+    
+    @Column(name="correo")
+    @NotEmpty
+    private String correo;
+    
+    @Column(name="tipocategoria")
+    @NotNull
+    private TipoCategoria tipocategoria;
 }

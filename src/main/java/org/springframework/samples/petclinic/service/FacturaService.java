@@ -1,5 +1,7 @@
 package org.springframework.samples.petclinic.service;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.samples.petclinic.model.Factura;
 import org.springframework.samples.petclinic.repository.FacturaRepository;
@@ -34,4 +36,7 @@ public class FacturaService {
 		return facturaRepo.findAllById(ids);
 	}
 	
+	public Optional<Factura> findFacturaById(Integer id) {
+		return facturaRepo.findById(id);
+	}
 }
