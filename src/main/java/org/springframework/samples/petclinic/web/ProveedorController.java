@@ -36,14 +36,14 @@ public class ProveedorController {
 		return vista;
 	}
 	
-	@GetMapping(path="proveedores/new")
+	@GetMapping(path="/oferta")
 	public String crearOferta(ModelMap modelMap) {
 		String view="proveedores/editOferta";
 		modelMap.addAttribute("oferta", new Oferta());
 		return view;
 	}
 	
-	@PostMapping(path="proveedores/save")
+	@PostMapping(path="/save")
 	public String salvarOfertas(@Valid Oferta oferta, BindingResult result,ModelMap modelMap) {
 		String view="proveedores/listadoProv";
 		if(result.hasErrors()) {
@@ -57,7 +57,7 @@ public class ProveedorController {
 		return view;
 	}
 	
-	@GetMapping(path="proveedores/delete/{provName}")
+	@GetMapping(path="/delete/{provName}")
 	public String borrarEvento(@PathVariable("provName") int provName, ModelMap modelmap) {
 		String view="proveedores/listadoEventos";
 		Optional<Proveedor> prov=provService.findEventById(provName);
