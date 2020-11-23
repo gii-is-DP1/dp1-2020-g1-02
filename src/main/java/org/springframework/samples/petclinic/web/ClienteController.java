@@ -1,5 +1,7 @@
 package org.springframework.samples.petclinic.web;
 
+import java.util.Optional;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -48,16 +51,16 @@ public class ClienteController {
 		return view;
 	}
 	
-//	@GetMapping(path="/delete/{eventId}")
+//	@GetMapping(path="/delete/{clienteId}")
 //	public String borrarCliente(@PathVariable("clienteDNI") String dni, ModelMap modelmap) {
 //		String view="events/listadoEventos";
-//		Optional<Trabajador> event=eventService.findEventById(eventId);
+//		Optional<Cliente> event=clienteService.findEventById(dni);
 //		if(event.isPresent()) {
-//			eventService.delete(event.get());
+//			clienteService.delete(event.get());
 //			modelmap.addAttribute("message", "Trabajador borrado correctamente");
 //		}else {
 //			modelmap.addAttribute("message", "Trabajador on encontrado");
-//			view=listadoEventos(modelmap);
+//			view=listadoClientes(modelmap);
 //		}
 //		return view;
 //	}
