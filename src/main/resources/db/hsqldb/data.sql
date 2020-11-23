@@ -6,15 +6,15 @@ INSERT INTO contratoTrabajador(id,fechainicial,fechafinal,idtrabajador,sueldo) V
 INSERT INTO cliente(nombre,apellidos,telefono,direccion,dni,email) VALUES ('Manolito', 'Pies de Plata', '624586245', 'Calle Agata', '25673519P', 'manolito@gmail.com');
 
 
-INSERT INTO proveedor(name,telefono,email,direccion) VALUES ('Lejias SL', '645681128', 'lejiassl@gmail.com', 'Calle Reina 14, Sevilla'); 
-INSERT INTO proveedor(name,telefono,email,direccion) VALUES ('Jabones SA', '645681127', 'jabonessa@gmail.com', 'Calle Mercedes 14, Madrid'); 
+INSERT INTO proveedores(name,telefono,email,direccion) VALUES ('Lejias SL', '645681128', 'lejiassl@gmail.com', 'Calle Reina 14, Sevilla'); 
+INSERT INTO proveedores(name,telefono,email,direccion) VALUES ('Jabones SA', '645681127', 'jabonessa@gmail.com', 'Calle Mercedes 14, Madrid'); 
 
-INSERT INTO producto(id, name, precio, cantidad) VALUES (1, 'Lejia', 2.5, 30);
-INSERT INTO producto(id, name, precio, cantidad) VALUES (2, 'jabon', 0.75, 15);
+INSERT INTO productos(id, name, precio, cantidad) VALUES (1, 'Lejia', 2.5, 30);
+INSERT INTO productos(id, name, precio, cantidad) VALUES (2, 'jabon', 0.75, 15);
 
-INSERT INTO factura(id, fecha, precio_total) VALUES (1, '2020-10-20', 10.0);
-INSERT INTO factura(id, fecha, precio_total) VALUES (2, '2020-10-22', 137.89);
-INSERT INTO factura(id, fecha, precio_total) VALUES (3, '2020-10-22', 56.01);
+INSERT INTO facturas(id, fecha, precio_total) VALUES (1, '2020-10-20', 10.0);
+INSERT INTO facturas(id, fecha, precio_total) VALUES (2, '2020-10-22', 137.89);
+INSERT INTO facturas(id, fecha, precio_total) VALUES (3, '2020-10-22', 56.01);
 
 /* -- One admin user, named admin1 with passwor 4dm1n and authority admin
 INSERT INTO users(username,password,enabled) VALUES ('admin1','4dm1n',TRUE);

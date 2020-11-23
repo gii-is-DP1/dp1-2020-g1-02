@@ -11,7 +11,7 @@ import lombok.Data;
 
 @Entity
 @Data
-@Table(name="proveedor")
+@Table(name="proveedores")
 public class Proveedor extends NamedEntity{
 	
     @Column(name="telefono")

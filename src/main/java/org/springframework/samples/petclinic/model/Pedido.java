@@ -13,7 +13,7 @@ import lombok.Data;
 
 @Entity
 @Data
-@Table(name="idPedido")
+@Table(name="pedidos")
 public class Pedido extends NamedEntity{
 
     @Column(name="fecha")
