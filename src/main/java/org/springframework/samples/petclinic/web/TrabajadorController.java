@@ -51,6 +51,13 @@ public class TrabajadorController {
 		return view;
 	}
 	
+	@GetMapping(value = "/{trabajadorId}/edit")
+	public String iniciarFormularioActualizacionTrabajador(@PathVariable("trabajadorId") int trabajadorId, ModelMap modelMap) {
+		Trabajador trabajador = this.trabajadorService.findTrabajadorById(trabajadorId).get();
+		modelMap.addAttribute(trabajador);
+		return "trabajadores/editTrabajadores";
+	}
+	
 	@GetMapping(path="/delete/{trabajadorId}")
 	public String borrarTrabajador(@PathVariable("trabajadorId") int trabajadorId, ModelMap modelmap) {
 		String view="trabajadores/listadoTrabajadores";
