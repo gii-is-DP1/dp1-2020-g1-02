@@ -12,11 +12,7 @@ import lombok.Data;
 @Entity
 @Data
 @Table(name="proveedor")
-public class Proveedor extends BaseEntity{
-	
-	 @Column(name="name")
-	 @NotEmpty
-	 private String name;
+public class Proveedor extends NamedEntity{
 	
     @Column(name="telefono")
     @NotEmpty

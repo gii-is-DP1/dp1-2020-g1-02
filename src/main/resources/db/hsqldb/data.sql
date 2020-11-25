@@ -16,8 +16,8 @@ INSERT INTO factura(id, fecha, precio_total) VALUES (1, '2020-10-20', 10.0);
 INSERT INTO factura(id, fecha, precio_total) VALUES (2, '2020-10-22', 137.89);
 INSERT INTO factura(id, fecha, precio_total) VALUES (3, '2020-10-22', 56.01);
 
-INSERT INTO curriculum(nombre, tipocategoria) VALUES ('Carlos Jesus', 0);
-INSERT INTO curriculum(nombre, tipocategoria) VALUES ('Carlos Jesus2', 2);
+INSERT INTO curriculum(name, tipocategoria) VALUES ('Carlos Jesus', 0);
+INSERT INTO curriculum(name, tipocategoria) VALUES ('Carlos Jesus2', 2);
 
 INSERT INTO administrador(nombre, apellidos, tipocategoria) VALUES ('Carlos Jesus','Morales Borreguero', 2);
 INSERT INTO administrador(nombre, apellidos, tipocategoria) VALUES ('Carlos','Borreguero', 0);
