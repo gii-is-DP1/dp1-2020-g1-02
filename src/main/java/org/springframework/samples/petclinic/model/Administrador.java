@@ -12,10 +12,18 @@ import lombok.Data;
 @Data
 @Entity
 @Table(name="administrador")
-public class Administrador extends PersonaEntity {
+public class Administrador extends BaseEntity {
 	
-    @Column(name="tipocategoria")
-    @NotNull
-    private TipoCategoria tipocategoria; 
+	@Column(name="nombre")
+    @NotEmpty
+	private String nombre;
+	
+	@Column(name="apellidos")
+    @NotEmpty
+	private String apellidos;
+
+   @Column(name="tipocategoria")
+   @NotNull
+   private TipoCategoria tipocategoria; 
 
 }

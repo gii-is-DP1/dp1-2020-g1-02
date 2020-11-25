@@ -11,6 +11,5 @@ import lombok.Data;
 @Entity
 @Table(name="cliente")
 public class Cliente extends PersonaEntity {
-
 	
 }

@@ -27,8 +27,8 @@
                     <c:out value="${curriculum.tipocategoria}"/>
                 </td>
                 <td>
-                	<spring:url value="/curriculums/delete/{curriculumNombre}" var="curriculumUrl">
-                		<spring:param name="curriculumNombre" value="${curriculum.nombre}"/>
+                	<spring:url value="/curriculums/delete/{curriculumId}" var="curriculumUrl">
+                		<spring:param name="curriculumId" value="${curriculum.id}"/>
                 	</spring:url>
                 	<a href="${fn:escapeXml(curriculumUrl)}">Delete</a>
                 </td>
