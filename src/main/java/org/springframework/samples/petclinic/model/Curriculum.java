@@ -12,11 +12,7 @@ import lombok.Data;
 @Data
 @Entity
 @Table(name="curriculum")
-public class Curriculum extends BaseEntity {
-	
-	@Column(name="nombre")
-    @NotEmpty
-	private String nombre;
+public class Curriculum extends NamedEntity {
 	
 	@Column(name="tipocategoria")
 	@NotNull

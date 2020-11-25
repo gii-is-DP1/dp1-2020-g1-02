@@ -32,8 +32,12 @@ public class ProductoService {
 	}
 
 	public void restarProducto(Producto product) {
-		product.setCantidadStock(product.getCantidadStock()-1);
-		productRepo.save(product);
+		Producto productoCopia = new Producto();
+		productoCopia.setId(product.getId());
+		productoCopia.setName(product.getName());
+		productoCopia.setCantidadStock((Integer) product.getCantidadStock()-1);
+		productRepo.delete(product);
+		productRepo.save(productoCopia);
 	}
 	
 	public void sumarProducto(Producto product) {

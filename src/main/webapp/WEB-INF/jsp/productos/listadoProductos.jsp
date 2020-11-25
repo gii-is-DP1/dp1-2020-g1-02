@@ -27,14 +27,11 @@
                     <c:out value="${producto.name}"/>
                 </td>
                 <td>
-                    <c:out value="${producto.precio}"/>
-                </td>
-                <td>
                     <c:out value="${producto.cantidadStock}"/>
                 </td>
                 
                 <td>
-                	<spring:url value="/productos/delete/{productId}" var="productUrl">
+                	<spring:url value="/productos/{productId}/restar" var="productUrl">
                 		<spring:param name="productId" value="${producto.id}"/>
                 	</spring:url>
                 	<a href="${fn:escapeXml(productUrl)}">Restar</a>

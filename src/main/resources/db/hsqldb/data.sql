@@ -1,23 +1,30 @@
-INSERT INTO trabajador(id,name,apellidos,dni,telefono, direccion, correo, tipocategoria) VALUES (1,'Carlos Jesus', 'Villadiego', '78461836B','666888888','C/Garcia Marquez n2', 'calvirgar@alum.us.es', 0);
-INSERT INTO trabajador(id,name,apellidos,dni,telefono, direccion, correo, tipocategoria) VALUES (2,'Carlos Jesus2', 'Villadiego', '78461836B','666888888','C/Garcia Marquez n2', 'calvirgar@alum.us.es', 2);
+INSERT INTO trabajador(id,nombre,apellidos,dni,telefono, direccion, correo, tipocategoria) VALUES (1,'Carlos Jesus', 'Villadiego', '78461836B','666888888','C/Garcia Marquez n2', 'calvirgar@alum.us.es', 0);
+INSERT INTO trabajador(id,nombre,apellidos,dni,telefono, direccion, correo, tipocategoria) VALUES (2,'Carlos Jesus2', 'Villadiego', '78461836B','666888888','C/Garcia Marquez n2', 'calvirgar@alum.us.es', 2);
 
 
-INSERT INTO contratoTrabajador(id,fechainicial,fechafinal,idtrabajador,sueldo) VALUES (1, '2010-01-01', '2019-12-31', 1, 1200.0);
-INSERT INTO cliente(nombre,apellidos,telefono,direccion,dni,email) VALUES ('Manolito', 'Pies de Plata', '624586245', 'Calle Agata', '25673519P', 'manolito@gmail.com');
+INSERT INTO contratoTrabajador(id,fechainicial,fechafinal,trabajador_id,sueldo) VALUES (1, '2010-01-01', '2019-12-31', 1, 1200.0);
+INSERT INTO cliente(nombre,apellidos,telefono,direccion,dni,correo) VALUES ('Manolito', 'Pies de Plata', '624586245', 'Calle Agata', '25673519P', 'manolito@gmail.com');
 
 
 INSERT INTO proveedores(name,telefono,email,direccion) VALUES ('Lejias SL', '645681128', 'lejiassl@gmail.com', 'Calle Reina 14, Sevilla'); 
 INSERT INTO proveedores(name,telefono,email,direccion) VALUES ('Jabones SA', '645681127', 'jabonessa@gmail.com', 'Calle Mercedes 14, Madrid'); 
 
-INSERT INTO productos(id, name, precio, cantidad) VALUES (1, 'Lejia', 2.5, 30);
-INSERT INTO productos(id, name, precio, cantidad) VALUES (2, 'jabon', 0.75, 15);
+INSERT INTO productos(name, cantidad) VALUES ('Lejia', 30);
+INSERT INTO productos(name, cantidad) VALUES ('jabon', 23);
+INSERT INTO productos(name, cantidad) VALUES ('Escoba', 13);
+INSERT INTO productos(name, cantidad) VALUES ('Fregona', 10);
+INSERT INTO productos(name, cantidad) VALUES ('Estropajo', 14);
+INSERT INTO productos(name, cantidad) VALUES ('Limpiacristales', 4);
+INSERT INTO productos(name, cantidad) VALUES ('Amoniaco', 9);
+INSERT INTO productos(name, cantidad) VALUES ('KH7', 10);
+INSERT INTO productos(name, cantidad) VALUES ('Rollos Papel', 40);
 
 INSERT INTO facturas(id, fecha, precio_total) VALUES (1, '2020-10-20', 10.0);
 INSERT INTO facturas(id, fecha, precio_total) VALUES (2, '2020-10-22', 137.89);
 INSERT INTO facturas(id, fecha, precio_total) VALUES (3, '2020-10-22', 56.01);
 
-INSERT INTO curriculum(nombre, tipocategoria) VALUES ('Carlos Jesus', 0);
-INSERT INTO curriculum(nombre, tipocategoria) VALUES ('Carlos Jesus2', 2);
+INSERT INTO curriculum(name, tipocategoria) VALUES ('Carlos Jesus', 0);
+INSERT INTO curriculum(name, tipocategoria) VALUES ('Carlos Jesus2', 2);
 
 
 INSERT INTO ofertas(name, precioU) VALUES ('Fregona', 2.5);
