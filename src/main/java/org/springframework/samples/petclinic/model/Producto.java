@@ -10,11 +10,7 @@ import lombok.Data;
 @Entity
 @Data
 @Table(name="producto")
-public class Producto extends BaseEntity {
-	
-	@Column(name="name")
-	@NotEmpty
-	private String name;
+public class Producto extends NamedEntity {
 	
 	@Column(name="precio")
 	@NotEmpty
