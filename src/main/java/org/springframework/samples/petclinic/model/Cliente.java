@@ -10,29 +10,6 @@ import lombok.Data;
 @Data
 @Entity
 @Table(name="cliente")
-public class Cliente extends BaseEntity {
-
-	@Column(name="nombre")
-    @NotEmpty
-	private String nombre;
+public class Cliente extends PersonaEntity {
 	
-	@Column(name="apellidos")
-    @NotEmpty
-	private String apellidos;
-	
-	@Column(name="telefono")
-    @NotEmpty
-	private String telefono;
-	
-	@Column(name="direccion")
-    @NotEmpty
-	private String direccion;
-	
-	@Column(name="dni")
-    @NotEmpty
-	private String dni;
-	
-	@Column(name="email")
-    @NotEmpty
-	private String email;
 }
