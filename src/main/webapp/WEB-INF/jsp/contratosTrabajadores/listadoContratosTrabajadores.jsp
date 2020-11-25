@@ -33,7 +33,7 @@
                     <c:out value="${contrato.fechafinal}"/>
                 </td>
                  <td>
-                    <c:out value="${contrato.idtrabajador}"/>
+                    <c:out value="${contrato.trabajador.id}"/>
                 </td>
                 <td>
                     <c:out value="${contrato.sueldo}"/>

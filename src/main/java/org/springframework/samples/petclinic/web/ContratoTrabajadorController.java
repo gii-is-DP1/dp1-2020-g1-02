@@ -35,7 +35,7 @@ public class ContratoTrabajadorController {
 	@GetMapping(path="/new")
 	public String crearContratoTrabajador(ModelMap modelMap) {
 		String view="contratosTrabajadores/editContratoTrabajador";
-		modelMap.addAttribute("contratoTrabajador", new Trabajador());
+		modelMap.addAttribute("contratoTrabajador", new ContratoTrabajador());
 		return view;
 	}
 	

@@ -12,7 +12,7 @@ import lombok.Data;
 @Data
 @Entity
 @Table(name="cliente")
-public class Administrador extends NamedEntity {
+public class Administrador extends PersonaEntity {
 	
     @Column(name="tipocategoria")
     @NotNull
