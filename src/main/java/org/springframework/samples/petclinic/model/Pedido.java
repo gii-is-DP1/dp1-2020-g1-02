@@ -14,7 +14,7 @@ import lombok.Data;
 @Entity
 @Data
 @Table(name="idPedido")
-public class Pedido extends NamedEntity{
+public class Pedido extends BaseEntity{
 
     @Column(name="fecha")
     @NotEmpty

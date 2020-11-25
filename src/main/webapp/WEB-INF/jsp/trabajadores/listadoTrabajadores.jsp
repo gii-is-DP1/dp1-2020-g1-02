@@ -50,6 +50,14 @@
                 <td>
                     <c:out value="${trabajador.tipocategoria}"/>
                 </td>
+              <%--   <td>
+                    <c:out value="${trabajador.contratos}"/>
+                </td> --%>
+                <td>
+                  <c:forEach var="contrato" items="${trabajador.contratos}">
+                    	<c:out value="${contrato.fechainicial}" />
+                    </c:forEach> 
+                </td>
                 <td>
                 	<spring:url value="/trabajadores/delete/{trabajadorId}" var="trabajadorUrl">
                 		<spring:param name="trabajadorId" value="${trabajador.id}"/>

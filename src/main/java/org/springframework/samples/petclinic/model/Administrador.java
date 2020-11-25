@@ -21,9 +21,9 @@ public class Administrador extends BaseEntity {
 	@Column(name="apellidos")
     @NotEmpty
 	private String apellidos;
-	
-    @Column(name="tipocategoria")
-    @NotNull
-    private TipoCategoria tipocategoria; 
-	
+
+   @Column(name="tipocategoria")
+   @NotNull
+   private TipoCategoria tipocategoria; 
+
 }
