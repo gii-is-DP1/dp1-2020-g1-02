@@ -14,6 +14,7 @@ import lombok.Data;
 @Data
 @Table(name="factura")
 public class Factura extends BaseEntity {
+
 	
 	@Column(name="fecha")
 	@NotEmpty
