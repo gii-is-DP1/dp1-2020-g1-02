@@ -15,18 +15,26 @@
         <tr>
             <th style="width: 150px;">Fecha</th>
             <th style="width: 150px;">Precio total</th>
+            <th style="width: 150px;">ID del proveedor</th>
+            <th style="width: 150px;">ID del pedido</th>
 
 
         </tr>
         </thead>
         <tbody>
-        <c:forEach items="${factura}" var="factura">
+        <c:forEach items="${facturas}" var="factura">
             <tr>
                 <td>
                     <c:out value="${factura.fecha}"/>
                 </td>
                 <td>
                     <c:out value="${factura.precio_total}"/>
+                </td>
+                <td>
+                    <c:out value="${factura.id_prov}"/>
+                </td>
+                <td>
+                    <c:out value="${factura.id_ped}"/>
                 </td>
                 
                 <td>

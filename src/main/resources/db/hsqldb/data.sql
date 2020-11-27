@@ -19,9 +19,9 @@ INSERT INTO productos(name, cantidad) VALUES ('Amoniaco', 9);
 INSERT INTO productos(name, cantidad) VALUES ('KH7', 10);
 INSERT INTO productos(name, cantidad) VALUES ('Rollos Papel', 40);
 
-INSERT INTO facturas(id, fecha, precio_total) VALUES (1, '2020-10-20', 10.0);
-INSERT INTO facturas(id, fecha, precio_total) VALUES (2, '2020-10-22', 137.89);
-INSERT INTO facturas(id, fecha, precio_total) VALUES (3, '2020-10-22', 56.01);
+INSERT INTO facturas(id, fecha, precio_total, id_prov, id_ped) VALUES (1, '2020-10-20', 10.0, 1, 1);
+INSERT INTO facturas(id, fecha, precio_total, id_prov, id_ped) VALUES (2, '2020-10-22', 137.89, 1, 2);
+INSERT INTO facturas(id, fecha, precio_total, id_prov, id_ped) VALUES (3, '2020-10-22', 56.01, 1, 3);
 
 INSERT INTO curriculum(name, tipocategoria) VALUES ('Carlos Jesus', 0);
 INSERT INTO curriculum(name, tipocategoria) VALUES ('Carlos Jesus2', 2);
