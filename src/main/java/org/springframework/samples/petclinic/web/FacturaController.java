@@ -57,10 +57,10 @@ public class FacturaController {
 		Optional<Factura> factura=facturaService.findFacturaById(facturaId);
 		if(factura.isPresent()) {
 			facturaService.delete(factura.get());
-			modelmap.addAttribute("message", "Trabajador borrado correctamente");
+			modelmap.addAttribute("message", "Factura borrada correctamente");
 			
 		}else {
-			modelmap.addAttribute("message", "Trabajador on encontrado");
+			modelmap.addAttribute("message", "Factura no encontrada");
 			view=listadoFacturas(modelmap);
 		}
 		return view;

@@ -23,5 +23,13 @@ public class Factura extends BaseEntity {
 	@Column(name="precio_total")
 	@NotEmpty
 	private Double precio_total;
+	
+	@Column(name="id_prov")
+	@NotEmpty
+	private Integer id_prov;
+	
+	@Column(name="id_ped")
+	@NotEmpty
+	private Integer id_ped;
 
 }
