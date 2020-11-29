@@ -33,7 +33,7 @@
                 </td>
                 <td>
                 	<spring:url value="/administradores/delete/{adminId}" var="adminUrl">
-                		<spring:param name="administradorId" value="${administrador.id}"/>
+                		<spring:param name="adminId" value="${administrador.id}"/>
                 	</spring:url>
                 	<a href="${fn:escapeXml(adminUrl)}">Delete</a>
                 </td>
