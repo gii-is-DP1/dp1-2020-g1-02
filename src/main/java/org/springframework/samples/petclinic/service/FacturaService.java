@@ -1,5 +1,6 @@
 package org.springframework.samples.petclinic.service;
 
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -44,6 +45,7 @@ public class FacturaService {
 		return facturaRepo.findAllById(ids);
 	}
 	
+
 	public Iterable<Factura> findFacturasByProveedorId(Integer idProveedor) {
 		List<Factura> listaFacturas = new ArrayList<Factura>();
 		Iterable<Factura> facturas = facturaRepo.findAll();

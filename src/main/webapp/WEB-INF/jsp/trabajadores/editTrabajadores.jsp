@@ -11,7 +11,7 @@
        <form:form modelAttribute="trabajador" class="form-horizontal" action="/trabajadores/save">
        		<div class="form-group has-feedback">
        			<input type="hidden" id="id" name="id" value=' <c:out value="${trabajador.id}"/>'>
-       			<petclinic:inputField label="Name" name="name"/>
+       			<petclinic:inputField label="Nombre" name="nombre"/>
        			<petclinic:inputField label="Apellidos" name="apellidos"/>
        			<petclinic:inputField label="DNI" name="dni"/>
        			<petclinic:inputField label="Telefono" name="telefono"/>

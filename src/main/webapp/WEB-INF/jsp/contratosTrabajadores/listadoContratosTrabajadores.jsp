@@ -38,6 +38,12 @@
                 <td>
                     <c:out value="${contrato.sueldo}"/>
                 </td>
+                 <td>
+                	<spring:url value="/contratosTrabajadores/delete/{contratoTrabajadorId}" var="contratotrabajadorUrl">
+                		<spring:param name="contratoTrabajadorId" value="${contrato.id}"/>
+                	</spring:url>
+                	<a href="${fn:escapeXml(contratotrabajadorUrl)}">Delete</a>
+                </td>
             </tr>
         </c:forEach>
         </tbody>
