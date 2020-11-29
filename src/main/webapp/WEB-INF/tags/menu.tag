@@ -28,6 +28,12 @@
 					<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
 					<span>Trabajadores</span>
 				</petclinic:menuItem>
+				
+				<petclinic:menuItem active="${name eq 'trabs'}" url="/contratosTrabajadores"
+					title="Contratos">
+					<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+					<span>Contratos</span>
+				</petclinic:menuItem>
 
 				<petclinic:menuItem active="${name eq 'provs'}" url="/proveedores"
 					title="Proveedores">

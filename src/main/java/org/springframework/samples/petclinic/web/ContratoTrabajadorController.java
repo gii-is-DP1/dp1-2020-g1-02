@@ -41,7 +41,7 @@ public class ContratoTrabajadorController {
 	
 	@PostMapping(path="/save")
 	public String salvarContratoTrabajador(@Valid ContratoTrabajador contratoTrabajador, BindingResult result,ModelMap modelMap) {
-		String view="contratosTrabajadores/listadoContratosTrabajadores";
+		String view="redirect:/contratosTrabajadores";
 		if(result.hasErrors()) {
 			modelMap.addAttribute("contratoTrabajador", contratoTrabajador);
 			return "contratosTrabajadores/editContratoTrabajador";
@@ -55,13 +55,13 @@ public class ContratoTrabajadorController {
 	
 	@GetMapping(path="/delete/{contratoTrabajadorId}")
 	public String borrarContratoTrabajador(@PathVariable("contratoTrabajadorId") int contratoTrabajadorId, ModelMap modelmap) {
-		String view="trabajadores/listadoContratosTrabajadores";
-		Optional<ContratoTrabajador> trabajador=contratoTrabajadorService.findContratoTrabajadorById(contratoTrabajadorId);
-		if(trabajador.isPresent()) {
-			contratoTrabajadorService.delete(trabajador.get());
-			modelmap.addAttribute("message", "Trabajador borrado correctamente");
+		String view="redirect:/contratosTrabajadores";
+		Optional<ContratoTrabajador> contratoTrabajador=contratoTrabajadorService.findContratoTrabajadorById(contratoTrabajadorId);
+		if(contratoTrabajador.isPresent()) {
+			contratoTrabajadorService.delete(contratoTrabajador.get());
+			modelmap.addAttribute("message", "Contrato trabajador borrado correctamente");
 		}else {
-			modelmap.addAttribute("message", "Trabajador on encontrado");
+			modelmap.addAttribute("message", "Contrato trabajador no encontrado");
 			view=listadoContratosTrabajadores(modelmap);
 		}
 		return view;
