@@ -58,10 +58,5 @@ public class CurriculumService {
 		delete(curriculumBorrar);
 	}
 
-	public void saveById(Integer id) {
-		Curriculum curriculumSalvado = findCurriculumById(id).get();
-		save(curriculumSalvado);
-	}
-
 }
 

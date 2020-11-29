@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.samples.petclinic.model.Administrador;
+import org.springframework.samples.petclinic.model.TipoCategoria;
 import org.springframework.stereotype.Service;
 
 @DataJpaTest(includeFilters = @ComponentScan.Filter(Service.class))
@@ -27,9 +28,16 @@ public class AdministradorServiceTest {
 	}
 	
 	@Test
-	public void testSaveAdministradorById() {
-		administradorService.saveById(1);
-		assertEquals(false, administradorService.findAdministradorById(1).isEmpty());
+	public void testSaveAdministrador() {
+		Administrador administradorNew = new Administrador();
+		administradorNew.setNombre("Pablo");
+		administradorNew.setApellidos("Sánchez");
+		administradorNew.setTipocategoria(TipoCategoria.Mantenimiento);
+
+		administradorService.save(administradorNew);
+		
+		Integer cantidad = administradorService.administradorCount();
+		assertEquals(3, cantidad);
 	}
 	
 	@Test
