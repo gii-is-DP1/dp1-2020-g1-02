@@ -17,7 +17,7 @@
             <petclinic:inputField label="Telefono" name="telefono"/>
             <petclinic:inputField label="Direccion" name="direccion"/>
             <petclinic:inputField label="Dni" name="dni"/>
-            <petclinic:inputField label="Email" name="email"/>
+            <petclinic:inputField label="Correo" name="correo"/>
         </div>
         <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
