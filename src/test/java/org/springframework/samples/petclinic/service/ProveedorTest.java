@@ -31,19 +31,19 @@ public class ProveedorTest {
 		assertEquals(Proveedor.class, provFind.getClass());
 	}
 	
-//	@Test
-//	public void testSaveProveedor() {
-//		Proveedor proveedorNew = new Proveedor();
-//		proveedorNew.setId(10);
-//		proveedorNew.setName("Roberto");
-//		proveedorNew.setEmail("robertito@gamil.com");
-//		proveedorNew.setDireccion("Calle Holanda 16");
-//		proveedorNew.setTelefono("645101010");
-//
-//		proveedorService.save(proveedorNew);
-//		
-//		assertEquals(Proveedor.class, proveedorService.findProveedorById(10).get().getClass());
-//	}
+	@Test
+	public void testSaveProveedor() {
+		Proveedor proveedorNew = new Proveedor();
+		proveedorNew.setName("Roberto");
+		proveedorNew.setEmail("robertito@gamil.com");
+		proveedorNew.setDireccion("Calle Holanda 16");
+		proveedorNew.setTelefono("645101010");
+
+		proveedorService.save(proveedorNew);
+		
+		Integer cantidad = proveedorService.proveedorCount();
+		assertEquals(3, cantidad);
+	}
 	
 	@Test
 	public void testDeleteProveedorById() {
