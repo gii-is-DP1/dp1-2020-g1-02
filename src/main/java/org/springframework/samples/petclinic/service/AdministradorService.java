@@ -40,12 +40,6 @@ public class AdministradorService {
 		Administrador administradorBorrar = findAdministradorById(id).get();
 		delete(administradorBorrar);
 	}
-
-	public void saveById(Integer id) {
-		Administrador administradorSalvado = findAdministradorById(id).get();
-		save(administradorSalvado);
-
-	}
 }
 
 
