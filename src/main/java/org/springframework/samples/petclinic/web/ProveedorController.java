@@ -35,33 +35,33 @@ public class ProveedorController {
 		return vista;
 	}
 	
-	@GetMapping(path="/oferta/new")
-	public String crearOferta(ModelMap modelMap) {
-		String view="proveedores/editOferta";
-		modelMap.addAttribute("oferta", new Oferta());
-		return view;
-	}
-	
-	@PostMapping(path="/oferta/save")
-	public String salvarOfertas(@Valid Oferta oferta, BindingResult result,ModelMap modelMap) {
-		String view="proveedores/ofertas";
-		if(result.hasErrors()) {
-			modelMap.addAttribute("oferta", oferta);
-			return "proveedores/editOferta";
-		}else {
-			ofertaService.save(oferta);
-			modelMap.addAttribute("message", "Proveedor actualizado!");
-			view=listadoProv(modelMap);
-		}
-		return view;
-	}
+//	@GetMapping(path="/oferta/new")
+//	public String crearOferta(ModelMap modelMap) {
+//		String view="proveedores/editOferta";
+//		modelMap.addAttribute("oferta", new Oferta());
+//		return view;
+//	}
+//	
+//	@PostMapping(path="/oferta/save")
+//	public String salvarOfertas(@Valid Oferta oferta, BindingResult result,ModelMap modelMap) {
+//		String view="proveedores/ofertas";
+//		if(result.hasErrors()) {
+//			modelMap.addAttribute("oferta", oferta);
+//			return "proveedores/editOferta";
+//		}else {
+//			ofertaService.save(oferta);
+//			modelMap.addAttribute("message", "Proveedor actualizado!");
+//			view=listadoProv(modelMap);
+//		}
+//		return view;
+//	}
 	
 	@GetMapping(path="/delete/{provName}")
-	public String borrarEvento(@PathVariable("provName") int provName, ModelMap modelmap) {
+	public String borrarEvento(@PathVariable("provName") int provId, ModelMap modelmap) {
 		String view="proveedores/listadoEventos";
-		Optional<Proveedor> prov=provService.findEventById(provName);
+		Optional<Proveedor> prov=provService.findProveedorById(provId);
 		if(prov.isPresent()) {
-			provService.delete(prov.get());
+			provService.deleteProveedor(prov.get());
 			modelmap.addAttribute("message", "Proveedor borrado correctamente");
 		}else {
 			modelmap.addAttribute("message", "Proveedor on encontrado");

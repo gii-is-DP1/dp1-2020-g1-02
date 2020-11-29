@@ -1,20 +1,22 @@
 package org.springframework.samples.petclinic.service;
 
-import static org.junit.Assert.assertNull;
+
 import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
+import java.time.LocalDate;
+
 import java.util.Iterator;
-import java.util.Random;
+
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.samples.petclinic.model.Factura;
-import org.springframework.samples.petclinic.repository.FacturaRepository;
 import org.springframework.stereotype.Service;
+
 
 @DataJpaTest(includeFilters = @ComponentScan.Filter(Service.class))
 public class FacturaServiceTest {
@@ -33,6 +35,25 @@ public class FacturaServiceTest {
 		Factura facturaFind = facturaService.findFacturaById(1).get();
 		assertEquals(Factura.class, facturaFind.getClass());
 	}
+	
+//	@Test
+//	public void testSaveFactura() {
+//		
+//		
+//		Factura facturaNew = new Factura();
+//		
+//		facturaNew.setFecha(LocalDate.now());
+//		facturaNew.setPrecio_total(50.0);
+//		facturaNew.setId_prov(10);
+//		facturaNew.setId_ped(3);
+//		
+//		facturaService.save(facturaNew);
+//		
+//		Integer cantidad = facturaService.facturaCount();
+//		
+//		assertEquals(4, cantidad);
+//	}
+	
 	
 	@Test
 	public void testFindAllFacturasByProveedorId() {

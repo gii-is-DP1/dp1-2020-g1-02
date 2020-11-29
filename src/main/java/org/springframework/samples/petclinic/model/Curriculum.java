@@ -19,7 +19,7 @@ public class Curriculum extends NamedEntity {
 	private TipoCategoria tipocategoria;
 
 	@Column(name="id_trab")
-	@NotEmpty
+	@NotNull
 	private Integer id_trab;
 	
 }
