@@ -39,13 +39,17 @@ public class FacturaServiceTest {
 //	@Test
 //	public void testSaveFactura() {
 //		
+//
+//		Double p=50.0;
+//		Integer ipr = 10;
+//		Integer ipe = 3; 
 //		
 //		Factura facturaNew = new Factura();
 //		
 //		facturaNew.setFecha(LocalDate.now());
-//		facturaNew.setPrecio_total(50.0);
-//		facturaNew.setId_prov(10);
-//		facturaNew.setId_ped(3);
+//		facturaNew.setPrecio_total(p);
+//		facturaNew.setId_prov(ipr);
+//		facturaNew.setId_ped(ipe);
 //		
 //		facturaService.save(facturaNew);
 //		
