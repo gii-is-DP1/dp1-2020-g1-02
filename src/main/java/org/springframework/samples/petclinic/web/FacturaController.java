@@ -56,7 +56,7 @@ public class FacturaController {
 		String view="facturas/listadoFacturas";
 		Optional<Factura> factura=facturaService.findFacturaById(facturaId);
 		if(factura.isPresent()) {
-			facturaService.delete(factura.get());
+			facturaService.deleteFactura(factura.get());
 			modelmap.addAttribute("message", "Factura borrada correctamente");
 			
 		}else {
