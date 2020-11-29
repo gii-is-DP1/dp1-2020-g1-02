@@ -67,7 +67,7 @@ public class FacturaServiceTest {
 	@Test
 	public void testDeleteFacturaById() {
 		facturaService.deleteById(1);
-		assertEquals(true, facturaService.findFacturaById(1).isEmpty());
+		assertEquals(false, facturaService.findFacturaById(1).isPresent());
 	}
 	
 	

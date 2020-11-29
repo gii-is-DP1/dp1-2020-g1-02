@@ -9,15 +9,15 @@ INSERT INTO cliente(nombre,apellidos,telefono,direccion,dni,correo) VALUES ('Man
 INSERT INTO proveedores(name,telefono,email,direccion) VALUES ('Lejias SL', '645681128', 'lejiassl@gmail.com', 'Calle Reina 14, Sevilla'); 
 INSERT INTO proveedores(name,telefono,email,direccion) VALUES ('Jabones SA', '645681127', 'jabonessa@gmail.com', 'Calle Mercedes 14, Madrid'); 
 
-INSERT INTO productos(name, cantidad) VALUES ('Lejia', 30);
-INSERT INTO productos(name, cantidad) VALUES ('jabon', 23);
-INSERT INTO productos(name, cantidad) VALUES ('Escoba', 13);
-INSERT INTO productos(name, cantidad) VALUES ('Fregona', 10);
-INSERT INTO productos(name, cantidad) VALUES ('Estropajo', 14);
-INSERT INTO productos(name, cantidad) VALUES ('Limpiacristales', 4);
-INSERT INTO productos(name, cantidad) VALUES ('Amoniaco', 9);
-INSERT INTO productos(name, cantidad) VALUES ('KH7', 10);
-INSERT INTO productos(name, cantidad) VALUES ('Rollos Papel', 40);
+INSERT INTO productos(name, cantidad) VALUES ('Lejia', '30');
+INSERT INTO productos(name, cantidad) VALUES ('jabon', '23');
+INSERT INTO productos(name, cantidad) VALUES ('Escoba', '13');
+INSERT INTO productos(name, cantidad) VALUES ('Fregona', '10');
+INSERT INTO productos(name, cantidad) VALUES ('Estropajo', '14');
+INSERT INTO productos(name, cantidad) VALUES ('Limpiacristales', '4');
+INSERT INTO productos(name, cantidad) VALUES ('Amoniaco', '9');
+INSERT INTO productos(name, cantidad) VALUES ('KH7', '10');
+INSERT INTO productos(name, cantidad) VALUES ('Rollos Papel', '40');
 
 INSERT INTO facturas(id, fecha, precio_total, id_prov, id_ped) VALUES (1, '2020-10-20', 10.0, 1, 1);
 INSERT INTO facturas(id, fecha, precio_total, id_prov, id_ped) VALUES (2, '2020-10-22', 137.89, 1, 2);
