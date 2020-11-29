@@ -39,7 +39,7 @@ public class TrabajadorController {
 	
 	@PostMapping(path="/save")
 	public String salvarTrabajador(@Valid Trabajador trabajador, BindingResult result,ModelMap modelMap) {
-		String view="trabajadores/listadoTrabajadores";
+		String view="redirect:/trabajadores";
 		if(result.hasErrors()) {
 			modelMap.addAttribute("trabajador", trabajador);
 			return "trabajadores/editTrabajadores";
@@ -60,7 +60,7 @@ public class TrabajadorController {
 	
 	@GetMapping(path="/delete/{trabajadorId}")
 	public String borrarTrabajador(@PathVariable("trabajadorId") int trabajadorId, ModelMap modelmap) {
-		String view="trabajadores/listadoTrabajadores";
+		String view="redirect:/trabajadores";
 		Optional<Trabajador> trabajador=trabajadorService.findTrabajadorById(trabajadorId);
 		if(trabajador.isPresent()) {
 			trabajadorService.delete(trabajador.get());

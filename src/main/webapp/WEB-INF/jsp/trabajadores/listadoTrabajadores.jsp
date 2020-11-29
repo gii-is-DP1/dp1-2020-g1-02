@@ -8,8 +8,14 @@
 <%@ taglib prefix="petclinic" tagdir="/WEB-INF/tags" %>
 
 <petclinic:layout pageName="trabajadores">
-    <h2>Events</h2>
-
+    <h2>Trabajadores</h2>
+	
+	<a href="trabajadores/new">
+		<button type="button" class="btn btn-default btn-lg">
+  			<span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Nuevo trabajador
+		</button>
+	</a>
+	
     <table id="eventsTable" class="table table-striped">
         <thead>
         <tr>

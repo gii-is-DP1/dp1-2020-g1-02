@@ -9,23 +9,21 @@
 
 <nav class="navbar navbar-default" role="navigation">
 	<div class="container">
-		<div class="navbar-header">
-			<a class="navbar-brand"
-				href="<spring:url value="/" htmlEscape="true" />"><span></span></a>
-			<button type="button" class="navbar-toggle" data-toggle="collapse"
-				data-target="#main-navbar">
-				<span class="sr-only"><os-p>Toggle navigation</os-p></span> <span
-					class="icon-bar"></span> <span class="icon-bar"></span> <span
-					class="icon-bar"></span>
-			</button>
-		</div>
+	<span><img src="/resources/images/logo.jpg" width="90px" height="90px"></span>
 		<div class="navbar-collapse collapse" id="main-navbar">
+		
 			<ul class="nav navbar-nav">
 
 				<petclinic:menuItem active="${name eq 'home'}" url="/"
 					title="home page">
 					<span class="glyphicon glyphicon-home" aria-hidden="true"></span>
 					<span>Home</span>
+				</petclinic:menuItem>
+				
+				<petclinic:menuItem active="${name eq 'trabs'}" url="/trabajadores"
+					title="Trabajadores">
+					<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+					<span>Trabajadores</span>
 				</petclinic:menuItem>
 
 				<petclinic:menuItem active="${name eq 'provs'}" url="/proveedores"
@@ -53,8 +51,8 @@
 
 			<ul class="nav navbar-nav navbar-right">
 				<sec:authorize access="!isAuthenticated()">
-					<li><a href="<c:url value="/login" />">Login</a></li>
-					<li><a href="<c:url value="/users/new" />">Register</a></li>
+					<li><a href="<c:url value="#" />">Login</a></li>
+					<li><a href="<c:url value="#" />">Register</a></li>
 				</sec:authorize>
 				<sec:authorize access="isAuthenticated()">
 					<li class="dropdown"><a href="#" class="dropdown-toggle"
