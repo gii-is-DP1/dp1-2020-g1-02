@@ -14,7 +14,7 @@ public class ProductoService {
 	private ProductoRepository productRepo;
 	
 	@Transactional
-	public int ProductCount() {
+	public int productCount() {
 		return (int) productRepo.count();
 	}
 	
@@ -29,6 +29,11 @@ public class ProductoService {
 	
 	public void delete(Producto product) {
 		productRepo.delete(product);
+	}
+	
+	public void deleteById(Integer id) {
+		Producto productoBorrar = findProductoById(id).get();
+		delete(productoBorrar);
 	}
 
 	public void restarProducto(Producto product) {

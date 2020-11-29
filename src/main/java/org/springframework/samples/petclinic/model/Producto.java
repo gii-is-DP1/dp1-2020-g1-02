@@ -12,12 +12,8 @@ import lombok.Data;
 @Table(name="productos")
 public class Producto extends NamedEntity {
 	
-//	@Column(name="precio")
-//	@NotEmpty
-//	private Double precio;
-//	
 	@Column(name="cantidad")
 	@NotEmpty
-	private Integer cantidadStock;
+	private String cantidadStock;
 	
 }
