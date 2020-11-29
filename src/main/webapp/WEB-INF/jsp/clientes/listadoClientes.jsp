@@ -18,7 +18,7 @@
             <th>Telefono</th>
             <th>Direccion</th>
             <th>Dni</th>
-            <th>Email</th>
+            <th>Correo</th>
         </tr>
         </thead>
         <tbody>
@@ -40,7 +40,7 @@
                     <c:out value="${cliente.dni}"/>
                 </td>
                  <td>
-                    <c:out value="${cliente.email}"/>
+                    <c:out value="${cliente.correo}"/>
                 </td>
                 <td>
                 	<spring:url value="/clientes/delete/{clienteId}" var="clienteUrl">

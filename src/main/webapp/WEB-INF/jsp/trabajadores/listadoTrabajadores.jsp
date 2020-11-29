@@ -23,7 +23,7 @@
             <th style="width: 150px;">NOMBRE</th>
             <th style="width: 150px;">APELLIDOS</th>
             <th style="width: 150px;">DNI</th>
-            <th style="width: 150px;">DIRECCIÓN</th>
+            <th style="width: 150px;">DIRECCIÃ“N</th>
             <th style="width: 150px;">CORREO</th>
             <th style="width: 150px;">TELEFONO</th>
             <th style="width: 150px;">CATEGORIA</th>
@@ -64,6 +64,7 @@
                     	<c:out value="${contrato.fechainicial}" />
                     </c:forEach> 
                 </td>--%>
+
                 <td>
                 	<spring:url value="/trabajadores/delete/{trabajadorId}" var="trabajadorUrl">
                 		<spring:param name="trabajadorId" value="${trabajador.id}"/>
