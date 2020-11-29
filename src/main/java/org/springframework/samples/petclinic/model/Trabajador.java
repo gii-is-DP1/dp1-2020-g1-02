@@ -26,5 +26,5 @@ public class Trabajador extends PersonaEntity {
     
     @OneToMany(cascade = CascadeType.ALL, mappedBy="trabajador")
     private Set<ContratoTrabajador> contratos; 
-    
+
 }

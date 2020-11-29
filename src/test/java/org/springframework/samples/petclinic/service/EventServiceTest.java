@@ -17,6 +17,12 @@ public class EventServiceTest {
 	@Test
 	public void testCountWithInitialData() {
 		int count = eventService.eventCount();
-		assertEquals(count, 1);
+		assertEquals(count, 2);
+	}
+	
+	@Test
+	public void testContratosTrabajadorInitialData() {
+		int count = eventService.findAll().iterator().next().getContratos().size();
+		assertEquals(count,1);
 	}
 }
