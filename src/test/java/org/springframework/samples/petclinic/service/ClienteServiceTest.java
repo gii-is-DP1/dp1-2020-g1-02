@@ -17,7 +17,6 @@ public class ClienteServiceTest {
 	
 	@Autowired
 	private ClienteService clienteService;
-	private Cliente cliente;
 	
 	@Test
 	public void testCountWithInitialData() {
@@ -27,17 +26,25 @@ public class ClienteServiceTest {
 	
 	@Test
 	public void findAll() {
-		Iterable<Cliente> cliente = clienteService.findAll();
+		clienteService.findAll();
 	}
 	
 	@Test
-	public void findClientById(int clienteId) {
-		Optional<Cliente> c = clienteService.findClienteById(clienteId);
+	public void findClientById() {
+		int clientId = 1;
+		clienteService.findClienteById(clientId);
 	}
 	
-//	@Test
-//	public void delete(Cliente cliente) {
-//		clienteService.delete(cliente);
-//	}
+	@Test
+	public void testDeleteClienteById() {
+		clienteService.deleteById(1);
+		assertEquals(true, clienteService.findClienteById(1).isEmpty());
+	}
+	
+	@Test
+	public void testSaveClienteById() {
+		clienteService.saveById(1);
+		assertEquals(false, clienteService.findClienteById(1).isEmpty());
+	}
 
 }
