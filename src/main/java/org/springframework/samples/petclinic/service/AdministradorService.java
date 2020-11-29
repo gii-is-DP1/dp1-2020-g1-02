@@ -1,7 +1,6 @@
 package org.springframework.samples.petclinic.service;
 
 import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.samples.petclinic.model.Administrador;
 import org.springframework.samples.petclinic.repository.AdministradorRepository;
@@ -15,7 +14,7 @@ public class AdministradorService {
 	private AdministradorRepository administradorRepo;
 	
 	@Transactional
-	public int proveedorCount() {
+	public int administradorCount() {
 		return (int) administradorRepo.count();
 	}
 	
@@ -33,8 +32,19 @@ public class AdministradorService {
 	}
 
 	public Optional<Administrador> findAdministradorById(int adminId) {
-		// TODO Auto-generated method stub
+
 		return administradorRepo.findById(adminId);
+	}
+
+	public void deleteById(Integer id) {
+		Administrador administradorBorrar = findAdministradorById(id).get();
+		delete(administradorBorrar);
+	}
+
+	public void saveById(Integer id) {
+		Administrador administradorSalvado = findAdministradorById(id).get();
+		save(administradorSalvado);
+
 	}
 }
 

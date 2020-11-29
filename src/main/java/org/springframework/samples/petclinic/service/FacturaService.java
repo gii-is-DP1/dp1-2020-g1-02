@@ -1,5 +1,9 @@
 package org.springframework.samples.petclinic.service;
 
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,12 +32,30 @@ public class FacturaService {
 		facturaRepo.save(factura);
 	}
 	
-	public void delete(Factura factura) {
+	public void deleteFactura(Factura factura) {
 		facturaRepo.delete(factura);
+	}
+	
+	public void deleteById(Integer id) {
+		Factura facturaBorrar = findFacturaById(id).get();
+		deleteFactura(facturaBorrar);
 	}
 
 	public Iterable<Factura> findAllById(Iterable<Integer> ids) {
 		return facturaRepo.findAllById(ids);
+	}
+	
+
+	public Iterable<Factura> findFacturasByProveedorId(Integer idProveedor) {
+		List<Factura> listaFacturas = new ArrayList<Factura>();
+		Iterable<Factura> facturas = facturaRepo.findAll();
+		Iterator<Factura> iterador = facturas.iterator();
+		while(iterador.hasNext()) {
+			Factura f = (Factura) iterador.next();
+			if(f.getId_prov()==idProveedor) listaFacturas.add(f);
+		}
+		Iterable<Factura> facturasProv = listaFacturas;
+		return facturasProv;
 	}
 	
 	public Optional<Factura> findFacturaById(Integer id) {
