@@ -36,11 +36,11 @@ public class FacturaServiceTest {
 	
 	@Test
 	public void testFindAllFacturasByProveedorId() {
-		Integer i = 0;
-		Iterable<Factura> facturaFind = facturaService.findFacturaByProveedorId(1);
+		Boolean i = true;
+		Iterable<Factura> facturaFind = facturaService.findFacturasByProveedorId(1);
 		Iterator<Factura> iterador = facturaFind.iterator();
-		while(iterador.hasNext()) i++;
-//		assertTrue(facturaFind.forEach(x-> x.);
+		while(iterador.hasNext()) if(iterador.next().getId_prov() != 1) i =false;
+		assertTrue(i);
 	}
 	
 	@Test
