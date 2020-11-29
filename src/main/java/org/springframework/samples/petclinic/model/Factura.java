@@ -12,8 +12,9 @@ import lombok.Data;
 
 @Entity
 @Data
-@Table(name="factura")
-public class Factura extends NamedEntity {
+@Table(name="facturas")
+public class Factura extends BaseEntity {
+
 	
 	@Column(name="fecha")
 	@NotEmpty
@@ -22,5 +23,13 @@ public class Factura extends NamedEntity {
 	@Column(name="precio_total")
 	@NotEmpty
 	private Double precio_total;
+	
+	@Column(name="id_prov")
+	@NotEmpty
+	private Integer id_prov;
+	
+	@Column(name="id_ped")
+	@NotEmpty
+	private Integer id_ped;
 
 }

@@ -7,34 +7,35 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="petclinic" tagdir="/WEB-INF/tags" %>
 
-<petclinic:layout pageName="productos">
-    <h2>Productos</h2>
+<petclinic:layout pageName="administradores">
+    <h2>Administradores</h2>
 
-    <table id="productosTable" class="table table-striped">
+    <table id="administradoresTable" class="table table-striped">
         <thead>
         <tr>
             <th style="width: 150px;">Nombre</th>
-            <th style="width: 150px;">Precio</th>
-            <th style="width: 150px;">Cantidad en Stock</th>
-
-
+            <th style="width: 200px;">Apellidos</th>
+            <th style="width: 200px;">Categoria</th>
+         
         </tr>
         </thead>
         <tbody>
-        <c:forEach items="${producto}" var="producto">
+        <c:forEach items="${administrador}" var="administrador">
             <tr>
                 <td>
-                    <c:out value="${producto.name}"/>
+                    <c:out value="${administrador.nombre}"/>
                 </td>
                 <td>
-                    <c:out value="${producto.cantidadStock}"/>
+                    <c:out value="${administrador.apellidos}"/>
                 </td>
-                
                 <td>
-                	<spring:url value="/productos/{productId}/restar" var="productUrl">
-                		<spring:param name="productId" value="${producto.id}"/>
+                    <c:out value="${administrador.tipocategoria}"/>
+                </td>
+                <td>
+                	<spring:url value="/administradores/delete/{adminId}" var="adminUrl">
+                		<spring:param name="administradorId" value="${administrador.id}"/>
                 	</spring:url>
-                	<a href="${fn:escapeXml(productUrl)}">Restar</a>
+                	<a href="${fn:escapeXml(adminUrl)}">Delete</a>
                 </td>
             </tr>
         </c:forEach>

@@ -7,6 +7,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.samples.petclinic.model.Producto;
 import org.springframework.samples.petclinic.model.Proveedor;
+import org.springframework.samples.petclinic.model.Trabajador;
 import org.springframework.samples.petclinic.service.ProductoService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -31,6 +32,13 @@ public class ProductoController {
 		return vista;
 	}
 	
+	@GetMapping(path="/edit")
+	public String editaProducto(ModelMap modelMap) {
+		String view="productos/editProducto";
+		modelMap.addAttribute("producto", new Producto());
+		return view;
+	}
+	
 	@GetMapping(path="/new")
 	public String crearProducto(ModelMap modelMap) {
 		String view="productos/editProducto";
@@ -50,6 +58,14 @@ public class ProductoController {
 			view=listadoProductos(modelMap);
 		}
 		return view;
+	}
+	
+	@PostMapping(path="/{productoId}/restar")
+	public String restarStock(@PathVariable("productoId") int productoId, ModelMap modelmap) {
+		Integer cantStock = this.productService.findProductoById(productoId).get().getCantidadStock()-1;
+		this.productService.findProductoById(productoId).get().setCantidadStock(cantStock);
+		productService.save(this.productService.findProductoById(productoId).get());
+		return listadoProductos(modelmap);
 	}
 
 }

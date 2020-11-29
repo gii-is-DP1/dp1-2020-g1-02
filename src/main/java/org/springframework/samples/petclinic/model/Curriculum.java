@@ -14,10 +14,6 @@ import lombok.Data;
 @Table(name="curriculum")
 public class Curriculum extends NamedEntity {
 	
-	@Column(name="nombre")
-    @NotEmpty
-	private String nombre;
-	
 	@Column(name="tipocategoria")
 	@NotNull
 	private TipoCategoria tipocategoria;

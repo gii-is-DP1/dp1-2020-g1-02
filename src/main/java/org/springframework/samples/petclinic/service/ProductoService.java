@@ -1,5 +1,7 @@
 package org.springframework.samples.petclinic.service;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.samples.petclinic.model.Producto;
 import org.springframework.samples.petclinic.repository.ProductoRepository;
@@ -29,8 +31,23 @@ public class ProductoService {
 		productRepo.delete(product);
 	}
 
-	public Iterable<Producto> findAllById(Iterable<Integer> ids) {
-		return productRepo.findAllById(ids);
+	public void restarProducto(Producto product) {
+		Producto productoCopia = new Producto();
+		productoCopia.setId(product.getId());
+		productoCopia.setName(product.getName());
+		productoCopia.setCantidadStock((Integer) product.getCantidadStock()-1);
+		productRepo.delete(product);
+		productRepo.save(productoCopia);
+	}
+	
+	public void sumarProducto(Producto product) {
+		product.setCantidadStock(product.getCantidadStock()+1);
+		productRepo.save(product);
+		
+	}
+	
+	public Optional<Producto> findProductoById(Integer id) {
+		return productRepo.findById(id);
 	}
 
 }
