@@ -36,7 +36,7 @@
                     <c:out value="${trabajador.id}"/>
                 </td>
                 <td>
-                    <c:out value="${trabajador.name}"/>
+                    <c:out value="${trabajador.nombre}"/>
                 </td>
                 <td>
                     <c:out value="${trabajador.apellidos}"/>
@@ -59,11 +59,11 @@
               <%--   <td>
                     <c:out value="${trabajador.contratos}"/>
                 </td> --%>
-                <td>
+                <%--<td>
                   <c:forEach var="contrato" items="${trabajador.contratos}">
                     	<c:out value="${contrato.fechainicial}" />
                     </c:forEach> 
-                </td>
+                </td>--%>
                 <td>
                 	<spring:url value="/trabajadores/delete/{trabajadorId}" var="trabajadorUrl">
                 		<spring:param name="trabajadorId" value="${trabajador.id}"/>
