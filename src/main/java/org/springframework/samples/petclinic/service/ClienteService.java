@@ -29,20 +29,24 @@ public class ClienteService {
 		clienteRepo.save(cliente);
 	}
 	
+
 	public void saveById(Integer id) {
 		Cliente clienteGuardar = findClienteById(id).get();
 		save(clienteGuardar);
 	}
 	
+
 	public void delete(Cliente cliente) {
 		clienteRepo.delete(cliente);
 		
 	}
+
 	
 	public void deleteById(Integer id) {
 		Cliente clienteBorrar = findClienteById(id).get();
 		delete(clienteBorrar);
 	}
+
 
 	public Optional<Cliente> findClienteById(Integer clienteId) {
 		return clienteRepo.findById(clienteId);

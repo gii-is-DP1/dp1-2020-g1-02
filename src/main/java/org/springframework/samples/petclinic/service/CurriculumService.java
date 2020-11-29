@@ -1,5 +1,6 @@
 package org.springframework.samples.petclinic.service;
 
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -39,6 +40,7 @@ public class CurriculumService {
 		return curriculumRepo.findById(curriculumId);
 	}
 
+
 	public Iterable<Curriculum> findCurriculumsByTrabajadorId(Integer idTrabajador) {
 		List<Curriculum> listaCurriculums = new ArrayList<Curriculum>();
 		Iterable<Curriculum> curriculums = curriculumRepo.findAll();
@@ -60,5 +62,6 @@ public class CurriculumService {
 		Curriculum curriculumSalvado = findCurriculumById(id).get();
 		save(curriculumSalvado);
 	}
+
 }
 

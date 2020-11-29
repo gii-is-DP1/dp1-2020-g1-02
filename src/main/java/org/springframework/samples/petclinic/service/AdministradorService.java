@@ -32,6 +32,7 @@ public class AdministradorService {
 	}
 
 	public Optional<Administrador> findAdministradorById(int adminId) {
+
 		return administradorRepo.findById(adminId);
 	}
 
@@ -43,6 +44,7 @@ public class AdministradorService {
 	public void saveById(Integer id) {
 		Administrador administradorSalvado = findAdministradorById(id).get();
 		save(administradorSalvado);
+
 	}
 }
 

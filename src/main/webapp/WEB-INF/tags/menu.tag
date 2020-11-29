@@ -9,10 +9,13 @@
 
 <nav class="navbar navbar-default" role="navigation">
 	<div class="container">
-	<span><img src="/resources/images/logo.jpg" width="90px" height="90px"></span>
 		<div class="navbar-collapse collapse" id="main-navbar">
 		
 			<ul class="nav navbar-nav">
+				
+				<li>
+					<img src="/resources/images/logo.jpg" width="90px" height="90px">
+				</li>
 
 				<petclinic:menuItem active="${name eq 'home'}" url="/"
 					title="home page">
