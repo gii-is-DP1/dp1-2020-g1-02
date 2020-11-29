@@ -38,32 +38,20 @@ public class FacturaServiceTest {
 	
 //	@Test
 //	public void testSaveFactura() {
-//		Integer cantidadFacturasIni = 0;
-//		Iterable<Factura> facturaFind = facturaService.findAll();
-//		Iterator<Factura> iterador = facturaFind.iterator();
-//		while(iterador.hasNext()) cantidadFacturasIni++;
+//		
 //		
 //		Factura facturaNew = new Factura();
-//		facturaNew.setId(10);
-//		facturaNew.setId_ped(3);
-//		facturaNew.setId_prov(1);
-//		facturaNew.setPrecio_total(50.0);
+//		
 //		facturaNew.setFecha(LocalDate.now());
+//		facturaNew.setPrecio_total(50.0);
+//		facturaNew.setId_prov(10);
+//		facturaNew.setId_ped(3);
+//		
 //		facturaService.save(facturaNew);
 //		
-//		Integer cantidadFacturasFin = 0;
-//		Iterable<Factura> facturaFind2 = facturaService.findAll();
-//		Iterator<Factura> iterador2 = facturaFind2.iterator();
-//		while(iterador2.hasNext()) cantidadFacturasFin++;
+//		Integer cantidad = facturaService.facturaCount();
 //		
-//		assertEquals(cantidadFacturasIni+1, cantidadFacturasFin);
-//		
-//		
-//		Factura facturaEdit = facturaService.findFacturaById(1).get();
-//		facturaEdit.setPrecio_total(3.5);
-//		facturaEdit.setId_ped(100);;
-//		facturaService.save(facturaEdit);
-//		assertEquals(3.5, facturaService.findFacturaById(1).get().getPrecio_total());
+//		assertEquals(4, cantidad);
 //	}
 	
 	
