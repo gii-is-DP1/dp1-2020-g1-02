@@ -28,12 +28,17 @@ public class ProveedorService {
 		proveedorRepo.save(proveedor);
 	}
 	
-	public void delete(Proveedor proveedor) {
+	public void deleteProveedor(Proveedor proveedor) {
 		proveedorRepo.delete(proveedor);
 	}
 
-	public Optional<Proveedor> findEventById(int proveedorName) {
+	public void deleteById(Integer id) {
+		Proveedor proveedorBorrar = findProveedorById(id).get();
+		deleteProveedor(proveedorBorrar);
+	}
+	
+	public Optional<Proveedor> findProveedorById(int id) {
 		// TODO Auto-generated method stub
-		return proveedorRepo.findById(proveedorName);
+		return proveedorRepo.findById(id);
 	}
 }
