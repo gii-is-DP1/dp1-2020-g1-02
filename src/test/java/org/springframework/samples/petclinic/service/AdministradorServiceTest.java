@@ -24,7 +24,7 @@ public class AdministradorServiceTest {
 	@Test
 	public void testDeleteAdministradorById() {
 		administradorService.deleteById(1);
-		assertEquals(true, administradorService.findAdministradorById(1).isEmpty());
+		assertEquals(false, administradorService.findAdministradorById(1).isPresent());
 	}
 	
 	@Test

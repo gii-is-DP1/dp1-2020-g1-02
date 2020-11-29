@@ -36,20 +36,20 @@ public class ProductoService {
 		delete(productoBorrar);
 	}
 
-	public void restarProducto(Producto product) {
-		Producto productoCopia = new Producto();
-		productoCopia.setId(product.getId());
-		productoCopia.setName(product.getName());
-		productoCopia.setCantidadStock((Integer) product.getCantidadStock()-1);
-		productRepo.delete(product);
-		productRepo.save(productoCopia);
-	}
+//	public void restarProducto(Producto product) {
+//		Producto productoCopia = new Producto();
+//		productoCopia.setId(product.getId());
+//		productoCopia.setName(product.getName());
+//		productoCopia.setCantidadStock((Integer) product.getCantidadStock()-1);
+//		productRepo.delete(product);
+//		productRepo.save(productoCopia);
+//	}
 	
-	public void sumarProducto(Producto product) {
-		product.setCantidadStock(product.getCantidadStock()+1);
-		productRepo.save(product);
-		
-	}
+//	public void sumarProducto(Producto product) {
+//		product.setCantidadStock(product.getCantidadStock()+1);
+//		productRepo.save(product);
+//		
+//	}
 	
 	public Optional<Producto> findProductoById(Integer id) {
 		return productRepo.findById(id);

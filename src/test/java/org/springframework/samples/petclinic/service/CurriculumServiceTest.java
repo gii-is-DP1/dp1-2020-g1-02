@@ -26,7 +26,7 @@ public class CurriculumServiceTest {
 	@Test
 	public void testDeleteCurriculumById() {
 		curriculumService.deleteById(1);
-		assertEquals(true, curriculumService.findCurriculumById(1).isEmpty());
+		assertEquals(false, curriculumService.findCurriculumById(1).isPresent());
 	}
 	
 	@Test

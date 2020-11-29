@@ -34,7 +34,7 @@ public class ClienteServiceTest {
 	@Test
 	public void testDeleteClienteById() {
 		clienteService.deleteById(1);
-		assertEquals(true, clienteService.findClienteById(1).isEmpty());
+		assertEquals(false, clienteService.findClienteById(1).isPresent());
 	}
 	
 	@Test
