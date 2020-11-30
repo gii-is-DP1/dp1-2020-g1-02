@@ -9,6 +9,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -22,12 +23,12 @@ public class ContratoTrabajador extends BaseEntity {
 
     @Column(name="fechainicial")
     @DateTimeFormat(pattern = "yyyy/MM/dd")
-    @NotEmpty
+    @NotNull
     private LocalDate fechainicial;
 
     @Column(name="fechafinal")
     @DateTimeFormat(pattern = "yyyy/MM/dd")
-    @NotEmpty
+    @NotNull
     private LocalDate fechafinal;
     
     @ManyToOne
@@ -35,7 +36,7 @@ public class ContratoTrabajador extends BaseEntity {
     private Trabajador trabajador;
     
     @Column(name="sueldo")
-    @NotEmpty
+    @NotNull
     private Double sueldo;
     
 }

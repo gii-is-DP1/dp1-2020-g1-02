@@ -86,4 +86,9 @@ public class TrabajadorServiceTest {
 		assertEquals(trabajadorActualizado.get().getNombre(), "Manolo");
 		
 	}
+	
+	@Test
+	public void testContratosTrabajador() {
+		
+	}
 }
