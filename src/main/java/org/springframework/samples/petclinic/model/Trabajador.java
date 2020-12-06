@@ -25,6 +25,9 @@ public class Trabajador extends PersonaEntity {
     private String tipocategoria;
     
     @OneToMany(cascade = CascadeType.ALL, mappedBy="trabajador")
-    private Set<ContratoTrabajador> contratos; 
+    private Set<ContratoTrabajador> contratos;
+    
+    @OneToMany(cascade = CascadeType.ALL, mappedBy="trabajador")
+    private Set<Horario> horarios;
 
 }
