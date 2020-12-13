@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.samples.petclinic.model.Factura;
+import org.springframework.samples.petclinic.model.Pedido;
 import org.springframework.stereotype.Service;
 
 
@@ -23,6 +24,8 @@ public class FacturaServiceTest {
 	
 	@Autowired
 	private FacturaService facturaService;
+	@Autowired
+	private ProveedorService proveedorService;
 	
 	@Test
 	public void testExistenFacturas() {
@@ -42,8 +45,10 @@ public class FacturaServiceTest {
 		
 		facturaNew.setFecha(LocalDate.now());
 		facturaNew.setPrecio_total(50.0);
-		facturaNew.setId_prov(10);
-		facturaNew.setId_ped(3);
+		facturaNew.setProveedor(proveedorService.findProveedorById(2).get());
+		Pedido ped = new Pedido();
+		ped.setFechaPedido(LocalDate.now());
+		facturaNew.setPedido(ped);;
 		facturaService.save(facturaNew);
 		
 		Integer cantidad = facturaService.facturaCount();
@@ -53,11 +58,11 @@ public class FacturaServiceTest {
 	
 	
 	@Test
-	public void testFindAllFacturasByProveedorId() {
+	public void testFindAllFacturasByProveedor() {
 		Boolean i = true;
 		Iterable<Factura> facturaFind = facturaService.findFacturasByProveedorId(1);
 		Iterator<Factura> iterador = facturaFind.iterator();
-		while(iterador.hasNext()) if(iterador.next().getId_prov() != 1) i =false;
+		while(iterador.hasNext()) if(iterador.next().getProveedor().getId() != 1) i =false;
 		assertTrue(i);
 	}
 	

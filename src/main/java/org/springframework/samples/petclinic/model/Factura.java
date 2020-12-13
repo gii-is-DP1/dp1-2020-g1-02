@@ -4,6 +4,9 @@ import java.time.LocalDate;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -25,12 +28,12 @@ public class Factura extends BaseEntity {
 	@NotNull
 	private Double precio_total;
 	
-	@Column(name="id_prov")
-	@NotNull
-	private Integer id_prov;
+	@ManyToOne
+	@JoinColumn(name="proveedor_id")
+	private Proveedor proveedor;
 	
-	@Column(name="id_ped")
-	@NotNull
-	private Integer id_ped;
+	@OneToOne(optional=false)
+	@JoinColumn(name="pedido_id")
+	private Pedido pedido;
 
 }
