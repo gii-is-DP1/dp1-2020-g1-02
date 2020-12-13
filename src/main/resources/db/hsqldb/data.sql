@@ -47,7 +47,7 @@ INSERT INTO presupuesto(precio, tipopresupuesto) VALUES (1205.9, 1);
 
 INSERT INTO contratoservicio(fechainicial, fechafinal, fechapago, cliente_dni, presupuesto_id, periodoprueba) VALUES ('2019-10-20', '2020-12-31', '2021-01-10', 1, 2, 0);
 
-INSERT INTO servicio(lugar, tipocategoria, fechainicio, fechafin) VALUES ('Av Reina Mercedes', 0, '2019-10-20', '2020-12-31');
+INSERT INTO servicio(lugar, tipocategoria, fechainicio, fechafin, estado) VALUES ('Av Reina Mercedes', 0, '2019-10-20', '2020-12-31', 0);
 
 
 /* -- One admin user, named admin1 with passwor 4dm1n and authority admin

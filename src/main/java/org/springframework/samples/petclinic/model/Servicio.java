@@ -34,5 +34,9 @@ public class Servicio extends BaseEntity {
 	@DateTimeFormat(pattern = "yyyy/MM/dd")
 	@NotEmpty
 	private LocalDate fechafin;
-
+	
+	@Column(name= "estado")
+	@NotNull
+	private EstadoServicio estado;
+	
 }
