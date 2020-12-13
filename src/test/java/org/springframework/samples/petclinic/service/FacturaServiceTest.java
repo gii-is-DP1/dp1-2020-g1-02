@@ -39,29 +39,7 @@ public class FacturaServiceTest {
 		assertEquals(Factura.class, facturaFind.getClass());
 	}
 	
-<<<<<<< HEAD
-//	@Test
-//	public void testSaveFactura() {
-//		
-//
-//		Double p=50.0;
-//		Integer ipr = 10;
-//		Integer ipe = 3; 
-//		
-//		Factura facturaNew = new Factura();
-//		
-//		facturaNew.setFecha(LocalDate.now());
-//		facturaNew.setPrecio_total(p);
-//		facturaNew.setId_prov(ipr);
-//		facturaNew.setId_ped(ipe);
-//		
-//		facturaService.save(facturaNew);
-//		
-//		Integer cantidad = facturaService.facturaCount();
-//		
-//		assertEquals(4, cantidad);
-//	}
-=======
+
 	@Test
 	public void testSaveFactura() {
 		Factura facturaNew = new Factura();
@@ -78,7 +56,7 @@ public class FacturaServiceTest {
 		
 		assertEquals(4, cantidad);
 	}
->>>>>>> refs/remotes/origin/master
+
 	
 	
 	@Test
