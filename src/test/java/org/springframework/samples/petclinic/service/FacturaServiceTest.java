@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.samples.petclinic.model.Factura;
+import org.springframework.samples.petclinic.model.Pedido;
 import org.springframework.stereotype.Service;
 
 
@@ -23,6 +24,8 @@ public class FacturaServiceTest {
 	
 	@Autowired
 	private FacturaService facturaService;
+	@Autowired
+	private ProveedorService proveedorService;
 	
 	@Test
 	public void testExistenFacturas() {
@@ -36,6 +39,7 @@ public class FacturaServiceTest {
 		assertEquals(Factura.class, facturaFind.getClass());
 	}
 	
+<<<<<<< HEAD
 //	@Test
 //	public void testSaveFactura() {
 //		
@@ -57,21 +61,39 @@ public class FacturaServiceTest {
 //		
 //		assertEquals(4, cantidad);
 //	}
+=======
+	@Test
+	public void testSaveFactura() {
+		Factura facturaNew = new Factura();
+		
+		facturaNew.setFecha(LocalDate.now());
+		facturaNew.setPrecio_total(50.0);
+		facturaNew.setProveedor(proveedorService.findProveedorById(2).get());
+		Pedido ped = new Pedido();
+		ped.setFechaPedido(LocalDate.now());
+		facturaNew.setPedido(ped);;
+		facturaService.save(facturaNew);
+		
+		Integer cantidad = facturaService.facturaCount();
+		
+		assertEquals(4, cantidad);
+	}
+>>>>>>> refs/remotes/origin/master
 	
 	
 	@Test
-	public void testFindAllFacturasByProveedorId() {
+	public void testFindAllFacturasByProveedor() {
 		Boolean i = true;
 		Iterable<Factura> facturaFind = facturaService.findFacturasByProveedorId(1);
 		Iterator<Factura> iterador = facturaFind.iterator();
-		while(iterador.hasNext()) if(iterador.next().getId_prov() != 1) i =false;
+		while(iterador.hasNext()) if(iterador.next().getProveedor().getId() != 1) i =false;
 		assertTrue(i);
 	}
 	
 	@Test
 	public void testDeleteFacturaById() {
 		facturaService.deleteById(1);
-		assertEquals(true, facturaService.findFacturaById(1).isEmpty());
+		assertEquals(false, facturaService.findFacturaById(1).isPresent());
 	}
 	
 	

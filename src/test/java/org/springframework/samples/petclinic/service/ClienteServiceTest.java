@@ -1,10 +1,6 @@
 package org.springframework.samples.petclinic.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-
-import java.util.List;
-import java.util.Optional;
-
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
@@ -19,7 +15,7 @@ public class ClienteServiceTest {
 	private ClienteService clienteService;
 	
 	@Test
-	public void testCountWithInitialData() {
+	public void testExistenClientes() {
 		int count = clienteService.clienteCount();
 		assertEquals(count, 1);
 	}
@@ -38,13 +34,23 @@ public class ClienteServiceTest {
 	@Test
 	public void testDeleteClienteById() {
 		clienteService.deleteById(1);
-		assertEquals(true, clienteService.findClienteById(1).isEmpty());
+		assertEquals(false, clienteService.findClienteById(1).isPresent());
 	}
 	
 	@Test
-	public void testSaveClienteById() {
-		clienteService.saveById(1);
-		assertEquals(false, clienteService.findClienteById(1).isEmpty());
+	public void testSaveCliente() {
+		Cliente clienteNew = new Cliente();
+		clienteNew.setNombre("José");
+		clienteNew.setApellidos("García");
+		clienteNew.setDni("47524318G");
+		clienteNew.setTelefono("639635963");
+		clienteNew.setDireccion("Sevilla");
+		clienteNew.setCorreo("joseg@gmail.com");
+
+		clienteService.save(clienteNew);
+		
+		Integer cantidad = clienteService.clienteCount();
+		assertEquals(2, cantidad);
 	}
 
 }

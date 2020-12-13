@@ -52,7 +52,7 @@ public class FacturaService {
 		Iterator<Factura> iterador = facturas.iterator();
 		while(iterador.hasNext()) {
 			Factura f = (Factura) iterador.next();
-			if(f.getId_prov()==idProveedor) listaFacturas.add(f);
+			if(f.getProveedor().getId()==idProveedor) listaFacturas.add(f);
 		}
 		Iterable<Factura> facturasProv = listaFacturas;
 		return facturasProv;

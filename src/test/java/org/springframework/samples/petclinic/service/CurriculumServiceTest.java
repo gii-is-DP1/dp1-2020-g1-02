@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.samples.petclinic.model.Curriculum;
+import org.springframework.samples.petclinic.model.TipoCategoria;
 import org.springframework.stereotype.Service;
 
 @DataJpaTest(includeFilters = @ComponentScan.Filter(Service.class))
@@ -25,13 +26,20 @@ public class CurriculumServiceTest {
 	@Test
 	public void testDeleteCurriculumById() {
 		curriculumService.deleteById(1);
-		assertEquals(true, curriculumService.findCurriculumById(1).isEmpty());
+		assertEquals(false, curriculumService.findCurriculumById(1).isPresent());
 	}
 	
 	@Test
-	public void testSaveCurriculumById() {
-		curriculumService.saveById(1);
-		assertEquals(false, curriculumService.findCurriculumById(1).isEmpty());
+	public void testSaveCurriculum() {
+		Curriculum curriculumNew = new Curriculum();
+		curriculumNew.setName("Jesús");
+		curriculumNew.setTipocategoria(TipoCategoria.Limpieza);
+		curriculumNew.setId_trab(3);
+
+		curriculumService.save(curriculumNew);
+		
+		Integer cantidad = curriculumService.curriculumCount();
+		assertEquals(3, cantidad);
 	}
 	
 	@Test

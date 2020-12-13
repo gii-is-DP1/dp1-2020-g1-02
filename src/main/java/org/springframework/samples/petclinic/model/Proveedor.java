@@ -1,8 +1,12 @@
 package org.springframework.samples.petclinic.model;
 
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 
@@ -25,5 +29,8 @@ public class Proveedor extends NamedEntity{
     @Column(name="direccion")
     @NotEmpty
     private String direccion;
+    
+    @OneToMany(cascade = CascadeType.ALL, mappedBy="proveedor")
+    private Set<Factura> facturas;
 
 }

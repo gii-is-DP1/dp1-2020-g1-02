@@ -14,7 +14,7 @@ import org.springframework.samples.petclinic.model.Proveedor;
 import org.springframework.stereotype.Service;
 
 @DataJpaTest(includeFilters = @ComponentScan.Filter(Service.class))
-public class ProveedorTest {
+public class ProveedorServiceTest {
 
 	@Autowired
 	private ProveedorService proveedorService;
@@ -48,6 +48,6 @@ public class ProveedorTest {
 	@Test
 	public void testDeleteProveedorById() {
 		proveedorService.deleteById(1);
-		assertEquals(true, proveedorService.findProveedorById(1).isEmpty());
+		assertEquals(false, proveedorService.findProveedorById(1).isPresent());
 	}
 }
