@@ -6,6 +6,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 import lombok.Data;
 
@@ -17,19 +18,19 @@ public class Factura extends BaseEntity {
 
 	
 	@Column(name="fecha")
-	@NotEmpty
+	@NotNull
 	private LocalDate fecha;
 	
 	@Column(name="precio_total")
-	@NotEmpty
+	@NotNull
 	private Double precio_total;
 	
 	@Column(name="id_prov")
-	@NotEmpty
+	@NotNull
 	private Integer id_prov;
 	
 	@Column(name="id_ped")
-	@NotEmpty
+	@NotNull
 	private Integer id_ped;
 
 }

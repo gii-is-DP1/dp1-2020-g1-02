@@ -36,23 +36,20 @@ public class FacturaServiceTest {
 		assertEquals(Factura.class, facturaFind.getClass());
 	}
 	
-//	@Test
-//	public void testSaveFactura() {
-//		
-//		
-//		Factura facturaNew = new Factura();
-//		
-//		facturaNew.setFecha(LocalDate.now());
-//		facturaNew.setPrecio_total(50.0);
-//		facturaNew.setId_prov(10);
-//		facturaNew.setId_ped(3);
-//		
-//		facturaService.save(facturaNew);
-//		
-//		Integer cantidad = facturaService.facturaCount();
-//		
-//		assertEquals(4, cantidad);
-//	}
+	@Test
+	public void testSaveFactura() {
+		Factura facturaNew = new Factura();
+		
+		facturaNew.setFecha(LocalDate.now());
+		facturaNew.setPrecio_total(50.0);
+		facturaNew.setId_prov(10);
+		facturaNew.setId_ped(3);
+		facturaService.save(facturaNew);
+		
+		Integer cantidad = facturaService.facturaCount();
+		
+		assertEquals(4, cantidad);
+	}
 	
 	
 	@Test
