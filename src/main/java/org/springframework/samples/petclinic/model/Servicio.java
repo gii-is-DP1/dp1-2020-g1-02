@@ -27,12 +27,12 @@ public class Servicio extends BaseEntity {
 	
 	@Column(name = "fechainicio")
 	@DateTimeFormat(pattern = "yyyy/MM/dd")
-	@NotEmpty
+	@NotNull
 	private LocalDate fechainicio;
 	
 	@Column(name = "fechafin")
 	@DateTimeFormat(pattern = "yyyy/MM/dd")
-	@NotEmpty
+	@NotNull
 	private LocalDate fechafin;
 	
 	@Column(name= "estado")

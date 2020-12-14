@@ -23,7 +23,7 @@ public class ServicioController {
 	public String listadoServicios(ModelMap modelMap) {
 		String vista = "servicios/listadoServicios";
 		Iterable<Servicio> servicios = servicioService.findAll();
-		modelMap.addAttribute("servicio", servicios);
+		modelMap.addAttribute("servicios", servicios);
 		return vista;
 	}
 	
@@ -43,14 +43,13 @@ public class ServicioController {
 	
 	@PostMapping(path="/save")
 	public String salvarServicio(@Valid Servicio servicio, BindingResult result, ModelMap modelMap) {
-		String view="servicios/listadoServicios";
+		String view="redirect:/servicios";
 		if(result.hasErrors()) {
 			modelMap.addAttribute("servicio", servicio);
-			return "events/editServicio";
+			return "servicios/editServicio";
 		}else {
 			servicioService.save(servicio);
 			modelMap.addAttribute("message", "Servicio actualizado!");
-			view=listadoServicios(modelMap);
 		}
 		return view;
 	}
