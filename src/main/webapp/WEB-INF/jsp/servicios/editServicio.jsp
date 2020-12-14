@@ -19,7 +19,7 @@
        <form:form modelAttribute="servicio" class="form-horizontal" action="/servicios/save">
        		<div class="form-group has-feedback">
        			<input type="hidden" id="id" name="id" value=' <c:out value="${servicio.id}"/>'>
-       			<input type="hidden" name="estado" value=0/>
+       			<input type="hidden" name="estado" value="Espera"/>
        			<petclinic:inputField label="Lugar" name="lugar"/>
        			<petclinic:inputField label="Fecha Inicial" name="fechainicio"/>
        			<petclinic:inputField label="Fecha Final" name="fechafin"/>
