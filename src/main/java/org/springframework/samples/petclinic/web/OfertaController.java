@@ -42,14 +42,14 @@ public class OfertaController {
 	
 	@PostMapping(path="/save")
 	public String salvarOferta(@Valid Oferta oferta, BindingResult result, ModelMap modelMap) {
-		String view="ofertas/listadoOfertas";
+		String view="redirect:/ofertas";
 		if(result.hasErrors()) {
 			modelMap.addAttribute("oferta", oferta);
 			return "ofertas/editOferta";
 		}else {
 			ofertaService.save(oferta);
 			modelMap.addAttribute("message", "Oferta añadida!");
-			view=listadoOfertas(modelMap);
+//			view=listadoOfertas(modelMap);
 		}
 		return view;
 	}

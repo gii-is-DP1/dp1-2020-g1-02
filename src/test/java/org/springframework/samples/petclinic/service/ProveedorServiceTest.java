@@ -4,12 +4,13 @@ package org.springframework.samples.petclinic.service;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
+import java.util.NoSuchElementException;
+import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.context.annotation.ComponentScan;
-import org.springframework.samples.petclinic.model.Factura;
 import org.springframework.samples.petclinic.model.Proveedor;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +19,8 @@ public class ProveedorServiceTest {
 
 	@Autowired
 	private ProveedorService proveedorService;
+	
+	//Test positivos
 	
 	@Test
 	public void testExistenProveedores() {
@@ -50,4 +53,13 @@ public class ProveedorServiceTest {
 		proveedorService.deleteById(1);
 		assertEquals(false, proveedorService.findProveedorById(1).isPresent());
 	}
+	
+	//Test negativos
+	
+	@Test
+	public void testNotFindProveedorById() {
+		Optional<Proveedor> provFind = proveedorService.findProveedorById(50);
+		assertEquals(false, provFind.isPresent());
+	}
+	
 }

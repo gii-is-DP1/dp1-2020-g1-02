@@ -3,6 +3,8 @@ package org.springframework.samples.petclinic.service;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
+import java.util.Optional;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
@@ -15,6 +17,8 @@ public class ProductoServiceTest {
 	
 	@Autowired
 	private ProductoService productoService;
+	
+	//Test positivos
 	
 	@Test
 	public void testExistenProductos() {
@@ -42,6 +46,13 @@ public class ProductoServiceTest {
 	public void testBorrarProductoById() {
 		productoService.deleteById(1);
 		assertEquals(false, productoService.findProductoById(1).isPresent());
+	}
+	
+	//Test negativos
+	@Test
+	public void testNoEncuentraProductoById() {
+		Optional<Producto> productoFind = productoService.findProductoById(50);
+		assertNotEquals(true, productoFind.isPresent());
 	}
 
 }

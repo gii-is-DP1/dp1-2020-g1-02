@@ -48,10 +48,10 @@ public class ProductoController {
 	
 	@PostMapping(path="/save")
 	public String salvarProducto(@Valid Producto producto, BindingResult result,ModelMap modelMap) {
-		String view="productos/listadoProductos";
+		String view="redirect:/productos";
 		if(result.hasErrors()) {
 			modelMap.addAttribute("producto", producto);
-			return "events/editEvent";
+			return "productos/edit";
 		}else {
 			productService.save(producto);
 			modelMap.addAttribute("message", "Producto actualizado!");
