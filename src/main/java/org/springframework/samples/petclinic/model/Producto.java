@@ -13,7 +13,7 @@ import lombok.Data;
 
 @Entity
 @Data
-@Table(name="productos")
+@Table(name="producto")
 public class Producto extends NamedEntity {
 	
 	@Column(name="cantidad")

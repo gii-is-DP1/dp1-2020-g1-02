@@ -18,7 +18,7 @@ import lombok.Data;
 
 @Entity
 @Data
-@Table(name="pedidos")
+@Table(name="pedido")
 public class Pedido extends BaseEntity{
 
 

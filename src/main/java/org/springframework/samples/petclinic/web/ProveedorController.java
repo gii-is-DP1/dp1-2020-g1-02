@@ -5,9 +5,8 @@ import java.util.Optional;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.samples.petclinic.model.Oferta;
 import org.springframework.samples.petclinic.model.Proveedor;
-import org.springframework.samples.petclinic.service.OfertaService;
+import org.springframework.samples.petclinic.model.Trabajador;
 import org.springframework.samples.petclinic.service.ProveedorService;
 
 import org.springframework.stereotype.Controller;
@@ -24,7 +23,6 @@ public class ProveedorController {
 
 	@Autowired
 	private ProveedorService provService;
-	private OfertaService ofertaService;
 
 	
 	@GetMapping()
@@ -35,38 +33,45 @@ public class ProveedorController {
 		return vista;
 	}
 	
-//	@GetMapping(path="/oferta/new")
-//	public String crearOferta(ModelMap modelMap) {
-//		String view="proveedores/editOferta";
-//		modelMap.addAttribute("oferta", new Oferta());
-//		return view;
-//	}
-//	
-//	@PostMapping(path="/oferta/save")
-//	public String salvarOfertas(@Valid Oferta oferta, BindingResult result,ModelMap modelMap) {
-//		String view="proveedores/ofertas";
-//		if(result.hasErrors()) {
-//			modelMap.addAttribute("oferta", oferta);
-//			return "proveedores/editOferta";
-//		}else {
-//			ofertaService.save(oferta);
-//			modelMap.addAttribute("message", "Proveedor actualizado!");
+	@GetMapping(path="/new")
+	public String crearProveedor(ModelMap modelMap) {
+		String view="proveedores/editProveedor";
+		modelMap.addAttribute("proveedor", new Proveedor());
+		return view;
+	}
+	
+	@PostMapping(path="/save")
+	public String salvarProveedor(@Valid Proveedor prov, BindingResult result,ModelMap modelMap) {
+		String view="redirect:/proveedores";
+		if(result.hasErrors()) {
+			modelMap.addAttribute("proveedor", prov);
+			return "proveedores/editProveedor";
+		}else {
+			provService.save(prov);
+			modelMap.addAttribute("message", "Proveedor actualizado!");
 //			view=listadoProv(modelMap);
-//		}
-//		return view;
-//	}
+		}
+		return view;
+	}
+	
+	@GetMapping(value = "/{proveedorId}/edit")
+	public String editarProveedor(@PathVariable("proveedorId") int proveedorId, ModelMap modelMap) {
+		Proveedor proveedor = this.provService.findProveedorById(proveedorId).get();
+		modelMap.addAttribute(proveedor);
+		return "proveedores/editProveedores";
+	}
 	
 	@GetMapping(path="/delete/{provName}")
-	public String borrarEvento(@PathVariable("provName") int provId, ModelMap modelmap) {
-		String view="proveedores/listadoEventos";
+	public String borrarProveedor(@PathVariable("provName") int provId, ModelMap modelmap) {
+		String view="redirect:/proveedores";
 		Optional<Proveedor> prov=provService.findProveedorById(provId);
-		if(prov.isPresent()) {
+//		if(prov.isPresent()) {
 			provService.deleteProveedor(prov.get());
 			modelmap.addAttribute("message", "Proveedor borrado correctamente");
-		}else {
-			modelmap.addAttribute("message", "Proveedor on encontrado");
-			view=listadoProv(modelmap);
-		}
+//		}else {
+//			modelmap.addAttribute("message", "Proveedor no encontrado");
+//			view=listadoProv(modelmap);
+//		}
 		return view;
 	}
 }
