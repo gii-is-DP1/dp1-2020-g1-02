@@ -31,7 +31,7 @@ INSERT INTO pedidos(id, fecha) VALUES (3, '2020-01-20');
 
 INSERT INTO facturas(id, fecha, precio_total, proveedor_id, pedido_id) VALUES (1, '2020-10-20', 10.0, 1, 1);
 INSERT INTO facturas(id, fecha, precio_total, proveedor_id, pedido_id) VALUES (2, '2020-10-22', 137.89, 1, 2);
-INSERT INTO facturas(id, fecha, precio_total, proveedor_id, pedido_id) VALUES (3, '2020-10-22', 56.01, 1, 3);
+INSERT INTO facturas(id, fecha, precio_total, proveedor_id, pedido_id) VALUES (3, '2020-10-22', 56.01, 2, 3);
 
 INSERT INTO curriculum(name, tipocategoria) VALUES ('Carlos Jesus', 0);
 INSERT INTO curriculum(name, tipocategoria) VALUES ('Carlos Jesus2', 2);
@@ -43,16 +43,19 @@ INSERT INTO ofertas(name, precioU) VALUES ('Escoba', 3);
 INSERT INTO administrador(nombre, apellidos, tipocategoria) VALUES ('Carlos Jesus','Morales Borreguero', 2);
 INSERT INTO administrador(nombre, apellidos, tipocategoria) VALUES ('Carlos','Borreguero', 0);
 
-INSERT INTO presupuesto(precio, tipopresupuesto) VALUES (4579.5, 1);
-INSERT INTO presupuesto(precio, tipopresupuesto) VALUES (50.0, 0);
-INSERT INTO presupuesto(precio, tipopresupuesto) VALUES (123.12, 0);
-INSERT INTO presupuesto(precio, tipopresupuesto) VALUES (18000.0, 1);
-INSERT INTO presupuesto(precio, tipopresupuesto) VALUES (78.45, 0);
-INSERT INTO presupuesto(precio, tipopresupuesto) VALUES (1205.9, 1);
+INSERT INTO instalacion(lugar, dimension, cliente_id) VALUES ('Calle Albania', 130, 1);
 
-INSERT INTO contratoservicio(fechainicial, fechafinal, fechapago, cliente_dni, presupuesto_id, periodoprueba) VALUES ('2019-10-20', '2020-12-31', '2021-01-10', 1, 2, 0);
+INSERT INTO presupuesto(precio, tipopresupuesto, instalacion_id) VALUES (4579.5, 1, 1);
+INSERT INTO presupuesto(precio, tipopresupuesto, instalacion_id) VALUES (50.0, 0, 1);
+INSERT INTO presupuesto(precio, tipopresupuesto, instalacion_id) VALUES (123.12, 0, 1);
+INSERT INTO presupuesto(precio, tipopresupuesto, instalacion_id) VALUES (18000.0, 1, 1);
+
 
 INSERT INTO servicio(lugar, tipocategoria, fechainicio, fechafin, estado) VALUES ('Av Reina Mercedes', 0, '2019-10-20', '2020-12-31', 0);
+
+INSERT INTO contratoservicio(fechainicial, fechafinal, fechapago, cliente_dni, presupuesto_id, periodoprueba, servicio_id) VALUES ('2019-10-20', '2020-12-31', '2021-01-10', 1, 2, 0, 1);
+
+
 
 
 /* -- One admin user, named admin1 with passwor 4dm1n and authority admin
