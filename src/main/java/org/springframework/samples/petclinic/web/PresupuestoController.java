@@ -36,14 +36,14 @@ public class PresupuestoController {
 	
 	@PostMapping(path="/save")
 	public String salvarPresupuesto(@Valid Presupuesto presupuesto, BindingResult result, ModelMap modelMap) {
-		String view = "presupuestos/listadoPresupuesto";
+		String view = "redirect:/presupuestos";
 		if(result.hasErrors()) {
 			modelMap.addAttribute("presupuesto", presupuesto);
 			return "presupuestos/editPresupuesto";
 		} else {
 			presupuestoService.save(presupuesto);
 			modelMap.addAttribute("mensaje", "Presupuesto actualizado!!");
-			view = listadoPresupuesto(modelMap);
+//			view = listadoPresupuesto(modelMap);
 		}
 		return view;
 	}

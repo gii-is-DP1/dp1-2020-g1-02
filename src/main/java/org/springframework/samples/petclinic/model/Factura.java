@@ -16,7 +16,7 @@ import lombok.Data;
 
 @Entity
 @Data
-@Table(name="facturas")
+@Table(name="factura")
 public class Factura extends BaseEntity {
 
 	

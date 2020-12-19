@@ -43,7 +43,7 @@ public class ContratoServicioController {
 		}else {
 			contratoServicioService.save(contratoServicio);
 			modelMap.addAttribute("mensaje", "Contrato del servicio actualizado!");
-			view=listadoContratosServicios(modelMap);
+//			view=listadoContratosServicios(modelMap);
 		}
 		return view;
 	}

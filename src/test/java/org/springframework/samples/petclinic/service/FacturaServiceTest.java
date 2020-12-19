@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import java.time.LocalDate;
 
 import java.util.Iterator;
-
+import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +26,10 @@ public class FacturaServiceTest {
 	private FacturaService facturaService;
 	@Autowired
 	private ProveedorService proveedorService;
+//	@Autowired
+//	private PedidoSerice pedidoService;
+	
+	//Test positivos
 	
 	@Test
 	public void testExistenFacturas() {
@@ -51,6 +55,7 @@ public class FacturaServiceTest {
 		ped.setFechaPedido(LocalDate.now());
 		
 		facturaNew.setPedido(ped);;
+
 		facturaService.save(facturaNew);
 		
 		Integer cantidad = facturaService.facturaCount();
@@ -75,5 +80,21 @@ public class FacturaServiceTest {
 		assertEquals(false, facturaService.findFacturaById(1).isPresent());
 	}
 	
+	//Test negativos
+	
+	@Test
+	public void testNotFindFacturaById() {
+		Optional<Factura> facturaFind = facturaService.findFacturaById(50);
+		assertEquals(false, facturaFind.isPresent());
+	}
+	
+	@Test
+	public void testNotFindAllFacturasByProveedor() {
+		Iterable<Factura> facturaFind = facturaService.findFacturasByProveedorId(50);
+		Iterator<Factura> iterador = facturaFind.iterator();
+		int cont = 0;
+		while(iterador.hasNext()) cont++;
+		assertEquals(0, cont);
+	}
 	
 }
