@@ -29,15 +29,10 @@ INSERT INTO pedido(id, fecha) VALUES (1, '2020-04-20');
 INSERT INTO pedido(id, fecha) VALUES (2, '2020-02-20');
 INSERT INTO pedido(id, fecha) VALUES (3, '2020-01-20');
 
-<<<<<<< HEAD
-INSERT INTO facturas(id, fecha, precio_total, proveedor_id, pedido_id) VALUES (1, '2020-10-20', 10.0, 1, 1);
-INSERT INTO facturas(id, fecha, precio_total, proveedor_id, pedido_id) VALUES (2, '2020-10-22', 137.89, 1, 2);
-INSERT INTO facturas(id, fecha, precio_total, proveedor_id, pedido_id) VALUES (3, '2020-10-22', 56.01, 2, 3);
-=======
+
 INSERT INTO factura(fecha, precio_total, proveedor_id, pedido_id) VALUES ('2020-10-20', 10.0, 1, 1);
 INSERT INTO factura(fecha, precio_total, proveedor_id, pedido_id) VALUES ('2020-10-22', 137.89, 1, 2);
 INSERT INTO factura(fecha, precio_total, proveedor_id, pedido_id) VALUES ('2020-10-22', 56.01, 2, 3);
->>>>>>> refs/remotes/origin/master
 
 INSERT INTO curriculum(name, tipocategoria) VALUES ('Carlos Jesus', 0);
 INSERT INTO curriculum(name, tipocategoria) VALUES ('Carlos Jesus2', 2);

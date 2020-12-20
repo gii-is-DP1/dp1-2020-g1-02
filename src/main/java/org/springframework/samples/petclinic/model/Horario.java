@@ -17,13 +17,14 @@ import lombok.Data;
 @Table(name="horario")
 public class Horario extends BaseEntity {
 	
+	
 	@Column(name="horaInicio")
     @DateTimeFormat(pattern = "yyyy/MM/dd HH:mm")
     @NotEmpty
     private LocalDateTime horaInicio;
 
     @Column(name="horaFin")
-    @DateTimeFormat(pattern = "yyyy/MM/dd")
+    @DateTimeFormat(pattern = "yyyy/MM/dd HH:mm")
     @NotEmpty
     private LocalDateTime horaFin;
     
