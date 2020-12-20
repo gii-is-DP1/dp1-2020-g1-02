@@ -9,13 +9,23 @@
 
 <petclinic:layout pageName="facturas">
     <h2>Facturas</h2>
+    
+    <h3> Filtrar proveedor: </h3>
+    <form action="/facturas/filtrado/{nameProv}"> 
+    	<input type="text"> 
+    	<button type="submit"> Filtrar </button>
+    	<spring:url value="/clientes/delete/{clienteId}" var="clienteUrl">
+              <spring:param name="clienteId" value="${cliente.id}"/>
+        </spring:url>
+        <a href="${fn:escapeXml(clienteUrl)}">Delete</a>
+    </form>
 
     <table id="facturasTable" class="table table-striped">
         <thead>
         <tr>
             <th style="width: 150px;">Fecha</th>
             <th style="width: 150px;">Precio total</th>
-            <th style="width: 150px;">ID del proveedor</th>
+            <th style="width: 150px;">>Nombre del proveedor</th>
             <th style="width: 150px;">ID del pedido</th>
 
 
@@ -31,10 +41,10 @@
                     <c:out value="${factura.precio_total}"/>
                 </td>
                 <td>
-                    <c:out value="${factura.id_prov}"/>
+                    <c:out value="${factura.proveedor.name}"/>
                 </td>
                 <td>
-                    <c:out value="${factura.id_ped}"/>
+                    <c:out value="${factura.pedido.id}"/>
                 </td>
                 
                 <td>

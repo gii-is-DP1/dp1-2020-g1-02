@@ -32,5 +32,9 @@ public class Reclamacion extends BaseEntity {
     @JoinColumn(name="cliente_id")
     private Cliente cliente;
 	
+	@ManyToOne
+	@JoinColumn(name="servicio_id")
+	private Servicio servicio;
+	
 	
 }

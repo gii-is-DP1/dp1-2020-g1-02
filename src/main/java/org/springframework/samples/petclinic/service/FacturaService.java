@@ -7,7 +7,9 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.samples.petclinic.model.Factura;
+import org.springframework.samples.petclinic.model.Proveedor;
 import org.springframework.samples.petclinic.repository.FacturaRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -41,22 +43,10 @@ public class FacturaService {
 		deleteFactura(facturaBorrar);
 	}
 
-	public Iterable<Factura> findAllById(Iterable<Integer> ids) {
-		return facturaRepo.findAllById(ids);
+	public Iterable<Factura> findFacturaByProveedorId(String name) {
+		return facturaRepo.findFacturasByProveedorId(name);
 	}
 	
-
-	public Iterable<Factura> findFacturasByProveedorId(Integer idProveedor) {
-		List<Factura> listaFacturas = new ArrayList<Factura>();
-		Iterable<Factura> facturas = facturaRepo.findAll();
-		Iterator<Factura> iterador = facturas.iterator();
-		while(iterador.hasNext()) {
-			Factura f = (Factura) iterador.next();
-			if(f.getProveedor().getId()==idProveedor) listaFacturas.add(f);
-		}
-		Iterable<Factura> facturasProv = listaFacturas;
-		return facturasProv;
-	}
 	
 	public Optional<Factura> findFacturaById(Integer id) {
 		return facturaRepo.findById(id);

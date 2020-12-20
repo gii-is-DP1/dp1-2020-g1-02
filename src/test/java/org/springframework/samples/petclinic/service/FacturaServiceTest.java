@@ -43,18 +43,20 @@ public class FacturaServiceTest {
 		assertEquals(Factura.class, facturaFind.getClass());
 	}
 	
+
 	@Test
 	public void testSaveFactura() {
 		Factura facturaNew = new Factura();
-		
 		facturaNew.setFecha(LocalDate.now());
 		facturaNew.setPrecio_total(50.0);
 		facturaNew.setProveedor(proveedorService.findProveedorById(2).get());
-//		Pedido ped = new Pedido();
-//		ped.setFechaPedido(LocalDate.now());
-//		facturaNew.setPedido(ped);
-//		facturaNew.setPedido(pedido);
-		facturaService.save(facturaNew);
+//		
+		Pedido ped = new Pedido();
+		ped.setFechaPedido(LocalDate.now());
+		
+		facturaNew.setPedido(ped);;
+
+facturaService.save(facturaNew);
 		
 		Integer cantidad = facturaService.facturaCount();
 		
@@ -64,16 +66,15 @@ public class FacturaServiceTest {
 	
 	
 	@Test
-	public void testFindAllFacturasByProveedor() {
-		Boolean i = true;
-		Iterable<Factura> facturaFind = facturaService.findFacturasByProveedorId(1);
-		Iterator<Factura> iterador = facturaFind.iterator();
-		while(iterador.hasNext()) if(iterador.next().getProveedor().getId() != 1) i =false;
-		assertTrue(i);
-	}
-	
-	@Test
-	public void testDeleteFacturaById() {
+	public void testFindAll//	@Test
+//	public void testFindAllFacturasByProveedor() {
+//		Boolean i = true;
+//		Iterable<Factura> facturaFind = facturaService.findFacturasByProveedorId(1);
+//		Iterator<Factura> iterador = facturaFind.iterator();
+//		while(iterador.hasNext()) if(iterador.next().getProveedor().getId() != 1) i =false;
+//		assertTrue(i);
+//	}
+teFacturaById() {
 		facturaService.deleteById(1);
 		assertEquals(false, facturaService.findFacturaById(1).isPresent());
 	}

@@ -6,6 +6,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -21,29 +22,32 @@ public class ContratoServicio extends BaseEntity {
 	
 	@Column(name="fechainicial")
 	@DateTimeFormat(pattern = "yyyy/MM/dd")
-	@NotEmpty
+	@NotNull
 	private LocalDate fechainicial;
 	
 	@Column(name="fechafinal")
 	@DateTimeFormat(pattern = "yyyy/MM/dd")
-	@NotEmpty
+	@NotNull
 	private LocalDate fechafinal;
 	
 	@Column(name="fechapago")
 	@DateTimeFormat(pattern = "yyyy/MM/dd")
-	@NotEmpty
 	private LocalDate fechapago;
 	
 	@ManyToOne
-	@JoinColumn(name="cliente_dni")
+	@JoinColumn(name="cliente")
 	private Cliente cliente;
 	
 	@ManyToOne
-	@JoinColumn(name = "presupuesto_id")
+	@JoinColumn(name = "presupuesto")
 	private Presupuesto presupuesto;
 	
 	@Column(name = "periodoprueba")
-	@NotEmpty
-	private Integer periodoPrueba;
+	@NotNull
+	private Boolean periodoPrueba;
+	
+	@OneToOne(optional=false)
+	@JoinColumn(name="servicio")
+	private Servicio servicio;
 
 }
