@@ -18,7 +18,7 @@ public class Producto extends NamedEntity {
 	
 	@Column(name="cantidad")
 	@NotNull
-	private Integer cantidadStock;
+	private Integer cantidad;
 	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy="producto")
     private Set<Oferta> ofertas;

@@ -14,8 +14,8 @@
     <form action="/facturas/filtrado/{nameProv}"> 
     	<input type="text"> 
     	<button type="submit"> Filtrar </button>
-    	<spring:url value="/clientes/delete/{clienteId}" var="clienteUrl">
-              <spring:param name="clienteId" value="${cliente.id}"/>
+    	<spring:url value="/facturas/filtrado/{nameProv}" var="facturaUrl">
+              <spring:param name="nameProv" value="${cliente.id}"/>
         </spring:url>
         <a href="${fn:escapeXml(clienteUrl)}">Delete</a>
     </form>

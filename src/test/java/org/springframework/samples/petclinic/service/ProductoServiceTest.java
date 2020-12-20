@@ -36,7 +36,7 @@ public class ProductoServiceTest {
 	public void testGuardarProducto() {
 		Producto pGuardar = new Producto();
 		pGuardar.setName("fregona");
-		pGuardar.setCantidadStock(30);
+		pGuardar.setCantidad(30);
 		productoService.save(pGuardar);
 		int count = productoService.productCount();
 		assertEquals(count, 10);
