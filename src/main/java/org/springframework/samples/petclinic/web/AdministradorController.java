@@ -6,7 +6,9 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.samples.petclinic.model.Administrador;
+import org.springframework.samples.petclinic.model.ContratoServicio;
 import org.springframework.samples.petclinic.service.AdministradorService;
+import org.springframework.samples.petclinic.service.ContratoServicioService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -21,6 +23,8 @@ public class AdministradorController {
 	
 	@Autowired
 	private AdministradorService adminService;
+	@Autowired
+	private ContratoServicioService contratoServicioService;
 	
 	@GetMapping()
 	public String listadoAdmin(ModelMap modelMap) {
@@ -34,6 +38,13 @@ public class AdministradorController {
 	public String crearEvento(ModelMap modelMap) {
 		String view="administradores/editAdmin";
 		modelMap.addAttribute("administrador", new Administrador());
+		return view;
+	}
+	
+	@GetMapping(path="/morosos")
+	public String listaMorosos(ModelMap modelMap) {
+		String view="administradores/listadoMorosos";
+		modelMap.addAttribute("morosos", contratoServicioService.buscaMorosos());
 		return view;
 	}
 	

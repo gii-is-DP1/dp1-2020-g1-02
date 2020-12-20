@@ -32,23 +32,22 @@ public class ContratoServicio extends BaseEntity {
 	
 	@Column(name="fechapago")
 	@DateTimeFormat(pattern = "yyyy/MM/dd")
-	@NotNull
 	private LocalDate fechapago;
 	
 	@ManyToOne
-	@JoinColumn(name="cliente_dni")
+	@JoinColumn(name="cliente")
 	private Cliente cliente;
 	
 	@ManyToOne
-	@JoinColumn(name = "presupuesto_id")
+	@JoinColumn(name = "presupuesto")
 	private Presupuesto presupuesto;
 	
 	@Column(name = "periodoprueba")
 	@NotNull
-	private Integer periodoPrueba;
+	private Boolean periodoPrueba;
 	
 	@OneToOne(optional=false)
-	@JoinColumn(name="servicio_id")
+	@JoinColumn(name="servicio")
 	private Servicio servicio;
 
 }

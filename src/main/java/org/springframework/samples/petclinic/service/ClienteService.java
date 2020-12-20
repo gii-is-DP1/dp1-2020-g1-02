@@ -33,14 +33,13 @@ public class ClienteService {
 		clienteRepo.delete(cliente);
 		
 	}
-
 	
 	public void deleteById(Integer id) {
 		Cliente clienteBorrar = findClienteById(id).get();
 		delete(clienteBorrar);
 	}
 
-
+	@Transactional
 	public Optional<Cliente> findClienteById(Integer clienteId) {
 		return clienteRepo.findById(clienteId);
 	}

@@ -9,6 +9,9 @@ INSERT INTO instalacion(id,horaInicio, lugar, cliente_id, dimension) VALUES (2,'
 */
 
 INSERT INTO contratoTrabajador(id,fechainicial,fechafinal,trabajador_id,sueldo) VALUES (1, '2010-01-01', '2019-12-31', 1, 1200.0);
+
+INSERT INTO cliente(nombre,apellidos,telefono,direccion,dni,correo) VALUES ('Jesus', 'Garcia', '644586245', 'Calle Cristie', '33445566P', 'jesus@gmail.com');
+INSERT INTO cliente(nombre,apellidos,telefono,direccion,dni,correo) VALUES ('Ruben', 'Bueno', '655788999', 'Calle Misco', '11223344T', 'ruben@gmail.com');
 INSERT INTO cliente(nombre,apellidos,telefono,direccion,dni,correo) VALUES ('Manolito', 'Pies de Plata', '624586245', 'Calle Agata', '25673519P', 'manolito@gmail.com');
 
 INSERT INTO proveedor(name,telefono,email,direccion) VALUES ('Lejias SL', '645681128', 'lejiassl@gmail.com', 'Calle Reina 14, Sevilla'); 
@@ -30,9 +33,9 @@ INSERT INTO pedido(id, fecha) VALUES (2, '2020-02-20');
 INSERT INTO pedido(id, fecha) VALUES (3, '2020-01-20');
 
 
-INSERT INTO factura(fecha, precio_total, proveedor_id, pedido_id) VALUES ('2020-10-20', 10.0, 1, 1);
-INSERT INTO factura(fecha, precio_total, proveedor_id, pedido_id) VALUES ('2020-10-22', 137.89, 1, 2);
-INSERT INTO factura(fecha, precio_total, proveedor_id, pedido_id) VALUES ('2020-10-22', 56.01, 2, 3);
+INSERT INTO factura(fecha, precio_total, proveedor, pedido) VALUES ('2020-10-20', 10.0, 1, 1);
+INSERT INTO factura(fecha, precio_total, proveedor, pedido) VALUES ('2020-10-22', 137.89, 1, 2);
+INSERT INTO factura(fecha, precio_total, proveedor, pedido) VALUES ('2020-10-22', 56.01, 2, 3);
 
 INSERT INTO curriculum(name, tipocategoria) VALUES ('Carlos Jesus', 0);
 INSERT INTO curriculum(name, tipocategoria) VALUES ('Carlos Jesus2', 2);
@@ -53,8 +56,14 @@ INSERT INTO presupuesto(precio, tipopresupuesto, instalacion_id) VALUES (18000.0
 
 
 INSERT INTO servicio(lugar, tipocategoria, fechainicio, fechafin, estado) VALUES ('Av Reina Mercedes', 0, '2019-10-20', '2020-12-31', 0);
+INSERT INTO servicio(lugar, tipocategoria, fechainicio, fechafin, estado) VALUES ('Av Reina Mercedes', 0, '2019-10-20', '2020-12-31', 1);
+INSERT INTO servicio(lugar, tipocategoria, fechainicio, fechafin, estado) VALUES ('Av Reina Mercedes', 1, '2019-10-20', '2020-12-31', 1);
+INSERT INTO servicio(lugar, tipocategoria, fechainicio, fechafin, estado) VALUES ('Av Reina Mercedes', 2, '2019-10-20', '2020-12-31', 1);
 
-INSERT INTO contratoservicio(fechainicial, fechafinal, fechapago, cliente_dni, presupuesto_id, periodoprueba, servicio_id) VALUES ('2019-10-20', '2020-12-31', '2021-01-10', 1, 2, 0, 1);
+INSERT INTO contratoservicio(fechainicial, fechafinal, fechapago, cliente, presupuesto, periodoprueba, servicio) VALUES ('2019-10-20', '2020-12-31', '2020-12-10', 1, 2, 0, 2);
+INSERT INTO contratoservicio(fechainicial, fechafinal, fechapago, cliente, presupuesto, periodoprueba, servicio) VALUES ('2019-10-20', '2020-12-31', '2020-12-10', 3, 3, 1, 3);
+INSERT INTO contratoservicio(fechainicial, fechafinal, cliente, presupuesto, periodoprueba, servicio) VALUES ('2020-10-20', '2021-10-20', 2, 1, 1, 4);
+
 
 
 

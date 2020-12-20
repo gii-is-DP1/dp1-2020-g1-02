@@ -29,5 +29,9 @@ public class ContratoServicioService {
 	public void delete(ContratoServicio contratoServicio) {
 		contratoServicioRepo.delete(contratoServicio);
 	}
+	
+	public Iterable<ContratoServicio> buscaMorosos() {
+		return contratoServicioRepo.buscaMorosos();
+	}
 
 }

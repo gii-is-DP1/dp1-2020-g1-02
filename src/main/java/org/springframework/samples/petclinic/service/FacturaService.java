@@ -43,17 +43,10 @@ public class FacturaService {
 		deleteFactura(facturaBorrar);
 	}
 
-	public Iterable<Factura> findAllById(Iterable<Integer> ids) {
-		return facturaRepo.findAllById(ids);
+	public Iterable<Factura> findFacturaByProveedorId(String name) {
+		return facturaRepo.findFacturasByProveedorId(name);
 	}
 	
-//	@Query("SELECT * FROM FACTURAS WHERE proveedor_id = ?1")
-//	public Iterable<Factura> findFacturasByProveedorId(Integer idProveedor) {
-//		
-//		
-//		
-//		return facturasProv;
-//	}
 	
 	public Optional<Factura> findFacturaById(Integer id) {
 		return facturaRepo.findById(id);
