@@ -6,6 +6,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="petclinic" tagdir="/WEB-INF/tags" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <petclinic:layout pageName="servicios">
     <h2>Servicios</h2>
@@ -50,13 +51,32 @@
                 	</spring:url>
                 	<a href="${fn:escapeXml(servicioUrl)}">Delete</a>
                 </td>
+               
+               <!--    ACEPTAR RECHAZAR SERVICIO   -->
+               <td>
+               	 	<form:form modelAttribute="servicio" class="form-horizontal" action="/servicios/save">
+       						<input type="hidden" id="id" name="id" value=' <c:out value="${servicio.id}"/>'>
+       						<!-- <input type="hidden" name="estado" value="Espera"/> -->
+       						<input type="hidden" name="lugar" value=' <c:out value="${servicio.lugar}"/>'>
+       						<input type="hidden" name="fechainicio" value='<petclinic:localDate date="${servicio.fechainicio}" pattern="yyyy/MM/dd"/>'>
+       						<input type="hidden" name="fechafin" value='<petclinic:localDate date="${servicio.fechafin}" pattern="yyyy/MM/dd"/>'>
+       						<input type="hidden" name="tipocategoria" value=' <c:out value="${servicio.tipocategoria}"/>'>
+     						<input type="hidden" name="estado" value="Aceptado"/>
+       						<button type="submit">Aceptar solicitud</button>
+        			</form:form>
+               </td> 
+               
                 <td>
-                	<spring:url value="/servicios/{servicioId}/edit" var="servicioUrl">
-                		<spring:param name="servicioId" value="${servicio.id}"/>
-                	</spring:url>
-                	<a href="${fn:escapeXml(servicioUrl)}">Editar Estado</a>
-                </td>
-                
+               	 	<form:form modelAttribute="servicio" class="form-horizontal" action="/servicios/save">
+       						<input type="hidden" id="id" name="id" value=' <c:out value="${servicio.id}"/>'>
+       						<input type="hidden" name="lugar" value=' <c:out value="${servicio.lugar}"/>'>
+       						<input type="hidden" name="fechainicio" value='<petclinic:localDate date="${servicio.fechainicio}" pattern="yyyy/MM/dd"/>'>
+       						<input type="hidden" name="fechafin" value='<petclinic:localDate date="${servicio.fechafin}" pattern="yyyy/MM/dd"/>'>
+       						<input type="hidden" name="tipocategoria" value=' <c:out value="${servicio.tipocategoria}"/>'>
+     						<input type="hidden" name="estado" value="Rechazado"/>
+       						<button type="submit">Rechazar solicitud</button>
+        			</form:form>
+               </td> 
                 <!-- AÑADIR BOTON PARA CREAR PRESUPUESTO  -->
             </tr>
         </c:forEach>
