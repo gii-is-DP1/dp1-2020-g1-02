@@ -60,12 +60,12 @@ public class ProductoController {
 		return view;
 	}
 	
-//	@PostMapping(path="/{productoId}/restar")
-//	public String restarStock(@PathVariable("productoId") int productoId, ModelMap modelmap) {
-//		Integer cantStock = this.productService.findProductoById(productoId).get().getCantidadStock()-1;
-//		this.productService.findProductoById(productoId).get().setCantidadStock(cantStock);
-//		productService.save(this.productService.findProductoById(productoId).get());
-//		return listadoProductos(modelmap);
-//	}
+	@GetMapping(path="/{productoId}/restar")
+	public String restarStock(@PathVariable("productoId") int productoId, ModelMap modelmap) {
+		Producto product = productService.findProductoById(productoId).get();
+		productService.restarProducto(product);
+		modelmap.addAttribute("message", "Producto actualizado!");
+		return "redirect:/productos";
+	}
 
 }
