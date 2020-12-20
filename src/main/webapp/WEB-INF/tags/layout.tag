@@ -9,11 +9,11 @@
 <html>
 <petclinic:htmlHeader/>
 
-<body>
+<body class="main-layout">
 <petclinic:bodyHeader menuName="${pageName}"/>
 
-<div class="container-fluid">
-    <div class="container xd-container">
+<div class="">
+    <div class="">
 	<c:if test="${not empty message}" >
 	<div class="alert alert-${not empty messageType ? messageType : 'info'}" role="alert">
   		<c:out value="${message}"></c:out>

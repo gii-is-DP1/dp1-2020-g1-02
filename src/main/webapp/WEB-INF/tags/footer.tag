@@ -1,14 +1,90 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 
-<%-- Placed at the end of the document so the pages load faster --%>
-<spring:url value="/webjars/jquery/2.2.4/jquery.min.js" var="jQuery"/>
-<script src="${jQuery}"></script>
-
-<%-- jquery-ui.js file is really big so we only load what we need instead of loading everything --%>
-<spring:url value="/webjars/jquery-ui/1.11.4/jquery-ui.min.js" var="jQueryUiCore"/>
-<script src="${jQueryUiCore}"></script>
-
-<%-- Bootstrap --%>
-<spring:url value="/webjars/bootstrap/3.3.6/js/bootstrap.min.js" var="bootstrapJs"/>
-<script src="${bootstrapJs}"></script>
-
+ <footr>
+         <div class="footer">
+            <div class="container">
+               <div class="row">
+                  <div class="col-md-6 offset-md-3">
+                     <ul class="sociel">
+                         <li> <a href="#"><i class="fa fa-facebook-f"></i></a></li>
+                         <li> <a href="#"><i class="fa fa-twitter"></i></a></li>
+                         <li> <a href="#"><i class="fa fa-instagram"></i></a></li>
+                         <li> <a href="#"><i class="fa fa-instagram"></i></a></li>
+                     </ul>
+                  </div>
+            </div>
+            <div class="row">
+               <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12">
+                  <div class="contact">
+                     <h3>Contacta con nosotros</h3>
+                     <span>C/José Álvarez, 25 Local,<br>
+                      41800 Sanlúcar la Mayor, Sevilla<br>
+                        644 351 450  |  644 354 617</span>
+                  </div>
+               </div>
+                 <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12">
+                  <div class="contact">
+                     <h3>INFORMACIÓN ADICIONAL</h3>
+                     <ul class="lik">
+                         <li> <a href="#">Sobre nosotros</a></li>
+                         <li> <a href="#">Términos y condiciones</a></li>
+                         <li> <a href="#">Política de privacidad</a></li>
+                         <li> <a href="#">Noticias</a></li>
+                          <li> <a href="#">Contacto</a></li>
+                     </ul>
+                  </div>
+               </div>
+                 <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12">
+                  <div class="contact">
+                     <h3>Servicios</h3>
+                      <ul class="lik">
+                    <li> <a href="#"> Limpieza</a></li>
+                         <li> <a href="#">Mantenimiento</a></li>
+                         <li> <a href="#">Jardinería</a></li>
+                         <li> <a href="#">Lavandería</a></li>
+                          <li> <a href="#">Conserjería</a></li>
+                  </div>
+               </div>
+                 <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12">
+                  <div class="contact">
+                     <h3>Sobre Disan</h3>
+                     <span>Con tres años en el sector, Disan Limpiezas es una empresa formada por jóvenes emprendedores que en tiempos difíciles se proponen a través de su trabajo y dedicación ofrecer un servicio profesional y personalizado a sus clientes. </span>
+                  </div>
+               </div>
+            </div>
+         </div>
+            <div class="copyright">
+               <p>Copyright 2019 All Right Reserved By Disan</a></p>
+            </div>
+         
+      </div>
+      </footr>
+      <!-- end footer -->
+      <!-- Latest compiled and minified CSS -->
+      <!-- Javascript files--> 
+      <script src="js/jquery.min.js"></script> 
+      <script src="js/popper.min.js"></script> 
+      <script src="js/bootstrap.bundle.min.js"></script> 
+      <script src="js/jquery-3.0.0.min.js"></script> 
+      <script src="js/plugin.js"></script> 
+      <!-- sidebar --> 
+      <script src="js/jquery.mCustomScrollbar.concat.min.js"></script> 
+      <script src="js/custom.js"></script>
+      <script src="https:cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
+      <script>
+         $(document).ready(function(){
+         $(".fancybox").fancybox({
+         openEffect: "none",
+         closeEffect: "none"
+         });
+         
+         $(".zoom").hover(function(){
+         
+         $(this).addClass('transition');
+         }, function(){
+         
+         $(this).removeClass('transition');
+         });
+         });
+         
+      </script> 
