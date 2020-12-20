@@ -5,6 +5,7 @@ import java.util.Optional;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.samples.petclinic.model.Cliente;
 import org.springframework.samples.petclinic.model.Factura;
 import org.springframework.samples.petclinic.service.FacturaService;
 import org.springframework.stereotype.Controller;
@@ -34,6 +35,13 @@ public class FacturaController {
 	public String crearFactura(ModelMap modelMap) {
 		String view="facturas/editFactura";
 		modelMap.addAttribute("factura", new Factura());
+		return view;
+	}
+	
+	@GetMapping(path="/filtrado/{nameProv}")
+	public String filtradoFactura(@PathVariable("nameProv") String nameProv,ModelMap modelMap) {
+		String view="redirect:/facturas";
+		modelMap.addAttribute("facturas", facturaService.findFacturaByProveedorId(nameProv));
 		return view;
 	}
 	

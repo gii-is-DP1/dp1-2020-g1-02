@@ -21,7 +21,7 @@ public class ContratoServicioController {
 	
 	@GetMapping()
 	public String listadoContratosServicios(ModelMap modelMap) {
-		String vista ="contratosServicios/listadoContratosServicios";
+		String vista ="administradores/listadoContratosServicios";
 		Iterable<ContratoServicio> contratos = contratoServicioService.findAll();
 		modelMap.addAttribute("contratosServicios", contratos);
 		return vista;
@@ -33,6 +33,7 @@ public class ContratoServicioController {
 		modelMap.addAttribute("contratoServicio", new ContratoServicio());
 		return view;
 	}
+	
 	
 	@PostMapping(path="/save")
 	public String salvarContratoServicio(@Valid ContratoServicio contratoServicio, BindingResult result, ModelMap modelMap) {

@@ -29,11 +29,11 @@ public class Factura extends BaseEntity {
 	private Double precio_total;
 	
 	@ManyToOne
-	@JoinColumn(name="proveedor_id")
+	@JoinColumn(name="proveedor")
 	private Proveedor proveedor;
 	
 	@OneToOne(optional=false)
-	@JoinColumn(name="pedido_id")
+	@JoinColumn(name="pedido")
 	private Pedido pedido;
 
 }
