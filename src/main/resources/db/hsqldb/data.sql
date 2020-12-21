@@ -9,6 +9,7 @@ INSERT INTO instalacion(id,horaInicio, lugar, cliente_id, dimension) VALUES (2,'
 */
 
 INSERT INTO contratoTrabajador(id,fechainicial,fechafinal,trabajador_id,sueldo) VALUES (1, '2010-01-01', '2019-12-31', 1, 1200.0);
+INSERT INTO contratoTrabajador(id,fechainicial,fechafinal,trabajador_id,sueldo) VALUES (2, '2010-01-01', '2019-12-31', 1, 1200.0);
 
 INSERT INTO cliente(nombre,apellidos,telefono,direccion,dni,correo) VALUES ('Jesus', 'Garcia', '644586245', 'Calle Cristie', '33445566P', 'jesus@gmail.com');
 INSERT INTO cliente(nombre,apellidos,telefono,direccion,dni,correo) VALUES ('Ruben', 'Bueno', '655788999', 'Calle Misco', '11223344T', 'ruben@gmail.com');
