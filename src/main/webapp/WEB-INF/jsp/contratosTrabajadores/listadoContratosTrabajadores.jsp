@@ -16,7 +16,7 @@
         	<th style="width: 150px;">ID_CONTRATO</th>
             <th style="width: 150px;">FECHA INICIO</th>
             <th style="width: 150px;">FECHA FIN</th>
-          <!--    <th style="width: 150px;">ID_TRABAJADOR</th>  -->
+            <th style="width: 150px;">ID_TRABAJADOR</th> 
             <th style="width: 150px;">SUELDO</th>
         </tr>
         </thead>
@@ -32,9 +32,9 @@
                 <td>
                     <c:out value="${contrato.fechafinal}"/>
                 </td>
-<%--                  <td>
-                    <c:out value="${contrato.trabajadooid}"/>
-                </td>  --%>
+		          <td>
+                    <c:out value="${contrato.trabajador.id}"/>
+                </td>  
                 <td>
                     <c:out value="${contrato.sueldo}"/>
                 </td>
