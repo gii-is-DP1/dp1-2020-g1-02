@@ -27,7 +27,7 @@
                     <c:out value="${producto.name}"/>
                 </td>
                 <td>
-                    <c:out value="${producto.cantidadStock}"/>
+                    <c:out value="${producto.cantidad}"/>
                 </td>
                 
                 <td>
