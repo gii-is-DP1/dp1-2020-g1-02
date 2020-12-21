@@ -63,6 +63,7 @@ public class TrabajadorController {
 		String view="redirect:/trabajadores";
 		Optional<Trabajador> trabajador=trabajadorService.findTrabajadorById(trabajadorId);
 		if(trabajador.isPresent()) {
+			
 			trabajadorService.delete(trabajador.get());
 			modelmap.addAttribute("message", "Trabajador borrado correctamente");
 		}else {

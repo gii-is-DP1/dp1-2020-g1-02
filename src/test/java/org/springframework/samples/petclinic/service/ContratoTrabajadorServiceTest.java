@@ -34,7 +34,7 @@ public class ContratoTrabajadorServiceTest {
 		ct.setFechainicial(LocalDate.of(2021,1, 1));
 		ct.setFechafinal(LocalDate.of(2021, 12, 31));
 		ct.setSueldo(800.0);
-		ct.setTrabajador(trabajadorService.findTrabajadorById(1).get());
+//		ct.setTrabajador(trabajadorService.findTrabajadorById(1).get());
 		
 		contratoService.save(ct);
 		int count =contratoService.contratoTrabajadorCount();

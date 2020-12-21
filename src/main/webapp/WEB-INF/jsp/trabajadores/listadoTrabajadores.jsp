@@ -27,6 +27,8 @@
             <th style="width: 150px;">CORREO</th>
             <th style="width: 150px;">TELEFONO</th>
             <th style="width: 150px;">CATEGORIA</th>
+            <th style="width: 150px;">Contrato</th>
+            
         </tr>
         </thead>
         <tbody>
@@ -56,10 +58,15 @@
                 <td>
                     <c:out value="${trabajador.tipocategoria}"/>
                 </td>
-               <%--  <td>
-                	<c:forEach var="contrato" items="${trabajador.contratos}">
-                	</c:forEach> 
+                
+              <%--   <td>
+                		<c:out value="${trabajador.contratos[0].id}"/>
                 </td> --%>
+          		<td>
+                	<c:forEach var="contrato" items="${trabajador.contratos}">
+                			<c:out value="${contrato.id}"/>
+                  	</c:forEach> 
+                </td> 
                 <td>
                 	<spring:url value="/trabajadores/delete/{trabajadorId}" var="trabajadorUrl">
                 		<spring:param name="trabajadorId" value="${trabajador.id}"/>
