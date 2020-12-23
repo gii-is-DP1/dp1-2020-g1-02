@@ -1,7 +1,6 @@
 package org.springframework.samples.petclinic.service;
 
 import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.samples.petclinic.model.Horario;
 import org.springframework.samples.petclinic.repository.HorarioRepository;
@@ -34,6 +33,15 @@ public class HorarioService {
 
 	public Optional<Horario> findHorarioById(Integer horarioId) {
 		return horarioRepo.findById(horarioId);
+	}
+	
+	public Iterable<Horario> findHorarioByTrabajadorId(String name) {
+		return horarioRepo.findHorarioByTrabajadorId(name);
+	}
+	
+	public void deleteById(Integer id) {
+		Horario horarioBorrar = findHorarioById(id).get();
+		delete(horarioBorrar);
 	}
 
 }

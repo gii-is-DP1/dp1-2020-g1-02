@@ -39,7 +39,7 @@ public class ReclamacionController {
 	
 	@PostMapping(path="/save")
 	public String salvarReclamacion(@Valid Reclamacion reclamacion, BindingResult result,ModelMap modelMap) {
-		String view="reclamaciones/listadoReclamaciones";
+		String view="redirect:/reclamaciones";
 		if(result.hasErrors()) {
 			modelMap.addAttribute("reclamacion", reclamacion);
 			return "reclamaciones/newReclamacion";
@@ -52,7 +52,7 @@ public class ReclamacionController {
 	
 	@GetMapping(path="/delete/{reclamacionId}")
 	public String borrarReclamacion(@PathVariable("reclamacionId") Integer reclamacionId, ModelMap modelmap) {
-		String view = "reclamacion/listadoReclamaciones";
+		String view = "redirect:/reclamaciones";
 		Optional<Reclamacion> reclamacion = reclamacionService.findReclamacionById(reclamacionId);
 		reclamacionService.delete(reclamacion.get());
 		modelmap.addAttribute("message", "Cliente borrado correctamente");

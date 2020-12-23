@@ -39,7 +39,7 @@ public class ClienteController {
 	
 	@PostMapping(path="/save")
 	public String salvarCliente(@Valid Cliente cliente, BindingResult result,ModelMap modelMap) {
-		String view="clientes/listadoClientes";
+		String view="redirect:/clientes";
 		if(result.hasErrors()) {
 			modelMap.addAttribute("cliente", cliente);
 			return "clientes/newCliente";
@@ -53,7 +53,7 @@ public class ClienteController {
 	
 	@GetMapping(path="/delete/{clienteId}")
 	public String borrarCliente(@PathVariable("clienteId") Integer clienteId, ModelMap modelmap) {
-		String view = "clientes/listadoClientes";
+		String view = "redirect:/clientes";
 		Optional<Cliente> cliente = clienteService.findClienteById(clienteId);
 		if(cliente.isPresent()) {
 			clienteService.delete(cliente.get());

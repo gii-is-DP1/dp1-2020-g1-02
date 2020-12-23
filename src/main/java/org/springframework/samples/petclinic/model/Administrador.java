@@ -4,9 +4,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
-
-import com.sun.istack.NotNull;
-
 import lombok.Data;
 
 @Data
@@ -23,7 +20,7 @@ public class Administrador extends BaseEntity {
 	private String apellidos;
 	
     @Column(name="tipocategoria")
-    @NotNull
+    @NotEmpty
     private TipoCategoria tipocategoria; 
 	
 }

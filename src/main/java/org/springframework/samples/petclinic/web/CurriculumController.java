@@ -29,7 +29,7 @@ public class CurriculumController {
 	
 	@GetMapping(path="/delete/{curriculumId}")
 	public String borrarCurriculum(@PathVariable("curriculumId") Integer curriculumId, ModelMap modelmap) {
-		String view="curriculums/listadoCurriculums";
+		String view="redirect:/curriculums";
 		Optional<Curriculum> curriculum = curriculumService.findCurriculumById(curriculumId);
 		if(curriculum.isPresent()) {
 			curriculumService.delete(curriculum.get());

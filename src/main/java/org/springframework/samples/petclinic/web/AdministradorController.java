@@ -1,12 +1,9 @@
 package org.springframework.samples.petclinic.web;
 
 import java.util.Optional;
-
 import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.samples.petclinic.model.Administrador;
-import org.springframework.samples.petclinic.model.ContratoServicio;
 import org.springframework.samples.petclinic.service.AdministradorService;
 import org.springframework.samples.petclinic.service.ContratoServicioService;
 import org.springframework.stereotype.Controller;
@@ -35,7 +32,7 @@ public class AdministradorController {
 	}
 	
 	@GetMapping(path="/new")
-	public String crearEvento(ModelMap modelMap) {
+	public String crearAdministrador(ModelMap modelMap) {
 		String view="administradores/editAdmin";
 		modelMap.addAttribute("administrador", new Administrador());
 		return view;
@@ -49,11 +46,11 @@ public class AdministradorController {
 	}
 	
 	@PostMapping(path="/save")
-	public String salvarEvento(@Valid Administrador administrador, BindingResult result,ModelMap modelMap) {
-		String view="administradores/listadoAdmin";
+	public String salvarAdministrador(@Valid Administrador administrador, BindingResult result,ModelMap modelMap) {
+		String view="redirect:/administradores";
 		if(result.hasErrors()) {
 			modelMap.addAttribute("administrador", administrador);
-			return "proveedores/editProv";
+			return "administradores/editAdministradores";
 		}else {
 			adminService.save(administrador);
 			modelMap.addAttribute("message", "Administrador actualizado!");
@@ -63,8 +60,8 @@ public class AdministradorController {
 	}
 	
 	@GetMapping(path="/delete/{adminId}")
-	public String borrarEvento(@PathVariable("adminId") int adminId, ModelMap modelmap) {
-		String view="administradores/listadoAdmin";
+	public String borrarAdministrador(@PathVariable("adminId") int adminId, ModelMap modelmap) {
+		String view="redirect:/administradores";
 		Optional<Administrador> administrador=adminService.findAdministradorById(adminId);
 		if(administrador.isPresent()) {
 			adminService.delete(administrador.get());

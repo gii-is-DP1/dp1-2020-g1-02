@@ -23,6 +23,6 @@ public class Instalacion extends BaseEntity {
     private Double dimension;
 	
 	@ManyToOne
-    @JoinColumn(name="cliente_id")
+    //@JoinColumn(name="cliente_id")
     private Cliente cliente;
 }

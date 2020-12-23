@@ -1,9 +1,5 @@
 package org.springframework.samples.petclinic.service;
 
-
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.samples.petclinic.model.Curriculum;
@@ -41,16 +37,8 @@ public class CurriculumService {
 	}
 
 
-	public Iterable<Curriculum> findCurriculumsByTrabajadorId(Integer idTrabajador) {
-		List<Curriculum> listaCurriculums = new ArrayList<Curriculum>();
-		Iterable<Curriculum> curriculums = curriculumRepo.findAll();
-		Iterator<Curriculum> iterador = curriculums.iterator();
-		while(iterador.hasNext()) {
-			Curriculum f = (Curriculum) iterador.next();
-			if(f.getId_trab()==idTrabajador) listaCurriculums.add(f);
-		}
-		Iterable<Curriculum> facturasProv = listaCurriculums;
-		return facturasProv;
+	public Iterable<Curriculum> findCurriculumByTrabajadorId(String name) {
+		return curriculumRepo.findCurriculumByTrabajadorId(name);
 	}
 	
 	public void deleteById(Integer id) {
