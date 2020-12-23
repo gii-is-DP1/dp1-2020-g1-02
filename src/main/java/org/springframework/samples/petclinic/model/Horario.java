@@ -29,7 +29,7 @@ public class Horario extends BaseEntity {
     private LocalDateTime horaFin;
     
 	@ManyToOne
-    @JoinColumn(name="trabajador_id")
+    //@JoinColumn(name="trabajador_id")
     private Trabajador trabajador;
 	
 	@Column(name="descripcion")

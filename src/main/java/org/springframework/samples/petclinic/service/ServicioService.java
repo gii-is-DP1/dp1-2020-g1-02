@@ -3,6 +3,7 @@ package org.springframework.samples.petclinic.service;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.samples.petclinic.model.EstadoServicio;
 import org.springframework.samples.petclinic.model.Servicio;
 import org.springframework.samples.petclinic.repository.ServicioRepository;
 import org.springframework.stereotype.Service;
@@ -35,4 +36,8 @@ public class ServicioService {
 		return servicioRepo.findById(sId);
 	}
 
+	public void aceptar(Servicio servicio) {
+		servicio.setEstado(EstadoServicio.Aceptado);
+		servicioRepo.save(servicio);
+	}
 }

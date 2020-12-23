@@ -4,19 +4,19 @@ import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
-
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 
-import com.sun.istack.NotNull;
-
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 
 @Entity
-@Data
+@Getter
+@Setter
 @Table(name="trabajador")
 public class Trabajador extends PersonaEntity {
 
@@ -24,10 +24,17 @@ public class Trabajador extends PersonaEntity {
     @NotEmpty
     private String tipocategoria;
     
-    @OneToMany(cascade = CascadeType.ALL, mappedBy="trabajador")
+    @OneToMany(cascade=CascadeType.ALL, mappedBy="trabajador")
+//    @JoinColumn(name="trabajador_id")
     private Set<ContratoTrabajador> contratos;
     
     @OneToMany(cascade = CascadeType.ALL, mappedBy="trabajador")
     private Set<Horario> horarios;
+    
+    @OneToOne(optional=true)
+    private Curriculum curriculum;
+    
+    @OneToMany(cascade = CascadeType.ALL, mappedBy="trabajador")
+    private Set<RegistroHoras> registroHoras;
 
 }

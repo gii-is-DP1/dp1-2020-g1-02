@@ -14,6 +14,8 @@ public class ClienteServiceTest {
 	@Autowired
 	private ClienteService clienteService;
 	
+	//Tests positivos
+	
 	@Test
 	public void testExistenClientes() {
 		int count = clienteService.clienteCount();
@@ -21,12 +23,12 @@ public class ClienteServiceTest {
 	}
 	
 	@Test
-	public void findAll() {
+	public void testfindAll() {
 		clienteService.findAll();
 	}
 	
 	@Test
-	public void findClientById() {
+	public void testfindClientById() {
 		int clientId = 1;
 		clienteService.findClienteById(clientId);
 	}

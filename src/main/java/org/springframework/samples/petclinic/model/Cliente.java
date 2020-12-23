@@ -14,5 +14,6 @@ import lombok.Data;
 public class Cliente extends PersonaEntity {
 	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy="cliente")
+//  @JoinColumn(name="cliente_id")
     private Set<Instalacion> instalaciones;
 }

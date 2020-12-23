@@ -37,7 +37,7 @@ public class InstalacionController {
 	
 	@PostMapping(path="/save")
 	public String salvarInstalacion(@Valid Instalacion instalacion, BindingResult result,ModelMap modelMap) {
-		String view="instalaciones/listadoInstalaciones";
+		String view="redirect:/instalaciones";
 		if(result.hasErrors()) {
 			modelMap.addAttribute("instalacion", instalacion);
 			return "instalaciones/newInstalacion";
@@ -51,7 +51,7 @@ public class InstalacionController {
 	
 	@GetMapping(path="/delete/{instalacionId}")
 	public String borrarInstalacion(@PathVariable("instalacionId") Integer instalacionId, ModelMap modelmap) {
-		String view = "instalaciones/listadoInstalaciones";
+		String view = "redirect:/instalaciones";
 		Optional<Instalacion> instalacion = instalacionService.findInstalacionById(instalacionId);
 		if(instalacion.isPresent()) {
 			instalacionService.delete(instalacion.get());

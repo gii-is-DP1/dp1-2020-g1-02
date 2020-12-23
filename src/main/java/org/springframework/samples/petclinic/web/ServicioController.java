@@ -1,7 +1,7 @@
 package org.springframework.samples.petclinic.web;
 
+import java.util.Optional;
 import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.samples.petclinic.model.Servicio;
 import org.springframework.samples.petclinic.service.ServicioService;
@@ -51,6 +51,14 @@ public class ServicioController {
 			servicioService.save(servicio);
 			modelMap.addAttribute("message", "Servicio actualizado!");
 		}
+		return view;
+	}
+	
+	@PostMapping(path="/aceptar")
+	public String aceptarServicio(Integer id, ModelMap modelMap) {
+		String view="redirect:/servicios";
+		Optional<Servicio> s= servicioService.findServicioById(id);
+		servicioService.aceptar(s.get());
 		return view;
 	}
 
