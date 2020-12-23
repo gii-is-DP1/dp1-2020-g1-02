@@ -37,7 +37,7 @@ public class HorarioController {
 	
 	@PostMapping(path="/save")
 	public String salvarHorario(@Valid Horario horario, BindingResult result,ModelMap modelMap) {
-		String view="horarios/listadoHorarios";
+		String view="redirect:/horarios";
 		if(result.hasErrors()) {
 			modelMap.addAttribute("horario", horario);
 			return "horarios/newHorario";
@@ -51,7 +51,7 @@ public class HorarioController {
 	
 	@GetMapping(path="/delete/{horarioId}")
 	public String borrarHorario(@PathVariable("horarioId") Integer horarioId, ModelMap modelmap) {
-		String view = "horarios/listadoHorarios";
+		String view = "redirect:/horarios";
 		Optional<Horario> horario = horarioService.findHorarioById(horarioId);
 		if(horario.isPresent()) {
 			horarioService.delete(horario.get());

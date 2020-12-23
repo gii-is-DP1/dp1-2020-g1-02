@@ -40,6 +40,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 				.antMatchers("/clientes/**").permitAll()
 				.antMatchers("/reclamaciones").permitAll()
 				.antMatchers("/reclamaciones/**").permitAll()
+				.antMatchers("/registroHoras").permitAll()
+				.antMatchers("/registroHoras/**").permitAll()
 				.antMatchers("/administradores").permitAll()
 				.antMatchers("/administradores/**").permitAll()
 				.antMatchers("/instalaciones").permitAll()
