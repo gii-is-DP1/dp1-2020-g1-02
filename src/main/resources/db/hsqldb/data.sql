@@ -38,9 +38,10 @@ INSERT INTO factura(fecha, precio_total, proveedor, pedido) VALUES ('2020-10-20'
 INSERT INTO factura(fecha, precio_total, proveedor, pedido) VALUES ('2020-10-22', 137.89, 1, 2);
 INSERT INTO factura(fecha, precio_total, proveedor, pedido) VALUES ('2020-10-22', 56.01, 2, 3);
 
+/*
 INSERT INTO curriculum(name, tipocategoria) VALUES ('Carlos Jesus', 0);
 INSERT INTO curriculum(name, tipocategoria) VALUES ('Carlos Jesus2', 2);
-
+*/
 
 INSERT INTO oferta(name, precioU) VALUES ('Fregona', 2.5);
 INSERT INTO oferta(name, precioU) VALUES ('Escoba', 3);

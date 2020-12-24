@@ -6,7 +6,7 @@ import org.springframework.samples.petclinic.model.Horario;
 
 public interface HorarioRepository extends CrudRepository<Horario, Integer> {
 	
-	@Query("SELECT h FROM Horario h WHERE h.trabajador.name = ?1")
-	Iterable<Horario> findHorarioByTrabajadorId(String nameTrab);
+//	@Query("SELECT h FROM Horario h WHERE h.trabajador.name = ?1")
+//	Iterable<Horario> findHorarioByTrabajadorId(String nameTrab);
 
 }
