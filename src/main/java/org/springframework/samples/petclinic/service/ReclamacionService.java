@@ -38,7 +38,8 @@ public class ReclamacionService {
 	}
 	
 	public Iterable<Reclamacion> findReclamacionesByServicioId(String name) {
-		return reclamacionRepo.findReclamacionesByServicioId(name);
+		return null;
+		//return reclamacionRepo.findReclamacionesByServicioId(name);
 	}
 	
 	public void deleteById(Integer id) {

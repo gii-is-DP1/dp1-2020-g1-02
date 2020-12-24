@@ -37,7 +37,8 @@ public class RegistroHorasService {
 	}
 
 	public Iterable<RegistroHoras> findRegistroHorasByTrabajadorId(String name) {
-		return registroHorasRepo.findRegistroHorasByTrabajadorId(name);
+		return null;
+		//return registroHorasRepo.findRegistroHorasByTrabajadorId(name);
 	}
 	
 	

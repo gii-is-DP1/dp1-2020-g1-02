@@ -38,7 +38,8 @@ public class CurriculumService {
 
 
 	public Iterable<Curriculum> findCurriculumByTrabajadorId(String name) {
-		return curriculumRepo.findCurriculumByTrabajadorId(name);
+		return null;
+		//return curriculumRepo.findCurriculumByTrabajadorId(name);
 	}
 	
 	public void deleteById(Integer id) {
