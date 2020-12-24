@@ -7,25 +7,34 @@
 <%@ taglib prefix="petclinic" tagdir="/WEB-INF/tags" %>
 
 <petclinic:layout pageName="reclamaciones">
-    <h2>
-        <c:if test="${reclamacion['new']}">Nueva </c:if> Reclamacion
-    </h2>
-    <form:form modelAttribute="reclamacion" class="form-horizontal" id="add-reclamacion-form" action="/reclamaciones/save">
-        <div class="form-group has-feedback">
-            <petclinic:inputField label="Fecha" name="fecha"/>
-            <petclinic:inputField label="Descripcion" name="descripcion"/>
-        </div>
-        <div class="form-group">
-            <div class="col-sm-offset-2 col-sm-10">
-                <c:choose>
-                    <c:when test="${reclamacion['new']}">
-                        <button class="btn btn-default" type="submit">Añadir Reclamacion</button>
-                    </c:when>
-                    <c:otherwise>
-                        <button class="btn btn-default" type="submit">Actualizar Reclamacion</button>
-                    </c:otherwise>
-                </c:choose>
-            </div>
-        </div>
-    </form:form>
+ <jsp:attribute name="customScript">
+        <script>
+            $(function () {
+                $("#fecha").datepicker({dateFormat: 'yy/mm/dd'});
+            });
+        </script>
+    </jsp:attribute>
+    <jsp:body>
+	    <h2>
+	        <c:if test="${reclamacion['new']}">Nueva </c:if> Reclamacion
+	    </h2>
+	    <form:form modelAttribute="reclamacion" class="form-horizontal" id="add-reclamacion-form" action="/reclamaciones/save">
+	        <div class="form-group has-feedback">
+	            <petclinic:inputField label="Fecha del Servicio" name="fecha"/>
+	            <petclinic:inputField label="Descripcion" name="descripcion"/>
+	        </div>
+	        <div class="form-group">
+	            <div class="col-sm-offset-2 col-sm-10">
+	                <c:choose>
+	                    <c:when test="${reclamacion['new']}">
+	                        <button class="btn btn-default" type="submit">Añadir Reclamacion</button>
+	                    </c:when>
+	                    <c:otherwise>
+	                        <button class="btn btn-default" type="submit">Actualizar Reclamacion</button>
+	                    </c:otherwise>
+	                </c:choose>
+	            </div>
+	        </div>
+	    </form:form>
+    </jsp:body>
 </petclinic:layout>
