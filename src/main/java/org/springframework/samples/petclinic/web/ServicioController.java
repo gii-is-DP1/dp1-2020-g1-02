@@ -61,5 +61,13 @@ public class ServicioController {
 		servicioService.aceptar(s.get());
 		return view;
 	}
+	
+	@PostMapping(path="/rechazar")
+	public String rechazarServicio(Integer id, ModelMap modelMap) {
+		String view="redirect:/servicios";
+		Optional<Servicio> s= servicioService.findServicioById(id);
+		servicioService.rechazar(s.get());
+		return view;
+	}
 
 }
