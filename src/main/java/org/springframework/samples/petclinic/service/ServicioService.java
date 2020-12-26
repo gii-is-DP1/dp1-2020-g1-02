@@ -40,4 +40,9 @@ public class ServicioService {
 		servicio.setEstado(EstadoServicio.Aceptado);
 		servicioRepo.save(servicio);
 	}
+	
+	public void rechazar(Servicio servicio) {
+		servicio.setEstado(EstadoServicio.Rechazado);
+		servicioRepo.save(servicio);
+	}
 }

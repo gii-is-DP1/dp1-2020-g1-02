@@ -25,7 +25,6 @@ public class Trabajador extends PersonaEntity {
     private String tipocategoria;
     
     @OneToMany(cascade=CascadeType.ALL, mappedBy="trabajador")
-//    @JoinColumn(name="trabajador_id")
     private Set<ContratoTrabajador> contratos;
     
     @OneToMany(cascade = CascadeType.ALL, mappedBy="trabajador")

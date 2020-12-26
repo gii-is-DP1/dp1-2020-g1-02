@@ -60,8 +60,15 @@
        						<button type="submit">Aceptar solicitud</button>
        				</form:form>
        			 </td>
-         
-                <td>
+         		
+         		
+         		<td>
+               	 	<form:form modelAttribute="servicio" class="form-horizontal" action="/servicios/rechazar">
+       						<input type="hidden" id="id" name="id" value=' <c:out value="${servicio.id}"/>'>
+       						<button type="submit">Rechazar solicitud</button>
+       				</form:form>
+       			 </td>
+                <%-- <td>
                	 	<form:form modelAttribute="servicio" class="form-horizontal" action="/servicios/save">
        						<input type="hidden" id="id" name="id" value=' <c:out value="${servicio.id}"/>'>
        						<input type="hidden" name="lugar" value=' <c:out value="${servicio.lugar}"/>'>
@@ -71,7 +78,7 @@
      						<input type="hidden" name="estado" value="Rechazado"/>
        						<button type="submit">Rechazar solicitud</button>
         			</form:form>
-               </td> 
+               </td>  --%>
                 <!-- AÑADIR BOTON PARA CREAR PRESUPUESTO  -->
             </tr>
         </c:forEach>
