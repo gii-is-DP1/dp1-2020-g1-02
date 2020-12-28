@@ -6,7 +6,7 @@ import org.springframework.samples.petclinic.model.RegistroHoras;
 
 public interface RegistroHorasRepository extends CrudRepository<RegistroHoras, Integer> {
 	
-//	@Query("SELECT r FROM RegistroHoras r WHERE r.trabajador.name = ?1")
-//	Iterable<RegistroHoras> findRegistroHorasByTrabajadorId(String nameTrab);
+	@Query("SELECT r FROM RegistroHoras r WHERE r.trabajador.nombre = ?1")
+	Iterable<RegistroHoras> findRegistroHorasByTrabajadorId(String nameTrab);
 
 }

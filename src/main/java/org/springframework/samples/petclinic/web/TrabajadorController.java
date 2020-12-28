@@ -6,6 +6,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.samples.petclinic.model.Trabajador;
+import org.springframework.samples.petclinic.service.RegistroHorasService;
 import org.springframework.samples.petclinic.service.TrabajadorService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -21,6 +22,8 @@ public class TrabajadorController {
 
 	@Autowired
 	private TrabajadorService trabajadorService;
+	@Autowired
+	private RegistroHorasService registroHorasService;
 	
 	@GetMapping()
 	public String listadoTrabajadores(ModelMap modelMap) {
@@ -70,6 +73,13 @@ public class TrabajadorController {
 			modelmap.addAttribute("message", "Trabajador on encontrado");
 			view=listadoTrabajadores(modelmap);
 		}
+		return view;
+	}
+	
+	@GetMapping(path="/registroHoras/{nameTrabajador}")
+	public String filtradoFactura(@PathVariable("nameTrabajador") String nameTrabajador,ModelMap modelMap) {
+		String view="redirect:/registroHoras";
+		modelMap.addAttribute("registroHoras", registroHorasService.findRegistroHorasByTrabajadorId(nameTrabajador));
 		return view;
 	}
 }

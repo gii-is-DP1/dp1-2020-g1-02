@@ -22,13 +22,6 @@ public class ReclamacionController {
 	@Autowired
 	private ReclamacionService reclamacionService;
 	
-	@GetMapping()
-	public String listadoReclamaciones(ModelMap modelMap) {
-		String vista ="reclamaciones/listadoReclamaciones";
-		Iterable<Reclamacion> reclamaciones = reclamacionService.findAll();
-		modelMap.addAttribute("reclamacion", reclamaciones);
-		return vista;
-	}
 	
 	@GetMapping(path="/new")
 	public String crearReclamacion(ModelMap modelMap) {

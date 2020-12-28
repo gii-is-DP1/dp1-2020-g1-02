@@ -10,7 +10,7 @@
 <petclinic:layout pageName="reclamaciones">
     <h2>Reclamaciones</h2>
 
-    <table id="clientesTable" class="table table-striped">
+    <table id="reclamacionesTable" class="table table-striped">
         <thead>
         <tr>
             <th style="width: 150px;">Fecha</th>
