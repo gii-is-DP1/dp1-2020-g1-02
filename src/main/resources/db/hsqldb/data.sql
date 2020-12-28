@@ -66,9 +66,13 @@ INSERT INTO contratoservicio(fechainicial, fechafinal, fechapago, cliente, presu
 INSERT INTO contratoservicio(fechainicial, fechafinal, fechapago, cliente, presupuesto, periodoprueba, servicio) VALUES ('2019-10-20', '2020-12-31', '2020-12-10', 3, 3, 1, 3);
 INSERT INTO contratoservicio(fechainicial, fechafinal, cliente, presupuesto, periodoprueba, servicio) VALUES ('2020-10-20', '2021-10-20', 2, 1, 1, 4);
 
+INSERT INTO reclamacion(fecha, descripcion, cliente_id, servicio_id) VALUES ('2019-10-20', 'El servicio está incompleto', 1, 1);
+INSERT INTO reclamacion(fecha, descripcion, cliente_id, servicio_id) VALUES ('2019-10-20', 'El servicio está lamentable', 2, 2);
 
+/*INSERT INTO horario (hora_inicio, hora_fin, trabajador_id, descripcion) VALUES ('2019-10-20 10:40', '2019-10-20 20:40', 1, 'Ha estado trabajando en el acuario');
 
-
+INSERT INTO REGISTRO_HORAS (hora_inicio, hora_fin, trabajador_nombre) VALUES ('2019-10-20 10:40', '2019-10-20 20:40', 'Carlos Jesus');
+*/
 
 /* -- One admin user, named admin1 with passwor 4dm1n and authority admin
 INSERT INTO users(username,password,enabled) VALUES ('admin1','4dm1n',TRUE);
