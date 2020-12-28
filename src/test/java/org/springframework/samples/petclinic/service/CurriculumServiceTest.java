@@ -32,7 +32,7 @@ public class CurriculumServiceTest {
 	@Test
 	public void testSaveCurriculum() {
 		Curriculum curriculumNew = new Curriculum();
-		curriculumNew.setName("Jesús");
+		curriculumNew.setNombre("Jesús");
 		curriculumNew.setTipocategoria(TipoCategoria.Limpieza);
 		curriculumNew.setId_trab(3);
 
@@ -50,7 +50,7 @@ public class CurriculumServiceTest {
 	@Test
 	public void testFindAllCurriculumsByTrabajadorId() {
 		Boolean i = true;
-		Iterable<Curriculum> curriculumFind = curriculumService.findCurriculumsByTrabajadorId(1);
+		Iterable<Curriculum> curriculumFind = curriculumService.findCurriculumByTrabajadorId("");
 		Iterator<Curriculum> iterador = curriculumFind.iterator();
 		while(iterador.hasNext()) {
 			if(iterador.next().getId_trab() != 1) {

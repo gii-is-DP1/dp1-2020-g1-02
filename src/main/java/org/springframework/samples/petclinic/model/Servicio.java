@@ -4,7 +4,9 @@ import java.time.LocalDate;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
@@ -12,9 +14,11 @@ import javax.validation.constraints.NotNull;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
+@Getter
+@Setter
 @Entity
 @Table(name = "servicio")
 public class Servicio extends BaseEntity {
@@ -44,5 +48,9 @@ public class Servicio extends BaseEntity {
 	@OneToOne(optional=true)
 	@JoinColumn(name="contrato_id")
 	private ContratoServicio contrato;
+	
+	@ManyToOne(fetch=FetchType.LAZY)
+    @JoinColumn(name="cliente_id")
+    private Cliente cliente;
 	
 }

@@ -5,7 +5,7 @@
 <%@ taglib prefix="petclinic" tagdir="/WEB-INF/tags" %>
 
 
-<petclinic:layout pageName="Events">
+<petclinic:layout pageName="Servicios">
  <jsp:attribute name="customScript">
         <script>
             $(function () {
