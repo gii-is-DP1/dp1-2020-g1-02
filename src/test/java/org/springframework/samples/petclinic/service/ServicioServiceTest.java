@@ -11,10 +11,12 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.samples.petclinic.model.Cliente;
 import org.springframework.samples.petclinic.model.EstadoServicio;
 import org.springframework.samples.petclinic.model.Servicio;
 import org.springframework.samples.petclinic.model.TipoCategoria;
 import org.springframework.samples.petclinic.model.Trabajador;
+import org.springframework.samples.petclinic.repository.ClienteRepository;
 import org.springframework.stereotype.Service;
 
 @DataJpaTest(includeFilters = @ComponentScan.Filter(Service.class))
@@ -52,7 +54,18 @@ public class ServicioServiceTest {
 		//Act
 		Optional<Servicio> ser1 = servicioService.findServicioById(id);
 		//Assert
-		assertNotNull(ser1.get());
+		assertNotNull(ser1);
+	}
+	
+	@Test
+	public void testGetServicesByCliente() {
+		//Arrange
+		int id = 1;
+		//Act
+		Iterable<Servicio> ser1 = servicioService.serviciosByCliente(id);
+		//Assert
+		assertNotNull(ser1);
+		//assertNotNull(ser1);
 	}
 	
 	@Test

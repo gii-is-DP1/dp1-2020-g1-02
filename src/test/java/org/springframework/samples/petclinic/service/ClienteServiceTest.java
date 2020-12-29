@@ -1,6 +1,10 @@
 package org.springframework.samples.petclinic.service;
 
+import static org.junit.Assert.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import java.util.Optional;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
@@ -30,7 +34,8 @@ public class ClienteServiceTest {
 	@Test
 	public void testfindClientById() {
 		int clientId = 1;
-		clienteService.findClienteById(clientId);
+		Optional<Cliente> cliente = clienteService.findClienteById(clientId);
+		assertNotNull(cliente);
 	}
 	
 	@Test
