@@ -51,10 +51,7 @@ INSERT INTO administrador(nombre, apellidos, tipocategoria) VALUES ('Carlos','Bo
 
 INSERT INTO instalacion(lugar, dimension, cliente_id) VALUES ('Calle Albania', 130, 1);
 
-INSERT INTO presupuesto(precio, tipopresupuesto, instalacion_id) VALUES (4579.5, 1, 1);
-INSERT INTO presupuesto(precio, tipopresupuesto, instalacion_id) VALUES (50.0, 0, 1);
-INSERT INTO presupuesto(precio, tipopresupuesto, instalacion_id) VALUES (123.12, 0, 1);
-INSERT INTO presupuesto(precio, tipopresupuesto, instalacion_id) VALUES (18000.0, 1, 1);
+
 
 
 INSERT INTO servicio(lugar, tipocategoria, fechainicio, fechafin, estado, cliente_id) VALUES ('Av Reina Mercedes', 0, '2019-10-20', '2020-12-31', 0, 1);
@@ -62,6 +59,11 @@ INSERT INTO servicio(lugar, tipocategoria, fechainicio, fechafin, estado, client
 INSERT INTO servicio(lugar, tipocategoria, fechainicio, fechafin, estado, cliente_id) VALUES ('Av Reina Mercedes', 1, '2019-10-20', '2020-12-31', 1, 1);
 INSERT INTO servicio(lugar, tipocategoria, fechainicio, fechafin, estado, cliente_id) VALUES ('Av Reina Mercedes', 2, '2019-10-20', '2020-12-31', 1, 1);
 INSERT INTO servicio(lugar, tipocategoria, fechainicio, fechafin, estado, cliente_id) VALUES ('Av Reina Mercedes', 0, '2019-10-20', '2020-12-31', 1, 2);
+
+INSERT INTO presupuesto(precio, tipopresupuesto, servicio_id) VALUES (4579.5, 1, 1);
+INSERT INTO presupuesto(precio, tipopresupuesto, servicio_id) VALUES (50.0, 0, 1);
+INSERT INTO presupuesto(precio, tipopresupuesto, servicio_id) VALUES (123.12, 0, 1);
+INSERT INTO presupuesto(precio, tipopresupuesto, servicio_id) VALUES (18000.0, 1, 1);
 
 INSERT INTO contratoservicio(fechainicial, fechafinal, fechapago, cliente, presupuesto, periodoprueba, servicio) VALUES ('2019-10-20', '2020-12-31', '2020-12-10', 1, 2, 0, 2);
 INSERT INTO contratoservicio(fechainicial, fechafinal, fechapago, cliente, presupuesto, periodoprueba, servicio) VALUES ('2019-10-20', '2020-12-31', '2020-12-10', 3, 3, 1, 3);

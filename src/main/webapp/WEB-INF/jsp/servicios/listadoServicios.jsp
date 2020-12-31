@@ -68,18 +68,16 @@
        						<button type="submit">Rechazar solicitud</button>
        				</form:form>
        			 </td>
-                <%-- <td>
-               	 	<form:form modelAttribute="servicio" class="form-horizontal" action="/servicios/save">
-       						<input type="hidden" id="id" name="id" value=' <c:out value="${servicio.id}"/>'>
-       						<input type="hidden" name="lugar" value=' <c:out value="${servicio.lugar}"/>'>
-       						<input type="hidden" name="fechainicio" value='<petclinic:localDate date="${servicio.fechainicio}" pattern="yyyy/MM/dd"/>'>
-       						<input type="hidden" name="fechafin" value='<petclinic:localDate date="${servicio.fechafin}" pattern="yyyy/MM/dd"/>'>
-       						<input type="hidden" name="tipocategoria" value=' <c:out value="${servicio.tipocategoria}"/>'>
-     						<input type="hidden" name="estado" value="Rechazado"/>
-       						<button type="submit">Rechazar solicitud</button>
-        			</form:form>
-               </td>  --%>
+       			 
+       			 
                 <!-- AÑADIR BOTON PARA CREAR PRESUPUESTO  -->
+                
+                <td>
+               	 	<form:form modelAttribute="presupuesto" class="form-horizontal" action="/presupuestos/new">
+       						<input type="hidden" id="sId" name="sId" value=' <c:out value="${servicio.id}"/>'>
+       						<button type="submit">Enviar presupuesto</button>
+       				</form:form>
+       			 </td>
             </tr>
         </c:forEach>
         </tbody>

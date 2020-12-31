@@ -5,6 +5,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.samples.petclinic.model.Presupuesto;
 import org.springframework.samples.petclinic.service.PresupuestoService;
+import org.springframework.samples.petclinic.service.ServicioService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -27,23 +28,23 @@ public class PresupuestoController {
 		return vista;
 	}
 	
-	@GetMapping(path="/new")
-	public String crearPresupuesto(ModelMap modelMap) {
+	@PostMapping(path="/new")
+	public String crearPresupuesto(Integer sId, ModelMap modelMap) {
 		String view = "presupuestos/editPresupuesto";
+		modelMap.addAttribute("sId", sId);
 		modelMap.addAttribute("presupuesto", new Presupuesto());
 		return view;
 	}
 	
 	@PostMapping(path="/save")
 	public String salvarPresupuesto(@Valid Presupuesto presupuesto, BindingResult result, ModelMap modelMap) {
-		String view = "redirect:/presupuestos";
+		String view = "redirect:/servicios";
 		if(result.hasErrors()) {
 			modelMap.addAttribute("presupuesto", presupuesto);
 			return "presupuestos/editPresupuesto";
 		} else {
 			presupuestoService.save(presupuesto);
 			modelMap.addAttribute("mensaje", "Presupuesto actualizado!!");
-//			view = listadoPresupuesto(modelMap);
 		}
 		return view;
 	}
