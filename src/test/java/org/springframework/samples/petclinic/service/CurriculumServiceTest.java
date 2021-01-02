@@ -1,8 +1,7 @@
 package org.springframework.samples.petclinic.service;
 
-import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import java.util.Iterator;
+import java.util.Optional;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
@@ -16,6 +15,8 @@ public class CurriculumServiceTest {
 
 	@Autowired
 	private CurriculumService curriculumService;
+	
+	//Test positivos
 	
 	@Test
 	public void testExistenCurriculums() {
@@ -34,7 +35,6 @@ public class CurriculumServiceTest {
 		Curriculum curriculumNew = new Curriculum();
 		curriculumNew.setNombre("Jesús");
 		curriculumNew.setTipocategoria(TipoCategoria.Limpieza);
-		curriculumNew.setId_trab(3);
 
 		curriculumService.save(curriculumNew);
 		
@@ -42,28 +42,32 @@ public class CurriculumServiceTest {
 		assertEquals(3, cantidad);
 	}
 	
-	@Test
-	public void testFindAll() {
-		curriculumService.findAll();
-	}
 	
-	@Test
-	public void testFindAllCurriculumsByTrabajadorId() {
-		Boolean i = true;
-		Iterable<Curriculum> curriculumFind = curriculumService.findCurriculumByTrabajadorId("");
-		Iterator<Curriculum> iterador = curriculumFind.iterator();
-		while(iterador.hasNext()) {
-			if(iterador.next().getId_trab() != 1) {
-				i =false;
-			}
-		}	
-		assertTrue(i);
-	}
+//	@Test
+//	public void testFindAllCurriculumsByTrabajadorId() {
+//		Boolean i = true;
+//		Iterable<Curriculum> curriculumFind = curriculumService.findCurriculumByTrabajadorId("");
+//		Iterator<Curriculum> iterador = curriculumFind.iterator();
+//		while(iterador.hasNext()) {
+//			if(iterador.next().getId_trab() != 1) {
+//				i =false;
+//			}
+//		}	
+//		assertTrue(i);
+//	}
 	
 	@Test
 	public void testCurriculumFindById() {
 		Curriculum curriculumFind = curriculumService.findCurriculumById(1).get();
 		assertEquals(Curriculum.class, curriculumFind.getClass());
+	}
+	
+	//Test negativos
+	
+	@Test
+	public void testNotFindCurriculumById() {
+		Optional<Curriculum> curriculumFind = curriculumService.findCurriculumById(50);
+		assertEquals(false, curriculumFind.isPresent());
 	}
 	
 	

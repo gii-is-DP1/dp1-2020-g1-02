@@ -5,24 +5,26 @@ import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
-@Data
+@Getter
+@Setter
 @Table(name="instalacion")
 public class Instalacion extends BaseEntity {
 
 	@Column(name="lugar")
-    @NotEmpty
+    @NotNull
     private String lugar;
 	
 	@Column(name="dimension")
-    @NotEmpty
+    @NotNull
     private Double dimension;
 	
 	@ManyToOne
-    //@JoinColumn(name="cliente_id")
+    @JoinColumn(name="cliente_id")
     private Cliente cliente;
 }
