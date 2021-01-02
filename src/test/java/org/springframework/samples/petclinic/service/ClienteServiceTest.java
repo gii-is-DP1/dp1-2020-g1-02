@@ -1,10 +1,7 @@
 package org.springframework.samples.petclinic.service;
 
-import static org.junit.Assert.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-
 import java.util.Optional;
-
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
@@ -23,19 +20,13 @@ public class ClienteServiceTest {
 	@Test
 	public void testExistenClientes() {
 		int count = clienteService.clienteCount();
-		assertEquals(count, 1);
-	}
-	
-	@Test
-	public void testfindAll() {
-		clienteService.findAll();
+		assertEquals(count, 3);
 	}
 	
 	@Test
 	public void testfindClientById() {
-		int clientId = 1;
-		Optional<Cliente> cliente = clienteService.findClienteById(clientId);
-		assertNotNull(cliente);
+		Cliente clienteFind = clienteService.findClienteById(1).get();
+		assertEquals(Cliente.class, clienteFind.getClass());
 	}
 	
 	@Test
@@ -57,7 +48,15 @@ public class ClienteServiceTest {
 		clienteService.save(clienteNew);
 		
 		Integer cantidad = clienteService.clienteCount();
-		assertEquals(2, cantidad);
+		assertEquals(4, cantidad);
 	}
 
+	//Test negativos
+	
+		@Test
+		public void testNotFindClienteById() {
+			Optional<Cliente> clienteFind = clienteService.findClienteById(50);
+			assertEquals(false, clienteFind.isPresent());
+		}
+		
 }

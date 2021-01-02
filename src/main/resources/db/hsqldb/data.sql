@@ -1,12 +1,15 @@
 INSERT INTO trabajador(id,nombre,apellidos,dni,telefono, direccion, correo, tipocategoria) VALUES (1,'Carlos Jesus', 'Villadiego', '78461836B','666888888','C/Garcia Marquez n2', 'calvirgar@alum.us.es', 0);
 INSERT INTO trabajador(id,nombre,apellidos,dni,telefono, direccion, correo, tipocategoria) VALUES (2,'Carlos Jesus2', 'Villadiego', '78461836B','666888888','C/Garcia Marquez n2', 'calvirgar@alum.us.es', 2);
 
-/*INSERT INTO horario(id,horaInicio, horaFin, trabajador_id, descripcion) VALUES (1,'2020/12/10 12:00', '2020/12/10 15:00',1, 'Limpiar en Acuario de Sevilla');
-INSERT INTO horario(id,horaInicio, horaFin, trabajador_id, descripcion) VALUES (2,'2020/01/31 17:30', '2020/01/31 20:30',2, 'Limpiar en Hostal San Jerónimo (Sevilla)');
+INSERT INTO horario(hora_inicio, hora_fin, descripcion) VALUES ('2020-12-10 12:00', '2020-12-10 15:00', 'Limpiar en Acuario de Sevilla');
+INSERT INTO horario(hora_inicio, hora_fin, descripcion) VALUES ('2020-01-31 17:30', '2020-01-31 20:30', 'Limpiar en Hostal San Jerónimo (Sevilla)');
 
-INSERT INTO instalacion(id,horaInicio, lugar, cliente_id, dimension) VALUES (1,'Calle Águila Piso 1ºB',1, '20.3');
-INSERT INTO instalacion(id,horaInicio, lugar, cliente_id, dimension) VALUES (2,'Calle Betis Piso 1ºD',2, '17.7');
-*/
+INSERT INTO registro_horas(hora_entrada, hora_salida) VALUES ('2019-06-16 11:00', '2019-06-16 14:00');
+INSERT INTO registro_horas(hora_entrada, hora_salida) VALUES ('2019-08-16 19:00', '2019-08-16 23:00');
+
+INSERT INTO instalacion(lugar, dimension) VALUES ('Calle Águila Piso 1ºB','20.3');
+INSERT INTO instalacion(lugar, dimension) VALUES ('Calle Betis Piso 1ºD','17.7');
+INSERT INTO instalacion(lugar, dimension) VALUES ('Calle Albania', '130.0');
 
 INSERT INTO contratoTrabajador(id,fechainicial,fechafinal,trabajador_id,sueldo) VALUES (1, '2010-01-01', '2019-12-31', 1, 1200.0);
 INSERT INTO contratoTrabajador(id,fechainicial,fechafinal,trabajador_id,sueldo) VALUES (2, '2010-01-01', '2019-12-31', 1, 1200.0);
@@ -38,10 +41,10 @@ INSERT INTO factura(fecha, precio_total, proveedor, pedido) VALUES ('2020-10-20'
 INSERT INTO factura(fecha, precio_total, proveedor, pedido) VALUES ('2020-10-22', 137.89, 1, 2);
 INSERT INTO factura(fecha, precio_total, proveedor, pedido) VALUES ('2020-10-22', 56.01, 2, 3);
 
-/*
-INSERT INTO curriculum(name, tipocategoria) VALUES ('Carlos Jesus', 0);
-INSERT INTO curriculum(name, tipocategoria) VALUES ('Carlos Jesus2', 2);
-*/
+
+INSERT INTO curriculum(nombre, tipocategoria) VALUES ('Carlos Jesus', 0);
+INSERT INTO curriculum(nombre, tipocategoria) VALUES ('Carlos Jesus2', 2);
+
 
 INSERT INTO oferta(name, precioU) VALUES ('Fregona', 2.5);
 INSERT INTO oferta(name, precioU) VALUES ('Escoba', 3);
@@ -49,7 +52,7 @@ INSERT INTO oferta(name, precioU) VALUES ('Escoba', 3);
 INSERT INTO administrador(nombre, apellidos, tipocategoria) VALUES ('Carlos Jesus','Morales Borreguero', 2);
 INSERT INTO administrador(nombre, apellidos, tipocategoria) VALUES ('Carlos','Borreguero', 0);
 
-INSERT INTO instalacion(lugar, dimension, cliente_id) VALUES ('Calle Albania', 130, 1);
+
 
 
 

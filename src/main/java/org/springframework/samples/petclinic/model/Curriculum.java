@@ -2,31 +2,31 @@ package org.springframework.samples.petclinic.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.NotEmpty;
-import lombok.Data;
+import javax.validation.constraints.NotNull;
 
-@Data
+import lombok.Getter;
+import lombok.Setter;
+
 @Entity
+@Getter
+@Setter
 @Table(name="curriculum")
 public class Curriculum extends BaseEntity {
 	
 	@Column(name = "nombre")
-    @NotEmpty
+    @NotNull
 	private String nombre;
 	
 	@Column(name="tipocategoria")
-	@NotEmpty
+	@NotNull
 	private TipoCategoria tipocategoria;
-
-	@Column(name="id_trab")
-	@NotEmpty
-	private Integer id_trab;
 	
-	@OneToOne
-    //@JoinColumn(name="trabajador_id")
+	@OneToOne(fetch=FetchType.LAZY)
+    @JoinColumn(name="trabajador_id")
     private Trabajador trabajador;
 	
 }

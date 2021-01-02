@@ -10,7 +10,7 @@
 <petclinic:layout pageName="registroHoras">
     <h2>Registro de Horas</h2>
 
-    <table id="reclamacionesTable" class="table table-striped">
+    <table id="registroHorastable" class="table table-striped">
         <thead>
         <tr>
             <th style="width: 150px;">Hora Entrada</th>
