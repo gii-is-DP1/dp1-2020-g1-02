@@ -43,8 +43,8 @@ public class FacturaService {
 		deleteFactura(facturaBorrar);
 	}
 
-	public Iterable<Factura> findFacturaByProveedorId(String name) {
-		return facturaRepo.findFacturasByProveedorId(name);
+	public Iterable<Factura> findFacturaByProveedorName(String name) {
+		return facturaRepo.findFacturasByProveedorName(name);
 	}
 	
 	

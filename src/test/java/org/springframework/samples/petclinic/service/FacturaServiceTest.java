@@ -50,7 +50,7 @@ public class FacturaServiceTest {
 		facturaNew.setFecha(LocalDate.now());
 		facturaNew.setPrecio_total(50.0);
 		facturaNew.setProveedor(proveedorService.findProveedorById(2).get());
-		
+//		
 		Pedido ped = new Pedido();
 		ped.setFechaPedido(LocalDate.now());
 		
@@ -62,20 +62,20 @@ public class FacturaServiceTest {
 		
 		assertEquals(4, cantidad);
 	}
-
 	
-	
-//	@Test
-//	public void testFindAllFacturasByProveedor() {
-//		Boolean i = true;
-//		Iterable<Factura> facturaFind = facturaService.findFacturasByProveedorId(1);
-//		Iterator<Factura> iterador = facturaFind.iterator();
-//		while(iterador.hasNext()) if(iterador.next().getProveedor().getId() != 1) i =false;
-//		assertTrue(i);
-//	}
 	
 	@Test
-	public void testDeleteFacturaById() {
+	public void testFindAllFacturasByProveedor() {
+		Integer cant= 0;
+		Iterator<Factura> facturasIT = facturaService.findFacturaByProveedorName("Lejias").iterator();
+		while(facturasIT.hasNext()) {
+			cant++;
+		}
+		assertEquals(2, cant);
+	}
+	
+	@Test
+	public void deleteFacturaById() {
 		facturaService.deleteById(1);
 		assertEquals(false, facturaService.findFacturaById(1).isPresent());
 	}
@@ -90,7 +90,7 @@ public class FacturaServiceTest {
 	
 //	@Test
 //	public void testNotFindAllFacturasByProveedor() {
-//		Iterable<Factura> facturaFind = facturaService.findFacturasByProveedorId(50);
+//		Iterable<Factura> facturaFind = facturaService.findFacturaByProveedorId(50);
 //		Iterator<Factura> iterador = facturaFind.iterator();
 //		int cont = 0;
 //		while(iterador.hasNext()) cont++;
