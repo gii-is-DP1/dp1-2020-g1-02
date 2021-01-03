@@ -78,16 +78,6 @@ public class FacturaServiceTest {
 	}
 	
 	@Test
-	public void testFindAllFacturasByProveedor() {
-		Integer cant= 0;
-		Iterator<Factura> facturasIT = facturaService.findFacturaByProveedorName("Lejias").iterator();
-		while(facturasIT.hasNext()) {
-			cant++;
-		}
-		assertEquals(2, cant);
-	}
-	
-	@Test
 	@Transactional
 	public void deleteFacturaById() {
 		facturaService.deleteById(1);
