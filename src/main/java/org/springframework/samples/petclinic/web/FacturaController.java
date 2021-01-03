@@ -42,7 +42,7 @@ public class FacturaController {
 	public String filtradoFactura(String nameProv,ModelMap modelMap) {
 		String view="facturas/listadoFacturas";
 		modelMap.addAttribute("filtrado", nameProv);
-		modelMap.replace("facturas", facturaService.findFacturaByProveedorName(nameProv));
+		modelMap.addAttribute("facturas", facturaService.findFacturaByProveedorName(nameProv));
 		return view;
 	}
 	
@@ -62,7 +62,7 @@ public class FacturaController {
 	
 	@GetMapping(path="/delete/{facturaId}")
 	public String borrarTrabajador(@PathVariable("facturaId") int facturaId, ModelMap modelmap) {
-		String view="facturas/listadoFacturas";
+		String view="redirect:/facturas";
 		Optional<Factura> factura=facturaService.findFacturaById(facturaId);
 		if(factura.isPresent()) {
 			facturaService.deleteFactura(factura.get());
@@ -70,7 +70,7 @@ public class FacturaController {
 			
 		}else {
 			modelmap.addAttribute("message", "Factura no encontrada");
-			view=listadoFacturas(modelmap);
+//			view=listadoFacturas(modelmap);
 		}
 		return view;
 	}

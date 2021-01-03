@@ -1,5 +1,7 @@
 package org.springframework.samples.petclinic.repository;
 
+import java.util.Collection;
+
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.Repository;
@@ -15,6 +17,9 @@ public interface FacturaRepository extends CrudRepository<Factura, Integer>{
 //	@Query("SELECT f FROM Factura f  INNER JOIN Proveedor p ON f.proveedor = p.id  WHERE p.name LIKE ':nameProv%' ")
 //	Iterable<Factura> findFacturasByProveedorName(@Param("nameProv") String nameProv);
 	
-	@Query("SELECT f FROM Factura AS f INNER JOIN Proveedor AS p  ON f.proveedor = p.id  WHERE p.name LIKE ':nameProv%' ")
-	Iterable<Factura> findFacturasByProveedorName(@Param("nameProv") String nameProv);
+//	@Query("SELECT f FROM Factura AS f INNER JOIN Proveedor AS p  ON f.proveedor = p.id  WHERE p.name LIKE ':nameProv%' ")
+//	Iterable<Factura> findFacturasByProveedorName(@Param("nameProv") String nameProv);
+	
+	@Query("SELECT DISTINCT f FROM Factura f LEFT JOIN FETCH f.proveedor WHERE f.proveedor.name LIKE :nameProv%")
+	Collection<Factura> findFacturasByProveedorName(@Param("nameProv") String nameProv);
 }
