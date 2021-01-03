@@ -38,10 +38,11 @@ public class FacturaController {
 		return view;
 	}
 	
-	@GetMapping(path="/filtrado/{nameProv}")
-	public String filtradoFactura(@PathVariable("nameProv") String nameProv,ModelMap modelMap) {
-		String view="redirect:/facturas";
-		modelMap.addAttribute("facturas", facturaService.findFacturaByProveedorId(nameProv));
+	@GetMapping(path="/filtrado")
+	public String filtradoFactura(String nameProv,ModelMap modelMap) {
+		String view="facturas/listadoFacturas";
+		modelMap.addAttribute("filtrado", nameProv);
+		modelMap.replace("facturas", facturaService.findFacturaByProveedorName(nameProv));
 		return view;
 	}
 	

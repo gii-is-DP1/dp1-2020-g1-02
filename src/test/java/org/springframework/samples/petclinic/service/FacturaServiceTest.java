@@ -17,6 +17,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.samples.petclinic.model.Factura;
 import org.springframework.samples.petclinic.model.Pedido;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 
 @DataJpaTest(includeFilters = @ComponentScan.Filter(Service.class))
@@ -26,8 +27,8 @@ public class FacturaServiceTest {
 	private FacturaService facturaService;
 	@Autowired
 	private ProveedorService proveedorService;
-//	@Autowired
-//	private PedidoSerice pedidoService;
+	@Autowired
+	private PedidoService pedidoService;
 	
 	//Test positivos
 	
@@ -45,14 +46,16 @@ public class FacturaServiceTest {
 	
 
 	@Test
+	@Transactional
 	public void testSaveFactura() {
 		Factura facturaNew = new Factura();
 		facturaNew.setFecha(LocalDate.now());
 		facturaNew.setPrecio_total(50.0);
-		facturaNew.setProveedor(proveedorService.findProveedorById(2).get());	
+		facturaNew.setProveedor(proveedorService.findProveedorById(2).get());
+//		
 		Pedido ped = new Pedido();
 		ped.setFechaPedido(LocalDate.now());
-		
+		pedidoService.save(ped);
 		facturaNew.setPedido(ped);;
 
 		facturaService.save(facturaNew);
@@ -61,11 +64,32 @@ public class FacturaServiceTest {
 		
 		assertEquals(4, cantidad);
 	}
-
 	
+	
+
+	@Test
+	public void testFindAllFacturasByProveedor() {
+		Integer cant= 0;
+		Iterator<Factura> facturasIT = facturaService.findFacturaByProveedorName("Lejias").iterator();
+		while(facturasIT.hasNext()) {
+			cant++;
+		}
+		assertEquals(2, cant);
+	}
 	
 	@Test
-	public void testFindAllteFacturaById() {
+	public void testFindAllFacturasByProveedor() {
+		Integer cant= 0;
+		Iterator<Factura> facturasIT = facturaService.findFacturaByProveedorName("Lejias").iterator();
+		while(facturasIT.hasNext()) {
+			cant++;
+		}
+		assertEquals(2, cant);
+	}
+	
+	@Test
+	@Transactional
+	public void deleteFacturaById() {
 		facturaService.deleteById(1);
 		assertEquals(false, facturaService.findFacturaById(1).isPresent());
 	}
@@ -80,7 +104,7 @@ public class FacturaServiceTest {
 	
 //	@Test
 //	public void testNotFindAllFacturasByProveedor() {
-//		Iterable<Factura> facturaFind = facturaService.findFacturasByProveedorId(50);
+//		Iterable<Factura> facturaFind = facturaService.findFacturaByProveedorId(50);
 //		Iterator<Factura> iterador = facturaFind.iterator();
 //		int cont = 0;
 //		while(iterador.hasNext()) cont++;

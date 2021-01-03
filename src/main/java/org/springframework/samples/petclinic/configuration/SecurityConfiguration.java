@@ -36,39 +36,39 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 				.antMatchers("/resources/**","/webjars/**","/h2-console/**").permitAll()
 				.antMatchers(HttpMethod.GET, "/","/oups").permitAll()
 				.antMatchers("/users/new").permitAll()
-				.antMatchers("/clientes").permitAll()
+				
 				.antMatchers("/clientes/**").permitAll()
-				.antMatchers("/reclamaciones").permitAll()
+				
 				.antMatchers("/reclamaciones/**").permitAll()
-				.antMatchers("/registroHoras").permitAll()
+				
 				.antMatchers("/registroHoras/**").permitAll()
-				.antMatchers("/administradores").permitAll()
+				
 				.antMatchers("/administradores/**").permitAll()
-				.antMatchers("/instalaciones").permitAll()
+				
 				.antMatchers("/instalaciones/**").permitAll()
-				.antMatchers("/horarios").permitAll()
+				
 				.antMatchers("/horarios/**").permitAll()
-				.antMatchers("/contratosServicios").permitAll()
+				
 				.antMatchers("/contratosServicios/**").permitAll()
-				.antMatchers("/curriculums").permitAll()
+				
 				.antMatchers("/curriculums/**").permitAll()
-				.antMatchers("/proveedores").permitAll()
+				
 				.antMatchers("/proveedores/**").permitAll()
-				.antMatchers("/contacto").permitAll()
+
 				.antMatchers("/contacto/**").permitAll()
-				.antMatchers("/facturas").permitAll()
+
 				.antMatchers("/facturas/**").permitAll()
-				.antMatchers("/ofertas").permitAll()
+
 				.antMatchers("/ofertas/**").permitAll()
-				.antMatchers("/productos").permitAll()
+
 				.antMatchers("/productos/**").permitAll()
-				.antMatchers("/trabajadores").permitAll()
+
 				.antMatchers("/trabajadores/**").permitAll()
-				.antMatchers("/contratosTrabajadores").permitAll()
+
 				.antMatchers("/contratosTrabajadores/**").permitAll()
-				.antMatchers("/servicios").permitAll()
+
 				.antMatchers("/servicios/**").permitAll()
-				.antMatchers("/presupuestos").permitAll()
+
 				.antMatchers("/presupuestos/**").permitAll()
 				.antMatchers("/admin/**").hasAnyAuthority("admin")
 				.antMatchers("/owners/**").hasAnyAuthority("owner","admin")				

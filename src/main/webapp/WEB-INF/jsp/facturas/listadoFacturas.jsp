@@ -11,13 +11,12 @@
     <h2>Facturas</h2>
     
     <h3> Filtrar proveedor: </h3>
-    <form action="/facturas/filtrado/{nameProv}"> 
-    	<input type="text"> 
+    
+    
+    
+    <form action="/facturas/filtrado"> 
+    	<input type="text" name="nameProv" value="${filtrado}"> 
     	<button type="submit"> Filtrar </button>
-    	<spring:url value="/facturas/filtrado/{nameProv}" var="facturaUrl">
-              <spring:param name="nameProv" value="${cliente.id}"/>
-        </spring:url>
-        <a href="${fn:escapeXml(clienteUrl)}">Delete</a>
     </form>
 
     <table id="facturasTable" class="table table-striped">
@@ -32,8 +31,10 @@
         </tr>
         </thead>
         <tbody>
-        <c:forEach items="${facturas}" var="factura">
-            <tr>
+        <c:choose> 
+		    <c:when test="${filtrado != null}"> 
+		    	<c:forEach items="${facturasFiltradas}" var="factura">
+		    	<tr>
                 <td>
                     <c:out value="${factura.fecha}"/>
                 </td>
@@ -54,7 +55,35 @@
                 	<a href="${fn:escapeXml(facturaUrl)}">Delete</a>
                 </td>
             </tr>
-        </c:forEach>
+       		</c:forEach>
+		    </c:when> 
+		    <c:otherwise> 
+		    	<c:forEach items="${facturas}" var="factura"> 
+		    	<tr>
+                <td>
+                    <c:out value="${factura.fecha}"/>
+                </td>
+                <td>
+                    <c:out value="${factura.precio_total}"/>
+                </td>
+                <td>
+                    <c:out value="${factura.proveedor.name}"/>
+                </td>
+                <td>
+                    <c:out value="${factura.pedido.id}"/>
+                </td>
+                
+                <td>
+                	<spring:url value="/facturas/delete/{facturaId}" var="facturaUrl">
+                		<spring:param name="facturaId" value="${factura.id}"/>
+                	</spring:url>
+                	<a href="${fn:escapeXml(facturaUrl)}">Delete</a>
+                </td>
+            </tr>
+       		</c:forEach>
+		    </c:otherwise> 
+			</c:choose> 
+            
         </tbody>
     </table>
 </petclinic:layout>
