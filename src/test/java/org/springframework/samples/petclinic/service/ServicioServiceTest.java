@@ -3,7 +3,6 @@ package org.springframework.samples.petclinic.service;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-
 import java.time.LocalDate;
 import java.util.NoSuchElementException;
 import java.util.Optional;
@@ -14,7 +13,6 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.samples.petclinic.model.EstadoServicio;
 import org.springframework.samples.petclinic.model.Servicio;
 import org.springframework.samples.petclinic.model.TipoCategoria;
-import org.springframework.samples.petclinic.model.Trabajador;
 import org.springframework.stereotype.Service;
 
 @DataJpaTest(includeFilters = @ComponentScan.Filter(Service.class))
@@ -23,10 +21,12 @@ public class ServicioServiceTest {
 	@Autowired
 	private ServicioService servicioService;
 	
+	//Test positivos
+	
 	@Test
 	public void testCountWithInitialData() {
 		int count = servicioService.servicioCount();
-		assertEquals(count, 1);
+		assertEquals(count, 5);
 	}
 	
 	@Test
@@ -41,7 +41,7 @@ public class ServicioServiceTest {
 		servicioService.save(ser1);
 		int count = servicioService.servicioCount();
 		//Assert
-		assertEquals(count, 2);
+		assertEquals(count, 6);
 		
 	}
 	
@@ -52,18 +52,21 @@ public class ServicioServiceTest {
 		//Act
 		Optional<Servicio> ser1 = servicioService.findServicioById(id);
 		//Assert
-		assertNotNull(ser1.get());
+		assertNotNull(ser1);
 	}
 	
 	@Test
-	public void testGetServiceByIdNotFound() {
+	public void testGetServicesByCliente() {
 		//Arrange
-		int id = 65;
+		int id = 1;
 		//Act
-		Optional<Servicio> ser1 = servicioService.findServicioById(id);
+		Iterable<Servicio> ser1 = servicioService.serviciosByCliente(id);
 		//Assert
-		assertThrows(NoSuchElementException.class, () -> {ser1.get();});
+		assertNotNull(ser1);
+		//assertNotNull(ser1);
 	}
+	
+	
 	
 	@Test
 	public void testDeleteServicio() {
@@ -90,4 +93,15 @@ public class ServicioServiceTest {
 		
 	}
 	
+	//Test negativos
+	
+	@Test
+	public void testGetServiceByIdNotFound() {
+		//Arrange
+		int id = 65;
+		//Act
+		Optional<Servicio> ser1 = servicioService.findServicioById(id);
+		//Assert
+		assertThrows(NoSuchElementException.class, () -> {ser1.get();});
+	}
 }

@@ -4,8 +4,10 @@ import java.util.Optional;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.samples.petclinic.model.Administrador;
+import org.springframework.samples.petclinic.model.Reclamacion;
 import org.springframework.samples.petclinic.service.AdministradorService;
 import org.springframework.samples.petclinic.service.ContratoServicioService;
+import org.springframework.samples.petclinic.service.ReclamacionService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -22,12 +24,22 @@ public class AdministradorController {
 	private AdministradorService adminService;
 	@Autowired
 	private ContratoServicioService contratoServicioService;
+	@Autowired
+	private ReclamacionService reclamacionService;
 	
 	@GetMapping()
 	public String listadoAdmin(ModelMap modelMap) {
 		String vista ="administradores/listadoAdmin";
 		Iterable<Administrador> administrador = adminService.findAll();
 		modelMap.addAttribute("administrador", administrador);
+		return vista;
+	}
+	
+	@GetMapping(path = "/reclamaciones")
+	public String listadoReclamaciones(ModelMap modelMap) {
+		String vista ="administradores/listadoReclamaciones";
+		Iterable<Reclamacion> reclamaciones = reclamacionService.findAll();
+		modelMap.addAttribute("reclamacion", reclamaciones);
 		return vista;
 	}
 	
