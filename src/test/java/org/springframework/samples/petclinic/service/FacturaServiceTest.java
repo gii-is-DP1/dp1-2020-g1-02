@@ -17,6 +17,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.samples.petclinic.model.Factura;
 import org.springframework.samples.petclinic.model.Pedido;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 
 @DataJpaTest(includeFilters = @ComponentScan.Filter(Service.class))
@@ -26,8 +27,8 @@ public class FacturaServiceTest {
 	private FacturaService facturaService;
 	@Autowired
 	private ProveedorService proveedorService;
-//	@Autowired
-//	private PedidoSerice pedidoService;
+	@Autowired
+	private PedidoService pedidoService;
 	
 	//Test positivos
 	
@@ -45,6 +46,7 @@ public class FacturaServiceTest {
 	
 
 	@Test
+	@Transactional
 	public void testSaveFactura() {
 		Factura facturaNew = new Factura();
 		facturaNew.setFecha(LocalDate.now());
@@ -53,7 +55,7 @@ public class FacturaServiceTest {
 //		
 		Pedido ped = new Pedido();
 		ped.setFechaPedido(LocalDate.now());
-		
+		pedidoService.save(ped);
 		facturaNew.setPedido(ped);;
 
 		facturaService.save(facturaNew);
@@ -75,6 +77,7 @@ public class FacturaServiceTest {
 	}
 	
 	@Test
+	@Transactional
 	public void deleteFacturaById() {
 		facturaService.deleteById(1);
 		assertEquals(false, facturaService.findFacturaById(1).isPresent());
