@@ -7,15 +7,16 @@ import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
 @Entity
+@Getter
+@Setter
 @Table(name = "reclamacion")
 public class Reclamacion extends BaseEntity {
 
@@ -25,7 +26,7 @@ public class Reclamacion extends BaseEntity {
 	private LocalDate fecha;
 	
 	@Column(name = "descripcion")
-	@NotEmpty
+	@NotNull
 	private String descripcion;
 	
 	@ManyToOne

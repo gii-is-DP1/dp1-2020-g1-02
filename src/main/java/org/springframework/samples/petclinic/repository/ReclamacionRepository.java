@@ -7,8 +7,8 @@ import org.springframework.samples.petclinic.model.Reclamacion;
 	
 public interface ReclamacionRepository extends CrudRepository<Reclamacion, Integer> {
 	
-	@Query("SELECT r FROM Reclamacion r WHERE r.servicio.name = ?1")
-	Iterable<Reclamacion> findReclamacionesByServicioId(String nameServ);
+//	@Query("SELECT r FROM Reclamacion r WHERE r.servicio.name = ?1")
+//	Iterable<Reclamacion> findReclamacionesByServicioId(String nameServ);
 }
 
 

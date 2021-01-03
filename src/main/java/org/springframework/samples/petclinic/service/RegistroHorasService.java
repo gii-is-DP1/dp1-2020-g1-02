@@ -36,8 +36,8 @@ public class RegistroHorasService {
 		deleteRegistroHoras(registroHorasBorrar);
 	}
 
-	public Iterable<RegistroHoras> findRegistroHorasByTrabajadorId(String name) {
-		return registroHorasRepo.findRegistroHorasByTrabajadorId(name);
+	public Iterable<RegistroHoras> findRegistroHorasByTrabajadorId(String nombre) {
+		return registroHorasRepo.findRegistroHorasByTrabajadorId(nombre);
 	}
 	
 	

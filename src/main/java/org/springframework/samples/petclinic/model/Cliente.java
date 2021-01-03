@@ -1,19 +1,24 @@
 package org.springframework.samples.petclinic.model;
 
 import java.util.Set;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
+@Getter
+@Setter
 @Entity
 @Table(name="cliente")
 public class Cliente extends PersonaEntity {
 	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy="cliente")
-//  @JoinColumn(name="cliente_id")
     private Set<Instalacion> instalaciones;
+	
+	@OneToMany(cascade=CascadeType.ALL, mappedBy="cliente")
+    private Set<Servicio> servicios;
 }

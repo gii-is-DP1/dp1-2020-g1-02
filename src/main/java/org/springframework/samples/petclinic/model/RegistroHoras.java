@@ -3,25 +3,35 @@ package org.springframework.samples.petclinic.model;
 import java.time.LocalDateTime;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.validation.constraints.NotEmpty;
+import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-public class RegistroHoras {
-	
-	@Column(name="horaEntrada")
-    @DateTimeFormat(pattern = "yyyy/MM/dd HH:mm")
-    @NotEmpty
-    private LocalDateTime horaEntrada;
+import lombok.Getter;
+import lombok.Setter;
 
-    @Column(name="horaSalida")
+@Entity
+@Getter
+@Setter
+@Table(name="registro_horas")
+public class RegistroHoras extends BaseEntity {
+	
+	@Column(name="hora_entrada")
     @DateTimeFormat(pattern = "yyyy/MM/dd HH:mm")
-    @NotEmpty
-    private LocalDateTime horaSalida;
+    @NotNull
+    private LocalDateTime hora_entrada;
+
+    @Column(name="hora_salida")
+    @DateTimeFormat(pattern = "yyyy/MM/dd HH:mm")
+    @NotNull
+    private LocalDateTime hora_salida;
     
     @ManyToOne
-    //@JoinColumn(name="trabajador_id")
+    @JoinColumn(name="trabajador_id")
     private Trabajador trabajador;
 
 }

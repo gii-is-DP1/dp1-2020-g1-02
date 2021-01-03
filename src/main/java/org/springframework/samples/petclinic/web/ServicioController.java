@@ -4,11 +4,13 @@ import java.util.Optional;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.samples.petclinic.model.Servicio;
+import org.springframework.samples.petclinic.model.Trabajador;
 import org.springframework.samples.petclinic.service.ServicioService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -60,6 +62,22 @@ public class ServicioController {
 		Optional<Servicio> s= servicioService.findServicioById(id);
 		servicioService.aceptar(s.get());
 		return view;
+	}
+	
+	@PostMapping(path="/rechazar")
+	public String rechazarServicio(Integer id, ModelMap modelMap) {
+		String view="redirect:/servicios";
+		Optional<Servicio> s= servicioService.findServicioById(id);
+		servicioService.rechazar(s.get());
+		return view;
+	}
+	
+	@GetMapping(value = "/{clienteId}")
+	public String listadoServiciosPorClienteId(@PathVariable("clienteId") int clienteId, ModelMap modelMap) {
+		String vista = "servicios/listadoServiciosPorCliente";
+		Iterable<Servicio> servicios = servicioService.serviciosByCliente(clienteId);
+		modelMap.addAttribute("servicios", servicios);
+		return vista;
 	}
 
 }

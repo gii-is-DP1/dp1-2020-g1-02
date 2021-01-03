@@ -9,7 +9,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <petclinic:layout pageName="servicios">
-    <h2>Servicios</h2>
+    <h2>Servicios por ID CLIENTE</h2>
 	
 	
     <table id="eventsTable" class="table table-striped">
@@ -44,40 +44,6 @@
                 <td>
                     <c:out value="${servicio.estado}"/>
                 </td>
-        
-                <td>
-                	<spring:url value="/servicios/delete/{servicioId}" var="servicioUrl">
-                		<spring:param name="servicioId" value="${servicio.id}"/>
-                	</spring:url>
-                	<a href="${fn:escapeXml(servicioUrl)}">Delete</a>
-                </td>
-               
-               <!--    ACEPTAR RECHAZAR SERVICIO   -->
-               
-                <td>
-               	 	<form:form modelAttribute="servicio" class="form-horizontal" action="/servicios/aceptar">
-       						<input type="hidden" id="id" name="id" value=' <c:out value="${servicio.id}"/>'>
-       						<button type="submit">Aceptar solicitud</button>
-       				</form:form>
-       			 </td>
-         		
-         		
-         		<td>
-               	 	<form:form modelAttribute="servicio" class="form-horizontal" action="/servicios/rechazar">
-       						<input type="hidden" id="id" name="id" value=' <c:out value="${servicio.id}"/>'>
-       						<button type="submit">Rechazar solicitud</button>
-       				</form:form>
-       			 </td>
-       			 
-       			 
-                <!-- AÑADIR BOTON PARA CREAR PRESUPUESTO  -->
-                
-                <td>
-               	 	<form:form modelAttribute="presupuesto" class="form-horizontal" action="/presupuestos/new">
-       						<input type="hidden" id="sId" name="sId" value=' <c:out value="${servicio.id}"/>'>
-       						<button type="submit">Enviar presupuesto</button>
-       				</form:form>
-       			 </td>
             </tr>
         </c:forEach>
         </tbody>
