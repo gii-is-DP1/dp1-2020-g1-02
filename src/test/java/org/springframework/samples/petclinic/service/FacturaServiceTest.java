@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 import java.time.LocalDate;
-
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.Optional;
 
@@ -69,12 +69,8 @@ public class FacturaServiceTest {
 
 	@Test
 	public void testFindAllFacturasByProveedor() {
-		Integer cant= 0;
-		Iterator<Factura> facturasIT = facturaService.findFacturaByProveedorName("Lejias").iterator();
-		while(facturasIT.hasNext()) {
-			cant++;
-		}
-		assertEquals(2, cant);
+		Collection<Factura> facturasIT = facturaService.findFacturaByProveedorName("Lejias");
+		assertEquals(2, facturasIT.size());
 	}
 	
 	@Test

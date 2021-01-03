@@ -2,6 +2,7 @@ package org.springframework.samples.petclinic.service;
 
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
@@ -43,7 +44,7 @@ public class FacturaService {
 		deleteFactura(facturaBorrar);
 	}
 
-	public Iterable<Factura> findFacturaByProveedorName(String name) {
+	public Collection<Factura> findFacturaByProveedorName(String name) {
 		return facturaRepo.findFacturasByProveedorName(name);
 	}
 	
