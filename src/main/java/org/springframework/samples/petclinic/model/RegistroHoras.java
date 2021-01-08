@@ -31,7 +31,7 @@ public class RegistroHoras extends BaseEntity {
     private LocalDateTime hora_salida;
     
     @ManyToOne
-    @JoinColumn(name="trabajador_id")
+    @JoinColumn(name="trabajador")
     private Trabajador trabajador;
 
 }

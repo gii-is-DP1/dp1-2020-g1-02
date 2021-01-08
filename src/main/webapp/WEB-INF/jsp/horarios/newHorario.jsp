@@ -12,9 +12,9 @@
     </h2>
     <form:form modelAttribute="horario" class="form-horizontal" id="add-cliente-form" action="/horarios/save">
         <div class="form-group has-feedback">
-       	    <input type="hidden" id="id" name="id" value=' <c:out value="${trabajador.id}"/>'>
-            <petclinic:inputField label="HoraInicio" name="horaInicio"/>
-            <petclinic:inputField label="HoraFin" name="horaFin"/>
+       	    <input type="hidden" id="id" name="id" value=' <c:out value="${trabajador.nombre}"/>'>
+            <petclinic:inputField label="HoraInicio" name="hora_inicio"/>
+            <petclinic:inputField label="HoraFin" name="hora_fin"/>
             <petclinic:inputField label="Descripcion" name="descripcion"/>
         </div>
         <div class="form-group">

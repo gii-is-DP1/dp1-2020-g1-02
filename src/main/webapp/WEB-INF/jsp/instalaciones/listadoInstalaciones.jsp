@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@ page session="false" trimDirectiveWhitespaces="true" %>
@@ -20,7 +20,7 @@
     <table id="instalacionesTable" class="table table-striped">
         <thead>
         <tr>
-        	<th style="width: 150px;">ID_CLIENTE</th>
+        	<th style="width: 150px;">NOMBRE_CLIENTE</th>
             <th style="width: 150px;">LUGAR</th>
             <th style="width: 150px;">DIMENSION</th>
         </tr>
@@ -29,7 +29,7 @@
         <c:forEach items="${instalaciones}" var="instalacion">
             <tr>
             	<td>
-                    <c:out value="${cliente.id}"/>
+                    <c:out value="${instalacion.cliente.nombre}"/>
                 </td>
                 <td>
                     <c:out value="${instalacion.lugar}"/>

@@ -7,10 +7,10 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="petclinic" tagdir="/WEB-INF/tags" %>
 
-<petclinic:layout pageName="registroHoras">
+<petclinic:layout pageName="registro_horas">
     <h2>Registro de Horas</h2>
 
-    <table id="registroHorastable" class="table table-striped">
+    <table id="registro_horastable" class="table table-striped">
         <thead>
         <tr>
             <th style="width: 150px;">Hora Entrada</th>
@@ -19,20 +19,20 @@
         </tr>
         </thead>
         <tbody>
-        <c:forEach items="${registroHoras}" var="registroHoras">
+        <c:forEach items="${registro_horas}" var="registro_horas">
             <tr>
                 <td>
-                    <c:out value="${registroHoras.horaEntrada}"/>
+                    <c:out value="${registro_horas.horaEntrada}"/>
                 </td>
                 <td>
-                    <c:out value="${registroHoras.horaSalidas}"/>
+                    <c:out value="${registro_horas.horaSalidas}"/>
                 </td>
                  <td>
-                    <c:out value="${registroHoras.trabajador.name}"/>
+                    <c:out value="${registro_horas.trabajador.name}"/>
                 </td>
                 <td>
-                	<spring:url value="/reclamaciones/delete/{reclamacionId}" var="registroHorasUrl">
-                		<spring:param name="registroHorasId" value="${registroHoras.id}"/>
+                	<spring:url value="/registroHoras/delete/{registroHorasId}" var="registroHorasUrl">
+                		<spring:param name="registroHorasId" value="${registro_horas.id}"/>
                 	</spring:url>
                 	<a href="${fn:escapeXml(registroHorasUrl)}">Delete</a>
                 </td>

@@ -35,9 +35,8 @@ public class InstalacionService {
 		return instalacionRepo.findById(instalacionId);
 	}
 	
-	public Iterable<Instalacion> findInstalacionesByClienteId(String name) {
-		return null;
-		//return instalacionRepo.findInstalacionesByClienteId(name);
+	public Iterable<Instalacion> findInstalacionesByClienteName(String name) {
+		return instalacionRepo.findInstalacionesByClienteName(name);
 	}
 	
 	public void deleteById(Integer id) {

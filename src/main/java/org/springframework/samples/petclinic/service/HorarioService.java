@@ -35,9 +35,8 @@ public class HorarioService {
 		return horarioRepo.findById(horarioId);
 	}
 	
-	public Iterable<Horario> findHorarioByTrabajadorId(String name) {
-		return null;
-		//return horarioRepo.findHorarioByTrabajadorId(name);
+	public Iterable<Horario> findHorarioByTrabajadorName(String name) {
+		return horarioRepo.findHorariosByTrabajadorName(name);
 	}
 	
 	public void deleteById(Integer id) {

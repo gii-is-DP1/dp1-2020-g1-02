@@ -12,7 +12,7 @@
     </h2>
     <form:form modelAttribute="instalacion" class="form-horizontal" id="add-cliente-form" action="/instalaciones/save">
         <div class="form-group has-feedback">
-       	    <input type="hidden" id="id" name="id" value=' <c:out value="${cliente.id}"/>'>
+       	    <input type="hidden" id="id" name="id" value=' <c:out value="${cliente.nombre}"/>'>
             <petclinic:inputField label="Lugar" name="lugar"/>
             <petclinic:inputField label="Dimension" name="dimension"/>
         </div>

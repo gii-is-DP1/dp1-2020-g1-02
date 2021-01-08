@@ -1,22 +1,22 @@
 INSERT INTO trabajador(id,nombre,apellidos,dni,telefono, direccion, correo, tipocategoria) VALUES (1,'Carlos Jesus', 'Villadiego', '78461836B','666888888','C/Garcia Marquez n2', 'calvirgar@alum.us.es', 0);
 INSERT INTO trabajador(id,nombre,apellidos,dni,telefono, direccion, correo, tipocategoria) VALUES (2,'Carlos Jesus2', 'Villadiego', '78461836B','666888888','C/Garcia Marquez n2', 'calvirgar@alum.us.es', 2);
 
-INSERT INTO horario(hora_inicio, hora_fin, descripcion) VALUES ('2020-12-10 12:00', '2020-12-10 15:00', 'Limpiar en Acuario de Sevilla');
-INSERT INTO horario(hora_inicio, hora_fin, descripcion) VALUES ('2020-01-31 17:30', '2020-01-31 20:30', 'Limpiar en Hostal San Jerónimo (Sevilla)');
+INSERT INTO horario(hora_inicio, hora_fin, trabajador, descripcion) VALUES ('2020-12-10 12:00', '2020-12-10 15:00', 1, 'Limpiar en Acuario de Sevilla');
+INSERT INTO horario(hora_inicio, hora_fin, trabajador, descripcion) VALUES ('2020-01-31 17:30', '2020-01-31 20:30', 2, 'Limpiar en Hostal San Jerónimo (Sevilla)');
 
-INSERT INTO registro_horas(hora_entrada, hora_salida) VALUES ('2019-06-16 11:00', '2019-06-16 14:00');
-INSERT INTO registro_horas(hora_entrada, hora_salida) VALUES ('2019-08-16 19:00', '2019-08-16 23:00');
-
-INSERT INTO instalacion(lugar, dimension) VALUES ('Calle Águila Piso 1ºB','20.3');
-INSERT INTO instalacion(lugar, dimension) VALUES ('Calle Betis Piso 1ºD','17.7');
-INSERT INTO instalacion(lugar, dimension) VALUES ('Calle Albania', '130.0');
+INSERT INTO registro_horas(hora_entrada, hora_salida, trabajador) VALUES ('2019-06-16 11:00', '2019-06-16 14:00', 1);
+INSERT INTO registro_horas(hora_entrada, hora_salida, trabajador) VALUES ('2019-08-16 19:00', '2019-08-16 23:00', 2);
 
 INSERT INTO contratoTrabajador(id,fechainicial,fechafinal,trabajador_id,sueldo) VALUES (1, '2010-01-01', '2019-12-31', 1, 1200.0);
 INSERT INTO contratoTrabajador(id,fechainicial,fechafinal,trabajador_id,sueldo) VALUES (2, '2010-01-01', '2019-12-31', 1, 1200.0);
 
-INSERT INTO cliente(nombre,apellidos,telefono,direccion,dni,correo) VALUES ('Jesus', 'Garcia', '644586245', 'Calle Cristie', '33445566P', 'jesus@gmail.com');
-INSERT INTO cliente(nombre,apellidos,telefono,direccion,dni,correo) VALUES ('Ruben', 'Bueno', '655788999', 'Calle Misco', '11223344T', 'ruben@gmail.com');
-INSERT INTO cliente(nombre,apellidos,telefono,direccion,dni,correo) VALUES ('Manolito', 'Pies de Plata', '624586245', 'Calle Agata', '25673519P', 'manolito@gmail.com');
+INSERT INTO cliente(id, nombre,apellidos,telefono,direccion,dni,correo) VALUES (1, 'Jesus', 'Garcia', '644586245', 'Calle Cristie', '33445566P', 'jesus@gmail.com');
+INSERT INTO cliente(id, nombre,apellidos,telefono,direccion,dni,correo) VALUES (2, 'Ruben', 'Bueno', '655788999', 'Calle Misco', '11223344T', 'ruben@gmail.com');
+INSERT INTO cliente(id, nombre,apellidos,telefono,direccion,dni,correo) VALUES (3, 'Manolito', 'Pies de Plata', '624586245', 'Calle Agata', '25673519P', 'manolito@gmail.com');
+
+INSERT INTO instalacion(lugar, dimension, cliente) VALUES ('Calle Águila Piso 1ºB','20.3', 1);
+INSERT INTO instalacion(lugar, dimension, cliente) VALUES ('Calle Betis Piso 1ºD','17.7', 2);
+INSERT INTO instalacion(lugar, dimension, cliente) VALUES ('Calle Albania', '130.0', 3);
 
 INSERT INTO proveedor(name,telefono,email,direccion) VALUES ('Lejias SL', '645681128', 'lejiassl@gmail.com', 'Calle Reina 14, Sevilla'); 
 INSERT INTO proveedor(name,telefono,email,direccion) VALUES ('Jabones SA', '645681127', 'jabonessa@gmail.com', 'Calle Mercedes 14, Madrid'); 
