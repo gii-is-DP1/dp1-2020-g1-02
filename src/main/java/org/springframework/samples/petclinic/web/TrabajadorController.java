@@ -6,6 +6,8 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.samples.petclinic.model.Trabajador;
+import org.springframework.samples.petclinic.service.HorarioService;
+import org.springframework.samples.petclinic.service.InstalacionService;
 import org.springframework.samples.petclinic.service.RegistroHorasService;
 import org.springframework.samples.petclinic.service.TrabajadorService;
 import org.springframework.stereotype.Controller;
@@ -24,6 +26,10 @@ public class TrabajadorController {
 	private TrabajadorService trabajadorService;
 	@Autowired
 	private RegistroHorasService registroHorasService;
+	@Autowired
+	private HorarioService horarioService;
+	@Autowired
+	private InstalacionService instalacionService;
 	
 	@GetMapping()
 	public String listadoTrabajadores(ModelMap modelMap) {
@@ -80,6 +86,30 @@ public class TrabajadorController {
 	public String filtradoFactura(@PathVariable("nameTrabajador") String nameTrabajador,ModelMap modelMap) {
 		String view="redirect:/registroHoras";
 		modelMap.addAttribute("registroHoras", registroHorasService.findRegistroHorasByTrabajadorId(nameTrabajador));
+		return view;
+	}
+	
+//	@GetMapping(path="/{trabajadorId}")
+//	public String listadoHorariosDeUnTrabajador(ModelMap modelMap, Trabajador trabajador) {
+//		String vista ="trabajadores/listadoJornadaLaboral";
+//		Iterable<Horario> horarios = horarioService.findHorarioByTrabajadorName(trabajador.getNombre());
+//		modelMap.addAttribute("horario", horarios);
+//		return vista;
+//	}
+	
+	@GetMapping(path="/horariosTrabajador")
+	public String horariosTrabajador(String nombreTrab, ModelMap modelMap) {
+		String view="horarios/listadoHorarios";
+		modelMap.addAttribute("horariosTrabajador", nombreTrab);
+		modelMap.addAttribute("horarios", horarioService.findHorarioByTrabajadorName(nombreTrab));
+		return view;
+	}
+	
+	@GetMapping(path="/instalacionesCliente")
+	public String instalacionesCliente(ModelMap modelMap, String nombreCli) {
+		String view="trabajadores/listadoTrabajadores";
+		modelMap.addAttribute("instalacionesCliente", nombreCli);
+		modelMap.addAttribute("instalaciones", instalacionService.findInstalacionesByClienteName(nombreCli));
 		return view;
 	}
 }

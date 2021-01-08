@@ -19,6 +19,7 @@
             <th>Direccion</th>
             <th>Dni</th>
             <th>Correo</th>
+            <th style="width: 150px;">Instalaciones</th>  
         </tr>
         </thead>
         <tbody>
@@ -42,6 +43,11 @@
                  <td>
                     <c:out value="${cliente.correo}"/>
                 </td>
+                <td>
+                	<c:forEach var="instalacion" items="${cliente.instalaciones}">
+                			<c:out value="${instalacion.id}"/>
+                  	</c:forEach> 
+                </td> 
                 <td>
                 	<spring:url value="/clientes/delete/{clienteId}" var="clienteUrl">
                 		<spring:param name="clienteId" value="${cliente.id}"/>
