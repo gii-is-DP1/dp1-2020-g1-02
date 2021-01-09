@@ -73,10 +73,14 @@
                 <!-- AÑADIR BOTON PARA CREAR PRESUPUESTO  -->
                 
                 <td>
-               	 	<form:form modelAttribute="presupuesto" class="form-horizontal" action="/presupuestos/new">
+               	 	<%-- <form:form modelAttribute="presupuesto" class="form-horizontal" action="/presupuestos/new">
        						<input type="hidden" id="sId" name="sId" value=' <c:out value="${servicio.id}"/>'>
        						<button type="submit">Enviar presupuesto</button>
-       				</form:form>
+       				</form:form> --%>
+       				<spring:url value="presupuestos/new/{sId}" var="addUrl">
+      				  <spring:param name="sId" value="${servicio.id}"/>
+   					 </spring:url>
+   					 <a href="${fn:escapeXml(addUrl)}" class="btn btn-default">Enviar presupuesto</a>
        			 </td>
             </tr>
         </c:forEach>

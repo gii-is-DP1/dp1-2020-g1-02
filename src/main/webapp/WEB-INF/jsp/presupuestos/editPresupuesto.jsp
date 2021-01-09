@@ -10,10 +10,10 @@
     </jsp:attribute>
     <jsp:body>
        <h2>Presupuesto</h2>
-       <form:form modelAttribute="presupuesto" class="form-horizontal" action="/presupuestos/save">
+       <form:form modelAttribute="presupuesto">
        		<div class="form-group has-feedback">
-       			<input type="hidden" id="id" name="id" value=' <c:out value="${presupuesto.id}"/>'>
-       			<input type="hidden" name="servicio_id" value='<c:out value="${sId}"/>'/> 
+       			
+       		<%-- 	<input type="hidden" name="servicio_id" value='<c:out value="${sId}"/>'/>  --%>
        			<petclinic:inputField label="precio" name="precio"/>
        			
        			<label for="tipopresupuesto">Tipo de Presupuesto</label>
