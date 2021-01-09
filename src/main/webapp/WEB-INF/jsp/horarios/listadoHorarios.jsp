@@ -20,23 +20,23 @@
     <table id="horariosTable" class="table table-striped">
         <thead>
         <tr>
-        	<th style="width: 150px;">NOMBRE_TRABAJADOR</th>
             <th style="width: 150px;">HORA_INICIO</th>
             <th style="width: 150px;">HORA_FIN</th>
+            <th style="width: 150px;">ID_TRABAJADOR</th>
             <th style="width: 150px;">DESCRIPCION</th>
         </tr>
         </thead>
         <tbody>
         <c:forEach items="${horarios}" var="horario">
             <tr>
-            	<td>
-                    <c:out value="${horario.trabajador.nombre}"/>
+                <td>
+                    <c:out value="${horario.hora_inicio}"/>
                 </td>
                 <td>
-                    <c:out value="${horario.horaInicio}"/>
+                    <c:out value="${horario.hora_fin}"/>
                 </td>
                 <td>
-                    <c:out value="${horario.horaFin}"/>
+                    <c:out value="${horario.trabajador.id}"/>
                 </td>
                 <td>
                     <c:out value="${horario.descripcion}"/>

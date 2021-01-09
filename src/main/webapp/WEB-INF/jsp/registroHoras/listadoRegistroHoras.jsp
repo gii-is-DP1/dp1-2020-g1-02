@@ -15,20 +15,20 @@
         <tr>
             <th style="width: 150px;">Hora Entrada</th>
             <th style="width: 200px;">Hora Salida</th>
-            <th style="width: 200px;">Nombre del Trabajador</th>
+            <th style="width: 200px;">ID del Trabajador</th>
         </tr>
         </thead>
         <tbody>
-        <c:forEach items="${registro_horas}" var="registro_horas">
+        <c:forEach items="${registro_horas}" var="registro_hora">
             <tr>
                 <td>
-                    <c:out value="${registro_horas.horaEntrada}"/>
+                    <c:out value="${registro_hora.hora_entrada}"/>
                 </td>
                 <td>
-                    <c:out value="${registro_horas.horaSalidas}"/>
+                    <c:out value="${registro_hora.hora_salida}"/>
                 </td>
                  <td>
-                    <c:out value="${registro_horas.trabajador.name}"/>
+                    <c:out value="${registro_hora.trabajador.id}"/>
                 </td>
                 <td>
                 	<spring:url value="/registroHoras/delete/{registroHorasId}" var="registroHorasUrl">

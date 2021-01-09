@@ -5,6 +5,7 @@ import java.util.Optional;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.samples.petclinic.model.Cliente;
 import org.springframework.samples.petclinic.model.Reclamacion;
 import org.springframework.samples.petclinic.service.ReclamacionService;
 import org.springframework.stereotype.Controller;
@@ -21,6 +22,14 @@ public class ReclamacionController {
 
 	@Autowired
 	private ReclamacionService reclamacionService;
+	
+	@GetMapping()
+	public String listadoReclamaciones(ModelMap modelMap) {
+		String vista ="reclamaciones/listadoReclamaciones";
+		Iterable<Reclamacion> reclamaciones = reclamacionService.findAll();
+		modelMap.addAttribute("reclamaciones", reclamaciones);
+		return vista;
+	}
 	
 	
 	@GetMapping(path="/new")

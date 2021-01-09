@@ -6,7 +6,7 @@
 
 
 <petclinic:layout pageName="reclamaciones">
- <jsp:attribute name="customScript">
+ 	<jsp:attribute name="customScript">
         <script>
             $(function () {
                 $("#fecha").datepicker({dateFormat: 'yy/mm/dd'});
