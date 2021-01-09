@@ -2,6 +2,7 @@ package org.springframework.samples.petclinic.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -25,6 +26,6 @@ public class Instalacion extends BaseEntity {
     private Double dimension;
 	
 	@ManyToOne
-    @JoinColumn(name="cliente")
+    @JoinColumn(name="cliente_id")
     private Cliente cliente;
 }

@@ -17,7 +17,7 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
-@Table(name="registro_horas")
+@Table(name="registro_hora")
 public class RegistroHoras extends BaseEntity {
 	
 	@Column(name="hora_entrada")

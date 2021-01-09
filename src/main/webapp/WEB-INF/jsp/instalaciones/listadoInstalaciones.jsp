@@ -1,4 +1,3 @@
-
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@ page session="false" trimDirectiveWhitespaces="true" %>
@@ -10,27 +9,18 @@
 
 <petclinic:layout pageName="instalaciones">
     <h2>Instalaciones</h2>
-	
-	<a href="instalaciones/new">
-		<button type="button" class="btn btn-default btn-lg">
-  			<span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Nueva Instalacion
-		</button>
-	</a>
-	
+
     <table id="instalacionesTable" class="table table-striped">
         <thead>
         <tr>
-        	<th style="width: 150px;">NOMBRE_CLIENTE</th>
-            <th style="width: 150px;">LUGAR</th>
-            <th style="width: 150px;">DIMENSION</th>
+            <th style="width: 150px;">Lugar</th>
+            <th style="width: 200px;">Dimension</th>
+            <th>ID Cliente</th>
         </tr>
         </thead>
         <tbody>
         <c:forEach items="${instalaciones}" var="instalacion">
             <tr>
-            	<td>
-                    <c:out value="${instalacion.cliente.nombre}"/>
-                </td>
                 <td>
                     <c:out value="${instalacion.lugar}"/>
                 </td>
@@ -38,16 +28,13 @@
                     <c:out value="${instalacion.dimension}"/>
                 </td>
                 <td>
+                    <c:out value="${instalacion.cliente.id}"/>
+                </td>
+                <td>
                 	<spring:url value="/instalaciones/delete/{instalacionId}" var="instalacionUrl">
                 		<spring:param name="instalacionId" value="${instalacion.id}"/>
                 	</spring:url>
                 	<a href="${fn:escapeXml(instalacionUrl)}">Delete</a>
-                </td>
-                <td>
-                	<spring:url value="/instalaciones/{instalacionId}/edit" var="instalacionUrl">
-                		<spring:param name="instalacionId" value="${instalacion.id}"/>
-                	</spring:url>
-                	<a href="${fn:escapeXml(instalacionUrl)}">Editar</a>
                 </td>
             </tr>
         </c:forEach>
