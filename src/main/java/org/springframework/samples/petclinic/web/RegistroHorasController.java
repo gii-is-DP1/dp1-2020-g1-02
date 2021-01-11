@@ -4,7 +4,9 @@ import java.util.Optional;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.samples.petclinic.model.RegistroHoras;
+import org.springframework.samples.petclinic.model.Trabajador;
 import org.springframework.samples.petclinic.service.RegistroHorasService;
+import org.springframework.samples.petclinic.service.TrabajadorService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -20,6 +22,9 @@ public class RegistroHorasController {
 	@Autowired
 	private RegistroHorasService registroHorasService;
 	
+	@Autowired
+	private TrabajadorService trabajadorService;
+	
 	@GetMapping()
 	public String listadoRegistroHoras(ModelMap modelMap) {
 		String vista ="registroHoras/listadoRegistroHoras";
@@ -31,6 +36,8 @@ public class RegistroHorasController {
 	@GetMapping(path="/new")
 	public String crearRegistroHoras(ModelMap modelMap) {
 		String view="registroHoras/newRegistroHoras";
+		Iterable<Trabajador> trabajadores = trabajadorService.findAll();
+		modelMap.addAttribute("trabajadores", trabajadores);
 		modelMap.addAttribute("registro_horas", new RegistroHoras());
 		return view;
 	}

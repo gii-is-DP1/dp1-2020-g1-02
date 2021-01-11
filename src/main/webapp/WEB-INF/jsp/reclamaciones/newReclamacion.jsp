@@ -19,6 +19,24 @@
        		<div class="form-group has-feedback">
        			<petclinic:inputField label="Fecha del Servicio" name="fecha"/>
   				<petclinic:inputField label="Descripcion" name="descripcion"/>
+  				<label for="cliente">ID del Cliente</label>
+  				<select id="cliente" name="cliente">
+  				<c:forEach items="${clientes}" var="cliente">
+		            <tr>
+		                <td>
+		                   <option><c:out value="${cliente.id}"/></option>
+		            </tr>
+		        </c:forEach>
+  				</select>
+  				<label for="servicio">ID del Servicio</label>
+  				<select id="servicio" name="servicio">
+  				<c:forEach items="${servicios}" var="servicio">
+		            <tr>
+		                <td>
+		                   <option><c:out value="${servicio.id}"/></option>
+		            </tr>
+		        </c:forEach>
+  				</select>
        		</div>
             <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-10">

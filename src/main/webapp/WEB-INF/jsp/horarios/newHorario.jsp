@@ -8,11 +8,19 @@
 
 <petclinic:layout pageName="horarios">
     <h2>
-        <c:if test="${horario['new']}">Nuevo </c:if> Horario
+        <c:if test="${horarios['new']}">Nuevo </c:if> Horario
     </h2>
-    <form:form modelAttribute="horario" class="form-horizontal" id="add-cliente-form" action="/horarios/save">
+    <form:form modelAttribute="horarios" class="form-horizontal" id="add-cliente-form" action="/horarios/save">
         <div class="form-group has-feedback">
-       	    <input type="hidden" id="id" name="id" value=' <c:out value="${trabajador.nombre}"/>'>
+       	    <label for="trabajador">ID del trabajador</label>
+  				<select id="trabajador" name="trabajador">
+  				<c:forEach items="${trabajadores}" var="trabajador">
+		            <tr>
+		                <td>
+		                   <option><c:out value="${trabajador.id}"/></option>
+		            </tr>
+		        </c:forEach>
+  				</select>
             <petclinic:inputField label="HoraInicio" name="hora_inicio"/>
             <petclinic:inputField label="HoraFin" name="hora_fin"/>
             <petclinic:inputField label="Descripcion" name="descripcion"/>
@@ -20,7 +28,7 @@
         <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
                 <c:choose>
-                    <c:when test="${horario['new']}">
+                    <c:when test="${horarios['new']}">
                         <button class="btn btn-default" type="submit">Añadir Horario</button>
                     </c:when>
                     <c:otherwise>

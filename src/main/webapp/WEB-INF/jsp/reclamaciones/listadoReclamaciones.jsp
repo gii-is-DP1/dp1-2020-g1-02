@@ -14,7 +14,7 @@
         <thead>
         <tr>
             <th style="width: 150px;">Fecha</th>
-            <th style="width: 200px;">Descripon</th>
+            <th style="width: 200px;">Descripcion</th>
             <th>ID Cliente</th>
             <th>ID Servicio</th> 
         </tr>
