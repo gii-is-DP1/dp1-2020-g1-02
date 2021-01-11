@@ -24,14 +24,14 @@ public class RegistroHorasController {
 	public String listadoRegistroHoras(ModelMap modelMap) {
 		String vista ="registroHoras/listadoRegistroHoras";
 		Iterable<RegistroHoras> registroHoras = registroHorasService.findAll();
-		modelMap.addAttribute("registroHoras", registroHoras);
+		modelMap.addAttribute("registro_horas", registroHoras);
 		return vista;
 	}
 	
 	@GetMapping(path="/new")
 	public String crearRegistroHoras(ModelMap modelMap) {
 		String view="registroHoras/newRegistroHoras";
-		modelMap.addAttribute("registroHoras", new RegistroHoras());
+		modelMap.addAttribute("registro_horas", new RegistroHoras());
 		return view;
 	}
 	
@@ -39,7 +39,7 @@ public class RegistroHorasController {
 	public String salvarRegistroHoras(@Valid RegistroHoras registroHoras, BindingResult result,ModelMap modelMap) {
 		String view="redirect:/registroHoras";
 		if(result.hasErrors()) {
-			modelMap.addAttribute("registroHoras", registroHoras);
+			modelMap.addAttribute("registro_horas", registroHoras);
 			return "registroHoras/newRegistroHoras";
 		}else {
 			registroHorasService.saveRegistroHoras(registroHoras);
