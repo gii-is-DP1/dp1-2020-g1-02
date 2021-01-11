@@ -4,7 +4,9 @@ import java.util.Optional;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.samples.petclinic.model.Horario;
+import org.springframework.samples.petclinic.model.Trabajador;
 import org.springframework.samples.petclinic.service.HorarioService;
+import org.springframework.samples.petclinic.service.TrabajadorService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -20,6 +22,9 @@ public class HorarioController {
 	@Autowired
 	private HorarioService horarioService;
 	
+	@Autowired
+	private TrabajadorService trabajadorService;
+	
 	@GetMapping()
 	public String listadoHorarios(ModelMap modelMap) {
 		String vista ="horarios/listadoHorarios";
@@ -31,6 +36,8 @@ public class HorarioController {
 	@GetMapping(path="/new")
 	public String crearHorario(ModelMap modelMap) {
 		String view="horarios/newHorario";
+		Iterable<Trabajador> trabajadores = trabajadorService.findAll();
+		modelMap.addAttribute("trabajadores", trabajadores);
 		modelMap.addAttribute("horarios", new Horario());
 		return view;
 	}
