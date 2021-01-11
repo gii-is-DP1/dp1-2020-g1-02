@@ -11,8 +11,13 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class ProveedorService {
 	
-	@Autowired
+	
 	private ProveedorRepository proveedorRepo;
+	
+	@Autowired
+	public ProveedorService(ProveedorRepository proveedorRepo) {
+		this.proveedorRepo = proveedorRepo;
+	}
 	
 	@Transactional
 	public int proveedorCount() {
