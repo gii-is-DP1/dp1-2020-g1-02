@@ -24,14 +24,14 @@ public class HorarioController {
 	public String listadoHorarios(ModelMap modelMap) {
 		String vista ="horarios/listadoHorarios";
 		Iterable<Horario> horarios = horarioService.findAll();
-		modelMap.addAttribute("horario", horarios);
+		modelMap.addAttribute("horarios", horarios);
 		return vista;
 	}
 	
 	@GetMapping(path="/new")
 	public String crearHorario(ModelMap modelMap) {
 		String view="horarios/newHorario";
-		modelMap.addAttribute("horario", new Horario());
+		modelMap.addAttribute("horarios", new Horario());
 		return view;
 	}
 	
@@ -39,7 +39,7 @@ public class HorarioController {
 	public String salvarHorario(@Valid Horario horario, BindingResult result,ModelMap modelMap) {
 		String view="redirect:/horarios";
 		if(result.hasErrors()) {
-			modelMap.addAttribute("horario", horario);
+			modelMap.addAttribute("horarios", horario);
 			return "horarios/newHorario";
 		}else {
 			horarioService.save(horario);
