@@ -10,7 +10,7 @@
     <h2>
         <c:if test="${registroHoras['new']}">Nuevo </c:if> Registro Horas
     </h2>
-    <form:form modelAttribute="registroHoras" class="form-horizontal" id="add-cliente-form" action="/registroHoras/save">
+    <form:form modelAttribute="registro_horas" class="form-horizontal" id="add-cliente-form" action="/registroHoras/save">
         <div class="form-group has-feedback">
        	    <input type="hidden" id="id" name="id" value=' <c:out value="${trabajador.nombre}"/>'>
             <petclinic:inputField label="HoraEntrada" name="hora_entrada"/>
