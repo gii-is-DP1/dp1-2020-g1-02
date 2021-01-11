@@ -12,15 +12,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Table(name="administrador")
-public class Administrador extends BaseEntity {
-	
-	@Column(name="nombre")
-    @NotNull
-	private String nombre;
-	
-	@Column(name="apellidos")
-    @NotNull
-	private String apellidos;
+public class Administrador extends PersonaEntity{
 	
     @Column(name="tipocategoria")
     @NotNull
