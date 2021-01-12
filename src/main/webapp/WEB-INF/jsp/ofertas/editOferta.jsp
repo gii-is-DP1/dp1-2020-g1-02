@@ -21,10 +21,21 @@
 		            <tr>
 		                <td>
 		                   <option><c:out value="${producto.name}"/></option>
+		                </td>
 		            </tr>
 		        </c:forEach>
   				</select>
             <petclinic:inputField label="PrecioUnidad" name="precioU"/>
+            <%-- <label for="proveedor">Proveedor ofertante</label>
+  				<select id="proveedor" name="proveedor">
+  				<c:forEach items="${proveedores}" var="proveedor">
+		            <tr>
+		                <td>
+		                   <option><c:out value="${proveedor.name}"/></option>
+		                </td>
+		            </tr>
+		        </c:forEach>
+  				</select> --%>
         </div>
        	<div class="form-group">
                 <div class="col-sm-offset-2 col-sm-10">
