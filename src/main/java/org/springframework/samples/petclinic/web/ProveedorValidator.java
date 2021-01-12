@@ -7,9 +7,7 @@ import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.samples.petclinic.model.Cliente;
 import org.springframework.samples.petclinic.model.Proveedor;
-import org.springframework.samples.petclinic.service.ClienteService;
 import org.springframework.samples.petclinic.service.ProveedorService;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
@@ -61,7 +59,7 @@ public class ProveedorValidator implements Validator {
 
 	@Override
 	public boolean supports(Class<?> clazz) {
-		return Cliente.class.isAssignableFrom(clazz);
+		return Proveedor.class.isAssignableFrom(clazz);
 	}
 
 }
