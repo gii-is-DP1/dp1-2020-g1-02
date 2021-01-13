@@ -22,7 +22,7 @@ public class Administrador extends PersonaEntity{
     @NotNull
     private TipoCategoria tipocategoria; 
     
-    @OneToMany(cascade = CascadeType.ALL, mappedBy="administrador")
-    private Set<MensajesAdmin> mensajesA;
+    //@OneToMany(cascade = CascadeType.ALL, mappedBy="administrador")
+    //private Set<MensajesAdmin> mensajesA;
 	
 }
