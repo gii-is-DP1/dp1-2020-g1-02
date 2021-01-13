@@ -3,28 +3,28 @@ package org.springframework.samples.petclinic.web;
 import java.util.Iterator;
 import java.util.regex.Pattern;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.samples.petclinic.model.Cliente;
-import org.springframework.samples.petclinic.service.ClienteService;
+import org.springframework.samples.petclinic.model.Administrador;
+import org.springframework.samples.petclinic.service.AdministradorService;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
 @Component
-public class ClienteValidator implements Validator {
+public class AdministradorValidator implements Validator {
 	
-	private static final String REQUIRED = "required";
+private static final String REQUIRED = "required";
 	
 	@Autowired
-	private ClienteService clienteService;
+	private AdministradorService administradorService;
 	
 	
-	public Boolean clienteConMismoDNI(String dni) {
+	public Boolean administradorConMismoDNI(String dni) {
 		dni = dni.toLowerCase();
 		Boolean result = false;
-		Iterator<Cliente> itClientes = this.clienteService.findAll().iterator();
-		while(itClientes.hasNext()) {
-			Cliente cliente = itClientes.next();
-			String pruebaDni = cliente.getDni().toLowerCase();
+		Iterator<Administrador> itAdministrador = this.administradorService.findAll().iterator();
+		while(itAdministrador.hasNext()) {
+			Administrador admin = itAdministrador.next();
+			String pruebaDni = admin.getDni().toLowerCase();
 			if(pruebaDni.equals(dni)) {
 				result = true;
 			}
@@ -34,10 +34,10 @@ public class ClienteValidator implements Validator {
 	
 	@Override
 	public void validate(Object obj, Errors errors) {
-		Cliente cliente = (Cliente) obj;
-		String name = cliente.getNombre();
-		String dni = cliente.getDni();
-		String telefono = cliente.getTelefono();
+		Administrador admin = (Administrador) obj;
+		String name = admin.getNombre();
+		String dni = admin.getDni();
+		String telefono = admin.getTelefono();
 
 		if (name == null || name.trim().equals("")) {
 			errors.rejectValue("name", REQUIRED, REQUIRED);
@@ -55,7 +55,7 @@ public class ClienteValidator implements Validator {
 	
 	@Override
 	public boolean supports(Class<?> clazz) {
-		return Cliente.class.isAssignableFrom(clazz);
+		return Administrador.class.isAssignableFrom(clazz);
 	}
 
 }
