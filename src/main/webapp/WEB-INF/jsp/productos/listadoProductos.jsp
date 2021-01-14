@@ -14,8 +14,9 @@
         <thead>
         <tr>
             <th style="width: 150px;">Nombre</th>
-            <th style="width: 150px;">Precio</th>
             <th style="width: 150px;">Cantidad en Stock</th>
+            <th style="width: 150px;"></th>
+            <!-- <th style="width: 150px;"> Solicitar más </th> -->
 
 
         </tr>
@@ -36,6 +37,12 @@
                 	</spring:url>
                 	<a href="${fn:escapeXml(productUrl)}">Restar</a>
                 </td>
+                <%-- <td>
+                	<spring:url value="/productos/{productId}/solicitar" var="productUrl">
+                		<spring:param name="productId" value="${producto.id}"/>
+                	</spring:url>
+                	<a href="${fn:escapeXml(productUrl)}">Solicitar</a>
+                </td> --%>
             </tr>
         </c:forEach>
         </tbody>

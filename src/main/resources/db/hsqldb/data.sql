@@ -52,8 +52,8 @@ INSERT INTO curriculum(nombre, tipocategoria) VALUES ('Carlos Jesus', 0);
 INSERT INTO curriculum(nombre, tipocategoria) VALUES ('Carlos Jesus2', 2);
 
 
-INSERT INTO oferta(name, precioU) VALUES ('Fregona', 2.5);
-INSERT INTO oferta(name, precioU) VALUES ('Escoba', 3);
+INSERT INTO oferta(name, precioU, proveedor) VALUES ('Fregona', 2.5, 1);
+INSERT INTO oferta(name, precioU, proveedor) VALUES ('Escoba', 3, 2);
 
 INSERT INTO administrador(nombre, apellidos, tipocategoria) VALUES ('Carlos Jesus','Morales Borreguero', 2);
 INSERT INTO administrador(nombre, apellidos, tipocategoria) VALUES ('Carlos','Borreguero', 0);

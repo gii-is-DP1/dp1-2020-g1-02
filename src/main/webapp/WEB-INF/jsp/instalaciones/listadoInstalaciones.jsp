@@ -19,7 +19,7 @@
         </tr>
         </thead>
         <tbody>
-        <c:forEach items="${instalaciones}" var="instalacion">
+        <c:forEach items="${instalacion}" var="instalacion">
             <tr>
                 <td>
                     <c:out value="${instalacion.lugar}"/>

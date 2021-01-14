@@ -5,8 +5,10 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.samples.petclinic.model.Oferta;
 import org.springframework.samples.petclinic.model.Producto;
+import org.springframework.samples.petclinic.model.Proveedor;
 import org.springframework.samples.petclinic.service.OfertaService;
 import org.springframework.samples.petclinic.service.ProductoService;
+import org.springframework.samples.petclinic.service.ProveedorService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -22,6 +24,8 @@ public class OfertaController {
 	private OfertaService ofertaService;
 	@Autowired
 	private ProductoService productoService;
+	@Autowired
+	private ProveedorService proveedorService;
 	
 	@GetMapping()
 	public String listadoOfertas(ModelMap modelMap) {
@@ -35,6 +39,8 @@ public class OfertaController {
 	public String crearOferta(ModelMap modelMap) {
 		String view="ofertas/editOferta";
 		Iterable<Producto> productos = productoService.findAll();
+		Iterable<Proveedor> proveedores = proveedorService.findAll();
+		modelMap.addAttribute("proveedores", proveedores);
 		modelMap.addAttribute("productos", productos);
 		modelMap.addAttribute("oferta", new Oferta());
 		return view;

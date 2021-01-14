@@ -16,6 +16,7 @@
             <th style="width: 150px;">ID</th>
             <th style="width: 150px;">Producto</th>
             <th style="width: 150px;">Precio por unidad</th>
+            <th style="width: 150px;">Proveedor</th>
         </tr>
         </thead>
         <tbody>
@@ -29,6 +30,9 @@
                 </td>
                  <td>
                     <c:out value="${oferta.precioU}"/>
+                </td>
+                <td>
+                    <c:out value="${oferta.proveedor.name}"/>
                 </td>
                 
                 <%--<td>

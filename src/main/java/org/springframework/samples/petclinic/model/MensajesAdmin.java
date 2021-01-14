@@ -1,10 +1,11 @@
 package org.springframework.samples.petclinic.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 
@@ -12,19 +13,21 @@ import lombok.Data;
 
 @Entity
 @Data
-@Table(name="oferta")
-public class Oferta extends NamedEntity {
+@Table(name="mensajesAdmin")
+public class MensajesAdmin extends BaseEntity{
 	
-	@Column(name="precioU")
+	
+	@Column(name="asuntoA")
 	@NotEmpty
-	private String precioU;
+	private String asuntoA; 
+	
+	@Column(name="mensajeA")
+	@NotEmpty
+	private String mensajeA;
 	
 	@ManyToOne
-    @JoinColumn(name="producto_id")
-    private Producto producto;
+	@JoinColumn(name="administrador")
+	private Administrador admin;
 	
-	@OneToOne(optional=false)
-	@JoinColumn(name="proveedor")
-	private Proveedor proveedor;
 	
 }

@@ -12,7 +12,15 @@
     </h2>
     <form:form modelAttribute="registro_horas" class="form-horizontal" id="add-cliente-form" action="/registroHoras/save">
         <div class="form-group has-feedback">
-       	    <input type="hidden" id="id" name="id" value=' <c:out value="${trabajador.id}"/>'>
+       	     <label for="trabajador">ID del trabajador</label>
+  				<select id="trabajador" name="trabajador">
+  				<c:forEach items="${trabajadores}" var="trabajador">
+		            <tr>
+		                <td>
+		                   <option><c:out value="${trabajador.id}"/></option>
+		            </tr>
+		        </c:forEach>
+  				</select>
             <petclinic:inputField label="HoraEntrada" name="hora_entrada"/>
             <petclinic:inputField label="HoraSalida" name="hora_salida"/>
         </div>
