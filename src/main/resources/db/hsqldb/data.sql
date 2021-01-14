@@ -1,3 +1,9 @@
+/* One admin user, named admin1 with passwor 4dm1n and authority admin*/
+INSERT INTO users(username,password,enabled) VALUES ('admin1','4dm1n',TRUE);
+INSERT INTO users(username,password,enabled) VALUES ('Nick Furia','S.H.I.E.L.D',TRUE);
+INSERT INTO users(username,password,enabled) VALUES ('Ironman','vengadores',TRUE);
+INSERT INTO users(username,password,enabled) VALUES ('Capitan América','vengadores',TRUE);
+
 INSERT INTO trabajador(id,nombre,apellidos,dni,telefono, direccion, correo, tipocategoria) VALUES (1,'Carlos Jesus', 'Villadiego', '78461836B','666888888','C/Garcia Marquez n2', 'calvirgar@alum.us.es', 0);
 INSERT INTO trabajador(id,nombre,apellidos,dni,telefono, direccion, correo, tipocategoria) VALUES (2,'Carlos Jesus2', 'Villadiego', '78461836B','666888888','C/Garcia Marquez n2', 'calvirgar@alum.us.es', 2);
 
@@ -10,9 +16,9 @@ INSERT INTO registro_hora(hora_entrada, hora_salida, trabajador) VALUES ('2019-0
 INSERT INTO contratoTrabajador(id,fechainicial,fechafinal,trabajador_id,sueldo) VALUES (1, '2010-01-01', '2019-12-31', 1, 1200.0);
 INSERT INTO contratoTrabajador(id,fechainicial,fechafinal,trabajador_id,sueldo) VALUES (2, '2010-01-01', '2019-12-31', 1, 1200.0);
 
-INSERT INTO cliente(id, nombre,apellidos,telefono,direccion,dni,correo) VALUES (1, 'Jesus', 'Garcia', '644586245', 'Calle Cristie', '33445566P', 'jesus@gmail.com');
-INSERT INTO cliente(id, nombre,apellidos,telefono,direccion,dni,correo) VALUES (2, 'Ruben', 'Bueno', '655788999', 'Calle Misco', '11223344T', 'ruben@gmail.com');
-INSERT INTO cliente(id, nombre,apellidos,telefono,direccion,dni,correo) VALUES (3, 'Manolito', 'Pies de Plata', '624586245', 'Calle Agata', '25673519P', 'manolito@gmail.com');
+INSERT INTO cliente(id, nombre,apellidos,telefono,direccion,dni,correo, username) VALUES (1, 'Jesus', 'Garcia', '644586245', 'Calle Cristie', '33445566P', 'jesus@gmail.com', 'Capitan América');
+INSERT INTO cliente(id, nombre,apellidos,telefono,direccion,dni,correo, username) VALUES (2, 'Ruben', 'Bueno', '655788999', 'Calle Misco', '11223344T', 'ruben@gmail.com', 'Ironman');
+INSERT INTO cliente(id, nombre,apellidos,telefono,direccion,dni,correo, username) VALUES (3, 'Manolito', 'Pies de Plata', '624586245', 'Calle Agata', '25673519P', 'manolito@gmail.com', 'Nick Furia');
 
 INSERT INTO instalacion(lugar, dimension, cliente_id) VALUES ('Calle Águila Piso 1ºB',20.8, 1);
 INSERT INTO instalacion(lugar, dimension, cliente_id) VALUES ('Calle Betis Piso 1ºD',17.3, 2);
@@ -72,9 +78,10 @@ INSERT INTO reclamacion(fecha, descripcion, cliente_id, servicio_id) VALUES ('20
 INSERT INTO reclamacion(fecha, descripcion, cliente_id, servicio_id) VALUES ('2019-10-20', 'El servicio está lamentable', 2, 2);
 
 
-/* One admin user, named admin1 with passwor 4dm1n and authority admin*/
-INSERT INTO users(username,password,enabled) VALUES ('admin1','4dm1n',TRUE);
 INSERT INTO authorities(id,username,authority) VALUES (1,'admin1','administrador');
+INSERT INTO authorities(id,username,authority) VALUES (2,'Nick Furia','cliente');
+INSERT INTO authorities(id,username,authority) VALUES (3,'Ironman','cliente');
+INSERT INTO authorities(id,username,authority) VALUES (4,'Capitan América','cliente');
 /*-- One owner user, named owner1 with passwor 0wn3r
 INSERT INTO users(username,password,enabled) VALUES ('owner1','0wn3r',TRUE);
 INSERT INTO authorities(id,username,authority) VALUES (2,'owner1','owner');

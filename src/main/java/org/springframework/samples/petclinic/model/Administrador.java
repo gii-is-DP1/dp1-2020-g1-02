@@ -1,7 +1,6 @@
 package org.springframework.samples.petclinic.model;
 
 import java.util.Set;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -22,7 +21,18 @@ public class Administrador extends PersonaEntity{
     @NotNull
     private TipoCategoria tipocategoria; 
     
+    //
+	@OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "username", referencedColumnName = "username")
+	private User user;
+	//
+	
+	public User getUser() {
+		return user;
+	}
+
     //@OneToMany(cascade = CascadeType.ALL, mappedBy="administrador")
     //private Set<MensajesAdmin> mensajesA;
+
 	
 }
