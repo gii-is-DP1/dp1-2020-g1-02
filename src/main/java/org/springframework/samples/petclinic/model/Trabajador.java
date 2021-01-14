@@ -35,5 +35,11 @@ public class Trabajador extends PersonaEntity {
     
     @OneToMany(cascade = CascadeType.ALL, mappedBy="trabajador")
     private Set<RegistroHoras> registroHoras;
+    
+
+	public void addContrato(ContratoTrabajador c) {
+		getContratos().add(c);
+		c.setTrabajador(this);
+	}
 
 }
