@@ -3,6 +3,7 @@ package org.springframework.samples.petclinic.service;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.samples.petclinic.model.Proveedor;
 import org.springframework.samples.petclinic.repository.ProveedorRepository;
 import org.springframework.stereotype.Service;
@@ -13,6 +14,12 @@ public class ProveedorService {
 	
 	@Autowired
 	private ProveedorRepository proveedorRepo;
+	
+	@Autowired
+	private UserService userService;
+	
+	@Autowired
+	private AuthoritiesService authoritiesService;
 	
 	@Transactional
 	public int proveedorCount() {
@@ -40,5 +47,15 @@ public class ProveedorService {
 	public Optional<Proveedor> findProveedorById(int id) {
 		// TODO Auto-generated method stub
 		return proveedorRepo.findById(id);
+	}
+	
+	@Transactional
+	public void saveProveedor(Proveedor proveedor) throws DataAccessException {
+		//creating owner
+		proveedorRepo.save(proveedor);
+		//creating user
+		userService.saveUser(proveedor.getUser());
+		//creating authorities
+		authoritiesService.saveAuthorities(proveedor.getUser().getUsername(), "proveedor");	
 	}
 }

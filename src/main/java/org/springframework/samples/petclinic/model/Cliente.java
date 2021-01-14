@@ -4,7 +4,9 @@ import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import lombok.Getter;
@@ -21,4 +23,14 @@ public class Cliente extends PersonaEntity {
 	
 	@OneToMany(cascade=CascadeType.ALL, mappedBy="cliente")
     private Set<Servicio> servicios;
+	
+	//
+	@OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "username", referencedColumnName = "username")
+	private User user;
+	//
+	
+	public User getUser() {
+		return user;
+	}
 }

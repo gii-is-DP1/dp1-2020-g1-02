@@ -20,6 +20,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class UserService {
 
 	private UserRepository userRepository;
+	
 
 	@Autowired
 	public UserService(UserRepository userRepository) {
@@ -32,6 +33,7 @@ public class UserService {
 		userRepository.save(user);
 	}
 	
+	@Transactional
 	public Optional<User> findUser(String username) {
 		return userRepository.findById(username);
 	}
