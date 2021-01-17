@@ -31,23 +31,29 @@ INSERT INTO producto(name, cantidad) VALUES ('Amoniaco', 9);
 INSERT INTO producto(name, cantidad) VALUES ('KH7', 10);
 INSERT INTO producto(name, cantidad) VALUES ('Rollos Papel', 40);
 
+INSERT INTO oferta(name, precioU, proveedor) VALUES ('Fregona', 2.5, 1);
+INSERT INTO oferta(name, precioU, proveedor) VALUES ('Escoba', 3, 2);
 
-INSERT INTO pedido(id, fecha) VALUES (1, '2020-04-20');
-INSERT INTO pedido(id, fecha) VALUES (2, '2020-02-20');
-INSERT INTO pedido(id, fecha) VALUES (3, '2020-01-20');
+INSERT INTO pedido(fecha, cantidad, oferta_id) VALUES ('2020-04-20', 5, 1);
+INSERT INTO pedido(fecha, cantidad, oferta_id) VALUES ('2020-02-20', 2, 2);
+--INSERT INTO pedido(fecha, cantidad, oferta_id) VALUES ('2020-01-20', 7, 3);
+--INSERT INTO pedido(fecha, cantidad, oferta_id) VALUES ('2021-01-14', 5, 4);
+--INSERT INTO pedido(fecha, cantidad, oferta_id) VALUES ('2021-01-14', 2, 5);
+--INSERT INTO pedido(fecha, cantidad, oferta_id) VALUES ('2021-01-14', 7, 6);
+--INSERT INTO pedido(fecha, cantidad, oferta_id) VALUES ('2021-01-14', 5, 7);
+--INSERT INTO pedido(fecha, cantidad, oferta_id) VALUES ('2021-01-14', 2, 8);
+--INSERT INTO pedido(fecha, cantidad, oferta_id) VALUES ('2021-01-14', 7, 9);
+
 
 
 INSERT INTO factura(fecha, precio_total, proveedor, pedido) VALUES ('2020-10-20', 10.0, 1, 1);
 INSERT INTO factura(fecha, precio_total, proveedor, pedido) VALUES ('2020-10-22', 137.89, 1, 2);
-INSERT INTO factura(fecha, precio_total, proveedor, pedido) VALUES ('2020-10-22', 56.01, 2, 3);
+--INSERT INTO factura(fecha, precio_total, proveedor, pedido) VALUES ('2020-10-22', 56.01, 2, 3);
 
 
 INSERT INTO curriculum(nombre, tipocategoria) VALUES ('Carlos Jesus', 0);
 INSERT INTO curriculum(nombre, tipocategoria) VALUES ('Carlos Jesus2', 2);
 
-
-INSERT INTO oferta(name, precioU, proveedor) VALUES ('Fregona', 2.5, 1);
-INSERT INTO oferta(name, precioU, proveedor) VALUES ('Escoba', 3, 2);
 
 INSERT INTO administrador(nombre, apellidos, tipocategoria) VALUES ('Carlos Jesus','Morales Borreguero', 2);
 INSERT INTO administrador(nombre, apellidos, tipocategoria) VALUES ('Carlos','Borreguero', 0);

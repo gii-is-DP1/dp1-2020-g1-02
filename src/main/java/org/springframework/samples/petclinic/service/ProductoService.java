@@ -45,5 +45,9 @@ public class ProductoService {
 	public Optional<Producto> findProductoById(Integer id) {
 		return productRepo.findById(id);
 	}
+	
+	public Optional<Producto> findByName(String name) {
+		return productRepo.findByName(name);
+	}
 
 }

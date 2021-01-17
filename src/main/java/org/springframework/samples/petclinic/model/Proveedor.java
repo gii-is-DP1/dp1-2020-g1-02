@@ -31,6 +31,9 @@ public class Proveedor extends NamedEntity{
     private String direccion;
     
     @OneToMany(cascade = CascadeType.ALL, mappedBy="proveedor")
+    private Set<Oferta> ofertas;
+    
+    @OneToMany(cascade = CascadeType.ALL, mappedBy="proveedor")
     private Set<Factura> facturas;
 
 }
