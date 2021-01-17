@@ -21,6 +21,8 @@ import org.springframework.samples.petclinic.configuration.SecurityConfiguration
 import org.springframework.samples.petclinic.model.Administrador;
 import org.springframework.samples.petclinic.model.TipoCategoria;
 import org.springframework.samples.petclinic.service.AdministradorService;
+import org.springframework.samples.petclinic.service.ContratoServicioService;
+import org.springframework.samples.petclinic.service.ReclamacionService;
 import org.springframework.security.config.annotation.web.WebSecurityConfigurer;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
@@ -37,6 +39,10 @@ public class AdministradorControllerTest {
 	
 	@MockBean
 	private AdministradorService administradorService;
+	@MockBean
+	private ContratoServicioService contratoServicioService;
+	@MockBean
+	private ReclamacionService reclamacionService;
 	
 	private Administrador admin;
 	
@@ -49,6 +55,7 @@ public class AdministradorControllerTest {
 		admin.setNombre("Carlos");
 		admin.setApellidos("Ramírez");
 		admin.setTelefono("628157278");
+		admin.setDireccion("Calle Huertas  31");
 		admin.setCorreo("carlosr@gmail.com");
 		admin.setTipocategoria(TipoCategoria.Limpieza);
 		
@@ -61,34 +68,9 @@ public class AdministradorControllerTest {
 	
 	@WithMockUser(value = "spring")
 	@Test
-	void testEditAdministrador() throws Exception{
-		mockMvc.perform(get("/administradores/new")).andExpect(status().isOk()).andExpect(model().attributeExists("admin"))
-		.andExpect(view().name("administradores/editAdmin"));
+	void testListadoAdministradores() throws Exception{
+		mockMvc.perform(get("/administradores")).andExpect(status().isOk())
+		.andExpect(model().attributeExists("administrador"))
+		.andExpect(view().name("administradores/listadoAdmin"));
 	}
-	
-	@WithMockUser(value = "spring")
-	@Test
-	void testInitUpdateslotgameForm() throws Exception {
-		mockMvc.perform(get("/delete/{adminId}", 1)).andExpect(status().isOk())
-				.andExpect(model().attributeExists("admin"))
-				.andExpect(model().attribute("admin", hasProperty("nombre", is("Pablo"))))
-				.andExpect(model().attribute("admin", hasProperty("telefono", is("633444555"))))
-				.andExpect(model().attribute("admin", hasProperty("dni", is("53985965D"))))
-				.andExpect(model().attribute("admin", hasProperty("apellidos", is("Gonzalez"))))
-				.andExpect(model().attribute("admin", hasProperty("correo", is("pablog@gmail.com"))))
-				.andExpect(model().attribute("admin", hasProperty("tipoCategoria", is(TipoCategoria.Limpieza))))
-				.andExpect(view().name("administradores/listadoAdmin"));
-	}
-	
-//	@WithMockUser(value = "spring")
-//    @Test
-//    void testAñadirAdministrador() throws Exception {
-//		mockMvc.perform(post("/administradores/save").param("admin", "José")
-//						.param("apellidos", "Bejarano")
-//						.param("telefono", "645746278")
-//						.param("dni", "84947824F"))
-//			.andExpect(status().is2xxSuccessful())
-//			.andExpect(view().name("administradores/listadoAdmin"));
-//	}
-
 }
