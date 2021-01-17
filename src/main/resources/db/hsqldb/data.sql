@@ -37,8 +37,8 @@ INSERT INTO producto(name, cantidad) VALUES ('Amoniaco', 9);
 INSERT INTO producto(name, cantidad) VALUES ('KH7', 10);
 INSERT INTO producto(name, cantidad) VALUES ('Rollos Papel', 40);
 
-INSERT INTO oferta(name, precioU, proveedor) VALUES ('Fregona', 2.5, 1);
-INSERT INTO oferta(name, precioU, proveedor) VALUES ('Escoba', 3, 2);
+INSERT INTO oferta(name, precioU, producto_id, proveedor) VALUES ('Fregona', 2.5, 4, 1);
+INSERT INTO oferta(name, precioU, producto_id, proveedor) VALUES ('Escoba', 3, 3, 2);
 
 INSERT INTO pedido(fecha, cantidad, oferta_id) VALUES ('2020-04-20', 5, 1);
 INSERT INTO pedido(fecha, cantidad, oferta_id) VALUES ('2020-02-20', 2, 2);

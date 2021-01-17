@@ -1,5 +1,6 @@
 package org.springframework.samples.petclinic.model;
 
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -11,6 +12,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 import lombok.Data;
 
@@ -25,13 +27,18 @@ public class Oferta extends NamedEntity {
 	
 	@ManyToOne
     @JoinColumn(name="producto_id")
+//	@NotNull
     private Producto producto;
 	
 	@ManyToOne
 	@JoinColumn(name="proveedor")
 	private Proveedor proveedor;
 	
-//	@OneToMany(cascade = CascadeType.ALL, mappedBy="oferta")
-//    private Set<Pedido> pedidos;
+	@OneToMany(cascade = CascadeType.ALL, mappedBy="oferta")
+    private List<Pedido> pedidos;
+	
+	public void añadirPedido(Pedido pedido) {
+		this.pedidos.add(pedido);
+	}
 	
 }

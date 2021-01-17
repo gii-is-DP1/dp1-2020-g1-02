@@ -1,14 +1,18 @@
 <%@ page session="false" trimDirectiveWhitespaces="true" %>
+<%@ page import="java.util.*" %>
+<%@ page import="java.text.SimpleDateFormat"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="petclinic" tagdir="/WEB-INF/tags" %>
 
 
+    
 <petclinic:layout pageName="Pedidos">
  <jsp:attribute name="customScript">
     </jsp:attribute>
     <jsp:body>
+    
     <h2>Oferta seleccionada</h2>
         <table id="ofertasTable" class="table table-striped">
         <thead>
@@ -40,11 +44,14 @@
        <h2>Pedido</h2>
        <form:form modelAttribute="pedido" class="form-horizontal" action="/pedidos/save">
        		<div class="form-group has-feedback">
-       			Fecha del pedido: <c:out value="${pedido.fechaPedido}"/>
+       			<%-- Fecha del pedido: <c:out value="${pedido.fechaPedido}"/> --%>
        			<!-- <input label="Fecha del pedido" name="fechaPedido" value=' <c:out value="${pedido.fechaPedido}"/>' disabled/>-->
        			<petclinic:inputField label="Cantidad" name="cantidadProducto"/>
-       			<input type="hidden" id="fecha" name="fechaPedido" value=' <c:out value="${pedido.fechaPedido}"/>'>
-       			<input type="hidden" id="id" name="oferta" value=' <c:out value="${pedido.oferta.id}"/>'>
+       			
+ 
+				<petclinic:inputField label="Fecha del pedido" name="fechaPedido" />
+		       	<%-- <input type="text" id="fecha" name="fechaPedido" value=' <c:out value="${pedido.fechaPedido}"/>'> --%>
+	       		<input type="hidden" id="oId" name="oId" value=' <c:out value="${pedido.oferta.id}"/>'>
   				
        		</div>
             <div class="form-group">
@@ -53,6 +60,12 @@
                 </div>
             </div>
         </form:form>
+        
+        <h3><c:out value="${error}"/></h3>
+        
     </jsp:body>
+    
+    
 
 </petclinic:layout>
+	
