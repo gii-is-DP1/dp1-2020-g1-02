@@ -4,6 +4,7 @@ package org.springframework.samples.petclinic.web;
 import static org.hamcrest.Matchers.hasProperty;
 import static org.hamcrest.Matchers.is;
 import static org.mockito.BDDMockito.given;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
@@ -51,15 +52,15 @@ public class ClienteControllerTest {
 		cliente.setNombre("Pablo");
 		cliente.setApellidos("Gonzalez");
 		cliente.setTelefono("633444555");
+		cliente.setDireccion("Calle Ave");
 		cliente.setCorreo("pablog@gmail.com");
 		
-//		cliente.setInstalaciones();
 		
 		given(this.clienteService.findClienteById(1)).willReturn(Optional.of(cliente));
 		
-		List<Cliente> clients = new ArrayList<Cliente>();
-		clients.add(cliente);
-		given(this.clienteService.findAll()).willReturn(clients);
+		List<Cliente> clientes = new ArrayList<Cliente>();
+		clientes.add(cliente);
+		given(this.clienteService.findAll()).willReturn(clientes);
 	}
 	
 	@WithMockUser(value = "spring")
@@ -71,25 +72,43 @@ public class ClienteControllerTest {
 	
 	@WithMockUser(value = "spring")
 	@Test
-	void testInitUpdateslotgameForm() throws Exception {
-		mockMvc.perform(get("/delete/{clientId}", 1)).andExpect(status().isOk())
-				.andExpect(model().attributeExists("client"))
-				.andExpect(model().attribute("cliente", hasProperty("nombre", is("Pablo"))))
-				.andExpect(model().attribute("cliente", hasProperty("telefono", is("633444555"))))
-				.andExpect(model().attribute("cliente", hasProperty("dni", is("53985965D"))))
-				.andExpect(model().attribute("cliente", hasProperty("apellidos", is("Gonzalez"))))
-				.andExpect(model().attribute("cliente", hasProperty("correo", is("pablog@gmail.com"))))
-				.andExpect(view().name("clientes/listadoClientes"));
+	void testListadoClientes() throws Exception{
+		mockMvc.perform(get("/clientes")).andExpect(status().isOk())
+		.andExpect(model().attributeExists("cliente"))
+		.andExpect(view().name("clientes/listadoClientes"));
 	}
 	
-//	@WithMockUser(value = "spring")
-//    @Test
-//    void testAñadirCliente() throws Exception {
-//		mockMvc.perform(post("/clientes/save").param("cliente", "Fer")
-//						.param("apellidos", "Valdes")
-//						.param("telefono", "643213430")
-//						.param("dni", "32324586J"))
-//			.andExpect(status().is2xxSuccessful())
-//			.andExpect(view().name("clientes/listadoClientes"));
-//	}
+	
+	@WithMockUser(value = "spring")
+    @Test
+    void testProcessCreationFormSuccess() throws Exception {
+		mockMvc.perform(post("/clientes/save")
+						.with(csrf())
+						.param("dni", "20099008E")
+						.param("nombre", "Jose Carlos")
+						.param("apellidos", "Morales Borreguero")
+						.param("telefono", "692069178")
+						.param("direccion", "Calle Huertas 31")
+						.param("correo", "jcmorales2400@gmail.com"))	
+			.andExpect(status().is2xxSuccessful())
+			.andExpect(view().name("clientes/listadoClientes"));
+	}
+	
+	@WithMockUser(value = "spring")
+    @Test
+    void testProcessCreationFormHasErrors() throws Exception {
+		mockMvc.perform(post("/clientes/save")
+						.with(csrf())
+						.param("dni", "20099008E")
+						.param("nombre", "")
+						.param("apellidos", "Morales Borreguero")
+						.param("telefono", "692069178")
+						.param("direccion", "Calle Huertas 31")
+						.param("correo", "jcmorales2400@gmail.com"))
+			.andExpect(status().isOk())
+			.andExpect(model().attributeHasErrors("cliente"))
+			.andExpect(model().attributeHasFieldErrors("cliente", "nombre"))
+			.andExpect(view().name("clientes/newCliente"));
+	}
+
 }
