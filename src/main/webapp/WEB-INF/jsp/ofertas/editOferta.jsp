@@ -6,7 +6,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="petclinic" tagdir="/WEB-INF/tags" %>
 
-<petclinic:layout pageName="oferta">
+<petclinic:layout pageName="ofertas">
     <h2>
         <c:if test="${oferta['new']}">Nueva </c:if> Oferta
     </h2>
@@ -26,6 +26,7 @@
 		        </c:forEach>
   				</select>
             <petclinic:inputField label="PrecioUnidad" name="precioU"/>
+            <petclinic:inputField label="proveedor" name="proveedor"/>
             <%-- <label for="proveedor">Proveedor ofertante</label>
   				<select id="proveedor" name="proveedor">
   				<c:forEach items="${proveedores}" var="proveedor">

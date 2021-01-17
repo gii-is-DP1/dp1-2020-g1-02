@@ -17,6 +17,7 @@
             <th style="width: 150px;">Producto</th>
             <th style="width: 150px;">Precio por unidad</th>
             <th style="width: 150px;">Proveedor</th>
+            <%-- <th style="width: 150px;">Cantidad deseada</th>--%>
         </tr>
         </thead>
         <tbody>
@@ -34,13 +35,12 @@
                 <td>
                     <c:out value="${oferta.proveedor.name}"/>
                 </td>
-                
-                <%--<td>
-                	<spring:url value="/proveedores/delete/{provName}" var="provUrl">
-                		<spring:param name="provName" value="${proveedor.name}"/>
-                	</spring:url>
-                	<a href="${fn:escapeXml(provUrl)}">Delete</a>
-                </td>--%>
+                <td>
+                	<spring:url value="pedidos/new/{oId}" var="addUrl">
+                        <spring:param name="oId" value="${oferta.id}"/>
+                        </spring:url>
+                        <a href="${fn:escapeXml(addUrl)}" class="btn btn-default">Crear pedido</a>
+                </td>
             </tr>
         </c:forEach>
         </tbody>
