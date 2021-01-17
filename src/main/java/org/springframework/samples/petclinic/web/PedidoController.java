@@ -1,6 +1,7 @@
 package org.springframework.samples.petclinic.web;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 import javax.validation.Valid;
 
@@ -34,28 +35,62 @@ public class PedidoController {
 		return vista;
 	}
 	
+//	@GetMapping(path="/new/{oId}")
+//	public String crearPedido(@PathVariable("oId") int oId, ModelMap modelMap) {
+//		String view="administradores/editPedido";
+//		Oferta o = ofertaService.findOfertaById(oId).get();
+//		
+//		Pedido p = new Pedido();
+//		p.setFechaPedido(LocalDate.now());
+//		
+//		o.añadirPedido(p);
+//		
+//		modelMap.addAttribute("pedido", p);
+//		return view;
+//	}
 	@GetMapping(path="/new/{oId}")
 	public String crearPedido(@PathVariable("oId") int oId, ModelMap modelMap) {
 		String view="administradores/editPedido";
-		Pedido p = new Pedido();
-		p.setOferta(ofertaService.findOfertaById(oId).get());
-		p.setFechaPedido(LocalDate.now());
-		modelMap.addAttribute("pedido", p);
-		return view;
+        Pedido p = new Pedido();
+        p.setOferta(ofertaService.findOfertaById(oId).get());
+        p.setFechaPedido(LocalDate.now());
+        modelMap.addAttribute("pedido", p);
+        return view;
 	}
 	
+//	@PostMapping(path="/save")
+//	public String salvarPedido(@Valid Pedido pedido, Integer oId, BindingResult result, ModelMap modelMap) {
+//		String view="redirect:/pedidos";
+//		
+//		if(result.hasErrors()) {
+//			modelMap.addAttribute("pedido", pedido);
+//			return "administradores/editPedido";
+//		} else {
+//			Oferta oferta = ofertaService.findOfertaById(oId).get();
+//			oferta.añadirPedido(pedido);
+//			pedidoService.save(pedido);
+//			modelMap.addAttribute("message", "Pedido actualizado!");
+////			view=listadoPedidos(modelMap);
+//		}
+//		return view;
+//	}
+
 	@PostMapping(path="/save")
 	public String salvarPedido(@Valid Pedido pedido, BindingResult result, ModelMap modelMap) {
 		String view="redirect:/pedidos";
-		if(result.hasErrors()) {
-			modelMap.addAttribute("pedido", pedido);
-			return "administradores/editPedido";
-		} else {
-			pedidoService.save(pedido);
-			modelMap.addAttribute("message", "Pedido actualizado!");
-//			view=listadoPedidos(modelMap);
-		}
-		return view;
+        if(result.hasErrors()) {
+            modelMap.addAttribute("pedido", pedido);
+            return "administradores/editPedido";
+        } else {
+        	if(pedidoService.cumpleCondicion(pedido)) {
+        		pedidoService.save(pedido);
+        	}else {
+        		modelMap.addAttribute("error", "No puede superar 100€ el precio total.");
+        		return "administradores/editPedido";
+        	}
+            
+//            view=listadoPedidos(modelMap);
+        }
+        return view;
 	}
-
 }
