@@ -1,5 +1,6 @@
 package org.springframework.samples.petclinic.service;
 
+import static org.junit.Assert.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import java.util.Optional;
 import org.junit.jupiter.api.Test;
@@ -30,6 +31,13 @@ public class ClienteServiceTest {
 	}
 	
 	@Test
+	public void testfindClientByUsername() {
+		Cliente clienteFind= clienteService.findClienteByUsername("Ironman").get();
+		assertNotNull(clienteFind);
+		assertEquals("Ruben", clienteFind.getNombre());
+	}
+	
+	@Test
 	public void testDeleteClienteById() {
 		clienteService.deleteById(1);
 		assertEquals(false, clienteService.findClienteById(1).isPresent());
@@ -57,6 +65,12 @@ public class ClienteServiceTest {
 		public void testNotFindClienteById() {
 			Optional<Cliente> clienteFind = clienteService.findClienteById(50);
 			assertEquals(false, clienteFind.isPresent());
+		}
+		
+		@Test
+		public void testNotFindClientByUsername() {
+			Cliente clienteFind= clienteService.findClienteByUsername("Ironman666").get(); //Introducir un username no registrado devuelve null
+			assertNotNull(clienteFind);
 		}
 		
 }
