@@ -51,7 +51,7 @@
  
 				<petclinic:inputField label="Fecha del pedido" name="fechaPedido" />
 		       	<%-- <input type="text" id="fecha" name="fechaPedido" value=' <c:out value="${pedido.fechaPedido}"/>'> --%>
-	       		<input type="hidden" id="oId" name="oId" value=' <c:out value="${pedido.oferta.id}"/>'>
+	       		<input type="hidden" id="oferta" name="oferta" value='<c:out value="${pedido.oferta.id}"/>'>
   				
        		</div>
             <div class="form-group">
