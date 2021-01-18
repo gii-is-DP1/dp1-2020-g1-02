@@ -83,6 +83,7 @@ public class PedidoController {
             return "administradores/editPedido";
         } else {
         	if(pedidoService.cumpleCondicion(pedido)) {
+        		pedido.setFechaPedido(LocalDate.now());
         		pedidoService.save(pedido);
         	}else {
         		modelMap.addAttribute("error", "No puede superar 100€ el precio total.");
