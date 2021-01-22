@@ -1,5 +1,7 @@
 package org.springframework.samples.petclinic.web;
 
+import java.util.Optional;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,6 +51,8 @@ public class OfertaController {
 	@PostMapping(path="/save")
 	public String salvarOferta(@Valid Oferta oferta, BindingResult result, ModelMap modelMap) {
 		String view="redirect:/ofertas";
+		Optional<Producto> producto = productoService.findByName(oferta.getName());
+		oferta.setProducto(producto.get());
 		if(result.hasErrors()) {
 			modelMap.addAttribute("oferta", oferta);
 			return "ofertas/editOferta";

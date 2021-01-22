@@ -1,7 +1,12 @@
 package org.springframework.samples.petclinic.service;
 
+import java.time.LocalDateTime;
+import java.util.Iterator;
 import java.util.Optional;
+import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
+import org.springframework.samples.petclinic.model.Horario;
 import org.springframework.samples.petclinic.model.Trabajador;
 import org.springframework.samples.petclinic.repository.TrabajadorRepository;
 import org.springframework.stereotype.Service;
@@ -11,6 +16,12 @@ import org.springframework.transaction.annotation.Transactional;
 public class TrabajadorService {
 	@Autowired
 	private TrabajadorRepository trabajadorRepo;
+	
+	@Autowired
+	private UserService userService;
+	
+	@Autowired
+	private AuthoritiesService authoritiesService;
 	
 	@Transactional
 	public int eventCount() {
@@ -34,6 +45,35 @@ public class TrabajadorService {
 		// TODO Auto-generated method stub
 		return trabajadorRepo.findById(trabajadorId);
 	}
-
 	
+	@Transactional
+	public Optional<Trabajador> findTrabajadorByUsername(String trabajadorUsername) {
+		return trabajadorRepo.findTrabajadorByUsername(trabajadorUsername);
+	}
+
+	public boolean cumpleCondicionR4(Trabajador trabajador) {
+		Boolean res = true;
+		Set<Horario> horarios = trabajador.getHorarios();
+		Iterator<Horario> iterador = horarios.iterator();
+		while(iterador.hasNext()) {
+			Horario h1 = iterador.next();
+			Horario h2 = iterador.next();
+			LocalDateTime diaconhora1 = h1.getHora_inicio();
+			LocalDateTime diaconhora2 = h2.getHora_inicio();
+			if(diaconhora1 == diaconhora2) {
+				res = false;
+			}
+		}
+		return res;
+	}
+	
+	@Transactional
+	public void saveTrabajador(Trabajador trabajador) throws DataAccessException {
+		//creating trabajador
+		trabajadorRepo.save(trabajador);
+		//creating user
+		userService.saveUser(trabajador.getUser());
+		//creating authorities
+		authoritiesService.saveAuthorities(trabajador.getUser().getUsername(), "trabajador");	
+	}
 }

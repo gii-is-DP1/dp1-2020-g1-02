@@ -1,7 +1,9 @@
 package org.springframework.samples.petclinic.web;
 
 import static org.mockito.BDDMockito.given;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
@@ -70,5 +72,35 @@ public class ReclamacionControllerTest {
 		.andExpect(view().name("reclamaciones/listadoReclamaciones"));
 	}
 	
-
+	@WithMockUser(value = "spring")
+	@Test
+	void testNewReclamacion() throws Exception{
+		mockMvc.perform(get("/reclamaciones/new")).andExpect(status().isOk()).andExpect(model().attributeExists("reclamacion"))
+		.andExpect(view().name("reclamaciones/newReclamacion"));
+	}
+	
+	
+//	@WithMockUser(value = "spring")
+//    @Test
+//    void testProcessCreationFormSuccess() throws Exception {
+//		mockMvc.perform(post("/reclamaciones/save")
+//						.with(csrf())
+//						.param("fecha", "2020/12/10")
+//						.param("descripcion", "El operario no estaba"))	
+//			.andExpect(status().is2xxSuccessful())
+//			.andExpect(view().name("reclamaciones/listadoReclamaciones"));
+//	}
+//	
+//	@WithMockUser(value = "spring")
+//    @Test
+//    void testProcessCreationFormHasErrors() throws Exception {
+//		mockMvc.perform(post("/reclamaciones/save")
+//						.with(csrf())
+//						.param("fecha", "2020/12/8")
+//						.param("descripcion", ""))
+//			.andExpect(status().isOk())
+//			.andExpect(model().attributeHasErrors("reclamacion"))
+//			.andExpect(model().attributeHasFieldErrors("reclamacion", "descripcion"))
+//			.andExpect(view().name("reclamaciones/newReclamacion"));
+//	}
 }

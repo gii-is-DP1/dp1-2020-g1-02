@@ -5,10 +5,12 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -21,8 +23,8 @@ import lombok.Setter;
 public class Trabajador extends PersonaEntity {
 
     @Column(name="tipocategoria")
-    @NotEmpty
-    private String tipocategoria;
+    @NotNull
+    private TipoCategoria tipocategoria;
     
     @OneToMany(cascade=CascadeType.ALL, mappedBy="trabajador")
     private Set<ContratoTrabajador> contratos;
@@ -35,11 +37,13 @@ public class Trabajador extends PersonaEntity {
     
     @OneToMany(cascade = CascadeType.ALL, mappedBy="trabajador")
     private Set<RegistroHoras> registroHoras;
-    
 
-	public void addContrato(ContratoTrabajador c) {
-		getContratos().add(c);
-		c.setTrabajador(this);
-	}
+	  @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "username", referencedColumnName = "username")
+	  private User user;
+	
+	  public User getUser() {
+		  return user;
+	  }
 
 }

@@ -6,7 +6,9 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 
@@ -31,6 +33,19 @@ public class Proveedor extends NamedEntity{
     private String direccion;
     
     @OneToMany(cascade = CascadeType.ALL, mappedBy="proveedor")
+    private Set<Oferta> ofertas;
+    
+    @OneToMany(cascade = CascadeType.ALL, mappedBy="proveedor")
     private Set<Factura> facturas;
+    
+    //
+	@OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "username", referencedColumnName = "username")
+	private User user;
+	//
+	
+	public User getUser() {
+		return user;
+	}
 
 }

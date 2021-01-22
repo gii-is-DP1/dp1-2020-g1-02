@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.samples.petclinic.model.TipoCategoria;
 import org.springframework.samples.petclinic.model.Trabajador;
 import org.springframework.stereotype.Service;
 
@@ -33,7 +34,7 @@ public class TrabajadorServiceTest {
 		tr1.setDni("2556895C");
 		tr1.setCorreo("hjhjhjh@lk.com");
 		tr1.setTelefono("666666666");
-		tr1.setTipocategoria("Limpieza");
+		tr1.setTipocategoria(TipoCategoria.Limpieza);
 		//Act
 		trabajadorService.save(tr1);
 		int count = trabajadorService.eventCount();

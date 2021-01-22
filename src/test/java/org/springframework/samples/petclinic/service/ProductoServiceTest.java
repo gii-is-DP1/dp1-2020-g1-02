@@ -1,5 +1,6 @@
 package org.springframework.samples.petclinic.service;
 
+import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
@@ -48,6 +49,12 @@ public class ProductoServiceTest {
 		assertEquals(false, productoService.findProductoById(1).isPresent());
 	}
 	
+	@Test
+	public void testFindByName() {
+		String name = "Escoba";
+		assertTrue(productoService.findByName(name).get().getName().equals(name));
+		
+	}
 	//Test negativos
 	@Test
 	public void testNoEncuentraProductoById() {

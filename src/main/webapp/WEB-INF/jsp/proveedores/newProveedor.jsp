@@ -6,29 +6,27 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="petclinic" tagdir="/WEB-INF/tags" %>
 
-<petclinic:layout pageName="clientes">
+<petclinic:layout pageName="proveedor">
     <h2>
-        <c:if test="${cliente['new']}">Nuevo </c:if> Cliente
+        <c:if test="${proveedor['new']}">Nuevo </c:if> Proveedor
     </h2>
     <div class="container">
     <p>Registrar como:</p>
     <a href="/users/new"><button class="btn btn-default" type="submit">Cliente</button></a>
     <a href="/users/newProveedor"><button class="btn btn-default" type="submit">Proveedor</button></a>
-    <form:form modelAttribute="cliente" class="form-horizontal" id="add-cliente-form" action="/users/saveCliente">
+    <form:form modelAttribute="proveedor" class="form-horizontal" id="add-proveedor-form" action="/users/saveProveedor">
         <div class="form-group has-feedback">
-            <petclinic:inputField label="Nombre" name="nombre"/>
-            <petclinic:inputField label="Apellidos" name="apellidos"/>
+            <petclinic:inputField label="Nombre de la empresa" name="name"/>
             <petclinic:inputField label="Telefono" name="telefono"/>
             <petclinic:inputField label="Direccion" name="direccion"/>
-            <petclinic:inputField label="Dni" name="dni"/>
-            <petclinic:inputField label="Correo" name="correo"/>
+            <petclinic:inputField label="Correo" name="email"/>
             <petclinic:inputField label="Username" name="user.username"/>
             <petclinic:inputField label="Password" name="user.password"/>
         </div>
         <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
                 <c:choose>
-                    <c:when test="${cliente['new']}">
+                    <c:when test="${proveedor['new']}">
                         <button class="btn btn-default" type="submit">Añadir Cliente</button>
                     </c:when>
                     <c:otherwise>
