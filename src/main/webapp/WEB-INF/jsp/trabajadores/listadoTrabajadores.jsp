@@ -10,9 +10,14 @@
 <petclinic:layout pageName="trabajadores">
     <h2>Trabajadores</h2>
 	
-	<a href="trabajadores/new">
+	<a href="/users/newTrabajador">
 		<button type="button" class="btn btn-default btn-lg">
   			<span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Nuevo trabajador
+		</button>
+	</a>
+	<a href="/users/newAdministrador">
+		<button type="button" class="btn btn-default btn-lg">
+  			<span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Nuevo administrador
 		</button>
 	</a>
 	
@@ -64,9 +69,6 @@
                     <c:out value="${trabajador.tipocategoria}"/>
                 </td>
                 
-              <%--   <td>
-                		<c:out value="${trabajador.contratos[0].id}"/>
-                </td> --%>
           		<td>
                 	<c:forEach var="contrato" items="${trabajador.contratos}">
                 			<c:out value="${contrato.id}"/>
@@ -93,6 +95,12 @@
                 		<spring:param name="trabajadorId" value="${trabajador.id}"/>
                 	</spring:url>
                 	<a href="${fn:escapeXml(trabajadorUrl)}">Editar</a>
+                </td>
+                <td>
+                	<spring:url value="contratosTrabajadores/{tId}/new" var="trabajadorUrl">
+                		<spring:param name="tId" value="${trabajador.id}"/>
+                	</spring:url>
+                	<a href="${fn:escapeXml(trabajadorUrl)}">Nuevo Contrato</a>
                 </td>
             </tr>
         </c:forEach>

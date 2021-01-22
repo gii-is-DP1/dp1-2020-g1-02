@@ -77,7 +77,7 @@
        						<input type="hidden" id="sId" name="sId" value=' <c:out value="${servicio.id}"/>'>
        						<button type="submit">Enviar presupuesto</button>
        				</form:form> --%>
-       				<spring:url value="/servicios/{servicioId}/presupuestos/new" var="addUrl">
+       				<spring:url value="servicios/{servicioId}/presupuesto/new" var="addUrl">
       				  <spring:param name="servicioId" value="${servicio.id}"/>
    					 </spring:url>
    					 <a href="${fn:escapeXml(addUrl)}" class="btn btn-default">Enviar presupuesto</a>

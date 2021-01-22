@@ -56,10 +56,5 @@ public class Servicio extends BaseEntity {
 	
 	@OneToMany(cascade=CascadeType.ALL, mappedBy="servicio")
     private List<Presupuesto> presupuestos;
-	
-	public void addPresupuesto(Presupuesto p) {
-		getPresupuestos().add(p);
-		p.setServicio(this);
-	}
-	
+
 }
