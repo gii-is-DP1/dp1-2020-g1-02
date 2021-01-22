@@ -6,7 +6,6 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.samples.petclinic.model.ContratoTrabajador;
-import org.springframework.samples.petclinic.model.Trabajador;
 import org.springframework.samples.petclinic.service.ContratoTrabajadorService;
 import org.springframework.samples.petclinic.service.TrabajadorService;
 import org.springframework.stereotype.Controller;
@@ -23,6 +22,8 @@ public class ContratoTrabajadorController {
 
 	@Autowired
 	private ContratoTrabajadorService contratoTrabajadorService;
+	@Autowired
+	private TrabajadorService trabajadorService;
 	
 	@GetMapping()
 	public String listadoContratosTrabajadores(ModelMap modelMap) {
@@ -32,10 +33,12 @@ public class ContratoTrabajadorController {
 		return vista;
 	}
 	
-	@GetMapping(path="/new")
-	public String crearContratoTrabajador(ModelMap modelMap) {
+	@GetMapping(path="/{tId}/new")
+	public String crearContratoTrabajador(@PathVariable("tId") int tId, ModelMap modelMap) {
 		String view="contratosTrabajadores/editContratoTrabajador";
-		modelMap.addAttribute("contratoTrabajador", new ContratoTrabajador());
+		ContratoTrabajador c= new ContratoTrabajador();
+		c.setTrabajador(trabajadorService.findTrabajadorById(tId).get());
+		modelMap.addAttribute("contratoTrabajador", c);
 		return view;
 	}
 	

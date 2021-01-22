@@ -4,18 +4,24 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="petclinic" tagdir="/WEB-INF/tags" %>
 
-
 <petclinic:layout pageName="ContratosTrabajadores">
+
+<jsp:attribute name="customScript">
+        <script>
+            $(function () {
+                $("#fechainicial").datepicker({dateFormat: 'yy/mm/dd'});
+              });
+        </script>
+ </jsp:attribute>
     <jsp:body>
        <h2>Contrato Trabajador</h2>
        <form:form modelAttribute="contratoTrabajador" class="form-horizontal" action="/contratosTrabajadores/save">
        		<div class="form-group has-feedback">
-       			<petclinic:inputField label="FechaInicial" name="fechainicial"/>
-       			<petclinic:inputField label="FechaFinal" name="fechafinal"/>
-       			<input type="number" name="idtrabajador" />
-       		<%-- 	<petclinic:inputField label="IdTrabajador" name="idtrabajador"/> --%>
+       			<petclinic:inputField label="Fecha Inicial" name="fechainicial"/>
+       			<petclinic:inputField label="Fecha Final" name="fechafinal"/>
        			<petclinic:inputField label="Sueldo" name="sueldo"/>
        			
+       			<input type="hidden" name="trabajador" value=' <c:out value="${contratoTrabajador.trabajador.id}"/>'>
        			
        		</div>
             <div class="form-group">

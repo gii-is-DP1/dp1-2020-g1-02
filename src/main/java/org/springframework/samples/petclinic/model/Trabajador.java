@@ -37,15 +37,13 @@ public class Trabajador extends PersonaEntity {
     
     @OneToMany(cascade = CascadeType.ALL, mappedBy="trabajador")
     private Set<RegistroHoras> registroHoras;
-    
-    //
-	@OneToOne(cascade = CascadeType.ALL)
+
+	  @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "username", referencedColumnName = "username")
-	private User user;
-	//
+	  private User user;
 	
-	public User getUser() {
-		return user;
-	}
+	  public User getUser() {
+		  return user;
+	  }
 
 }

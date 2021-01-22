@@ -50,7 +50,7 @@ public class ServicioServiceTest {
 		//Arrange
 		int id = 1;
 		//Act
-		Optional<Servicio> ser1 = servicioService.findServicioById(id);
+		Servicio ser1 = servicioService.findServicioById(id).get();
 		//Assert
 		assertNotNull(ser1);
 	}
