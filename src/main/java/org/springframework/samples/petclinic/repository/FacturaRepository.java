@@ -10,16 +10,10 @@ import org.springframework.samples.petclinic.model.Factura;
 
 public interface FacturaRepository extends CrudRepository<Factura, Integer>{
 
-//	@Query("SELECT f FROM Factura f WHERE f.proveedor.name LIKE ':nameProv%'")
-//	Iterable<Factura> findFacturasByProveedorName(@Param("nameProv") String nameProv);
-	
-	
-//	@Query("SELECT f FROM Factura f  INNER JOIN Proveedor p ON f.proveedor = p.id  WHERE p.name LIKE ':nameProv%' ")
-//	Iterable<Factura> findFacturasByProveedorName(@Param("nameProv") String nameProv);
-	
-//	@Query("SELECT f FROM Factura AS f INNER JOIN Proveedor AS p  ON f.proveedor = p.id  WHERE p.name LIKE ':nameProv%' ")
-//	Iterable<Factura> findFacturasByProveedorName(@Param("nameProv") String nameProv);
 	
 	@Query("SELECT DISTINCT f FROM Factura f LEFT JOIN FETCH f.proveedor WHERE f.proveedor.name LIKE :nameProv%")
 	Collection<Factura> findFacturasByProveedorName(@Param("nameProv") String nameProv);
+	
+//	@Query("SELECT DISTINCT f FROM Factura f WHERE f.pedido.id LIKE :idP%")
+//	Optional<Factura> findFacturaByPedidoID(@Param("idP") String idP);
 }

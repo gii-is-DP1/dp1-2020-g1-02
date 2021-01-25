@@ -6,8 +6,10 @@ import java.time.format.DateTimeFormatter;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.samples.petclinic.model.Factura;
 import org.springframework.samples.petclinic.model.Oferta;
 import org.springframework.samples.petclinic.model.Pedido;
+import org.springframework.samples.petclinic.service.FacturaService;
 import org.springframework.samples.petclinic.service.OfertaService;
 import org.springframework.samples.petclinic.service.PedidoService;
 import org.springframework.stereotype.Controller;
@@ -26,6 +28,8 @@ public class PedidoController {
 	private PedidoService pedidoService;
 	@Autowired
 	private OfertaService ofertaService;
+	@Autowired
+	private FacturaService facturaService;
 	
 	@GetMapping()
 	public String listadoPedidos(ModelMap modelMap) {
@@ -35,19 +39,6 @@ public class PedidoController {
 		return vista;
 	}
 	
-//	@GetMapping(path="/new/{oId}")
-//	public String crearPedido(@PathVariable("oId") int oId, ModelMap modelMap) {
-//		String view="administradores/editPedido";
-//		Oferta o = ofertaService.findOfertaById(oId).get();
-//		
-//		Pedido p = new Pedido();
-//		p.setFechaPedido(LocalDate.now());
-//		
-//		o.añadirPedido(p);
-//		
-//		modelMap.addAttribute("pedido", p);
-//		return view;
-//	}
 	@GetMapping(path="/new/{oId}")
 	public String crearPedido(@PathVariable("oId") int oId, ModelMap modelMap) {
 		String view="administradores/editPedido";
@@ -58,22 +49,6 @@ public class PedidoController {
         return view;
 	}
 	
-//	@PostMapping(path="/save")
-//	public String salvarPedido(@Valid Pedido pedido, Integer oId, BindingResult result, ModelMap modelMap) {
-//		String view="redirect:/pedidos";
-//		
-//		if(result.hasErrors()) {
-//			modelMap.addAttribute("pedido", pedido);
-//			return "administradores/editPedido";
-//		} else {
-//			Oferta oferta = ofertaService.findOfertaById(oId).get();
-//			oferta.añadirPedido(pedido);
-//			pedidoService.save(pedido);
-//			modelMap.addAttribute("message", "Pedido actualizado!");
-////			view=listadoPedidos(modelMap);
-//		}
-//		return view;
-//	}
 
 	@PostMapping(path="/save")
 	public String salvarPedido(@Valid Pedido pedido, BindingResult result, ModelMap modelMap) {
@@ -84,7 +59,10 @@ public class PedidoController {
         } else {
         	if(pedidoService.cumpleCondicion(pedido)) {
         		pedido.setFechaPedido(LocalDate.now());
+        		
+//        		pedido.setFactura(facturaService.findFacturaById(id));
         		pedidoService.save(pedido);
+        		facturaService.creaFactura(pedido);
         	}else {
         		modelMap.addAttribute("error", "No puede superar 100€ el precio total.");
         		return "administradores/editPedido";
@@ -92,6 +70,7 @@ public class PedidoController {
             
 //            view=listadoPedidos(modelMap);
         }
+        
         return view;
 	}
 }

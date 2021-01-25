@@ -1,5 +1,8 @@
 package org.springframework.samples.petclinic.web;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
 
 import javax.validation.Valid;
@@ -31,12 +34,22 @@ public class FacturaController {
 		return vista;
 	}
 	
+	@GetMapping(path="/{facturaId}")
+	public String verFactura(@PathVariable("facturaId") int facturaId, ModelMap modelMap) {
+		String vista = "facturas/verFactura";
+
+		Factura factura = facturaService.findFacturaById(facturaId).get();
+		modelMap.addAttribute("factura", factura);
+		return vista;
+	}
+	
 	@GetMapping(path="/new")
 	public String crearFactura(ModelMap modelMap) {
 		String view="facturas/editFactura";
 		modelMap.addAttribute("factura", new Factura());
 		return view;
 	}
+	
 	
 	@GetMapping(path="/filtrado")
 	public String filtradoFactura(String nameProv,ModelMap modelMap) {

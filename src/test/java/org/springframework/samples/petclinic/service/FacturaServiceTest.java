@@ -51,7 +51,7 @@ public class FacturaServiceTest {
 		Factura facturaNew = new Factura();
 		facturaNew.setFecha(LocalDate.now());
 		facturaNew.setPrecio_total(50.0);
-		facturaNew.setProveedor(proveedorService.findProveedorById(2).get());
+//		facturaNew.setProveedor(proveedorService.findProveedorById(2).get());
 //		
 		Pedido ped = new Pedido();
 		ped.setFechaPedido(LocalDate.now());
