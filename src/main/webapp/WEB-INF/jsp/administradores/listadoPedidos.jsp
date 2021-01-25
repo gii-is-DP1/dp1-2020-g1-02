@@ -31,6 +31,17 @@
                 <td>
                     <c:out value="${pedido.oferta.producto.name}"/>
                 </td>
+                <td>
+                    <c:out value="${pedido.factura.id}"/>
+                </td>
+                
+                <td>
+                
+                    <spring:url value="/facturas/{facturaId}" var="facturaUrl">
+              		<spring:param name="facturaId" value="${pedido.factura.id}"/>
+	              	</spring:url>
+	              	<a href="${fn:escapeXml(facturaUrl)}">Ver factura</a>
+                </td>
             </tr>
         </c:forEach>
         </tbody>

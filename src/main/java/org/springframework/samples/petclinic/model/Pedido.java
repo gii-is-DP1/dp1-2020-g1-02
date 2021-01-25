@@ -2,6 +2,7 @@ package org.springframework.samples.petclinic.model;
 
 import java.time.LocalDate;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 
 import javax.persistence.Entity;
@@ -34,8 +35,7 @@ public class Pedido extends BaseEntity{
     @JoinColumn(name = "oferta_id")
     private Oferta oferta;
     
-    @OneToOne(optional=true)
-    @JoinColumn(name="factura_id")
+    @OneToOne(optional=true, cascade = CascadeType.ALL, mappedBy="pedido")
     private Factura factura;
 
 }
