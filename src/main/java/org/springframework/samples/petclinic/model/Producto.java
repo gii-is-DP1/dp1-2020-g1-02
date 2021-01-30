@@ -1,5 +1,6 @@
 package org.springframework.samples.petclinic.model;
 
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -21,6 +22,6 @@ public class Producto extends NamedEntity {
 	private Integer cantidad;
 	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy="producto")
-    private Set<Oferta> ofertas;
+    private List<Oferta> ofertas;
 	
 }
