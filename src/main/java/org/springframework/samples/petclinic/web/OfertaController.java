@@ -54,6 +54,7 @@ public class OfertaController {
 		Optional<Producto> producto = productoService.findByName(oferta.getName());
 		oferta.setProducto(producto.get());
 		if(result.hasErrors()) {
+			
 			modelMap.addAttribute("oferta", oferta);
 			return "ofertas/editOferta";
 		}else {

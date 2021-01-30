@@ -77,6 +77,8 @@ public class OfertaControllerTest {
 		oferta.setProveedor(proveedor);
 		
 		given(this.ofertaService.findOfertaById(1)).willReturn(Optional.of(oferta));
+		given(this.productoService.findByName("Fregona")).willReturn(Optional.of(producto));
+		given(this.provService.findProveedorById(1)).willReturn(Optional.of(proveedor));
 		
 		List<Oferta> ofertas = new ArrayList<Oferta>();
 		ofertas.add(oferta);
@@ -105,10 +107,9 @@ public class OfertaControllerTest {
 						.with(csrf())
 						.param("name", "Fregona")
 						.param("precioU", "4.05")
-//						.param("proveedor", "1"))
-						)
-			.andExpect(status().is2xxSuccessful())
-			.andExpect(view().name("ofertas/listadoOfertas"));
+						.param("proveedor", "1"))
+			.andExpect(status().is3xxRedirection())
+			.andExpect(view().name("redirect:/ofertas"));
 	}
 	
 	@WithMockUser(value = "spring")
@@ -116,12 +117,12 @@ public class OfertaControllerTest {
     void testProcessCreationFormHasErrors() throws Exception {
 		mockMvc.perform(post("/ofertas/save")
 						.with(csrf())
-						.param("name", "")
-						.param("precioU", "4.05")
+						.param("name", "Fregona")
+						.param("precioU", "")
 						.param("proveedor", "1"))
 			.andExpect(status().isOk())
 			.andExpect(model().attributeHasErrors("oferta"))
-			.andExpect(model().attributeHasFieldErrors("oferta", "name"))
+			.andExpect(model().attributeHasFieldErrors("oferta", "precioU"))
 			.andExpect(view().name("ofertas/editOferta"));
 	}
 
