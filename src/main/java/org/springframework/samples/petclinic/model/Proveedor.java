@@ -1,5 +1,6 @@
 package org.springframework.samples.petclinic.model;
 
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -33,10 +34,10 @@ public class Proveedor extends NamedEntity{
     private String direccion;
     
     @OneToMany(cascade = CascadeType.ALL, mappedBy="proveedor")
-    private Set<Oferta> ofertas;
+    private List<Oferta> ofertas;
     
     @OneToMany(cascade = CascadeType.ALL, mappedBy="proveedor")
-    private Set<Factura> facturas;
+    private List<Factura> facturas;
     
     //
 	@OneToOne(cascade = CascadeType.ALL)
