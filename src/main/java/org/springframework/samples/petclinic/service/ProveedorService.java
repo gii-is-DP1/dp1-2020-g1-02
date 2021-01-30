@@ -48,6 +48,11 @@ public class ProveedorService {
 		deleteProveedor(proveedorBorrar);
 	}
 	
+	public Optional<Proveedor> findProveedorByUsername(String username) {
+		// TODO Auto-generated method stub
+		return proveedorRepo.findProveedorByUsername(username);
+	}
+	
 	public Optional<Proveedor> findProveedorById(int id) {
 		// TODO Auto-generated method stub
 		return proveedorRepo.findById(id);
