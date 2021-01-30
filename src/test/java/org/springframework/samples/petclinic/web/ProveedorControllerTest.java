@@ -3,6 +3,7 @@ package org.springframework.samples.petclinic.web;
 import static org.hamcrest.Matchers.hasProperty;
 import static org.hamcrest.Matchers.is;
 import static org.mockito.BDDMockito.given;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
@@ -65,5 +66,36 @@ public class ProveedorControllerTest {
 		.andExpect(model().attributeExists("prov"))
 		.andExpect(view().name("proveedores/listadoProv"));
 	}
+	
+//	@WithMockUser(value = "spring")
+//	@Test
+//	void testInitCreationForm() throws Exception{
+//		mockMvc.perform(get("/proveedores/new")).andExpect(status().isOk()).andExpect(model().attributeExists("proveedor"))
+//		.andExpect(view().name("instalaciones/newInstalacion"));
+//	}
+	
+//	@WithMockUser(value = "spring")
+//    @Test
+//    void testProcessCreationFormSuccess() throws Exception {
+//		mockMvc.perform(post("/instalaciones/save")
+//						.with(csrf())
+//						.param("dimension", "120.3")
+//						.param("lugar", "Calle Río Danubio 23"))
+//			.andExpect(status().is2xxSuccessful())
+//			.andExpect(view().name("instalaciones/listadoInstalaciones"));
+//	}
+	
+//	@WithMockUser(value = "spring")
+//    @Test
+//    void testProcessCreationFormHasErrors() throws Exception {
+//		mockMvc.perform(post("/instalaciones/save")
+//						.with(csrf())
+//						.param("dimension", "")
+//						.param("lugar", "Calle Santa Maria"))
+//			.andExpect(status().isOk())
+//			.andExpect(model().attributeHasErrors("instalacion"))
+//			.andExpect(model().attributeHasFieldErrors("instalacion", "dimension"))
+//			.andExpect(view().name("instalaciones/newInstalacion"));
+//	}
 	
 }
