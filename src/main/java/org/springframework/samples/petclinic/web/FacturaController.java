@@ -44,6 +44,7 @@ public class FacturaController {
 	}
 	
 	
+	
 	@GetMapping(path="/filtrado")
 	public String filtradoFactura(String nameProv,ModelMap modelMap) {
 		String view="facturas/listadoFacturas";
