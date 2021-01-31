@@ -143,6 +143,7 @@ public class FacturaControllerTest {
 //		.andExpect(model().attribute("factura", hasProperty("pedido", is(pedido))))
 		.andExpect(view().name("redirect:/facturas"));
 	}
+	
 
 
 }

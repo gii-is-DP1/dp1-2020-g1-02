@@ -58,9 +58,16 @@ public class OfertaController {
 			modelMap.addAttribute("oferta", oferta);
 			return "ofertas/editOferta";
 		}else {
+			
+			if(proveedorService.findProveedorById(oferta.getProveedor().getId()).isEmpty()) {
+				modelMap.addAttribute("oferta", oferta);
+				modelMap.addAttribute("error", "No existe el proveedor que ha seleccionado.");
+				return "ofertas/editOferta";
+			}else {
 			ofertaService.save(oferta);
 			modelMap.addAttribute("message", "Oferta añadida!");
 //			view=listadoOfertas(modelMap);
+			}
 		}
 		return view;
 	}

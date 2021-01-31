@@ -46,8 +46,12 @@ public class FacturaService {
 		deleteFactura(facturaBorrar);
 	}
 
+//	public Collection<Factura> findFacturaByProveedorName(String name) {
+//		return facturaRepo.findFacturasByProveedorName(name);
+//	}
+	
 	public Collection<Factura> findFacturaByProveedorName(String name) {
-		return facturaRepo.findFacturasByProveedorName(name);
+		return facturaRepo.findAllByProveedorName(name.toLowerCase());
 	}
 	
 	

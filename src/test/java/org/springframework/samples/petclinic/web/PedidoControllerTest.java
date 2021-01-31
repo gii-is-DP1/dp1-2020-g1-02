@@ -83,6 +83,7 @@ public class PedidoControllerTest {
 
         oferta = new Oferta();
         oferta.setId(1);
+        oferta.setName(producto.getName());
         oferta.setPrecioU("2.35");
         oferta.setProducto(producto);
         oferta.setProveedor(proveedor);
@@ -106,6 +107,7 @@ public class PedidoControllerTest {
 		given(this.pedidoService.findAll()).willReturn(Lists.list(pedido));
 		given(this.ofertaService.findOfertaById(1)).willReturn(Optional.of(oferta));
 		given(this.productoService.findByName(pedido.getOferta().getName())).willReturn(Optional.of(producto));
+		given(this.pedidoService.cumpleCondicion(pedido)).willReturn(true);
 		
 	}
 
@@ -119,8 +121,10 @@ public class PedidoControllerTest {
 	
 	@WithMockUser(value = "spring")
 	@Test
-	void testInitCreationForm() throws Exception{
-		mockMvc.perform(get("pedidos/new/{oId}", 1)).andExpect(status().isOk()).andExpect(model().attributeExists("pedido"))
+	void testNewPedido() throws Exception{
+		mockMvc.perform(get("/pedidos/new/{oId}", 1)).andExpect(status().isOk())
+		.andExpect(model().attributeExists("pedido"))
+		.andExpect(model().attribute("pedido", hasProperty("oferta", is(oferta))))
 		.andExpect(view().name("administradores/editPedido"));
 	}
 	
@@ -130,10 +134,12 @@ public class PedidoControllerTest {
 		mockMvc.perform(post("/pedidos/save")
 						.with(csrf())
 						.param("cantidadProducto", "5")
-						.param("fechaPedido", "2021-01-31")
+						.param("fechaPedido", "2021/01/31")
 						.param("oferta", "1"))
-			.andExpect(status().is3xxRedirection())
-			.andExpect(view().name("pedidos"));
+			.andExpect(model().attributeExists("pedido"))
+//			.andExpect(model().attribute("pedido", hasProperty("oferta", is(oferta))))
+			.andExpect(status().is2xxSuccessful())
+			.andExpect(view().name("redirect:/pedidos"));
 	}
 	
 //	@WithMockUser(value = "spring")

@@ -53,20 +53,5 @@ public class FacturaController {
 	}
 	
 	
-	
-	@GetMapping(path="/delete/{facturaId}")
-	public String borrarTrabajador(@PathVariable("facturaId") Integer facturaId, ModelMap modelmap) {
-		String view="redirect:/facturas";
-		Optional<Factura> factura=facturaService.findFacturaById(facturaId);
-		if(factura.isPresent()) {
-			facturaService.deleteFactura(factura.get());
-			modelmap.addAttribute("message", "Factura borrada correctamente");
-			
-		}else {
-			modelmap.addAttribute("message", "Factura no encontrada");
-//			view=listadoFacturas(modelmap);
-		}
-		return view;
-	}
 
 }

@@ -31,6 +31,7 @@ public class Oferta extends NamedEntity {
 	
 	@ManyToOne
 	@JoinColumn(name="proveedor")
+	@NotNull
 	private Proveedor proveedor;
 	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy="oferta")

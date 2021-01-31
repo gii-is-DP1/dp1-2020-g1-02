@@ -67,16 +67,16 @@ public class PedidoController {
 //        		pedido.setFactura(facturaService.findFacturaById(id));
         		pedidoService.save(pedido);
         		Producto producto = productoService.findByName(pedido.getOferta().getName()).get();
-        		productoService.sumarProducto(producto, pedido);
+//        		productoService.sumarProducto(producto, pedido);
         		facturaService.creaFactura(pedido);
+        		return view;
         	}else {
-        		modelMap.addAttribute("error", "No puede superar 100€ el precio total.");
+        		modelMap.addAttribute("pedido", pedido);
+        		modelMap.addAttribute("error", "No puede superar 100 euros el precio total.");
         		return "administradores/editPedido";
         	}
-            
-//            view=listadoPedidos(modelMap);
         }
         
-        return view;
+        
 	}
 }
