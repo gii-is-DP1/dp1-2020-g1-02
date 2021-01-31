@@ -27,7 +27,6 @@ public class Oferta extends NamedEntity {
 	
 	@ManyToOne
     @JoinColumn(name="producto_id")
-//	@NotNull
     private Producto producto;
 	
 	@ManyToOne
