@@ -24,7 +24,7 @@
         <tr>
             <th style="width: 150px;">Fecha</th>
             <th style="width: 150px;">Precio total</th>
-            <th style="width: 150px;">>Nombre del proveedor</th>
+            <th style="width: 150px;">Nombre del proveedor</th>
             <th style="width: 150px;">ID del pedido</th>
 
 
@@ -44,13 +44,6 @@
               </td>
               <td>
                   <c:out value="${factura.pedido.id}"/>
-              </td>
-              
-              <td>
-              	<spring:url value="/facturas/delete/{facturaId}" var="facturaUrl">
-              		<spring:param name="facturaId" value="${factura.id}"/>
-              	</spring:url>
-              	<a href="${fn:escapeXml(facturaUrl)}">Delete</a>
               </td>
           </tr>
      		</c:forEach>

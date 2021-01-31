@@ -27,11 +27,11 @@ public class Oferta extends NamedEntity {
 	
 	@ManyToOne
     @JoinColumn(name="producto_id")
-//	@NotNull
     private Producto producto;
 	
 	@ManyToOne
 	@JoinColumn(name="proveedor")
+	@NotNull
 	private Proveedor proveedor;
 	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy="oferta")

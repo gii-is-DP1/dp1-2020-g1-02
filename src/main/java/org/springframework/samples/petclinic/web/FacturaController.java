@@ -43,12 +43,6 @@ public class FacturaController {
 		return vista;
 	}
 	
-	@GetMapping(path="/new")
-	public String crearFactura(ModelMap modelMap) {
-		String view="facturas/editFactura";
-		modelMap.addAttribute("factura", new Factura());
-		return view;
-	}
 	
 	
 	@GetMapping(path="/filtrado")
@@ -59,33 +53,6 @@ public class FacturaController {
 		return view;
 	}
 	
-	@PostMapping(path="/save")
-	public String salvarFactura(@Valid Factura factura, BindingResult result, ModelMap modelMap) {
-		String view="facturas/listadoFacturas";
-		if(result.hasErrors()) {
-			modelMap.addAttribute("factura", factura);
-			return "events/editEvent";
-		}else {
-			facturaService.save(factura);
-			modelMap.addAttribute("message", "Factura actualizada!");
-			view=listadoFacturas(modelMap);
-		}
-		return view;
-	}
 	
-	@GetMapping(path="/delete/{facturaId}")
-	public String borrarTrabajador(@PathVariable("facturaId") int facturaId, ModelMap modelmap) {
-		String view="redirect:/facturas";
-		Optional<Factura> factura=facturaService.findFacturaById(facturaId);
-		if(factura.isPresent()) {
-			facturaService.deleteFactura(factura.get());
-			modelmap.addAttribute("message", "Factura borrada correctamente");
-			
-		}else {
-			modelmap.addAttribute("message", "Factura no encontrada");
-//			view=listadoFacturas(modelmap);
-		}
-		return view;
-	}
 
 }
