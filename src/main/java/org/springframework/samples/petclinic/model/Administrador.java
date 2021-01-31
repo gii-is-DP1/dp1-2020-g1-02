@@ -21,7 +21,7 @@ public class Administrador extends PersonaEntity{
 	
     @Column(name="tipocategoria")
     @NotNull
-    private String tipocategoria; 
+    private TipoCategoria tipocategoria; 
     
     //
 	@OneToOne(cascade = CascadeType.ALL)

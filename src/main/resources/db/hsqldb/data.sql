@@ -3,12 +3,14 @@ INSERT INTO users(username,password,enabled) VALUES ('admin','$2a$10$scVXDdcGmWu
 INSERT INTO users(username,password,enabled) VALUES ('Nick Furia','$2a$10$scVXDdcGmWu8SNk/6EP/y.ox5UKp8eQoTpZTzYC6Q.Rgf0/gJW6C6',TRUE);
 INSERT INTO users(username,password,enabled) VALUES ('Ironman','$2a$10$scVXDdcGmWu8SNk/6EP/y.ox5UKp8eQoTpZTzYC6Q.Rgf0/gJW6C6',TRUE);
 INSERT INTO users(username,password,enabled) VALUES ('Capitan América','$2a$10$scVXDdcGmWu8SNk/6EP/y.ox5UKp8eQoTpZTzYC6Q.Rgf0/gJW6C6',TRUE);
+INSERT INTO users(username,password,enabled) VALUES ('Don Limpio','$2a$10$scVXDdcGmWu8SNk/6EP/y.ox5UKp8eQoTpZTzYC6Q.Rgf0/gJW6C6',TRUE);
 
 
 INSERT INTO authorities(id,username,authority) VALUES (1,'admin','administrador');
 INSERT INTO authorities(id,username,authority) VALUES (2,'Nick Furia','cliente');
 INSERT INTO authorities(id,username,authority) VALUES (3,'Ironman','cliente');
 INSERT INTO authorities(id,username,authority) VALUES (4,'Capitan América','cliente');
+INSERT INTO authorities(id,username,authority) VALUES (5,'Don Limpio','proveedor');
 
 INSERT INTO trabajador(id,nombre,apellidos,dni,telefono, direccion, correo, tipocategoria) VALUES (1,'Carlos Jesus', 'Villadiego', '78461836B','666888888','C/Garcia Marquez n2', 'calvirgar@alum.us.es', 0);
 INSERT INTO trabajador(id,nombre,apellidos,dni,telefono, direccion, correo, tipocategoria) VALUES (2,'Carlos Jesus2', 'Villadiego', '78461836B','666888888','C/Garcia Marquez n2', 'calvirgar@alum.us.es', 2);
@@ -30,7 +32,7 @@ INSERT INTO instalacion(lugar, dimension, cliente_id) VALUES ('Calle Águila Pis
 INSERT INTO instalacion(lugar, dimension, cliente_id) VALUES ('Calle Betis Piso 1ºD',17.3, 2);
 INSERT INTO instalacion(lugar, dimension, cliente_id) VALUES ('Calle Albania', 130.9, 3);
 
-INSERT INTO proveedor(name,telefono,email,direccion) VALUES ('Lejias SL', '645681128', 'lejiassl@gmail.com', 'Calle Reina 14, Sevilla'); 
+INSERT INTO proveedor(name,telefono,email,direccion,username) VALUES ('Lejias SL', '645681128', 'lejiassl@gmail.com', 'Calle Reina 14, Sevilla','Don Limpio'); 
 INSERT INTO proveedor(name,telefono,email,direccion) VALUES ('Jabones SA', '645681127', 'jabonessa@gmail.com', 'Calle Mercedes 14, Madrid'); 
 
 INSERT INTO producto(name, cantidad) VALUES ('Lejia', 30);

@@ -76,4 +76,9 @@ public class TrabajadorService {
 		//creating authorities
 		authoritiesService.saveAuthorities(trabajador.getUser().getUsername(), "trabajador");	
 	}
+	
+	@Transactional
+	public void actualizarTrabajador(Trabajador trabajador) throws DataAccessException {
+		trabajadorRepo.save(trabajador);
+	}
 }

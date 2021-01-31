@@ -67,4 +67,11 @@ public class ProveedorService {
 		//creating authorities
 		authoritiesService.saveAuthorities(proveedor.getUser().getUsername(), "proveedor");	
 	}
+	
+	@Transactional
+	public void actualizarProveedor(Proveedor proveedor) throws DataAccessException {
+		proveedorRepo.save(proveedor);
+	}
+	
+	
 }

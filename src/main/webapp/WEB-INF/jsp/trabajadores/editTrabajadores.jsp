@@ -9,7 +9,7 @@
     <jsp:body>
        <h2><c:if test="${trabajador['new']}">Nuevo</c:if>Trabajador</h2>
        <div class="container">
-       <form:form modelAttribute="trabajador" class="form-horizontal" action="/users/actualizarTrabajador">
+       <form:form modelAttribute="trabajador" class="form-horizontal" action="/users/saveTrabajador">
        		<div class="form-group has-feedback">
        			<input type="hidden" id="id" name="id" value=' <c:out value="${trabajador.id}"/>'>
        			<petclinic:inputField label="Nombre" name="nombre"/>
