@@ -55,7 +55,7 @@ public class UserController {
 	
 	@GetMapping("/newAdministrador")
 	public String newAdministrador(ModelMap modelMap) {
-		String vista ="administradores/editAdministrador";
+		String vista ="administradores/newAdministrador";
 		Administrador administrador = new Administrador();
 		modelMap.addAttribute("trabajador", administrador);
 		return vista;
@@ -128,7 +128,16 @@ public class UserController {
 			modelMap.addAttribute("cliente", cliente);
 			return "users/new";
 		}else {
-			clienteService.saveCliente(cliente);
+			Cliente clientToUpDate = clienteService.findClienteById(cliente.getId()).get();
+			
+			clientToUpDate.setNombre(cliente.getNombre());
+			clientToUpDate.setApellidos(cliente.getApellidos());
+			clientToUpDate.setCorreo(cliente.getCorreo());
+			clientToUpDate.setDireccion(cliente.getDireccion());
+			clientToUpDate.setTelefono(cliente.getTelefono());
+			
+			
+			clienteService.actualizarCliente(clientToUpDate);
 			//modelMap.addAttribute("message", "Cliente actualizado!");
 		}
 		return view;
@@ -141,9 +150,16 @@ public class UserController {
 			modelMap.addAttribute("trabajador", trabajador);
 			return "users/newTrabajador";
 		}else {
+			Trabajador employeeToUpDate = trabajadorService.findTrabajadorById(trabajador.getId()).get();
 			
-			trabajadorService.saveTrabajador(trabajador);
-			//modelMap.addAttribute("message", "Trabajador insertado correctamente!");
+			employeeToUpDate.setNombre(trabajador.getNombre());
+			employeeToUpDate.setApellidos(trabajador.getApellidos());
+			employeeToUpDate.setCorreo(trabajador.getCorreo());
+			employeeToUpDate.setDireccion(trabajador.getDireccion());
+			employeeToUpDate.setTelefono(trabajador.getTelefono());
+			
+			
+			trabajadorService.actualizarTrabajador(employeeToUpDate);
 		}
 		return view;
 	}
@@ -155,7 +171,14 @@ public class UserController {
 			modelMap.addAttribute("proveedor", proveedor);
 			return "users/newProveedor";
 		}else {
-			proveedorService.saveProveedor(proveedor);
+			Proveedor supplierToUpDate = proveedorService.findProveedorById(proveedor.getId()).get();
+	
+			supplierToUpDate.setEmail(proveedor.getEmail());
+			supplierToUpDate.setDireccion(proveedor.getDireccion());
+			supplierToUpDate.setTelefono(proveedor.getTelefono());
+			
+			
+			proveedorService.actualizarProveedor(supplierToUpDate);
 			//modelMap.addAttribute("message", "Cliente actualizado!");
 		}
 		return view;
@@ -192,25 +215,28 @@ public class UserController {
 		if(principal != null && principal.getUsername().equals(username)) {
 			switch(principal.getAuthorities().getAuthority()) {
 				case "administrador": 
-					view ="administradores/perfilAdministrador";
+					view ="users/perfilView";
 					Administrador administrador = administradorService.findAdministradorByUsername(principal.getUsername()).get();
-					administrador.getUser().setPassword(principal.getPassword());
-					modelMap.addAttribute("trabajador", administrador);
+					modelMap.addAttribute("administrador", administrador);
+					modelMap.addAttribute("rol", "administrador");
 					break;
 				case "trabajador": 
-					view = "trabajadores/editTrabajadores";
+					view = "users/perfilView";
 					Trabajador trabajador = trabajadorService.findTrabajadorByUsername(principal.getUsername()).get();
 					modelMap.addAttribute("trabajador", trabajador);
+					modelMap.addAttribute("rol", "trabajador");
 					break;
 				case "proveedor": 
-					view ="proveedores/newProveedor";
+					view ="users/perfilView";
 					Proveedor proveedor = proveedorService.findProveedorByUsername(principal.getUsername()).get();
 					modelMap.addAttribute("proveedor", proveedor);
+					modelMap.addAttribute("rol", "proveedor");
 					break;
 				case "cliente": 
-					view ="clientes/newCliente";
+					view ="users/perfilView";
 					Cliente cliente = clienteService.findClienteByUsername(principal.getUsername()).get();
 					modelMap.addAttribute("cliente", cliente);
+					modelMap.addAttribute("rol", "cliente");
 					break;
 				default: break;
 			}

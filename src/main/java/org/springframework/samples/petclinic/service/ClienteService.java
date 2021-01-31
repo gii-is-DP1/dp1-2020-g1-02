@@ -65,5 +65,12 @@ public class ClienteService {
 		//creating authorities
 		authoritiesService.saveAuthorities(client.getUser().getUsername(), "cliente");	
 	}
+	
+	@Transactional
+	public void actualizarCliente(Cliente client) throws DataAccessException {
+		clienteRepo.save(client);
+	}
+	
+	
 
 }
