@@ -44,7 +44,7 @@ public class PedidoController {
 	}
 	
 	@GetMapping(path="/new/{oId}")
-	public String crearPedido(@PathVariable("oId") int oId, ModelMap modelMap) {
+	public String crearPedido(@PathVariable("oId") Integer oId, ModelMap modelMap) {
 		String view="administradores/editPedido";
         Pedido p = new Pedido();
         p.setOferta(ofertaService.findOfertaById(oId).get());
