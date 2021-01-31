@@ -13,6 +13,10 @@ public interface ProductoRepository extends CrudRepository<Producto, Integer> {
 	@Query("UPDATE Producto p SET p.cantidad= ?2 WHERE p.id = ?1")
 	void restarProducto(Integer productoId, Integer cant);
 	
+	@Modifying
+	@Query("UPDATE Producto p SET p.cantidad= ?2 WHERE p.id = ?1")
+	void sumarCantidadProducto(Integer productoId, Integer cant);
+	
 	@Query("SELECT p FROM Producto p WHERE p.name = ?1")
 	Optional<Producto> findByName(String name);
 	
