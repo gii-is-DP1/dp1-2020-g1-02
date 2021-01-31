@@ -40,10 +40,13 @@ public class AdministradorService {
 	}
 
 	public Optional<Administrador> findAdministradorById(int adminId) {
-
 		return administradorRepo.findById(adminId);
 	}
 
+	public Optional<Administrador> findAdministradorByUsername(String username) {
+		return administradorRepo.findAdministradorByUsername(username);
+	}
+	
 	public void deleteById(Integer id) {
 		Administrador administradorBorrar = findAdministradorById(id).get();
 		delete(administradorBorrar);
@@ -54,11 +57,14 @@ public class AdministradorService {
 		//creating owner
 		administradorRepo.save(administrador);
 		//creating user
-		/*String contrasenya = administrador.getUser().getPassword();
-		administrador.getUser().setPassword(encoder.encode(contrasenya));*/
 		userService.saveUser(administrador.getUser());
 		//creating authorities
 		authoritiesService.saveAuthorities(administrador.getUser().getUsername(), "administrador");	
+	}
+	
+	public void actualizarAdministrador(Administrador administrador) throws DataAccessException {
+		//creating owner
+		administradorRepo.save(administrador);
 	}
 }
 

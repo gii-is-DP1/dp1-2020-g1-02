@@ -48,6 +48,11 @@ public class ProveedorService {
 		deleteProveedor(proveedorBorrar);
 	}
 	
+	public Optional<Proveedor> findProveedorByUsername(String username) {
+		// TODO Auto-generated method stub
+		return proveedorRepo.findProveedorByUsername(username);
+	}
+	
 	public Optional<Proveedor> findProveedorById(int id) {
 		// TODO Auto-generated method stub
 		return proveedorRepo.findById(id);
@@ -62,4 +67,11 @@ public class ProveedorService {
 		//creating authorities
 		authoritiesService.saveAuthorities(proveedor.getUser().getUsername(), "proveedor");	
 	}
+	
+	@Transactional
+	public void actualizarProveedor(Proveedor proveedor) throws DataAccessException {
+		proveedorRepo.save(proveedor);
+	}
+	
+	
 }

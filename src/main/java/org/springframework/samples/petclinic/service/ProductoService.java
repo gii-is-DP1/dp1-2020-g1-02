@@ -3,6 +3,7 @@ package org.springframework.samples.petclinic.service;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.samples.petclinic.model.Pedido;
 import org.springframework.samples.petclinic.model.Producto;
 import org.springframework.samples.petclinic.repository.ProductoRepository;
 import org.springframework.stereotype.Service;
@@ -39,6 +40,12 @@ public class ProductoService {
 	@Transactional
 	public void restarProducto(Producto product) {
 		productRepo.restarProducto(product.getId(), product.getCantidad()-1);
+	}
+	
+	@Transactional
+	public void sumarProducto(Producto product, Pedido pedido) {
+		Integer cantidadActual = product.getCantidad() + pedido.getCantidadProducto();
+		productRepo.sumarCantidadProducto(product.getId(), cantidadActual);
 	}
 
 	

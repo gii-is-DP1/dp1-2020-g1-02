@@ -10,6 +10,7 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -65,7 +66,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 				.antMatchers("/productos/**").permitAll()
 
-				.antMatchers("/trabajadores/**").hasAnyAuthority("administrador")
+				.antMatchers("/trabajadores/**").permitAll()//.hasAnyAuthority("administrador", "trabajador")
 
 				.antMatchers("/contratosTrabajadores/**").hasAnyAuthority("administrador")
 
@@ -100,20 +101,17 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		auth.jdbcAuthentication()
 	      .dataSource(dataSource)
 	      .usersByUsernameQuery(
-	       "select username,password,enabled "
-	        + "from users "
-	        + "where username = ?")
+	       "select username,password,enabled from users where username = ?")
 	      .authoritiesByUsernameQuery(
 	       "select username, authority "
 	        + "from authorities "
-	        + "where username = ?")	      	      
-	      .passwordEncoder(passwordEncoder());	
+	        + "where username = ?")	   	      
+	      .passwordEncoder(encoder());	
 	}
 	
 	@Bean
-	public PasswordEncoder passwordEncoder() {	    
-		PasswordEncoder encoder =  NoOpPasswordEncoder.getInstance();
-	    return encoder;
+	public PasswordEncoder encoder() {
+	    return new BCryptPasswordEncoder();
 	}
 	
 }

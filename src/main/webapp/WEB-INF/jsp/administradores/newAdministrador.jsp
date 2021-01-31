@@ -12,8 +12,8 @@
        <form:form modelAttribute="trabajador" class="form-horizontal" action="/users/saveAdministrador">
        		<div class="form-group has-feedback">
        			<input type="hidden" id="id" name="id" value=' <c:out value="${trabajador.id}"/>'>
-       			<petclinic:inputField label="Nombre" name="nombre"/>
-       			<petclinic:inputField label="Apellidos" name="apellidos"/>
+       			<petclinic:inputField label="Nombre" name="nombre" />
+       			<petclinic:inputField label="Apellidos" name="apellidos" />
        			<petclinic:inputField label="DNI" name="dni"/>
        			<petclinic:inputField label="Telefono" name="telefono"/>
        			<petclinic:inputField label="Direccion" name="direccion"/>
@@ -21,10 +21,10 @@
        			<petclinic:inputField label="Username" name="user.username"/>
            		<petclinic:inputField label="Password" name="user.password"/>
        			<label for="tipocategoria">Categoria</label>
-  				<form:select path="" id="tipocategoria" name="tipocategoria">
-    				<option value="Limpieza">Limpieza</option>
-				    <option value="Mantenimiento">Mantenimiento</option>
-				    <option value="Lavanderia">Lavandería</option>
+  				<form:select path="tipocategoria">
+    				<option value='Limpieza'>Limpieza</option>
+				    <option value='Mantenimiento'>Mantenimiento</option>
+				    <option value='Lavanderia'>Lavandería</option>
   				</form:select>
        		</div>
             <div class="form-group">

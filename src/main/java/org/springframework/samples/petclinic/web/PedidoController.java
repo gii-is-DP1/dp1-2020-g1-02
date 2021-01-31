@@ -9,9 +9,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.samples.petclinic.model.Factura;
 import org.springframework.samples.petclinic.model.Oferta;
 import org.springframework.samples.petclinic.model.Pedido;
+import org.springframework.samples.petclinic.model.Producto;
 import org.springframework.samples.petclinic.service.FacturaService;
 import org.springframework.samples.petclinic.service.OfertaService;
 import org.springframework.samples.petclinic.service.PedidoService;
+import org.springframework.samples.petclinic.service.ProductoService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -30,6 +32,8 @@ public class PedidoController {
 	private OfertaService ofertaService;
 	@Autowired
 	private FacturaService facturaService;
+	@Autowired
+	private ProductoService productoService;
 	
 	@GetMapping()
 	public String listadoPedidos(ModelMap modelMap) {
@@ -40,7 +44,7 @@ public class PedidoController {
 	}
 	
 	@GetMapping(path="/new/{oId}")
-	public String crearPedido(@PathVariable("oId") int oId, ModelMap modelMap) {
+	public String crearPedido(@PathVariable("oId") Integer oId, ModelMap modelMap) {
 		String view="administradores/editPedido";
         Pedido p = new Pedido();
         p.setOferta(ofertaService.findOfertaById(oId).get());
@@ -62,6 +66,8 @@ public class PedidoController {
         		
 //        		pedido.setFactura(facturaService.findFacturaById(id));
         		pedidoService.save(pedido);
+        		Producto producto = productoService.findByName(pedido.getOferta().getName()).get();
+        		productoService.sumarProducto(producto, pedido);
         		facturaService.creaFactura(pedido);
         	}else {
         		modelMap.addAttribute("error", "No puede superar 100€ el precio total.");
