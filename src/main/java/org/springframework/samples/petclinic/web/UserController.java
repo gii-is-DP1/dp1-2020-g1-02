@@ -13,8 +13,6 @@ import org.springframework.samples.petclinic.service.ClienteService;
 import org.springframework.samples.petclinic.service.ProveedorService;
 import org.springframework.samples.petclinic.service.TrabajadorService;
 import org.springframework.samples.petclinic.service.UserService;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -128,17 +126,20 @@ public class UserController {
 			modelMap.addAttribute("cliente", cliente);
 			return "users/new";
 		}else {
-			Cliente clientToUpDate = clienteService.findClienteById(cliente.getId()).get();
-			
-			clientToUpDate.setNombre(cliente.getNombre());
-			clientToUpDate.setApellidos(cliente.getApellidos());
-			clientToUpDate.setCorreo(cliente.getCorreo());
-			clientToUpDate.setDireccion(cliente.getDireccion());
-			clientToUpDate.setTelefono(cliente.getTelefono());
-			
-			
-			clienteService.actualizarCliente(clientToUpDate);
-			//modelMap.addAttribute("message", "Cliente actualizado!");
+			User principal = userService.getLoggedUser();
+			if(principal != null && principal.getUsername().equals(cliente.getUser().getUsername())) {
+				Cliente clientToUpDate = clienteService.findClienteById(cliente.getId()).get();
+				
+				clientToUpDate.setNombre(cliente.getNombre());
+				clientToUpDate.setApellidos(cliente.getApellidos());
+				clientToUpDate.setCorreo(cliente.getCorreo());
+				clientToUpDate.setDireccion(cliente.getDireccion());
+				clientToUpDate.setTelefono(cliente.getTelefono());
+				
+				
+				clienteService.actualizarCliente(clientToUpDate);
+				//modelMap.addAttribute("message", "Cliente actualizado!");
+			}
 		}
 		return view;
 	}
@@ -150,16 +151,19 @@ public class UserController {
 			modelMap.addAttribute("trabajador", trabajador);
 			return "users/newTrabajador";
 		}else {
-			Trabajador employeeToUpDate = trabajadorService.findTrabajadorById(trabajador.getId()).get();
-			
-			employeeToUpDate.setNombre(trabajador.getNombre());
-			employeeToUpDate.setApellidos(trabajador.getApellidos());
-			employeeToUpDate.setCorreo(trabajador.getCorreo());
-			employeeToUpDate.setDireccion(trabajador.getDireccion());
-			employeeToUpDate.setTelefono(trabajador.getTelefono());
-			
-			
-			trabajadorService.actualizarTrabajador(employeeToUpDate);
+			User principal = userService.getLoggedUser();
+			if(principal != null && principal.getUsername().equals(trabajador.getUser().getUsername())) {
+				Trabajador employeeToUpDate = trabajadorService.findTrabajadorById(trabajador.getId()).get();
+				
+				employeeToUpDate.setNombre(trabajador.getNombre());
+				employeeToUpDate.setApellidos(trabajador.getApellidos());
+				employeeToUpDate.setCorreo(trabajador.getCorreo());
+				employeeToUpDate.setDireccion(trabajador.getDireccion());
+				employeeToUpDate.setTelefono(trabajador.getTelefono());
+				
+				
+				trabajadorService.actualizarTrabajador(employeeToUpDate);
+			}
 		}
 		return view;
 	}
@@ -168,42 +172,52 @@ public class UserController {
 	public String actualizarProveedor(@Valid Proveedor proveedor, BindingResult result,ModelMap modelMap) {
 		String view="redirect:/";
 		if(result.hasErrors()) {
+			view = "users/perfilView";
 			modelMap.addAttribute("proveedor", proveedor);
-			return "users/newProveedor";
+			modelMap.addAttribute("rol", "proveedor");
 		}else {
-			Proveedor supplierToUpDate = proveedorService.findProveedorById(proveedor.getId()).get();
-	
-			supplierToUpDate.setEmail(proveedor.getEmail());
-			supplierToUpDate.setDireccion(proveedor.getDireccion());
-			supplierToUpDate.setTelefono(proveedor.getTelefono());
-			
-			
-			proveedorService.actualizarProveedor(supplierToUpDate);
-			//modelMap.addAttribute("message", "Cliente actualizado!");
+			User principal = userService.getLoggedUser();
+			if(principal != null && principal.getUsername().equals(proveedor.getUser().getUsername())) {
+				Proveedor supplierToUpDate = proveedorService.findProveedorById(proveedor.getId()).get();
+		
+				supplierToUpDate.setEmail(proveedor.getEmail());
+				supplierToUpDate.setDireccion(proveedor.getDireccion());
+				supplierToUpDate.setTelefono(proveedor.getTelefono());
+				
+				
+				proveedorService.actualizarProveedor(supplierToUpDate);
+				//modelMap.addAttribute("message", "Cliente actualizado!");
+			}
 		}
 		return view;
 	}
 	
 	@PostMapping(path="/actualizarAdministrador")
 	public String actualizarAdministrador(@Valid Administrador trabajador, BindingResult result,ModelMap modelMap) {
-		String view="redirect:/";
+		String view = "redirect:/";
 		if(result.hasErrors()) {
+			view = "users/perfilView";
 			modelMap.addAttribute("trabajador", trabajador);
-			return "users/carvilgar1";
+			modelMap.addAttribute("rol", "administrador");
 		}else {
-			Administrador adminToUpDate = administradorService.findAdministradorById(trabajador.getId()).get();
-			
-			//BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-			//String password = trabajador.getUser().getPassword();
-			//String encodedPassword = passwordEncoder.encode(password);
-			
-			adminToUpDate.setNombre(trabajador.getNombre());
-			adminToUpDate.setApellidos(trabajador.getApellidos());
-			adminToUpDate.setCorreo(trabajador.getCorreo());
-			adminToUpDate.setDireccion(trabajador.getDireccion());
-			adminToUpDate.setTelefono(trabajador.getTelefono());
-			//adminToUpDate.getUser().setPassword(encodedPassword);
-			administradorService.actualizarAdministrador(adminToUpDate);
+			User principal = userService.getLoggedUser();
+			if(principal != null && principal.getUsername().equals(trabajador.getUser().getUsername())) {
+				Administrador adminToUpDate = administradorService.findAdministradorById(trabajador.getId()).get();
+				
+				//BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+				//String password = trabajador.getUser().getPassword();
+				//String encodedPassword = passwordEncoder.encode(password);
+				
+				adminToUpDate.setNombre(trabajador.getNombre());
+				adminToUpDate.setApellidos(trabajador.getApellidos());
+				adminToUpDate.setCorreo(trabajador.getCorreo());
+				adminToUpDate.setDireccion(trabajador.getDireccion());
+				adminToUpDate.setTelefono(trabajador.getTelefono());
+				//adminToUpDate.getUser().setPassword(encodedPassword);
+				administradorService.actualizarAdministrador(adminToUpDate);
+			}else {
+				view = "redirect:/error";
+			}
 		}
 		return view;
 	}

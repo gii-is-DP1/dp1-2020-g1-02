@@ -88,14 +88,25 @@
 					<span class="glyphicon glyphicon-warning-sign" aria-hidden="true"></span>
 					<span>Error</span>
 				</petclinic:menuItem>
-                              <li class="mean-last"> <a href="#contact">signup</a> </li>
+							<c:if test = "${pageContext.request.userPrincipal.name == null}">
+         						<li class="mean-last"> <a href="/users/new">signup</a> </li>
+      						</c:if>
+      						<c:if test="${pageContext.request.userPrincipal.name != null}">
+								<li class="mean-last"> <a href="/logout">Logout</a> </li>
+							</c:if>
                            </ul>
                         </nav>
                      </div>
                   </div>
                </div>
                <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2">
-                  <li><a class="buy" href="/login">Login</a></li>
+               		<c:if test = "${pageContext.request.userPrincipal.name == null}">
+         				<li><a class="buy" href="/login">Login</a></li>
+      				</c:if>
+      				<c:if test="${pageContext.request.userPrincipal.name != null}">
+						<li><a class="buy" href="/users/<c:out value="${pageContext.request.userPrincipal.name}"/>">Perfil</a></li>
+					</c:if>
+                  
                </div>
             </div>
          </div>

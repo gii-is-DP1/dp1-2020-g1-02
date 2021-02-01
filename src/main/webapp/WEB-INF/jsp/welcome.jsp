@@ -5,7 +5,6 @@
 <!-- %@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %-->  
 
 <petclinic:layout pageName="home">
-    
 		 <section class="slider_section">
          <div id="main_slider" class="carousel slide banner-main" data-ride="carousel">
 

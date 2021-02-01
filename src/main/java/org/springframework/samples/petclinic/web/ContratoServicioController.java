@@ -23,6 +23,8 @@ public class ContratoServicioController {
 	public String listadoContratosServicios(ModelMap modelMap) {
 		String vista ="administradores/listadoContratosServicios";
 		Iterable<ContratoServicio> contratos = contratoServicioService.findAll();
+		Iterable<ContratoServicio> contratosQueCaducanEsteMes = contratoServicioService.contratosQueCaducanEsteMes();
+		modelMap.addAttribute("aviso", contratosQueCaducanEsteMes);
 		modelMap.addAttribute("contratosServicios", contratos);
 		return vista;
 	}

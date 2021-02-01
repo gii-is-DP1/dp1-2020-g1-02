@@ -1,5 +1,7 @@
 package org.springframework.samples.petclinic.service;
 
+import java.time.LocalDate;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.samples.petclinic.model.ContratoServicio;
 import org.springframework.samples.petclinic.repository.ContratoServicioRepository;
@@ -32,6 +34,11 @@ public class ContratoServicioService {
 	
 	public Iterable<ContratoServicio> buscaMorosos() {
 		return contratoServicioRepo.buscaMorosos();
+	}
+	
+	public Iterable<ContratoServicio> contratosQueCaducanEsteMes(){
+		LocalDate now = LocalDate.now();
+		return contratoServicioRepo.contratosQueCaducanEsteMes(now.getDayOfMonth(), now.getMonthValue(), now.getYear());
 	}
 
 }

@@ -15,7 +15,7 @@
         <label class="col-sm-2 control-label">${label}</label>
 
         <div class="col-sm-10">
-            <form:input class="form-control" path="${name}" readonly="${disabled}"/>
+            <form:input class="form-control" path="${name}" id="${name}" readonly="${disabled}"/>
             <c:if test="${valid}">
                 <span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>
             </c:if>
