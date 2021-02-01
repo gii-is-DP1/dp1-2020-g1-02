@@ -9,6 +9,10 @@
 
 <petclinic:layout pageName="productos">
     <h2>Productos</h2>
+    
+    <spring:url value="/productos/new" var="productUrl">
+    </spring:url>
+    <a href="${fn:escapeXml(productUrl)}" class="btn btn-default">Añadir Producto</a>
 
     <table id="productosTable" class="table table-striped">
         <thead>
@@ -16,9 +20,7 @@
             <th style="width: 150px;">Nombre</th>
             <th style="width: 150px;">Cantidad en Stock</th>
             <th style="width: 150px;"></th>
-            <!-- <th style="width: 150px;"> Solicitar más </th> -->
-
-
+            <th style="width: 150px;"></th>
         </tr>
         </thead>
         <tbody>
@@ -35,14 +37,14 @@
                 	<spring:url value="/productos/{productId}/restar" var="productUrl">
                 		<spring:param name="productId" value="${producto.id}"/>
                 	</spring:url>
-                	<a href="${fn:escapeXml(productUrl)}">Restar</a>
+                	<a href="${fn:escapeXml(productUrl)}">Restar unidad</a>
                 </td>
-                <%-- <td>
-                	<spring:url value="/productos/{productId}/solicitar" var="productUrl">
-                		<spring:param name="productId" value="${producto.id}"/>
+                <td>
+                	<spring:url value="/productos/delete/{productoId}" var="productUrl">
+                		<spring:param name="productoId" value="${producto.id}"/>
                 	</spring:url>
-                	<a href="${fn:escapeXml(productUrl)}">Solicitar</a>
-                </td> --%>
+                	<a href="${fn:escapeXml(productUrl)}">Borrar</a>
+                </td>
             </tr>
         </c:forEach>
         </tbody>

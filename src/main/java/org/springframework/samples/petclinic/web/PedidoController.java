@@ -53,7 +53,6 @@ public class PedidoController {
         return view;
 	}
 	
-
 	@PostMapping(path="/save")
 	public String salvarPedido(@Valid Pedido pedido, BindingResult result, ModelMap modelMap) {
 		String view="redirect:/pedidos";
@@ -63,11 +62,9 @@ public class PedidoController {
         } else {
         	if(pedidoService.cumpleCondicion(pedido)) {
         		pedido.setFechaPedido(LocalDate.now());
-        		
-//        		pedido.setFactura(facturaService.findFacturaById(id));
         		pedidoService.save(pedido);
         		Producto producto = productoService.findByName(pedido.getOferta().getName()).get();
-//        		productoService.sumarProducto(producto, pedido);
+        		productoService.sumarProducto(producto, pedido);
         		facturaService.creaFactura(pedido);
         		return view;
         	}else {
@@ -76,7 +73,6 @@ public class PedidoController {
         		return "administradores/editPedido";
         	}
         }
-        
-        
 	}
+	
 }

@@ -39,7 +39,7 @@ public class ProductoService {
 
 	@Transactional
 	public void restarProducto(Producto product) {
-		productRepo.restarProducto(product.getId(), product.getCantidad()-1);
+		if(product.getCantidad()>0) productRepo.restarProducto(product.getId(), product.getCantidad()-1);
 	}
 	
 	@Transactional
