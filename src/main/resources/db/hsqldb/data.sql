@@ -91,6 +91,8 @@ INSERT INTO contratoservicio(fechainicial, fechafinal, cliente, presupuesto, per
 INSERT INTO reclamacion(fecha, descripcion, cliente_id, servicio_id) VALUES ('2019-10-20', 'El servicio está incompleto', 1, 1);
 INSERT INTO reclamacion(fecha, descripcion, cliente_id, servicio_id) VALUES ('2019-10-20', 'El servicio está lamentable', 2, 2);
 
+INSERT INTO valoracion(fecha,nivelsatisfaccion, cliente_id, servicio_id) VALUES ('2019-10-20', 0, 1, 1);
+INSERT INTO valoracion(fecha,nivelsatisfaccion, cliente_id, servicio_id) VALUES ('2020-10-12', 2, 2, 2);
 
 /*-- One owner user, named owner1 with passwor 0wn3r
 INSERT INTO users(username,password,enabled) VALUES ('owner1','0wn3r',TRUE);

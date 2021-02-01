@@ -80,27 +80,27 @@ public class ReclamacionControllerTest {
 	}
 	
 	
-//	@WithMockUser(value = "spring")
-//    @Test
-//    void testProcessCreationFormSuccess() throws Exception {
-//		mockMvc.perform(post("/reclamaciones/save")
-//						.with(csrf())
-//						.param("fecha", "2020/12/10")
-//						.param("descripcion", "El operario no estaba"))	
-//			.andExpect(status().is2xxSuccessful())
-//			.andExpect(view().name("reclamaciones/listadoReclamaciones"));
-//	}
-//	
-//	@WithMockUser(value = "spring")
-//    @Test
-//    void testProcessCreationFormHasErrors() throws Exception {
-//		mockMvc.perform(post("/reclamaciones/save")
-//						.with(csrf())
-//						.param("fecha", "2020/12/8")
-//						.param("descripcion", ""))
-//			.andExpect(status().isOk())
-//			.andExpect(model().attributeHasErrors("reclamacion"))
-//			.andExpect(model().attributeHasFieldErrors("reclamacion", "descripcion"))
-//			.andExpect(view().name("reclamaciones/newReclamacion"));
-//	}
+	@WithMockUser(value = "spring")
+    @Test
+    void testProcessCreationFormSuccess() throws Exception {
+		mockMvc.perform(post("/reclamaciones/save")
+						.with(csrf())
+						.param("fecha", "2020/12/10")
+						.param("descripcion", "El operario no estaba"))	
+			.andExpect(status().is2xxSuccessful())
+			.andExpect(view().name("reclamaciones/listadoReclamaciones"));
+	}
+	
+	@WithMockUser(value = "spring")
+    @Test
+    void testProcessCreationFormHasErrors() throws Exception {
+		mockMvc.perform(post("/reclamaciones/save")
+						.with(csrf())
+						.param("fecha", "2020/12/8")
+						.param("descripcion", ""))
+			.andExpect(status().isOk())
+			.andExpect(model().attributeHasErrors("reclamacion"))
+			.andExpect(model().attributeHasFieldErrors("reclamacion", "descripcion"))
+			.andExpect(view().name("reclamaciones/newReclamacion"));
+	}
 }

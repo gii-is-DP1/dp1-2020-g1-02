@@ -5,7 +5,7 @@
 <%@ taglib prefix="petclinic" tagdir="/WEB-INF/tags" %>
 
 
-<petclinic:layout pageName="reclamaciones">
+<petclinic:layout pageName="valoraciones">
  	<jsp:attribute name="customScript">
         <script>
             $(function () {
@@ -14,11 +14,18 @@
         </script>
     </jsp:attribute>
     <jsp:body>
-       <h2>Poner una reclamacion</h2>
-       <form:form modelAttribute="reclamacion" class="form-horizontal" action="/reclamaciones/save">
+       <h2>Poner una valoracion</h2>
+       <form:form modelAttribute="valoracion" class="form-horizontal" action="/valoraciones/save">
        		<div class="form-group has-feedback">
        			<petclinic:inputField label="Fecha del Servicio" name="fecha"/>
-  				<petclinic:inputField label="Descripcion" name="descripcion"/>
+  				<label for="nivelsatisfaccion">Nivel de Satisfaccion</label>
+  				<select id="nivelsatisfaccion" name="nivelsatisfaccion">
+    				<option value="MuyAlto">Muy Alto</option>
+				    <option value="Alto">Alto</option>
+				    <option value="Medio">Medio</option>
+				    <option value="Bajo">Bajo</option>
+				    <option value="MuyBajo">Muy Bajo</option>
+  				</select>
   				<label for="cliente">Nombre del Cliente</label>
   				<select id="cliente" name="cliente">
   				<c:forEach items="${clientes}" var="cliente">
@@ -40,7 +47,7 @@
        		</div>
             <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-10">
-                    <button class="btn btn-default" type="submit">Poner Reclamacion</button>
+                    <button class="btn btn-default" type="submit">Realizar Valoracion</button>
                 </div>
             </div>
         </form:form>
