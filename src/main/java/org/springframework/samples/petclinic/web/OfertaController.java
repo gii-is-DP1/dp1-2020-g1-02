@@ -59,7 +59,7 @@ public class OfertaController {
 			return "ofertas/editOferta";
 		}else {
 			
-			if(proveedorService.findProveedorById(oferta.getProveedor().getId()).isEmpty()) {
+			if(!proveedorService.findProveedorById(oferta.getProveedor().getId()).isPresent()) {
 				modelMap.addAttribute("oferta", oferta);
 				modelMap.addAttribute("error", "No existe el proveedor que ha seleccionado.");
 				return "ofertas/editOferta";
