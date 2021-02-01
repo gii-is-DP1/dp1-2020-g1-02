@@ -55,8 +55,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 				.antMatchers("/curriculums/**").hasAnyAuthority("administrador")
 				
 				.antMatchers("/proveedores/**").hasAnyAuthority("administrador")
-
-				.antMatchers("/contacto/**").permitAll()
 				
 				.antMatchers("/valoraciones/**").permitAll()
 
@@ -64,7 +62,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 				
 				.antMatchers("/pedidos/**").permitAll()
 
-				.antMatchers("/ofertas/**").permitAll()
+				.antMatchers("/ofertas/new").hasAnyAuthority("proveedor")
+				
+				.antMatchers("/ofertas/**").hasAnyAuthority("administrador")
+				
+				
 
 				.antMatchers("/productos/**").permitAll()
 
