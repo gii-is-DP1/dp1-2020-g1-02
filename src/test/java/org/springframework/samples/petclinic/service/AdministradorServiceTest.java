@@ -37,7 +37,7 @@ public class AdministradorServiceTest {
 		Administrador administradorNew = new Administrador();
 		administradorNew.setNombre("Pablo");
 		administradorNew.setApellidos("Sánchez");
-		administradorNew.setTipocategoria(TipoCategoria.Mantenimiento);
+//		administradorNew.setTipocategoria(TipoCategoria.Mantenimiento);
 
 		administradorService.save(administradorNew);
 		

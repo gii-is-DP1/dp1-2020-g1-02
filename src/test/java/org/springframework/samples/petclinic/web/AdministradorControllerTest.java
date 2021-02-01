@@ -57,7 +57,7 @@ public class AdministradorControllerTest {
 		admin.setTelefono("628157278");
 		admin.setDireccion("Calle Huertas  31");
 		admin.setCorreo("carlosr@gmail.com");
-		admin.setTipocategoria(TipoCategoria.Limpieza);
+//		admin.setTipocategoria(TipoCategoria.Limpieza);
 		
 		given(this.administradorService.findAdministradorById(1)).willReturn(Optional.of(admin));
 		

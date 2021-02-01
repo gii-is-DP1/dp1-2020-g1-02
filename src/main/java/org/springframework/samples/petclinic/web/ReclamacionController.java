@@ -61,7 +61,7 @@ public class ReclamacionController {
 			return "reclamaciones/newReclamacion";
 		}else {
 			reclamacionService.save(reclamacion);
-			modelMap.addAttribute("message", "Cliente actualizado!");
+			modelMap.addAttribute("message", "Reclamación realizada!");
 		}
 		return view;
 	}
@@ -71,7 +71,7 @@ public class ReclamacionController {
 		String view = "redirect:/reclamaciones";
 		Optional<Reclamacion> reclamacion = reclamacionService.findReclamacionById(reclamacionId);
 		reclamacionService.delete(reclamacion.get());
-		modelmap.addAttribute("message", "Cliente borrado correctamente");
+		modelmap.addAttribute("message", "Reclamación borrada correctamente");
 		return view;
 	}
 }
