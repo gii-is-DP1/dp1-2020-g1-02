@@ -17,6 +17,7 @@
        			<petclinic:inputField label="precio" name="precio"/>
        			
        			<label for="tipopresupuesto">Tipo de Presupuesto</label>
+       			<input type="hidden" name="estado" value="Espera"/>
   				<select id="tipopresupuesto" name="tipopresupuesto">
     				<option value="PorHoras">Por horas</option>
 				    <option value="Cerrado">Cerrado</option>

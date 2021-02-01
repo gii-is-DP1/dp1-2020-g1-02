@@ -1,7 +1,9 @@
 package org.springframework.samples.petclinic.web;
 
 import static org.mockito.BDDMockito.given;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
@@ -20,15 +22,13 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.FilterType;
 import org.springframework.samples.petclinic.configuration.SecurityConfiguration;
 import org.springframework.samples.petclinic.model.EstadoServicio;
-import org.springframework.samples.petclinic.model.Proveedor;
 import org.springframework.samples.petclinic.model.Servicio;
 import org.springframework.samples.petclinic.model.TipoCategoria;
-import org.springframework.samples.petclinic.service.ProveedorService;
+import org.springframework.samples.petclinic.service.PresupuestoService;
 import org.springframework.samples.petclinic.service.ServicioService;
 import org.springframework.security.config.annotation.web.WebSecurityConfigurer;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
-import org.w3c.dom.ls.LSInput;
 
 @WebMvcTest(controllers= ServicioController.class,
 includeFilters= @ComponentScan.Filter(value = Servicio.class, type = FilterType.ASSIGNABLE_TYPE ),
@@ -37,11 +37,15 @@ excludeAutoConfiguration= SecurityConfiguration.class)
 
 public class ServicioControllerTest {
 	
+	private static int TEST_SERVICIO_ID=1;
+	
 	@Autowired
 	private MockMvc mockMvc;
 	
 	@MockBean
 	private ServicioService servicioService;
+	@MockBean
+	private PresupuestoService presupuestoService;
 	
 	private Servicio servicio;
 	
@@ -69,5 +73,44 @@ public class ServicioControllerTest {
 		.andExpect(model().attributeExists("servicios"))
 		.andExpect(view().name("servicios/listadoServicios"));
 	}
-
+	
+	@WithMockUser(value="spring")
+	@Test
+	void testNewServicio() throws Exception{
+		mockMvc.perform(get("/servicios/new")).andExpect(status().isOk()).andExpect(model().attributeExists("servicio")).andExpect(view().name("servicios/editServicio"));
+	}
+	
+	@WithMockUser(value=("spring"))
+	@Test
+	void testSaveServicio() throws Exception {
+		mockMvc.perform(post("/servicios/save").with(csrf())
+			.param("lugar", "Promociones Sanlucar")
+			.param("tipocategoria", "Limpieza")
+			.param("fechainicio", "2020/01/01")
+			.param("fechafin", "2020/02/01")
+			.param("estado", "Aceptado"))
+		.andExpect(status().is3xxRedirection()).andExpect(view().name("redirect:/servicios"));
+	}
+	
+	@WithMockUser(value="spring")
+	@Test
+	void testAceptarServicio() throws Exception {
+		mockMvc.perform(post("/servicios/aceptar").with(csrf())
+			.param("id","1"))
+		.andExpect(status().is3xxRedirection()).andExpect(view().name("redirect:/servicios"));
+	}
+	
+	@WithMockUser(value="spring")
+	@Test
+	void testRechazarServicio() throws Exception {
+		mockMvc.perform(post("/servicios/rechazar").with(csrf())
+			.param("id","1"))
+		.andExpect(status().is3xxRedirection()).andExpect(view().name("redirect:/servicios"));
+	}
+	
+	@WithMockUser(value="spring")
+	@Test
+	void testCrearPresupuesto() throws Exception {
+		mockMvc.perform(get("/servicios/{servicioId}/presupuestos/new", 1)).andExpect(status().isOk()).andExpect(model().attributeExists("presupuesto")).andExpect(view().name("presupuestos/editPresupuestos"));
+	}
 }
