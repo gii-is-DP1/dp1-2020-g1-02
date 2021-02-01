@@ -3,6 +3,7 @@ package org.springframework.samples.petclinic.service;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.samples.petclinic.model.EstadoServicio;
 import org.springframework.samples.petclinic.model.Presupuesto;
 import org.springframework.samples.petclinic.repository.PresupuestoRepository;
 import org.springframework.stereotype.Service;
@@ -33,6 +34,20 @@ public class PresupuestoService {
 	
 	public Optional<Presupuesto> findPresupuestoById(int pId) {
 		return presupuestoRepo.findById(pId);
+	}
+	
+	public Iterable<Presupuesto>presupuestosByServicio(Integer id){
+		return presupuestoRepo.presupuestosByServicio(id);
+	}
+
+	public void aceptar(Presupuesto presupuesto) {
+		presupuesto.setEstado(EstadoServicio.Aceptado);
+		presupuestoRepo.save(presupuesto);
+	}
+	
+	public void rechazar(Presupuesto presupuesto) {
+		presupuesto.setEstado(EstadoServicio.Rechazado);
+		presupuestoRepo.save(presupuesto);
 	}
 
 }
