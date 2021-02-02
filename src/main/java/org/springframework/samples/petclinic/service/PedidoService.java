@@ -1,13 +1,13 @@
 package org.springframework.samples.petclinic.service;
 
+import java.time.LocalDate;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.samples.petclinic.model.Factura;
-import org.springframework.samples.petclinic.model.Oferta;
 import org.springframework.samples.petclinic.model.Pedido;
-import org.springframework.samples.petclinic.repository.FacturaRepository;
+import org.springframework.samples.petclinic.model.Producto;
 import org.springframework.samples.petclinic.repository.PedidoRepository;
+import org.springframework.samples.petclinic.service.exceptions.LimitePedidoException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,6 +16,11 @@ public class PedidoService {
 
 	@Autowired
 	private PedidoRepository pedidoRepo;
+	
+	@Autowired
+	private ProductoService productoService;
+	@Autowired
+	private FacturaService facturaService;
 	
 	@Transactional
 	public int pedidoCount() {
@@ -44,6 +49,18 @@ public class PedidoService {
 		
 		return b;
 		
+	}
+	
+	public void crearPedido(Pedido pedido) throws LimitePedidoException {
+		if(this.cumpleCondicion(pedido)) {
+    		pedido.setFechaPedido(LocalDate.now());
+    		this.save(pedido);
+    		Producto producto = productoService.findByName(pedido.getOferta().getName()).get();
+    		productoService.sumarProducto(producto, pedido);
+    		facturaService.creaFactura(pedido);
+		} else {
+			throw new LimitePedidoException();
+		}
 	}
 
 	public Optional<Pedido> findById(Integer id) {
