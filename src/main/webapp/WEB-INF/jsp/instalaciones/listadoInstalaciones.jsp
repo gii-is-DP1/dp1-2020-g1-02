@@ -9,6 +9,12 @@
 
 <petclinic:layout pageName="instalaciones">
     <h2>Instalaciones</h2>
+    
+    <a href="instalaciones/new">
+		<button type="button" class="btn btn-default btn-lg">
+  			<span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Nueva Instalacion
+		</button>
+	</a>
 
     <table id="instalacionesTable" class="table table-striped">
         <thead>

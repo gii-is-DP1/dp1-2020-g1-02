@@ -11,7 +11,7 @@
 <petclinic:layout pageName="horarios">
     <h2>Horarios</h2>
 	
-	<a href="/new">
+	<a href="horarios/new">
 		<button type="button" class="btn btn-default btn-lg">
   			<span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Nuevo Horario
 		</button>
