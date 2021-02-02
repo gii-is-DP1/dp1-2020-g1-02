@@ -44,7 +44,6 @@ public class InstalacionController {
 		}else {
 			instalacionService.save(instalacion);
 			modelMap.addAttribute("message", "Instalación actualizado!");
-			view=listadoInstalaciones(modelMap);
 		}
 		return view;
 	}
@@ -58,7 +57,6 @@ public class InstalacionController {
 			modelmap.addAttribute("message", "Instalación borrada correctamente");
 		}else {
 			modelmap.addAttribute("message", "Instalación no encontrada");
-			view=listadoInstalaciones(modelmap);
 		}
 		return view;
 	}

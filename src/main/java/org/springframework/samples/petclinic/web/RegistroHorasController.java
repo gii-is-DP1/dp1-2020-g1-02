@@ -43,15 +43,14 @@ public class RegistroHorasController {
 	}
 	
 	@PostMapping(path="/save")
-	public String salvarRegistroHoras(@Valid RegistroHoras registroHoras, BindingResult result,ModelMap modelMap) {
+	public String salvarRegistroHoras(@Valid RegistroHoras registroHora, BindingResult result,ModelMap modelMap) {
 		String view="redirect:/registroHoras";
 		if(result.hasErrors()) {
-			modelMap.addAttribute("registro_horas", registroHoras);
+			modelMap.addAttribute("registro_horas", registroHora);
 			return "registroHoras/newRegistroHoras";
 		}else {
-			registroHorasService.saveRegistroHoras(registroHoras);
+			registroHorasService.saveRegistroHoras(registroHora);
 			modelMap.addAttribute("message", "Registro de Horas actualizado!");
-			view=listadoRegistroHoras(modelMap);
 		}
 		return view;
 	}
@@ -65,7 +64,6 @@ public class RegistroHorasController {
 			modelmap.addAttribute("message", "Registro de Horas borrado correctamente");
 		}else {
 			modelmap.addAttribute("message", "Registro de Horas no encontrado");
-			view=listadoRegistroHoras(modelmap);
 		}
 		return view;
 	}

@@ -9,13 +9,19 @@
 
 <petclinic:layout pageName="registro_horas">
     <h2>Registro de Horas</h2>
+    
+    <a href="registroHoras/new">
+		<button type="button" class="btn btn-default btn-lg">
+  			<span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Nuevo Registro de Horas
+		</button>
+	</a>
 
     <table id="registro_horastable" class="table table-striped">
         <thead>
         <tr>
             <th style="width: 150px;">Hora Entrada</th>
             <th style="width: 200px;">Hora Salida</th>
-            <th style="width: 200px;">ID del Trabajador</th>
+            <th style="width: 200px;">Nombre del Trabajador</th>
         </tr>
         </thead>
         <tbody>
@@ -28,7 +34,7 @@
                     <c:out value="${registro_hora.hora_salida}"/>
                 </td>
                  <td>
-                    <c:out value="${registro_hora.trabajador.id}"/>
+                    <c:out value="${registro_hora.trabajador.nombre}"/>
                 </td>
                 <td>
                 	<spring:url value="/registroHoras/delete/{registroHorasId}" var="registroHorasUrl">

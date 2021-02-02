@@ -46,7 +46,6 @@ public class ClienteController {
 		}else {
 			clienteService.save(cliente);
 			modelMap.addAttribute("message", "Cliente actualizado!");
-			view=listadoClientes(modelMap);
 		}
 		return view;
 	}
@@ -60,7 +59,6 @@ public class ClienteController {
 			modelmap.addAttribute("message", "Cliente borrado correctamente");
 		}else {
 			modelmap.addAttribute("message", "Cliente no encontrado");
-			view=listadoClientes(modelmap);
 		}
 		return view;
 	}

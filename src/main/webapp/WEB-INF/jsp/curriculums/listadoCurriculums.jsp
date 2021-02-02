@@ -9,6 +9,12 @@
 
 <petclinic:layout pageName="curriculums">
     <h2>Curriculums</h2>
+    
+    <a href="curriculums/new">
+		<button type="button" class="btn btn-default btn-lg">
+  			<span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Nuevo Curriculum
+		</button>
+	</a>
 
     <table id="curriculumsTable" class="table table-striped">
         <thead>

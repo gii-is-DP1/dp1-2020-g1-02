@@ -5,9 +5,11 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.samples.petclinic.model.Administrador;
 import org.springframework.samples.petclinic.model.Reclamacion;
+import org.springframework.samples.petclinic.model.Trabajador;
 import org.springframework.samples.petclinic.service.AdministradorService;
 import org.springframework.samples.petclinic.service.ContratoServicioService;
 import org.springframework.samples.petclinic.service.ReclamacionService;
+import org.springframework.samples.petclinic.service.TrabajadorService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -26,6 +28,8 @@ public class AdministradorController {
 	private ContratoServicioService contratoServicioService;
 	@Autowired
 	private ReclamacionService reclamacionService;
+	@Autowired
+	private TrabajadorService trabajadorService;
 	
 	@GetMapping()
 	public String listadoAdmin(ModelMap modelMap) {
@@ -45,7 +49,9 @@ public class AdministradorController {
 	
 	@GetMapping(path="/new")
 	public String crearAdministrador(ModelMap modelMap) {
-		String view="administradores/editAdmin";
+		String view="administradores/newAdministrador";
+		Iterable<Trabajador> trabajadores = trabajadorService.findAll();
+		modelMap.addAttribute("trabajadores", trabajadores);
 		modelMap.addAttribute("administrador", new Administrador());
 		return view;
 	}
@@ -66,7 +72,6 @@ public class AdministradorController {
 		}else {
 			adminService.save(administrador);
 			modelMap.addAttribute("message", "Administrador actualizado!");
-			view=listadoAdmin(modelMap);
 		}
 		return view;
 	}
@@ -80,7 +85,6 @@ public class AdministradorController {
 			modelmap.addAttribute("message", "Administrador borrado correctamente");
 		}else {
 			modelmap.addAttribute("message", "Administrador on encontrado");
-			view=listadoAdmin(modelmap);
 		}
 		return view;
 	}
