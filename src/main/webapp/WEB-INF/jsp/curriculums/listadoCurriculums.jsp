@@ -21,7 +21,7 @@
         <c:forEach items="${curriculum}" var="curriculum">
             <tr>
                 <td>
-                    <c:out value="${curriculum.name}"/>
+                    <c:out value="${curriculum.nombre}"/>
                 </td>
                 <td>
                     <c:out value="${curriculum.tipocategoria}"/>

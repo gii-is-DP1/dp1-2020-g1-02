@@ -25,6 +25,10 @@ public class Presupuesto extends BaseEntity {
 	@NotNull
 	private TipoPresupuesto tipopresupuesto;
 	
+	@Column(name="estado")
+	@NotNull
+	private EstadoServicio estado;
+	
 	@ManyToOne
 	@JoinColumn(name="servicio_id")
 	private Servicio servicio;

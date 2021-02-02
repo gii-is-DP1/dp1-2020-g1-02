@@ -1,7 +1,9 @@
 package org.springframework.samples.petclinic.web;
 
 import static org.mockito.BDDMockito.given;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
@@ -64,6 +66,37 @@ public class RegistroHorasControllerTest {
 		mockMvc.perform(get("/registroHoras")).andExpect(status().isOk())
 		.andExpect(model().attributeExists("registro_horas"))
 		.andExpect(view().name("registroHoras/listadoRegistroHoras"));
+	}
+	
+	@WithMockUser(value = "spring")
+	@Test
+	void testNewRegistroHoras() throws Exception{
+		mockMvc.perform(get("/registroHoras/new")).andExpect(status().isOk()).andExpect(model().attributeExists("registro_horas"))
+		.andExpect(view().name("registroHoras/newRegistroHoras"));
+	}
+	
+	@WithMockUser(value = "spring")
+    @Test
+    void testProcessCreationFormSuccess() throws Exception {
+		mockMvc.perform(post("/registroHoras/save")
+						.with(csrf())
+						.param("hora_entrada", "2020/12/10 10:00")
+						.param("hora_salida", "2020/12/10 15:00"))	
+			.andExpect(status().is2xxSuccessful())
+			.andExpect(view().name("registroHoras/listadoRegistroHoras"));
+	}
+	
+	@WithMockUser(value = "spring")
+    @Test
+    void testProcessCreationFormHasErrors() throws Exception {
+		mockMvc.perform(post("/registroHoras/save")
+						.with(csrf())
+						.param("hora_entrada", "")
+						.param("hora_salida", "2020/12/10 15:00"))
+			.andExpect(status().isOk())
+			.andExpect(model().attributeHasErrors("registro_horas"))
+			.andExpect(model().attributeHasFieldErrors("registro_horas", "hora_entrada"))
+			.andExpect(view().name("registroHoras/newRegistroHoras"));
 	}
 
 }

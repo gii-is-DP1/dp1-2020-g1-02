@@ -18,17 +18,18 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
-@Table(name = "reclamacion")
-public class Reclamacion extends BaseEntity {
-
+@Table(name = "valoracion")
+public class Valoracion extends BaseEntity {
+	
 	@Column(name="fecha")
 	@DateTimeFormat(pattern = "yyyy/MM/dd")
 	@NotNull
 	private LocalDate fecha;
 	
-	@Column(name = "descripcion")
-	@NotEmpty
-	private String descripcion;
+	
+	@Column(name = "nivelsatisfaccion")
+	@NotNull
+	private NivelSatisfaccion nivelsatisfaccion;
 	
 	@ManyToOne
     @JoinColumn(name="cliente_id")
@@ -37,6 +38,5 @@ public class Reclamacion extends BaseEntity {
 	@ManyToOne
 	@JoinColumn(name="servicio_id")
 	private Servicio servicio;
-	
-	
+
 }

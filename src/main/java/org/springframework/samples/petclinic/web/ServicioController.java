@@ -54,7 +54,8 @@ public class ServicioController {
 		if(result.hasErrors()) {
 			modelMap.addAttribute("servicio", servicio);
 			return "servicios/editServicio";
-		}else {
+		}
+		else {
 			servicioService.save(servicio);
 			modelMap.addAttribute("message", "Servicio actualizado!");
 		}
@@ -85,7 +86,15 @@ public class ServicioController {
 		return vista;
 	}
 	
-	@GetMapping(path="/{servicioId}/presupuesto/new")
+	@GetMapping(value="/{servicioId}/presupuestos")
+	public String listadoPresupuestos(@PathVariable("servicioId") Integer id, ModelMap modelMap) {
+		String vista = "presupuestos/listadoPresupuestoPorServicio";
+		Iterable<Presupuesto> presupuestos=presupuestoService.presupuestosByServicio(id);
+		modelMap.addAttribute("presupuestos", presupuestos);
+		return vista;
+	}
+	
+	@GetMapping(path="/{servicioId}/presupuestos/new")
 	public String crearPresupuesto(@PathVariable("servicioId") Integer servicioId, ModelMap modelMap) {
 		String view = "presupuestos/editPresupuesto";
 		Presupuesto p= new Presupuesto();
@@ -96,15 +105,36 @@ public class ServicioController {
 	
 	@PostMapping(path="/presupuestos/save")
 	public String salvarPresupuesto(@Valid Presupuesto presupuesto, BindingResult result, ModelMap modelMap) {
-		String view = "redirect:/servicios";
+		String view = "redirect:/servicios/"  + presupuesto.getServicio().getId() + "/presupuestos";
+		Integer a=presupuestoService.numeroPresupuestosByServicioConEstadoAceptado(presupuesto.getServicio().getId());
 		if(result.hasErrors()) {
 			modelMap.addAttribute("presupuesto", presupuesto);
 			return "presupuestos/editPresupuesto";
-		} else {
+		}else {
+			if(a>0) {
+				modelMap.addAttribute("mensaje", "No se enviar presupuesto a un servicio que ya tiene un presupuesto aceptado");
+				view="redirect:/error";
+			}else {
 			presupuestoService.save(presupuesto);
 			modelMap.addAttribute("mensaje", "Presupuesto actualizado!!");
+			}
 		}
 		return view;
 	}
-
+	
+	@PostMapping(path="/{presupuestoId}/aceptar")
+	public String aceptarPresupuesto(Integer id, ModelMap modelMap) {
+		Optional<Presupuesto> p= presupuestoService.findPresupuestoById(id);
+		presupuestoService.aceptar(p.get());
+		String view="redirect:/servicios/" + p.get().getServicio().getId() + "/presupuestos";
+		return view;
+	}
+	
+	@PostMapping(path="/{presupuestoId}/rechazar")
+	public String rechazarPresupuesto(Integer id, ModelMap modelMap) {
+		Optional<Presupuesto> p= presupuestoService.findPresupuestoById(id);
+		presupuestoService.rechazar(p.get());;
+		String view="redirect:/servicios/" + p.get().getServicio().getId() + "/presupuestos";
+		return view;
+	}
 }

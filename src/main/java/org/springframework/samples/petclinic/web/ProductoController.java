@@ -32,16 +32,9 @@ public class ProductoController {
 		return vista;
 	}
 	
-	@GetMapping(path="/edit")
-	public String editaProducto(ModelMap modelMap) {
-		String view="productos/editProducto";
-		modelMap.addAttribute("producto", new Producto());
-		return view;
-	}
-	
 	@GetMapping(path="/new")
 	public String crearProducto(ModelMap modelMap) {
-		String view="productos/editProducto";
+		String view="productos/newProducto";
 		modelMap.addAttribute("producto", new Producto());
 		return view;
 	}
@@ -51,11 +44,11 @@ public class ProductoController {
 		String view="redirect:/productos";
 		if(result.hasErrors()) {
 			modelMap.addAttribute("producto", producto);
-			return "productos/edit";
+			return "productos/newProducto";
 		}else {
+			producto.setCantidad(0);
 			productService.save(producto);
-			modelMap.addAttribute("message", "Producto actualizado!");
-			view=listadoProductos(modelMap);
+			modelMap.addAttribute("message", "Producto guardado!");
 		}
 		return view;
 	}
@@ -65,6 +58,14 @@ public class ProductoController {
 		Producto product = productService.findProductoById(productoId).get();
 		productService.restarProducto(product);
 		modelmap.addAttribute("message", "Producto actualizado!");
+		return "redirect:/productos";
+	}
+	
+	@GetMapping(path="/delete/{productoId}")
+	public String borrarProducto(@PathVariable("productoId") int productoId, ModelMap modelmap) {
+		Producto product = productService.findProductoById(productoId).get();
+		productService.delete(product);
+		modelmap.addAttribute("message", "Producto borrado!");
 		return "redirect:/productos";
 	}
 
