@@ -1,6 +1,10 @@
 package org.springframework.samples.petclinic.service;
 
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,4 +55,22 @@ public class UserService {
 	public User getLoggedUser() {
 		return this.findUser(SecurityContextHolder.getContext().getAuthentication().getName()).get();
 	}
+
+	public Iterable<User> findAll(){
+		return userRepository.findAll();
+	}
+	
+	public List<String> findAllUsernames() {
+		List<String> list = new ArrayList<String>();
+		Iterable<User> users = findAll();
+		Iterator<User> it = users.iterator();
+		while(it.hasNext()) {
+			list.add(it.next().getUsername());
+		}
+		return list;
+	}
+	
+	
+	
+	
 }

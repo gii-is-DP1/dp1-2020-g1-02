@@ -2,7 +2,7 @@ package org.springframework.samples.petclinic.web;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.samples.petclinic.model.Mensajes;
+import org.springframework.samples.petclinic.model.Mensaje;
 import org.springframework.samples.petclinic.service.MensajesService;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
@@ -22,9 +22,9 @@ public class MensajesValidator implements Validator {
 	
 	@Override
 	public void validate(Object obj, Errors errors) {
-		Mensajes msj = (Mensajes) obj;
-		String asunto = msj.getAsuntoA();
-		String mensaje = msj.getMensajeA();
+		Mensaje msj = (Mensaje) obj;
+		String asunto = msj.getAsunto();
+		String mensaje = msj.getCuerpo();
 
 		if (asunto == null || asunto.trim().equals("")) {
 			errors.rejectValue("asunto", REQUIRED, REQUIRED);
@@ -40,6 +40,6 @@ public class MensajesValidator implements Validator {
 
 	@Override
 	public boolean supports(Class<?> clazz) {
-		return Mensajes.class.isAssignableFrom(clazz);
+		return Mensaje.class.isAssignableFrom(clazz);
 	}
 }

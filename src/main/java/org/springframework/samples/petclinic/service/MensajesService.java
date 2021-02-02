@@ -1,9 +1,12 @@
 package org.springframework.samples.petclinic.service;
 
+import java.util.Collection;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.samples.petclinic.model.Mensajes;
+import org.springframework.dao.DataAccessException;
+import org.springframework.samples.petclinic.model.Mensaje;
+import org.springframework.samples.petclinic.model.User;
 import org.springframework.samples.petclinic.repository.MensajesRepository;
 import org.springframework.stereotype.Service;
 
@@ -17,15 +20,15 @@ public class MensajesService {
 		this.mensajesAdminRepo = mensajesAdminRepo;
 	}
 
-	public <S extends Mensajes> S save(S entity) {
+	public <S extends Mensaje> S save(S entity) {
 		return mensajesAdminRepo.save(entity);
 	}
 
-	public <S extends Mensajes> Iterable<S> saveAll(Iterable<S> entities) {
+	public <S extends Mensaje> Iterable<S> saveAll(Iterable<S> entities) {
 		return mensajesAdminRepo.saveAll(entities);
 	}
 
-	public Optional<Mensajes> findById(Integer id) {
+	public Optional<Mensaje> findById(Integer id) {
 		return mensajesAdminRepo.findById(id);
 	}
 
@@ -33,12 +36,16 @@ public class MensajesService {
 		return mensajesAdminRepo.existsById(id);
 	}
 
-	public Iterable<Mensajes> findAll() {
+	public Iterable<Mensaje> findAll() {
 		return mensajesAdminRepo.findAll();
 	}
 
-	public Iterable<Mensajes> findAllById(Iterable<Integer> ids) {
+	public Iterable<Mensaje> findAllById(Iterable<Integer> ids) {
 		return mensajesAdminRepo.findAllById(ids);
+	}
+	
+	public Collection<Mensaje> findAllByReceptor(User receptor) throws DataAccessException {
+		return mensajesAdminRepo.findAllByReceptor(receptor);
 	}
 
 	public long count() {
@@ -49,11 +56,11 @@ public class MensajesService {
 		mensajesAdminRepo.deleteById(id);
 	}
 
-	public void delete(Mensajes entity) {
+	public void delete(Mensaje entity) {
 		mensajesAdminRepo.delete(entity);
 	}
 
-	public void deleteAll(Iterable<? extends Mensajes> entities) {
+	public void deleteAll(Iterable<? extends Mensaje> entities) {
 		mensajesAdminRepo.deleteAll(entities);
 	}
 
