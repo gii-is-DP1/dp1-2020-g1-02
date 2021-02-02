@@ -1,5 +1,7 @@
 package org.springframework.samples.petclinic.web;
 
+import java.util.Collection;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +15,9 @@ import org.springframework.samples.petclinic.service.ClienteService;
 import org.springframework.samples.petclinic.service.ProveedorService;
 import org.springframework.samples.petclinic.service.TrabajadorService;
 import org.springframework.samples.petclinic.service.UserService;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -34,6 +39,10 @@ public class UserController {
 	private ClienteService clienteService;
 	@Autowired
 	private ProveedorService proveedorService;
+	
+	public static String EXCEPTION_VIEW = "/exception";
+	public static String PERFIL_VIEW = "users/perfilView";
+	public static Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 	
 	@GetMapping("/new")
 	public String nuevoCliente(ModelMap modelMap) {
@@ -139,6 +148,10 @@ public class UserController {
 				
 				clienteService.actualizarCliente(clientToUpDate);
 				//modelMap.addAttribute("message", "Cliente actualizado!");
+				view = "redirect:/users/" + principal.getUsername();
+			}else {
+				view = EXCEPTION_VIEW;
+				modelMap.addAttribute("error", "No tienes permisos para acceder a esta página");
 			}
 		}
 		return view;
@@ -146,10 +159,10 @@ public class UserController {
 	
 	@PostMapping(path="/actualizarTrabajador")
 	public String actualizarTrabajador(@Valid Trabajador trabajador, BindingResult result,ModelMap modelMap) {
-		String view="redirect:/";
+		String view = PERFIL_VIEW;
 		if(result.hasErrors()) {
 			modelMap.addAttribute("trabajador", trabajador);
-			return "users/newTrabajador";
+			modelMap.addAttribute("rol", "trabajador");
 		}else {
 			User principal = userService.getLoggedUser();
 			if(principal != null && principal.getUsername().equals(trabajador.getUser().getUsername())) {
@@ -163,6 +176,11 @@ public class UserController {
 				
 				
 				trabajadorService.actualizarTrabajador(employeeToUpDate);
+				
+				view = "redirect:/users/" + principal.getUsername();
+			}else {
+				view = EXCEPTION_VIEW;
+				modelMap.addAttribute("error", "No tienes permisos para acceder a esta página");
 			}
 		}
 		return view;
@@ -170,9 +188,8 @@ public class UserController {
 	
 	@PostMapping(path="/actualizarProveedor")
 	public String actualizarProveedor(@Valid Proveedor proveedor, BindingResult result,ModelMap modelMap) {
-		String view="redirect:/";
+		String view = PERFIL_VIEW;
 		if(result.hasErrors()) {
-			view = "users/perfilView";
 			modelMap.addAttribute("proveedor", proveedor);
 			modelMap.addAttribute("rol", "proveedor");
 		}else {
@@ -186,7 +203,12 @@ public class UserController {
 				
 				
 				proveedorService.actualizarProveedor(supplierToUpDate);
+				
+				view = "redirect:/users/" + principal.getUsername();
 				//modelMap.addAttribute("message", "Cliente actualizado!");
+			}else {
+				view = EXCEPTION_VIEW;
+				modelMap.addAttribute("error", "No tienes permisos para acceder a esta página");
 			}
 		}
 		return view;
@@ -194,9 +216,8 @@ public class UserController {
 	
 	@PostMapping(path="/actualizarAdministrador")
 	public String actualizarAdministrador(@Valid Administrador trabajador, BindingResult result,ModelMap modelMap) {
-		String view = "redirect:/";
+		String view = PERFIL_VIEW;
 		if(result.hasErrors()) {
-			view = "users/perfilView";
 			modelMap.addAttribute("trabajador", trabajador);
 			modelMap.addAttribute("rol", "administrador");
 		}else {
@@ -215,8 +236,11 @@ public class UserController {
 				adminToUpDate.setTelefono(trabajador.getTelefono());
 				//adminToUpDate.getUser().setPassword(encodedPassword);
 				administradorService.actualizarAdministrador(adminToUpDate);
+				
+				view = "redirect:/users/" + principal.getUsername();
 			}else {
-				view = "redirect:/error";
+				view = EXCEPTION_VIEW;
+				modelMap.addAttribute("error", "No tienes permisos para acceder a esta página");
 			}
 		}
 		return view;
@@ -224,36 +248,38 @@ public class UserController {
 	
 	@GetMapping(path="/{username}")
 	public String getUserInfo(@PathVariable("username") String username, ModelMap modelMap) {
-		String view="error";
+		String view= EXCEPTION_VIEW;
 		User principal = userService.getLoggedUser();
 		if(principal != null && principal.getUsername().equals(username)) {
-			switch(principal.getAuthorities().getAuthority()) {
+			view = PERFIL_VIEW;
+			String rol = principal.getAuthorities().getAuthority();
+			modelMap.addAttribute("rol", rol);
+			String datos = rol;
+			modelMap.addAttribute("datos", datos);
+			switch(rol) {
 				case "administrador": 
-					view ="users/perfilView";
 					Administrador administrador = administradorService.findAdministradorByUsername(principal.getUsername()).get();
 					modelMap.addAttribute("administrador", administrador);
-					modelMap.addAttribute("rol", "administrador");
 					break;
 				case "trabajador": 
-					view = "users/perfilView";
 					Trabajador trabajador = trabajadorService.findTrabajadorByUsername(principal.getUsername()).get();
 					modelMap.addAttribute("trabajador", trabajador);
-					modelMap.addAttribute("rol", "trabajador");
 					break;
 				case "proveedor": 
-					view ="users/perfilView";
 					Proveedor proveedor = proveedorService.findProveedorByUsername(principal.getUsername()).get();
 					modelMap.addAttribute("proveedor", proveedor);
-					modelMap.addAttribute("rol", "proveedor");
 					break;
 				case "cliente": 
-					view ="users/perfilView";
 					Cliente cliente = clienteService.findClienteByUsername(principal.getUsername()).get();
 					modelMap.addAttribute("cliente", cliente);
-					modelMap.addAttribute("rol", "cliente");
 					break;
-				default: break;
+				default: 
+					view= EXCEPTION_VIEW;
+					modelMap.addAttribute("error", "Se ha producido un error inesperado");
+					break;
 			}
+		}else{
+			modelMap.addAttribute("error", "No tienes permisos para acceder a esta página");
 		}return view;
 	}
 }

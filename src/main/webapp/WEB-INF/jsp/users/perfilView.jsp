@@ -3,11 +3,13 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="petclinic" tagdir="/WEB-INF/tags" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
 
 <petclinic:layout pageName="Profile">
     <jsp:body>
-       <div class="container">		
+       <div class="container">
+       <c:out value="${datos}"/>
 			<c:choose>
 			<c:when test="${rol == 'administrador'}">
 				<form:form modelAttribute="administrador" class="form-horizontal" action="/users/actualizarAdministrador">

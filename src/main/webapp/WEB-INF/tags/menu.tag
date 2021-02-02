@@ -7,6 +7,8 @@
 <%@ attribute name="name" required="true" rtexprvalue="true"
 	description="Name of the active menu: home, owners, vets or error"%>
 
+<c:set var="user" value="${pageContext.request.userPrincipal.name}" />
+
       <!-- header -->
        <header>
          <!-- header inner -->
@@ -88,23 +90,26 @@
 					<span class="glyphicon glyphicon-warning-sign" aria-hidden="true"></span>
 					<span>Error</span>
 				</petclinic:menuItem>
-							<c:if test = "${pageContext.request.userPrincipal.name == null}">
-         						<li class="mean-last"> <a href="/users/new">signup</a> </li>
-      						</c:if>
-      						<c:if test="${pageContext.request.userPrincipal.name != null}">
-								<li class="mean-last"> <a href="/logout">Logout</a> </li>
-							</c:if>
                            </ul>
                         </nav>
                      </div>
                   </div>
                </div>
-               <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2">
-               		<c:if test = "${pageContext.request.userPrincipal.name == null}">
+               <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1">
+               		<c:if test = "${user == null}">
+         				<li class="buy"> <a href="/users/new">signup</a> </li>
+      				</c:if>
+      				<c:if test="${user != null}">
+						<li class="buy"> <a href="/logout">logout</a> </li>
+					</c:if>
+                  
+               </div>
+               <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1">
+               		<c:if test = "${user == null}">
          				<li><a class="buy" href="/login">Login</a></li>
       				</c:if>
-      				<c:if test="${pageContext.request.userPrincipal.name != null}">
-						<li><a class="buy" href="/users/<c:out value="${pageContext.request.userPrincipal.name}"/>">Perfil</a></li>
+      				<c:if test="${user != null}">
+						<li><a class="buy" href="/users/<c:out value="${user}"/>">Perfil</a></li>
 					</c:if>
                   
                </div>
@@ -112,3 +117,4 @@
          </div>
          <!-- end header inner --> 
       </header>
+      kwkefwufiwhfiuhwifhweiu
