@@ -13,35 +13,40 @@ public class ReclamacionService {
 	@Autowired
 	private ReclamacionRepository reclamacionRepo;
 	
-	@Transactional
+	@Transactional(readOnly=true)
 	public int reclamacionCount() {
 		return (int) reclamacionRepo.count();
 	}
 	
-	@Transactional
+	@Transactional(readOnly=true)
 	public Iterable<Reclamacion> findAll(){
 		return reclamacionRepo.findAll();
 	}
 
+	@Transactional
 	public void save(Reclamacion reclamacion) {
 		reclamacionRepo.save(reclamacion);
 	}
 	
+	@Transactional
 	public void delete(Reclamacion reclamacion) {
 		reclamacionRepo.delete(reclamacion);
 		
 	}
 
+	@Transactional(readOnly=true)
 	public Optional<Reclamacion> findReclamacionById(int reclamacionId) {
 		// TODO Auto-generated method stub
 		return reclamacionRepo.findById(reclamacionId);
 	}
 	
+	@Transactional(readOnly=true)
 	public Iterable<Reclamacion> findReclamacionesByServicioId(String name) {
 		return null;
 		//return reclamacionRepo.findReclamacionesByServicioId(name);
 	}
 	
+	@Transactional
 	public void deleteById(Integer id) {
 		Reclamacion reclamacionBorrar = findReclamacionById(id).get();
 		delete(reclamacionBorrar);

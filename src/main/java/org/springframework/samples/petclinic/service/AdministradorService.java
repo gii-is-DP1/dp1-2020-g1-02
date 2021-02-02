@@ -21,32 +21,37 @@ public class AdministradorService {
 	@Autowired
 	private AuthoritiesService authoritiesService;
 	
-	@Transactional
+	@Transactional(readOnly=true)
 	public int administradorCount() {
 		return (int) administradorRepo.count();
 	}
 	
-	@Transactional
+	@Transactional(readOnly=true)
 	public Iterable<Administrador> findAll(){
 		return administradorRepo.findAll();
 	}
-
+	
+	@Transactional
 	public void save(Administrador administrador) {
 		administradorRepo.save(administrador);
 	}
 	
+	@Transactional
 	public void delete(Administrador administrador) {
 		administradorRepo.delete(administrador);
 	}
-
+	
+	@Transactional(readOnly=true)
 	public Optional<Administrador> findAdministradorById(int adminId) {
 		return administradorRepo.findById(adminId);
 	}
-
+	
+	@Transactional(readOnly=true)
 	public Optional<Administrador> findAdministradorByUsername(String username) {
 		return administradorRepo.findAdministradorByUsername(username);
 	}
 	
+	@Transactional(readOnly=true)
 	public void deleteById(Integer id) {
 		Administrador administradorBorrar = findAdministradorById(id).get();
 		delete(administradorBorrar);
@@ -62,6 +67,7 @@ public class AdministradorService {
 		authoritiesService.saveAuthorities(administrador.getUser().getUsername(), "administrador");	
 	}
 	
+	@Transactional
 	public void actualizarAdministrador(Administrador administrador) throws DataAccessException {
 		//creating owner
 		administradorRepo.save(administrador);

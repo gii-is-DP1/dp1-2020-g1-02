@@ -16,35 +16,40 @@ public class ValoracionService {
 	@Autowired
 	private ValoracionRepository valoracionRepo;
 	
-	@Transactional
+	@Transactional(readOnly=true)
 	public int valoracionCount() {
 		return (int) valoracionRepo.count();
 	}
 	
-	@Transactional
+	@Transactional(readOnly=true)
 	public Iterable<Valoracion> findAll(){
 		return valoracionRepo.findAll();
 	}
-
+	
+	@Transactional
 	public void save(Valoracion valoracion) {
 		valoracionRepo.save(valoracion);
 	}
 	
+	@Transactional
 	public void delete(Valoracion valoracion) {
 		valoracionRepo.delete(valoracion);
 		
 	}
-
+	
+	@Transactional(readOnly=true)
 	public Optional<Valoracion> findValoracionById(int valoracionId) {
 		// TODO Auto-generated method stub
 		return valoracionRepo.findById(valoracionId);
 	}
 	
+	@Transactional(readOnly=true)
 	public Iterable<Valoracion> findValoracionByServicioId(String name) {
 		return null;
 		//return valoracionRepo.findValoracionByServicioId(name);
 	}
 	
+	@Transactional
 	public void deleteById(Integer id) {
 		Valoracion valoracionBorrar = findValoracionById(id).get();
 		delete(valoracionBorrar);

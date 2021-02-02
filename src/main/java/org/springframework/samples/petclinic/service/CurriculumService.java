@@ -13,35 +13,39 @@ public class CurriculumService {
 	@Autowired
 	private CurriculumRepository curriculumRepo;
 	
-	@Transactional
+	@Transactional(readOnly=true)
 	public int curriculumCount() {
 		return (int) curriculumRepo.count();
 	}
 	
-	@Transactional
+	@Transactional(readOnly=true)
 	public Iterable<Curriculum> findAll(){
 		return curriculumRepo.findAll();
 	}
 
+	@Transactional
 	public void save(Curriculum curriculum) {
 		curriculumRepo.save(curriculum);
 	}
 	
+	@Transactional
 	public void delete(Curriculum curriculum) {
 		curriculumRepo.delete(curriculum);
 		
 	}
 
+	@Transactional(readOnly=true)
 	public Optional<Curriculum> findCurriculumById(Integer curriculumId) {
 		return curriculumRepo.findById(curriculumId);
 	}
 
-
+	@Transactional(readOnly=true)
 	public Iterable<Curriculum> findCurriculumByTrabajadorId(String name) {
 		return null;
 		//return curriculumRepo.findCurriculumByTrabajadorId(name);
 	}
 	
+	@Transactional
 	public void deleteById(Integer id) {
 		Curriculum curriculumBorrar = findCurriculumById(id).get();
 		delete(curriculumBorrar);
