@@ -44,7 +44,7 @@
                 <td>
                     <c:out value="${servicio.estado}"/>
                 </td>
-        
+        		
                 <td>
                 	<spring:url value="/servicios/delete/{servicioId}" var="servicioUrl">
                 		<spring:param name="servicioId" value="${servicio.id}"/>
