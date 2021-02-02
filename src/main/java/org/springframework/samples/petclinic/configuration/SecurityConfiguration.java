@@ -76,6 +76,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 				.antMatchers("/servicios/**").hasAnyAuthority("cliente","administrador")
 				
+				.antMatchers("/mensajes/**").permitAll()
+				
 				.antMatchers("/users/**").permitAll()
 				
 				.antMatchers("/authorities/**").permitAll()
