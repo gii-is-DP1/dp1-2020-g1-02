@@ -9,5 +9,8 @@ public interface PresupuestoRepository extends CrudRepository<Presupuesto, Integ
 	
 	@Query("SELECT p FROM Presupuesto p WHERE p.servicio.id = :servicio")
 	Iterable<Presupuesto> presupuestosByServicio(@Param("servicio") Integer servicio);
+	
+	@Query("SELECT count(*) FROM Presupuesto p WHERE p.servicio.id = :servicio AND p.estado = 1")
+	Integer numeroPresupuestosByServicioConEstadoAceptado(@Param("servicio") Integer servicio);
 
 }

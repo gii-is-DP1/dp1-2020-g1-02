@@ -3,6 +3,7 @@ package org.springframework.samples.petclinic.service;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.samples.petclinic.model.EstadoServicio;
 import org.springframework.samples.petclinic.model.Presupuesto;
 import org.springframework.samples.petclinic.repository.PresupuestoRepository;
@@ -48,6 +49,10 @@ public class PresupuestoService {
 	public void rechazar(Presupuesto presupuesto) {
 		presupuesto.setEstado(EstadoServicio.Rechazado);
 		presupuestoRepo.save(presupuesto);
+	}
+	
+	public Integer numeroPresupuestosByServicioConEstadoAceptado(Integer id) {
+		return presupuestoRepo.numeroPresupuestosByServicioConEstadoAceptado(id);
 	}
 
 }
