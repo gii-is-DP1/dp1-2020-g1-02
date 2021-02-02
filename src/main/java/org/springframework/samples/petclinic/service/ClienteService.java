@@ -22,36 +22,39 @@ public class ClienteService {
 	@Autowired
 	private AuthoritiesService authoritiesService;
 	
-	@Transactional
+	@Transactional(readOnly=true)
 	public int clienteCount() {
 		return (int) clienteRepo.count();
 	}
 	
-	@Transactional
+	@Transactional(readOnly=true)
 	public Iterable<Cliente> findAll(){
 		return clienteRepo.findAll();
 	}
 
+	@Transactional
 	public void save(Cliente cliente) {
 		clienteRepo.save(cliente);
 	}
 	
+	@Transactional
 	public void delete(Cliente cliente) {
 		clienteRepo.delete(cliente);
 		
 	}
 	
+	@Transactional
 	public void deleteById(Integer id) {
 		Cliente clienteBorrar = findClienteById(id).get();
 		delete(clienteBorrar);
 	}
 
-	@Transactional
+	@Transactional(readOnly=true)
 	public Optional<Cliente> findClienteById(Integer clienteId) {
 		return clienteRepo.findById(clienteId);
 	}
 	
-	@Transactional
+	@Transactional(readOnly=true)
 	public Optional<Cliente> findClienteByUsername(String clienteUsername) {
 		return clienteRepo.findClienteByUsername(clienteUsername);
 	}

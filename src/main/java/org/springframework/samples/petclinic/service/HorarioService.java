@@ -12,33 +12,38 @@ public class HorarioService {
 	@Autowired
 	private HorarioRepository horarioRepo;
 	
-	@Transactional
+	@Transactional(readOnly=true)
 	public int horarioCount() {
 		return (int) horarioRepo.count();
 	}
 	
-	@Transactional
+	@Transactional(readOnly=true)
 	public Iterable<Horario> findAll(){
 		return horarioRepo.findAll();
 	}
-
+	
+	@Transactional
 	public void save(Horario horario) {
 		horarioRepo.save(horario);
 	}
 	
+	@Transactional
 	public void delete(Horario horario) {
 		horarioRepo.delete(horario);
 		
 	}
-
+	
+	@Transactional(readOnly=true)
 	public Optional<Horario> findHorarioById(Integer horarioId) {
 		return horarioRepo.findById(horarioId);
 	}
 	
+	@Transactional(readOnly=true)
 	public Iterable<Horario> findHorarioByTrabajadorName(String name) {
 		return horarioRepo.findHorariosByTrabajadorName(name);
 	}
 	
+	@Transactional
 	public void deleteById(Integer id) {
 		Horario horarioBorrar = findHorarioById(id).get();
 		delete(horarioBorrar);
