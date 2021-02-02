@@ -1,19 +1,14 @@
 package org.springframework.samples.petclinic.web;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.samples.petclinic.model.Factura;
-import org.springframework.samples.petclinic.model.Oferta;
 import org.springframework.samples.petclinic.model.Pedido;
-import org.springframework.samples.petclinic.model.Producto;
-import org.springframework.samples.petclinic.service.FacturaService;
 import org.springframework.samples.petclinic.service.OfertaService;
 import org.springframework.samples.petclinic.service.PedidoService;
-import org.springframework.samples.petclinic.service.ProductoService;
+import org.springframework.samples.petclinic.service.exceptions.LimitePedidoException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -30,10 +25,10 @@ public class PedidoController {
 	private PedidoService pedidoService;
 	@Autowired
 	private OfertaService ofertaService;
-	@Autowired
-	private FacturaService facturaService;
-	@Autowired
-	private ProductoService productoService;
+//	@Autowired
+//	private FacturaService facturaService;
+//	@Autowired
+//	private ProductoService productoService;
 	
 	@GetMapping()
 	public String listadoPedidos(ModelMap modelMap) {
@@ -60,19 +55,37 @@ public class PedidoController {
             modelMap.addAttribute("pedido", pedido);
             return "administradores/editPedido";
         } else {
-        	if(pedidoService.cumpleCondicion(pedido)) {
-        		pedido.setFechaPedido(LocalDate.now());
-        		pedidoService.save(pedido);
-        		Producto producto = productoService.findByName(pedido.getOferta().getName()).get();
-        		productoService.sumarProducto(producto, pedido);
-        		facturaService.creaFactura(pedido);
+        	try {
+        		pedidoService.crearPedido(pedido);
         		return view;
-        	}else {
+        	} catch(LimitePedidoException e) {
         		modelMap.addAttribute("pedido", pedido);
-        		modelMap.addAttribute("error", "No puede superar 100 euros el precio total.");
+        		modelMap.addAttribute("error", "El precio total del pedido no puede superar 100 euros.");
         		return "administradores/editPedido";
         	}
         }
 	}
+	
+//	@PostMapping(path="/save")
+//	public String salvarPedido(@Valid Pedido pedido, BindingResult result, ModelMap modelMap) {
+//		String view="redirect:/pedidos";
+//        if(result.hasErrors()) {
+//            modelMap.addAttribute("pedido", pedido);
+//            return "administradores/editPedido";
+//        } else {
+//        	if(pedidoService.cumpleCondicion(pedido)) {
+//        		pedido.setFechaPedido(LocalDate.now());
+//        		pedidoService.save(pedido);
+//        		Producto producto = productoService.findByName(pedido.getOferta().getName()).get();
+//        		productoService.sumarProducto(producto, pedido);
+//        		facturaService.creaFactura(pedido);
+//        		return view;
+//        	}else {
+//        		modelMap.addAttribute("pedido", pedido);
+//        		modelMap.addAttribute("error", "No puede superar 100 euros el precio total.");
+//        		return "administradores/editPedido";
+//        	}
+//        }
+//	}
 	
 }
