@@ -11,7 +11,7 @@ import org.springframework.samples.petclinic.model.RegistroHoras;
 import org.springframework.stereotype.Service;
 
 @DataJpaTest(includeFilters = @ComponentScan.Filter(Service.class))
-public class ResgitroHorasServiceTest {
+public class RegistroHorasServiceTest {
 
 	@Autowired
 	private RegistroHorasService registroHorasService;

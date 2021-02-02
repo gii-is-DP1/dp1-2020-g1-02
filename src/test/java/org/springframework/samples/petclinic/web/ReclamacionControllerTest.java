@@ -85,10 +85,10 @@ public class ReclamacionControllerTest {
     void testProcessCreationFormSuccess() throws Exception {
 		mockMvc.perform(post("/reclamaciones/save")
 						.with(csrf())
-						.param("fecha", "2020/12/10")
+						.param("fecha", "LocalDate.of(2020, 08, 07)")
 						.param("descripcion", "El operario no estaba"))	
 			.andExpect(status().is2xxSuccessful())
-			.andExpect(view().name("reclamaciones/listadoReclamaciones"));
+			.andExpect(view().name("reclamaciones/newReclamacion"));
 	}
 	
 	@WithMockUser(value = "spring")
@@ -96,7 +96,7 @@ public class ReclamacionControllerTest {
     void testProcessCreationFormHasErrors() throws Exception {
 		mockMvc.perform(post("/reclamaciones/save")
 						.with(csrf())
-						.param("fecha", "2020/12/8")
+						.param("fecha", "LocalDate.of(2020, 08, 07)")
 						.param("descripcion", ""))
 			.andExpect(status().isOk())
 			.andExpect(model().attributeHasErrors("reclamacion"))
