@@ -3,29 +3,29 @@ package org.springframework.samples.petclinic.service;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.samples.petclinic.model.MensajesAdmin;
-import org.springframework.samples.petclinic.repository.MensajesAdminRepository;
+import org.springframework.samples.petclinic.model.Mensajes;
+import org.springframework.samples.petclinic.repository.MensajesRepository;
 import org.springframework.stereotype.Service;
 
 @Service
-public class MensajesAdminService {
+public class MensajesService {
 	
-	private MensajesAdminRepository mensajesAdminRepo;
+	private MensajesRepository mensajesAdminRepo;
 	
 	@Autowired
-	public MensajesAdminService(MensajesAdminRepository mensajesAdminRepo) {
+	public MensajesService(MensajesRepository mensajesAdminRepo) {
 		this.mensajesAdminRepo = mensajesAdminRepo;
 	}
 
-	public <S extends MensajesAdmin> S save(S entity) {
+	public <S extends Mensajes> S save(S entity) {
 		return mensajesAdminRepo.save(entity);
 	}
 
-	public <S extends MensajesAdmin> Iterable<S> saveAll(Iterable<S> entities) {
+	public <S extends Mensajes> Iterable<S> saveAll(Iterable<S> entities) {
 		return mensajesAdminRepo.saveAll(entities);
 	}
 
-	public Optional<MensajesAdmin> findById(Integer id) {
+	public Optional<Mensajes> findById(Integer id) {
 		return mensajesAdminRepo.findById(id);
 	}
 
@@ -33,11 +33,11 @@ public class MensajesAdminService {
 		return mensajesAdminRepo.existsById(id);
 	}
 
-	public Iterable<MensajesAdmin> findAll() {
+	public Iterable<Mensajes> findAll() {
 		return mensajesAdminRepo.findAll();
 	}
 
-	public Iterable<MensajesAdmin> findAllById(Iterable<Integer> ids) {
+	public Iterable<Mensajes> findAllById(Iterable<Integer> ids) {
 		return mensajesAdminRepo.findAllById(ids);
 	}
 
@@ -49,11 +49,11 @@ public class MensajesAdminService {
 		mensajesAdminRepo.deleteById(id);
 	}
 
-	public void delete(MensajesAdmin entity) {
+	public void delete(Mensajes entity) {
 		mensajesAdminRepo.delete(entity);
 	}
 
-	public void deleteAll(Iterable<? extends MensajesAdmin> entities) {
+	public void deleteAll(Iterable<? extends Mensajes> entities) {
 		mensajesAdminRepo.deleteAll(entities);
 	}
 

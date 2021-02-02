@@ -14,7 +14,7 @@ import lombok.Data;
 @Entity
 @Data
 @Table(name="mensajesAdmin")
-public class MensajesAdmin extends BaseEntity{
+public class Mensajes extends BaseEntity{
 	
 	
 	@Column(name="asuntoA")
@@ -26,8 +26,12 @@ public class MensajesAdmin extends BaseEntity{
 	private String mensajeA;
 	
 	@ManyToOne
-	@JoinColumn(name="administrador")
-	private Administrador admin;
+	@JoinColumn(name="receptor")
+	private User receptor;
+	
+	@ManyToOne
+	@JoinColumn(name="emisor")
+	private User emisor;
 	
 	
 }

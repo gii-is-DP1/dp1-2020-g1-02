@@ -4,11 +4,11 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.samples.petclinic.model.Cliente;
-import org.springframework.samples.petclinic.model.MensajesAdmin;
+import org.springframework.samples.petclinic.model.Mensajes;
 import org.springframework.samples.petclinic.model.Proveedor;
 import org.springframework.samples.petclinic.model.Reclamacion;
 import org.springframework.samples.petclinic.model.Servicio;
-import org.springframework.samples.petclinic.service.MensajesAdminService;
+import org.springframework.samples.petclinic.service.MensajesService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -22,25 +22,25 @@ public class MensajesController {
 
 	
 	@Autowired
-	private MensajesAdminService mensajesAdminService;
+	private MensajesService mensajesAdminService;
 	
 	@GetMapping()
 	public String listadoMensajes(ModelMap modelMap) {
 		String vista = "administradores/listadoMensajes";
-		Iterable<MensajesAdmin> msjs = mensajesAdminService.findAll();
+		Iterable<Mensajes> msjs = mensajesAdminService.findAll();
 		modelMap.addAttribute("mensajes", msjs);
 		return vista;
 	}
 	
 	@GetMapping(path="/new")
 	public String crearMensajeAdmin(ModelMap modelMap) {
-		String view="administrador/newMensaje";
-		modelMap.addAttribute("mensaje", new MensajesAdmin());
+		String view="adminsitrador/newMensaje";
+		modelMap.addAttribute("mensaje", new Mensajes());
 		return view;
 	}
 	
 	@PostMapping(path="/save")
-	public String salvarMensajeAdmin(@Valid MensajesAdmin msj, BindingResult result,ModelMap modelMap) {
+	public String salvarMensajeAdmin(@Valid Mensajes msj, BindingResult result,ModelMap modelMap) {
 		String view="redirect:/mensajes";
 		if(result.hasErrors()) {
 			modelMap.addAttribute("mensaje", msj);
