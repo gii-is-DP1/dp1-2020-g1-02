@@ -37,8 +37,6 @@ excludeAutoConfiguration= SecurityConfiguration.class)
 
 public class ServicioControllerTest {
 	
-	private static int TEST_SERVICIO_ID=1;
-	
 	@Autowired
 	private MockMvc mockMvc;
 	
@@ -111,6 +109,6 @@ public class ServicioControllerTest {
 	@WithMockUser(value="spring")
 	@Test
 	void testCrearPresupuesto() throws Exception {
-		mockMvc.perform(get("/servicios/{servicioId}/presupuestos/new", 1)).andExpect(status().isOk()).andExpect(model().attributeExists("presupuesto")).andExpect(view().name("presupuestos/editPresupuestos"));
+		mockMvc.perform(get("/servicios/{servicioId}/presupuestos/new", 1)).andExpect(status().isOk()).andExpect(model().attributeExists("presupuesto")).andExpect(view().name("presupuestos/editPresupuesto"));
 	}
 }

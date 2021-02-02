@@ -80,10 +80,10 @@ public class RegistroHorasControllerTest {
     void testProcessCreationFormSuccess() throws Exception {
 		mockMvc.perform(post("/registroHoras/save")
 						.with(csrf())
-						.param("hora_entrada", "2020/12/10 10:00")
-						.param("hora_salida", "2020/12/10 15:00"))	
+						.param("hora_entrada", "LocalDateTime.of(2020, 12, 10, 10, 00)")
+						.param("hora_salida", "LocalDateTime.of(2020, 12, 10, 15, 00)"))	
 			.andExpect(status().is2xxSuccessful())
-			.andExpect(view().name("registroHoras/listadoRegistroHoras"));
+			.andExpect(view().name("registroHoras/newRegistroHoras"));
 	}
 	
 	@WithMockUser(value = "spring")
@@ -92,10 +92,10 @@ public class RegistroHorasControllerTest {
 		mockMvc.perform(post("/registroHoras/save")
 						.with(csrf())
 						.param("hora_entrada", "")
-						.param("hora_salida", "2020/12/10 15:00"))
+						.param("hora_salida", "LocalDateTime.of(2020, 12, 10, 15, 00)"))
 			.andExpect(status().isOk())
-			.andExpect(model().attributeHasErrors("registro_horas"))
-			.andExpect(model().attributeHasFieldErrors("registro_horas", "hora_entrada"))
+			.andExpect(model().attributeHasErrors("registroHoras"))
+			.andExpect(model().attributeHasFieldErrors("registroHoras", "hora_entrada"))
 			.andExpect(view().name("registroHoras/newRegistroHoras"));
 	}
 
