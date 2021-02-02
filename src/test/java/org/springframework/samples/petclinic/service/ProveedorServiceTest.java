@@ -42,7 +42,7 @@ public class ProveedorServiceTest {
 		proveedorNew.setDireccion("Calle Holanda 16");
 		proveedorNew.setTelefono("645101010");
 
-		proveedorService.save(proveedorNew);
+		proveedorService.saveProveedor(proveedorNew);
 		
 		Integer cantidad = proveedorService.proveedorCount();
 		assertEquals(3, cantidad);

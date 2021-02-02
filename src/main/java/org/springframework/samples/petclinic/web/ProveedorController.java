@@ -33,27 +33,6 @@ public class ProveedorController {
 		return vista;
 	}
 	
-	@GetMapping(path="/new")
-	public String crearProveedor(ModelMap modelMap) {
-		String view="proveedores/editProveedor";
-		modelMap.addAttribute("proveedor", new Proveedor());
-		return view;
-	}
-	
-	@PostMapping(path="/save")
-	public String salvarProveedor(@Valid Proveedor prov, BindingResult result,ModelMap modelMap) {
-		String view="redirect:/proveedores";
-		if(result.hasErrors()) {
-			modelMap.addAttribute("proveedor", prov);
-			return "proveedores/editProveedor";
-		}else {
-			provService.save(prov);
-			modelMap.addAttribute("message", "Proveedor actualizado!");
-//			view=listadoProv(modelMap);
-		}
-		return view;
-	}
-	
 	@GetMapping(value = "/{proveedorId}/edit")
 	public String editarProveedor(@PathVariable("proveedorId") int proveedorId, ModelMap modelMap) {
 		Proveedor proveedor = this.provService.findProveedorById(proveedorId).get();
