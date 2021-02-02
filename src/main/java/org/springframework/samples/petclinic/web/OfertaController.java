@@ -47,7 +47,8 @@ public class OfertaController {
 		Iterable<Producto> productos = productoService.findAll();
 		Iterable<Proveedor> proveedores = proveedorService.findAll();
 		User user =  userService.getLoggedUser();
-		if(user.getAuthorities().getAuthority() == "proveedor" ) {
+		
+		if(user.getAuthorities().getAuthority().equalsIgnoreCase("proveedor") ) {
 			Proveedor prov = proveedorService.findProveedorByUsername(user.getUsername()).get();
 			modelMap.addAttribute("proveedor", prov);
 			modelMap.addAttribute("productos", productos);
