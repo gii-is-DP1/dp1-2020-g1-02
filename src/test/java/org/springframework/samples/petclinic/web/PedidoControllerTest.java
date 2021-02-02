@@ -2,8 +2,8 @@ package org.springframework.samples.petclinic.web;
 
 import static org.hamcrest.Matchers.hasProperty;
 import static org.hamcrest.Matchers.is;
-import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.BDDMockito.given;
+
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -12,9 +12,10 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
+
 import java.util.Optional;
+
+import javax.persistence.EntityManager;
 
 import org.assertj.core.util.Lists;
 import org.junit.jupiter.api.BeforeEach;
@@ -26,17 +27,14 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.FilterType;
 import org.springframework.samples.petclinic.configuration.SecurityConfiguration;
 import org.springframework.samples.petclinic.model.Factura;
-import org.springframework.samples.petclinic.model.Instalacion;
 import org.springframework.samples.petclinic.model.Oferta;
 import org.springframework.samples.petclinic.model.Pedido;
 import org.springframework.samples.petclinic.model.Producto;
 import org.springframework.samples.petclinic.model.Proveedor;
 import org.springframework.samples.petclinic.service.FacturaService;
-import org.springframework.samples.petclinic.service.InstalacionService;
 import org.springframework.samples.petclinic.service.OfertaService;
 import org.springframework.samples.petclinic.service.PedidoService;
 import org.springframework.samples.petclinic.service.ProductoService;
-import org.springframework.samples.petclinic.service.ProveedorService;
 import org.springframework.security.config.annotation.web.WebSecurityConfigurer;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
@@ -59,6 +57,11 @@ public class PedidoControllerTest {
 	private FacturaService facturaService;
 	@MockBean
 	private ProductoService productoService;
+	
+	@MockBean
+	private EntityManager entityManager;
+	
+	
 	
 	private Pedido pedido;
 	private Oferta oferta;
@@ -101,13 +104,11 @@ public class PedidoControllerTest {
         factura.setPrecio_total(11.75);
         factura.setProveedor(proveedor);
 
-//        given(this.ofertaService.findOfertaById(1)).willReturn(Optional.of(oferta));
-//        given(this.productoService.findByName("Fregona")).willReturn(Optional.of(producto));
-//        given(this.facturaService.findAll()).willReturn(Lists.list(factura));
 		given(this.pedidoService.findAll()).willReturn(Lists.list(pedido));
 		given(this.ofertaService.findOfertaById(1)).willReturn(Optional.of(oferta));
 		given(this.productoService.findByName(pedido.getOferta().getName())).willReturn(Optional.of(producto));
-		given(this.pedidoService.cumpleCondicion(pedido)).willReturn(true);
+		
+		given(this.entityManager.find(Oferta.class, 1)).willReturn(oferta);
 		
 	}
 
@@ -136,24 +137,35 @@ public class PedidoControllerTest {
 						.param("cantidadProducto", "5")
 						.param("fechaPedido", "2021/01/31")
 						.param("oferta", "1"))
-			.andExpect(model().attributeExists("pedido"))
-//			.andExpect(model().attribute("pedido", hasProperty("oferta", is(oferta))))
-			.andExpect(status().is2xxSuccessful())
+			.andExpect(status().is3xxRedirection())
 			.andExpect(view().name("redirect:/pedidos"));
+	}
+
+	
+	@WithMockUser(value = "spring")
+    @Test
+    void testProcessCreationFormHasErrors() throws Exception {
+		mockMvc.perform(post("/pedidos/save")
+						.with(csrf())
+						.param("cantidadProducto", "")
+						.param("fechaPedido", "2021/01/31")
+						.param("oferta", "1"))
+		.andExpect(model().attributeHasErrors("pedido"))
+		.andExpect(model().attributeHasFieldErrors("pedido", "cantidadProducto"))
+		.andExpect(status().isOk())
+		.andExpect(view().name("administradores/editPedido"));
 	}
 	
 //	@WithMockUser(value = "spring")
 //    @Test
-//    void testProcessCreationFormHasErrors() throws Exception {
-//		mockMvc.perform(post("/ofertas/save")
+//    void testSuperiorA100() throws Exception {
+//		mockMvc.perform(post("/pedidos/save")
 //						.with(csrf())
-//						.param("name", "Fregona")
-//						.param("precioU", "")
-//						.param("proveedor", "1"))
-//			.andExpect(status().isOk())
-//			.andExpect(model().attributeHasErrors("oferta"))
-//			.andExpect(model().attributeHasFieldErrors("oferta", "precioU"))
-//			.andExpect(view().name("ofertas/editOferta"));
+//						.param("cantidadProducto", "1000")
+//						.param("fechaPedido", "2021/01/31")
+//						.param("oferta", "1"))
+//		.andExpect(status().is4xxClientError())
+//		.andExpect(view().name("administradores/editPedido"));
 //	}
 
 }

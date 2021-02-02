@@ -103,5 +103,7 @@ public class ProductoControllerTest {
 			.andExpect(model().attributeHasFieldErrors("producto", "name"))
 			.andExpect(view().name("productos/newProducto"));
 	}
+	
+	
 
 }

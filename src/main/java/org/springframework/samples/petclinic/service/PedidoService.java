@@ -22,25 +22,25 @@ public class PedidoService {
 	@Autowired
 	private FacturaService facturaService;
 	
-	@Transactional
+	@Transactional(readOnly=true)
 	public int pedidoCount() {
 		return (int) pedidoRepo.count();
 	}
 	
-	@Transactional
+	@Transactional(readOnly=true)
 	public Iterable<Pedido> findAll() {
 		return pedidoRepo.findAll();
 	}
-	
+	@Transactional
 	public void save(Pedido pedido) {
 		pedidoRepo.save(pedido);
 	}
-	
+	@Transactional
 	public void deletePedido(Pedido pedido) {
 		pedidoRepo.delete(pedido);
 	}
 	
-	public boolean cumpleCondicion(Pedido pedido) {
+	public boolean pedidoMenor100(Pedido pedido) {
 		boolean b=true;
 		Integer cantidad = pedido.getCantidadProducto();
 		Double precio = Double.valueOf(pedido.getOferta().getPrecioU());
@@ -51,8 +51,9 @@ public class PedidoService {
 		
 	}
 	
+	@Transactional(rollbackFor = LimitePedidoException.class)
 	public void crearPedido(Pedido pedido) throws LimitePedidoException {
-		if(this.cumpleCondicion(pedido)) {
+		if(this.pedidoMenor100(pedido)) {
     		pedido.setFechaPedido(LocalDate.now());
     		this.save(pedido);
     		Producto producto = productoService.findByName(pedido.getOferta().getName()).get();
@@ -62,7 +63,7 @@ public class PedidoService {
 			throw new LimitePedidoException();
 		}
 	}
-
+	@Transactional(readOnly=true)
 	public Optional<Pedido> findById(Integer id) {
 		return pedidoRepo.findById(id);
 	}
