@@ -22,7 +22,7 @@
         <tr>
             <th style="width: 150px;">HORA_INICIO</th>
             <th style="width: 150px;">HORA_FIN</th>
-            <th style="width: 150px;">ID_TRABAJADOR</th>
+            <th style="width: 150px;">NOMBRE_TRABAJADOR</th>
             <th style="width: 150px;">DESCRIPCION</th>
         </tr>
         </thead>
@@ -36,7 +36,7 @@
                     <c:out value="${horario.hora_fin}"/>
                 </td>
                 <td>
-                    <c:out value="${horario.trabajador.id}"/>
+                    <c:out value="${horario.trabajador.nombre}"/>
                 </td>
                 <td>
                     <c:out value="${horario.descripcion}"/>

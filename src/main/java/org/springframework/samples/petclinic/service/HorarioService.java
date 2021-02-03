@@ -43,6 +43,12 @@ public class HorarioService {
 		return horarioRepo.findHorariosByTrabajadorName(name);
 	}
 	
+	@Transactional(readOnly=true)
+	public Iterable<Horario> findHorarioByTrabajadorId(Integer id) {
+		return horarioRepo.findHorariosByTrabajadorId(id);
+	}
+	
+	
 	@Transactional
 	public void deleteById(Integer id) {
 		Horario horarioBorrar = findHorarioById(id).get();
