@@ -25,10 +25,12 @@ public class ServicioService {
 		return servicioRepo.findAll();
 	}
 	
+	@Transactional
 	public void save(Servicio servicio) {
 		servicioRepo.save(servicio);
 	}
 	
+	@Transactional
 	public void delete(Servicio servicio) {
 		servicioRepo.delete(servicio);
 	}
@@ -37,11 +39,13 @@ public class ServicioService {
 		return servicioRepo.findById(sId);
 	}
 
+	@Transactional
 	public void aceptar(Servicio servicio) {
 		servicio.setEstado(EstadoServicio.Aceptado);
 		servicioRepo.save(servicio);
 	}
 	
+	@Transactional
 	public void rechazar(Servicio servicio) {
 		servicio.setEstado(EstadoServicio.Rechazado);
 		servicioRepo.save(servicio);

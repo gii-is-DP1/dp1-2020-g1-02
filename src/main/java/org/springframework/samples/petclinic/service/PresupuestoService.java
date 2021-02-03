@@ -25,10 +25,12 @@ public class PresupuestoService {
 		return presupuestoRepo.findAll();
 	}
 	
+	@Transactional
 	public void save(Presupuesto presupuesto) {
 		presupuestoRepo.save(presupuesto);
 	}
 	
+	@Transactional
 	public void delete(Presupuesto presupuesto) {
 		presupuestoRepo.delete(presupuesto);
 	}
@@ -41,15 +43,18 @@ public class PresupuestoService {
 		return presupuestoRepo.presupuestosByServicio(id);
 	}
 
+	@Transactional
 	public void aceptar(Presupuesto presupuesto) {
 		presupuesto.setEstado(EstadoServicio.Aceptado);
 		presupuestoRepo.save(presupuesto);
 	}
 	
+	@Transactional
 	public void rechazar(Presupuesto presupuesto) {
 		presupuesto.setEstado(EstadoServicio.Rechazado);
 		presupuestoRepo.save(presupuesto);
 	}
+	
 	
 	public Integer numeroPresupuestosByServicioConEstadoAceptado(Integer id) {
 		return presupuestoRepo.numeroPresupuestosByServicioConEstadoAceptado(id);

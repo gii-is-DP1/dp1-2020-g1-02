@@ -17,15 +17,12 @@ import lombok.Setter;
 public class Presupuesto extends BaseEntity {
 	
 	
-	@Column(name="precio")
 	@NotNull
 	private Double precio;
 	
-	@Column(name="tipopresupuesto")
 	@NotNull
 	private TipoPresupuesto tipopresupuesto;
 	
-	@Column(name="estado")
 	@NotNull
 	private EstadoServicio estado;
 	
