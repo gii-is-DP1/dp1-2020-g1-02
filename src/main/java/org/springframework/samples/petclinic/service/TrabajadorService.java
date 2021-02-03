@@ -9,6 +9,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.samples.petclinic.model.Horario;
 import org.springframework.samples.petclinic.model.Trabajador;
 import org.springframework.samples.petclinic.repository.TrabajadorRepository;
+import org.springframework.samples.petclinic.service.exceptions.HorarioServicioException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -53,21 +54,6 @@ public class TrabajadorService {
 		return trabajadorRepo.findTrabajadorByUsername(trabajadorUsername);
 	}
 
-	public boolean cumpleCondicionR4(Trabajador trabajador) {
-		Boolean res = true;
-		Set<Horario> horarios = trabajador.getHorarios();
-		Iterator<Horario> iterador = horarios.iterator();
-		while(iterador.hasNext()) {
-			Horario h1 = iterador.next();
-			Horario h2 = iterador.next();
-			LocalDateTime diaconhora1 = h1.getHora_inicio();
-			LocalDateTime diaconhora2 = h2.getHora_inicio();
-			if(diaconhora1 == diaconhora2) {
-				res = false;
-			}
-		}
-		return res;
-	}
 	
 	@Transactional
 	public void saveTrabajador(Trabajador trabajador) throws DataAccessException {
