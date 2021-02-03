@@ -55,35 +55,49 @@
 					<span>Home</span>
 				</petclinic:menuItem>
 				
-				<petclinic:menuItem active="${name eq 'trabajadores'}" url="/trabajadores"
-					title="Trabajadores">
-					<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
-					<span>Trabajadores</span>
-				</petclinic:menuItem>
+				<sec:authorize access="hasAuthority('administrador')">
+      				<petclinic:menuItem active="${name eq 'trabajadores'}" url="/trabajadores"
+						title="Trabajadores">
+						<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+						<span>Trabajadores</span>
+					</petclinic:menuItem>
+					
+					<petclinic:menuItem active="${name eq 'trabsC'}" url="/contratosTrabajadores"
+						title="Contratos">
+						<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+						<span>Contratos</span>
+					</petclinic:menuItem>
+	
+					<petclinic:menuItem active="${name eq 'provs'}" url="/proveedores"
+						title="Proveedores">
+						<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+						<span>Proveedores</span>
+					</petclinic:menuItem>
+	
+					<petclinic:menuItem active="${nombre eq 'clientes'}" url="/clientes"
+						title="clientes">
+						<span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+						<span>Clientes</span>
+					</petclinic:menuItem>
+					
+					<petclinic:menuItem active="${name eq 'oferta'}" url="/ofertas/new"
+						title="contacto">
+						<span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+						<span>Contacto</span>
+					</petclinic:menuItem>
+				</sec:authorize>
 				
-				<petclinic:menuItem active="${name eq 'trabsC'}" url="/contratosTrabajadores"
-					title="Contratos">
-					<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
-					<span>Contratos</span>
-				</petclinic:menuItem>
-
-				<petclinic:menuItem active="${name eq 'provs'}" url="/proveedores"
-					title="Proveedores">
-					<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
-					<span>Proveedores</span>
-				</petclinic:menuItem>
-
-				<petclinic:menuItem active="${nombre eq 'clientes'}" url="/clientes"
-					title="clientes">
-					<span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
-					<span>Clientes</span>
-				</petclinic:menuItem>
+				<sec:authorize access="hasAuthority('trabajador')">
+					
+				</sec:authorize>
 				
-				<petclinic:menuItem active="${name eq 'oferta'}" url="/ofertas/new"
-					title="contacto">
-					<span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
-					<span>Contacto</span>
-				</petclinic:menuItem>
+				<sec:authorize access="hasAuthority('cliente')">
+					
+				</sec:authorize>
+				
+				<sec:authorize access="hasAuthority('proveedor')">
+					
+				</sec:authorize>
 
 				<petclinic:menuItem active="${name eq 'error'}" url="/oups"
 					title="trigger a RuntimeException to see how it is handled">
@@ -117,4 +131,3 @@
          </div>
          <!-- end header inner --> 
       </header>
-      kwkefwufiwhfiuhwifhweiu

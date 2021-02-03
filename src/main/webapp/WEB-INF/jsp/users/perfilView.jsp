@@ -9,13 +9,11 @@
 <petclinic:layout pageName="Profile">
     <jsp:body>
        <div class="container">
-       <c:out value="${datos}"/>
-			<c:choose>
-			<c:when test="${rol == 'administrador'}">
-				<form:form modelAttribute="administrador" class="form-horizontal" action="/users/actualizarAdministrador">
+			<sec:authorize access="hasAuthority('administrador')">
 				<div class="row">
 					<h2>¡Bienvenido! administrador <c:out value="${administrador.user.username}"></c:out></h2>
 				</div>
+				<form:form modelAttribute="administrador" class="form-horizontal" action="/users/actualizarAdministrador">
 	       		<div class="form-group has-feedback">
 	       			<input type="hidden" id="id" name="id" value=' <c:out value="${administrador.id}"/>'>
 	       			<petclinic:inputField label="Username" name="user.username" disabled="true"/>
@@ -33,8 +31,9 @@
 	                </div>
 	            </div>
 	        	</form:form>
-			</c:when>
-			<c:when test="${rol == 'trabajador'}">
+			</sec:authorize>
+			
+			<sec:authorize access="hasAuthority('trabajador')">
 				<div class="row">
 					<h2>¡Bienvenido! trabajador <c:out value="${trabajador.user.username}"></c:out></h2>
 				</div>
@@ -56,8 +55,9 @@
 	                </div>
 	            </div>
 	        	</form:form>
-			</c:when>
-			<c:when test="${rol == 'cliente'}">
+			</sec:authorize>
+			
+			<sec:authorize access="hasAuthority('cliente')">
 				<div class="row">
 					<h2>¡Bienvenido! cliente <c:out value="${cliente.user.username}"></c:out></h2>
 				</div>
@@ -78,8 +78,9 @@
 	                </div>
 	            </div>
 	        	</form:form>
-			</c:when>
-			<c:otherwise>
+			</sec:authorize>
+			
+			<sec:authorize access="hasAuthority('proveedor')">
 				<div class="row">
 					<h2>¡Bienvenido! proveedor <c:out value="${proveedor.user.username}"></c:out></h2>
 				</div>
@@ -98,8 +99,8 @@
 	                </div>
 	            </div>
 	        	</form:form>
-			</c:otherwise>
-			</c:choose>
+			</sec:authorize>
+			
         </div>
     </jsp:body>
 
