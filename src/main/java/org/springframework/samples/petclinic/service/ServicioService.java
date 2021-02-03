@@ -62,9 +62,8 @@ public class ServicioService {
 		servicioRepo.save(servicio);
 	}
 	
-//	public boolean cumpleNoEsLaMismaHora(Servicio servicio) {
+//	public boolean cumpleNoEsLaMismaHora(Servicio servicio, Trabajador trabajador) {
 //		Boolean res = true;
-//		Trabajador trabajador = trabajadorService.findTrabajadorByUsername(servicio.get)
 //		Set<Horario> horarios = trabajador.getHorarios();
 //		Iterator<Horario> iterador = horarios.iterator();
 //		while(iterador.hasNext()) {
@@ -79,14 +78,14 @@ public class ServicioService {
 //		return res;
 //	}
 //	
-//	public void crearServicio(Servicio servicio) throws HorarioServicioException {
-//		if (this.cumpleNoEsLaMismaHora(servicio)) {
+//	public void crearServicio(Servicio servicio, Trabajador trabajador) throws HorarioServicioException {
+//		if (this.cumpleNoEsLaMismaHora(servicio,trabajador)) {
 //			this.save(servicio);
 //		}else {
 //			throw new HorarioServicioException();
 //		}
 //	}
-//	
+	
 	public Iterable<Servicio> serviciosByCliente(Integer id){
 		return servicioRepo.serviciosByCliente(id);
 	}
