@@ -25,10 +25,6 @@ public class PedidoController {
 	private PedidoService pedidoService;
 	@Autowired
 	private OfertaService ofertaService;
-//	@Autowired
-//	private FacturaService facturaService;
-//	@Autowired
-//	private ProductoService productoService;
 	
 	@GetMapping()
 	public String listadoPedidos(ModelMap modelMap) {
@@ -65,27 +61,5 @@ public class PedidoController {
         	}
         }
 	}
-	
-//	@PostMapping(path="/save")
-//	public String salvarPedido(@Valid Pedido pedido, BindingResult result, ModelMap modelMap) {
-//		String view="redirect:/pedidos";
-//        if(result.hasErrors()) {
-//            modelMap.addAttribute("pedido", pedido);
-//            return "administradores/editPedido";
-//        } else {
-//        	if(pedidoService.cumpleCondicion(pedido)) {
-//        		pedido.setFechaPedido(LocalDate.now());
-//        		pedidoService.save(pedido);
-//        		Producto producto = productoService.findByName(pedido.getOferta().getName()).get();
-//        		productoService.sumarProducto(producto, pedido);
-//        		facturaService.creaFactura(pedido);
-//        		return view;
-//        	}else {
-//        		modelMap.addAttribute("pedido", pedido);
-//        		modelMap.addAttribute("error", "No puede superar 100 euros el precio total.");
-//        		return "administradores/editPedido";
-//        	}
-//        }
-//	}
 	
 }
