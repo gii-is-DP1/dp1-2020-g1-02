@@ -37,12 +37,12 @@
                     <c:out value="${proveedor.direccion}"/>
                 </td>
                 
-                <td>
+                <%-- <td>
                 	<spring:url value="/proveedores/delete/{provName}" var="provUrl">
                 		<spring:param name="provName" value="${proveedor.name}"/>
                 	</spring:url>
-                	<a href="${fn:escapeXml(provUrl)}">Delete</a>
-                </td>
+                	<a href="${fn:escapeXml(provUrl)}">Borrar</a>
+                </td>--%>
             </tr>
         </c:forEach>
         </tbody>

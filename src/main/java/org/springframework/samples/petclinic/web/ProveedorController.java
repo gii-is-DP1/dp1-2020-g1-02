@@ -5,6 +5,7 @@ import java.util.Optional;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.samples.petclinic.model.Oferta;
 import org.springframework.samples.petclinic.model.Proveedor;
 import org.springframework.samples.petclinic.model.Trabajador;
 import org.springframework.samples.petclinic.service.ProveedorService;
@@ -40,17 +41,12 @@ public class ProveedorController {
 		return "proveedores/editProveedores";
 	}
 	
-	@GetMapping(path="/delete/{provName}")
-	public String borrarProveedor(@PathVariable("provName") int provId, ModelMap modelmap) {
-		String view="redirect:/proveedores";
-		Optional<Proveedor> prov=provService.findProveedorById(provId);
-//		if(prov.isPresent()) {
-			provService.deleteProveedor(prov.get());
-			modelmap.addAttribute("message", "Proveedor borrado correctamente");
-//		}else {
-//			modelmap.addAttribute("message", "Proveedor no encontrado");
-//			view=listadoProv(modelmap);
-//		}
-		return view;
-	}
+//	@GetMapping(path="/delete/{provName}")
+//	public String borrarProveedor(@PathVariable("provName") String provName, ModelMap modelmap) {
+//		Proveedor prov = provService.findProveedorByName(provName).get();
+//		provService.deleteProveedor(prov);
+//		modelmap.addAttribute("message", "Proveedor borrado!");
+//		return "redirect:/proveedores";
+//	}
+	
 }
