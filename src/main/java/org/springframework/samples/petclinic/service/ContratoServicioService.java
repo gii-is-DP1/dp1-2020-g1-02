@@ -41,4 +41,8 @@ public class ContratoServicioService {
 		return contratoServicioRepo.contratosQueCaducanEsteMes(now.getDayOfMonth(), now.getMonthValue(), now.getYear());
 	}
 
+	@Transactional
+	public Iterable<ContratoServicio> contratosByIdCliente(int idCliente) {
+		return contratoServicioRepo.contratosByIdCliente(idCliente);
+	}
 }

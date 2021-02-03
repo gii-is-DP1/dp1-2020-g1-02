@@ -5,10 +5,14 @@ import java.util.Optional;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.samples.petclinic.model.Cliente;
 import org.springframework.samples.petclinic.model.Presupuesto;
 import org.springframework.samples.petclinic.model.Servicio;
+import org.springframework.samples.petclinic.service.ClienteService;
 import org.springframework.samples.petclinic.service.PresupuestoService;
 import org.springframework.samples.petclinic.service.ServicioService;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -23,6 +27,8 @@ public class ServicioController {
 	
 	@Autowired
 	private ServicioService servicioService;
+	@Autowired
+	private ClienteService clienteService;
 	@Autowired
 	private PresupuestoService presupuestoService;
 	
@@ -82,6 +88,16 @@ public class ServicioController {
 	public String listadoServiciosPorClienteId(@PathVariable("clienteId") int clienteId, ModelMap modelMap) {
 		String vista = "servicios/listadoServiciosPorCliente";
 		Iterable<Servicio> servicios = servicioService.serviciosByCliente(clienteId);
+		modelMap.addAttribute("servicios", servicios);
+		return vista;
+	}
+	
+	@GetMapping(value = "/misServicios")
+	public String listadoServiciosPorClienteUsername(ModelMap modelMap) {
+		String vista = "servicios/listadoServiciosPorCliente";
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		Cliente client = clienteService.findClienteByUsername(auth.getName()).get();
+		Iterable<Servicio> servicios = servicioService.serviciosByCliente(client.getId());
 		modelMap.addAttribute("servicios", servicios);
 		return vista;
 	}
