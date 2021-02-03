@@ -5,8 +5,10 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.samples.petclinic.model.RegistroHoras;
 import org.springframework.samples.petclinic.model.Trabajador;
+import org.springframework.samples.petclinic.model.User;
 import org.springframework.samples.petclinic.service.RegistroHorasService;
 import org.springframework.samples.petclinic.service.TrabajadorService;
+import org.springframework.samples.petclinic.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -25,6 +27,9 @@ public class RegistroHorasController {
 	@Autowired
 	private TrabajadorService trabajadorService;
 	
+	@Autowired
+	private UserService userService;
+	
 	@GetMapping()
 	public String listadoRegistroHoras(ModelMap modelMap) {
 		String vista ="registroHoras/listadoRegistroHoras";
@@ -36,21 +41,33 @@ public class RegistroHorasController {
 	@GetMapping(path="/new")
 	public String crearRegistroHoras(ModelMap modelMap) {
 		String view="registroHoras/newRegistroHoras";
-		Iterable<Trabajador> trabajadores = trabajadorService.findAll();
-		modelMap.addAttribute("trabajadores", trabajadores);
-		modelMap.addAttribute("registro_horas", new RegistroHoras());
+		User user = userService.getLoggedUser();
+		if(user.getAuthorities().getAuthority().equalsIgnoreCase("trabajador") ) {
+			Trabajador trabajador = trabajadorService.findTrabajadorByUsername(user.getUsername()).get();
+			modelMap.addAttribute("trabajador", trabajador);
+			modelMap.addAttribute("registro_horas", new RegistroHoras());
+		}else {
+			return "exception";
+		}
 		return view;
 	}
 	
 	@PostMapping(path="/save")
 	public String salvarRegistroHoras(@Valid RegistroHoras registroHora, BindingResult result,ModelMap modelMap) {
-		String view="redirect:/registroHoras";
+		String view="succesful";
 		if(result.hasErrors()) {
 			modelMap.addAttribute("registro_horas", registroHora);
 			return "registroHoras/newRegistroHoras";
 		}else {
+			if(!trabajadorService.findTrabajadorById(registroHora.getTrabajador().getId()).isPresent()) {
+			modelMap.addAttribute("registroHora", registroHora);
+			modelMap.addAttribute("error", "No existe el trabajador que ha seleccionado.");
+			return "registroHoras/newRegistroHoras";
+		} else {
 			registroHorasService.saveRegistroHoras(registroHora);
-			modelMap.addAttribute("message", "Registro de Horas actualizado!");
+			modelMap.addAttribute("message", "Registro Hora añadida!");
+			}
+		
 		}
 		return view;
 	}

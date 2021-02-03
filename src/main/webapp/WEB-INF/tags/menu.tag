@@ -87,7 +87,7 @@
 				</sec:authorize>
 				
 				<sec:authorize access="hasAuthority('trabajador')">
-					<petclinic:menuItem active="${name eq 'horario'}" url="#"
+					<petclinic:menuItem active="${name eq 'horario'}" url="/registroHoras/new"
 						title="horario">
 						<span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
 						<span>Horario</span>
