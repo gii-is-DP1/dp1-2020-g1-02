@@ -112,11 +112,11 @@ public class ServicioController {
 			return "presupuestos/editPresupuesto";
 		}else {
 			if(a>0) {
-				modelMap.addAttribute("mensaje", "No se enviar presupuesto a un servicio que ya tiene un presupuesto aceptado");
+				modelMap.addAttribute("message", "No se enviar presupuesto a un servicio que ya tiene un presupuesto aceptado");
 				view="redirect:/error";
 			}else {
 			presupuestoService.save(presupuesto);
-			modelMap.addAttribute("mensaje", "Presupuesto actualizado!!");
+			modelMap.addAttribute("message", "Presupuesto actualizado!!");
 			}
 		}
 		return view;

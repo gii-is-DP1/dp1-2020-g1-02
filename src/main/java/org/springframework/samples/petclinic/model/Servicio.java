@@ -24,25 +24,20 @@ import lombok.Setter;
 @Table(name = "servicio")
 public class Servicio extends BaseEntity {
 	
-	@Column(name = "lugar")
 	@NotNull
 	private String lugar;
 	
-	@Column(name = "tipocategoria")
 	@NotNull
 	private TipoCategoria tipocategoria;
 	
-	@Column(name = "fechainicio")
 	@DateTimeFormat(pattern = "yyyy/MM/dd")
 	@NotNull
 	private LocalDate fechainicio;
 	
-	@Column(name = "fechafin")
 	@DateTimeFormat(pattern = "yyyy/MM/dd")
 	@NotNull
 	private LocalDate fechafin;
 	
-	@Column(name= "estado")
 	@NotNull
 	private EstadoServicio estado;
 	

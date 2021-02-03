@@ -33,10 +33,12 @@ public class TrabajadorService {
 		return trabajadorRepo.findAll();
 	}
 
+	@Transactional
 	public void save(Trabajador trabajador) {
 		trabajadorRepo.save(trabajador);
 	}
 	
+	@Transactional
 	public void delete(Trabajador trabajador) {
 		trabajadorRepo.delete(trabajador);
 	}

@@ -22,12 +22,10 @@ import lombok.Setter;
 @Table(name="contratotrabajador")
 public class ContratoTrabajador extends BaseEntity {
 
-    @Column(name="fechainicial")
     @DateTimeFormat(pattern = "yyyy/MM/dd")
     @NotNull
     private LocalDate fechainicial;
 
-    @Column(name="fechafinal")
     @DateTimeFormat(pattern = "yyyy/MM/dd")
     @NotNull
     private LocalDate fechafinal;
@@ -36,7 +34,6 @@ public class ContratoTrabajador extends BaseEntity {
     @JoinColumn(name="trabajador_id")
     private Trabajador trabajador;
     
-    @Column(name="sueldo")
     @NotNull
     private Double sueldo;
     
