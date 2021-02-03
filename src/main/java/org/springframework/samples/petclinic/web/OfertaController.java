@@ -60,7 +60,7 @@ public class OfertaController {
 	
 	@PostMapping(path="/save")
 	public String salvarOferta(@Valid Oferta oferta, BindingResult result, ModelMap modelMap) {
-		String view="redirect:/editOferta";
+		String view="succesful";
 		Optional<Producto> producto = productoService.findByName(oferta.getName());
 		oferta.setProducto(producto.get());
 		if(result.hasErrors()) {

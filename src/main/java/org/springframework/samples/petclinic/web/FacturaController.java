@@ -10,7 +10,12 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.samples.petclinic.model.Cliente;
 import org.springframework.samples.petclinic.model.Factura;
+import org.springframework.samples.petclinic.model.Proveedor;
+import org.springframework.samples.petclinic.model.Servicio;
 import org.springframework.samples.petclinic.service.FacturaService;
+import org.springframework.samples.petclinic.service.ProveedorService;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -25,6 +30,8 @@ public class FacturaController {
 	
 	@Autowired
 	private FacturaService facturaService;
+	@Autowired
+	private ProveedorService proveedorService;
 	
 	@GetMapping()
 	public String listadoFacturas(ModelMap modelMap) {
@@ -53,6 +60,15 @@ public class FacturaController {
 		return view;
 	}
 	
+	@GetMapping(value = "/misFacturas")
+	public String listadoFacturasPorProveedor(ModelMap modelMap) {
+		String vista = "facturas/listadoFacturas";
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		Proveedor proveedor = proveedorService.findProveedorByUsername(auth.getName()).get();
+		Iterable<Factura> facturas = facturaService.findFacturaByProveedorName(proveedor.getName());
+		modelMap.addAttribute("facturas", facturas);
+		return vista;
+	}
 	
 
 }
