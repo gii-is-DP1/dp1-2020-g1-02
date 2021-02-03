@@ -11,8 +11,6 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.factory.PasswordEncoderFactories;
-import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 /*
@@ -38,7 +36,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 				.antMatchers(HttpMethod.GET, "/","/oups").permitAll()
 				.antMatchers("/users/new").permitAll()
 				
-				.antMatchers("/clientes/**").hasAnyAuthority("administrador")
+				.antMatchers("/clientes/**").hasAuthority("administrador")
 				
 				.antMatchers("/reclamaciones/**").hasAnyAuthority("administrador")
 				
@@ -50,7 +48,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 				
 				.antMatchers("/horarios/**").hasAnyAuthority("administrador")
 				
-				.antMatchers("/contratosServicios/**").hasAnyAuthority("administrador")
+				.antMatchers("/contratosServicios/misContratos").hasAuthority("cliente")
+				
+				.antMatchers("/contratosServicios/**").hasAuthority("administrador")
 				
 				.antMatchers("/curriculums/**").hasAnyAuthority("administrador")
 				
@@ -72,7 +72,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 				.antMatchers("/contratosTrabajadores/**").hasAnyAuthority("administrador")
 
-				.antMatchers("/servicios/**").hasAnyAuthority("cliente","administrador")
+				.antMatchers("/servicios/misServicios").hasAuthority("cliente")
+				
+				.antMatchers("/servicios/**").hasAuthority("administrador")
 				
 				.antMatchers("/mensajes/**").permitAll()
 				

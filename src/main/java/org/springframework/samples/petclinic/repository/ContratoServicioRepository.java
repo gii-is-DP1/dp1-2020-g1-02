@@ -12,6 +12,9 @@ public interface ContratoServicioRepository extends CrudRepository<ContratoServi
 	@Query("SELECT cliente FROM ContratoServicio cs WHERE cs.fechapago = null")
 	Iterable<ContratoServicio> buscaMorosos() throws DataAccessException;
 	
+	@Query("SELECT s FROM ContratoServicio s WHERE s.cliente.id = :idCliente")
+	Iterable<ContratoServicio> contratosByIdCliente(@Param("idCliente") int idCliente) throws DataAccessException;
+	
 	@Query("SELECT s FROM ContratoServicio s WHERE day(s.fechafinal) >= :dia and month(s.fechafinal) = :mes and year(s.fechafinal) = :anyo")
 	Iterable<ContratoServicio> contratosQueCaducanEsteMes(@Param("dia") int dia, @Param("mes") int mes, @Param("anyo") int anyo) throws DataAccessException;
 }

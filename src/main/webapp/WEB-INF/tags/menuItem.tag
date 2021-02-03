@@ -3,11 +3,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ attribute name="active" required="true" rtexprvalue="true" %>
 <%@ attribute name="url" required="true" rtexprvalue="true" %>
+<%@ attribute name="user" required="false" rtexprvalue="true" %>
 <%@ attribute name="title" required="false" rtexprvalue="true" %>
 <%@ attribute name="dropdown" required="false" rtexprvalue="true" %>
 
 <li class="${active ? 'active' : ''} ${dropdown ? 'dropdown' : ''}">
-    <a href="<spring:url value="${url}" htmlEscape="true" />"
+    <a href="<spring:url value="${url}${user}" htmlEscape="true" />"
        title="${fn:escapeXml(title)}" class="${dropdown ? 'dropdown-toggle' : ''}" 
        ${dropdown ? 'data-toggle="dropdown"' : ''}>
        <c:if test="${!dropdown}">

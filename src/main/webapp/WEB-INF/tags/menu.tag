@@ -1,8 +1,7 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="petclinic" tagdir="/WEB-INF/tags"%>
-<%@ taglib prefix="sec"
-	uri="http://www.springframework.org/security/tags"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <!--  >%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%-->
 <%@ attribute name="name" required="true" rtexprvalue="true"
 	description="Name of the active menu: home, owners, vets or error"%>
@@ -88,11 +87,23 @@
 				</sec:authorize>
 				
 				<sec:authorize access="hasAuthority('trabajador')">
-					
+					<petclinic:menuItem active="${name eq 'horario'}" url="#"
+						title="horario">
+						<span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+						<span>Horario</span>
+					</petclinic:menuItem>
 				</sec:authorize>
 				
 				<sec:authorize access="hasAuthority('cliente')">
+					<petclinic:menuItem active="${name eq 'servicios'}" url="/servicios/misServicios" title="servicios">
+						<span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+						<span>Servicios</span>
+					</petclinic:menuItem>
 					
+					<petclinic:menuItem active="${name eq 'contratos'}" url="/contratosServicios/misContratos" title="contratos">
+						<span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+						<span>Contratos</span>
+					</petclinic:menuItem>
 				</sec:authorize>
 				
 				<sec:authorize access="hasAuthority('proveedor')">

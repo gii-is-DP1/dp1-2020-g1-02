@@ -162,7 +162,6 @@ public class UserController {
 		String view = PERFIL_VIEW;
 		if(result.hasErrors()) {
 			modelMap.addAttribute("trabajador", trabajador);
-			modelMap.addAttribute("rol", "trabajador");
 		}else {
 			User principal = userService.getLoggedUser();
 			if(principal != null && principal.getUsername().equals(trabajador.getUser().getUsername())) {
@@ -191,7 +190,6 @@ public class UserController {
 		String view = PERFIL_VIEW;
 		if(result.hasErrors()) {
 			modelMap.addAttribute("proveedor", proveedor);
-			modelMap.addAttribute("rol", "proveedor");
 		}else {
 			User principal = userService.getLoggedUser();
 			if(principal != null && principal.getUsername().equals(proveedor.getUser().getUsername())) {
@@ -219,7 +217,6 @@ public class UserController {
 		String view = PERFIL_VIEW;
 		if(result.hasErrors()) {
 			modelMap.addAttribute("trabajador", trabajador);
-			modelMap.addAttribute("rol", "administrador");
 		}else {
 			User principal = userService.getLoggedUser();
 			if(principal != null && principal.getUsername().equals(trabajador.getUser().getUsername())) {
@@ -252,11 +249,7 @@ public class UserController {
 		User principal = userService.getLoggedUser();
 		if(principal != null && principal.getUsername().equals(username)) {
 			view = PERFIL_VIEW;
-			String rol = principal.getAuthorities().getAuthority();
-			modelMap.addAttribute("rol", rol);
-			String datos = rol;
-			modelMap.addAttribute("datos", datos);
-			switch(rol) {
+			switch(principal.getAuthorities().getAuthority()) {
 				case "administrador": 
 					Administrador administrador = administradorService.findAdministradorByUsername(principal.getUsername()).get();
 					modelMap.addAttribute("administrador", administrador);
