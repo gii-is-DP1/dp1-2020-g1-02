@@ -1,7 +1,9 @@
 package org.springframework.samples.petclinic.web;
 
 import static org.mockito.BDDMockito.given;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
@@ -61,9 +63,42 @@ public class HorarioControllerTest {
 
 	@WithMockUser(value = "spring")
 	@Test
+	void testEditHorario() throws Exception{
+		mockMvc.perform(get("/horarios/new")).andExpect(status().isOk()).andExpect(model().attributeExists("horarios"))
+		.andExpect(view().name("horarios/newHorario"));
+	}
+	
+	@WithMockUser(value = "spring")
+	@Test
 	void testListadoHorarios() throws Exception{
 		mockMvc.perform(get("/horarios")).andExpect(status().isOk())
 		.andExpect(model().attributeExists("horarios"))
 		.andExpect(view().name("horarios/listadoHorarios"));
+	}
+	
+	@WithMockUser(value = "spring")
+    @Test
+    void testProcessCreationFormSuccess() throws Exception {
+		mockMvc.perform(post("/horarios/save")
+						.with(csrf())
+						.param("hora_inicio", "LocalDateTime.of(2018, 10, 03, 14, 30)")
+						.param("hora_fin", "LocalDateTime.of(2018, 10, 03, 17, 30)")
+						.param("descripcion", "Ese es tu horario de hoy"))
+			.andExpect(status().is2xxSuccessful())
+			.andExpect(view().name("horarios/newHorario"));
+	}
+	
+	@WithMockUser(value = "spring")
+    @Test
+    void testProcessCreationFormHasErrors() throws Exception {
+		mockMvc.perform(post("/horarios/save")
+						.with(csrf())
+						.param("hora_inicio", "")
+						.param("hora_fin", "LocalDateTime.of(2018, 10, 03, 17, 30)")
+						.param("descripcion", "Ese es tu horario de hoy"))
+			.andExpect(status().isOk())
+			.andExpect(model().attributeHasErrors("horario"))
+			.andExpect(model().attributeHasFieldErrors("horario", "hora_inicio"))
+			.andExpect(view().name("horarios/newHorario"));
 	}
 }

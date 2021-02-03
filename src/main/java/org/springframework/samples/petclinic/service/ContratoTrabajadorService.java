@@ -26,11 +26,13 @@ public class ContratoTrabajadorService {
 	public Iterable<ContratoTrabajador> findAll(){
 		return contratoTrabajadorRepo.findAll();
 	}
-
+	
+	@Transactional
 	public void save(ContratoTrabajador contratoTrabajador) {
 		contratoTrabajadorRepo.save(contratoTrabajador);
 	}
 	
+	@Transactional
 	public void delete(ContratoTrabajador contratoTrabajador) {
 		contratoTrabajadorRepo.delete(contratoTrabajador);
 		

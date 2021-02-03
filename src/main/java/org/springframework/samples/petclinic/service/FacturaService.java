@@ -23,24 +23,24 @@ public class FacturaService {
 	@Autowired
 	private FacturaRepository facturaRepo;
 	
-	@Transactional
+	@Transactional(readOnly=true)
 	public int facturaCount() {
 		return (int) facturaRepo.count();
 	}
 	
-	@Transactional
+	@Transactional(readOnly=true)
 	public Iterable<Factura> findAll() {
 		return facturaRepo.findAll();
 	}
-	
+	@Transactional
 	public void save(Factura factura) {
 		facturaRepo.save(factura);
 	}
-	
+	@Transactional
 	public void deleteFactura(Factura factura) {
 		facturaRepo.delete(factura);
 	}
-	
+	@Transactional
 	public void deleteById(Integer id) {
 		Factura facturaBorrar = findFacturaById(id).get();
 		deleteFactura(facturaBorrar);
@@ -49,23 +49,17 @@ public class FacturaService {
 //	public Collection<Factura> findFacturaByProveedorName(String name) {
 //		return facturaRepo.findFacturasByProveedorName(name);
 //	}
-	
+	@Transactional(readOnly=true)
 	public Collection<Factura> findFacturaByProveedorName(String name) {
 		return facturaRepo.findAllByProveedorName(name.toLowerCase());
 	}
 	
-	
+	@Transactional(readOnly=true)
 	public Optional<Factura> findFacturaById(Integer id) {
 		return facturaRepo.findById(id);
 	}
-	
-	public Optional<Factura> findFacturaByPedidoID(Integer idP){
-		
-		
-		return null;
-		
-	}
-	
+
+	@Transactional
 	public void creaFactura(Pedido pedido) {
 		
 		Proveedor prov = pedido.getOferta().getProveedor();

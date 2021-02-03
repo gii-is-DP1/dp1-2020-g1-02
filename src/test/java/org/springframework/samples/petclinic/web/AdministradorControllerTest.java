@@ -1,9 +1,9 @@
 package org.springframework.samples.petclinic.web;
 
-import static org.hamcrest.Matchers.hasProperty;
-import static org.hamcrest.Matchers.is;
 import static org.mockito.BDDMockito.given;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
@@ -21,8 +21,6 @@ import org.springframework.samples.petclinic.configuration.SecurityConfiguration
 import org.springframework.samples.petclinic.model.Administrador;
 import org.springframework.samples.petclinic.model.TipoCategoria;
 import org.springframework.samples.petclinic.service.AdministradorService;
-import org.springframework.samples.petclinic.service.ContratoServicioService;
-import org.springframework.samples.petclinic.service.ReclamacionService;
 import org.springframework.security.config.annotation.web.WebSecurityConfigurer;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
@@ -39,10 +37,6 @@ public class AdministradorControllerTest {
 	
 	@MockBean
 	private AdministradorService administradorService;
-	@MockBean
-	private ContratoServicioService contratoServicioService;
-	@MockBean
-	private ReclamacionService reclamacionService;
 	
 	private Administrador admin;
 	
@@ -57,7 +51,7 @@ public class AdministradorControllerTest {
 		admin.setTelefono("628157278");
 		admin.setDireccion("Calle Huertas  31");
 		admin.setCorreo("carlosr@gmail.com");
-//		admin.setTipocategoria(TipoCategoria.Limpieza);
+		admin.setTipocategoria(TipoCategoria.Limpieza);
 		
 		given(this.administradorService.findAdministradorById(1)).willReturn(Optional.of(admin));
 		
@@ -68,9 +62,50 @@ public class AdministradorControllerTest {
 	
 	@WithMockUser(value = "spring")
 	@Test
+	void testEditAdministrador() throws Exception{
+		mockMvc.perform(get("/administradores/new")).andExpect(status().isOk()).andExpect(model().attributeExists("administrador"))
+		.andExpect(view().name("administradores/editAdmin"));
+	}
+	
+	@WithMockUser(value = "spring")
+	@Test
 	void testListadoAdministradores() throws Exception{
 		mockMvc.perform(get("/administradores")).andExpect(status().isOk())
 		.andExpect(model().attributeExists("administrador"))
 		.andExpect(view().name("administradores/listadoAdmin"));
+	}
+	
+	@WithMockUser(value = "spring")
+    @Test
+    void testProcessCreationFormSuccess() throws Exception {
+		mockMvc.perform(post("/administradores/save")
+						.with(csrf())
+						.param("dni", "23523464S")
+						.param("nombre", "José Manuel")
+						.param("apellidos", "González Rodríguez")
+						.param("telefono", "635254643")
+						.param("direccion", "Calle Sevilla")
+						.param("correo", "jmgr12@gmail.com")
+						.param("categoria", "Mantenimiento"))
+			.andExpect(status().is2xxSuccessful())
+			.andExpect(view().name("administradores/editAdministradores"));
+	}
+	
+	@WithMockUser(value = "spring")
+    @Test
+    void testProcessCreationFormHasErrors() throws Exception {
+		mockMvc.perform(post("/administradores/save")
+						.with(csrf())
+						.param("dni", "23523464S")
+						.param("nombre", "")
+						.param("apellidos", "González Rodríguez")
+						.param("telefono", "635254643")
+						.param("direccion", "Calle Sevilla")
+						.param("correo", "jmgr12@gmail.com")
+						.param("categoria", "Mantenimiento"))
+			.andExpect(status().isOk())
+			.andExpect(model().attributeHasErrors("administrador"))
+			.andExpect(model().attributeHasFieldErrors("administrador", "nombre"))
+			.andExpect(view().name("administradores/editAdministradores"));
 	}
 }

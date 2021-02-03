@@ -10,14 +10,14 @@
     <h2>
         <c:if test="${registroHoras['new']}">Nuevo </c:if> Registro Horas
     </h2>
-    <form:form modelAttribute="registro_horas" class="form-horizontal" id="add-cliente-form" action="/registroHoras/save">
+    <form:form modelAttribute="registro_horas" class="form-horizontal" id="add-registroHora-form" action="/registroHoras/save">
         <div class="form-group has-feedback">
-       	     <label for="trabajador">ID del trabajador</label>
+       	     <label for="trabajador">Nombre del trabajador</label>
   				<select id="trabajador" name="trabajador">
   				<c:forEach items="${trabajadores}" var="trabajador">
 		            <tr>
 		                <td>
-		                   <option><c:out value="${trabajador.id}"/></option>
+		                   <option><c:out value="${trabajador.nombre}"/></option>
 		            </tr>
 		        </c:forEach>
   				</select>
@@ -30,9 +30,6 @@
                     <c:when test="${registroHoras['new']}">
                         <button class="btn btn-default" type="submit">Añadir Registro De Horas</button>
                     </c:when>
-                    <c:otherwise>
-                        <button class="btn btn-default" type="submit">Actualizar Registro De Horas</button>
-                    </c:otherwise>
                 </c:choose>
             </div>
         </div>

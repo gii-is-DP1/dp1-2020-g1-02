@@ -35,24 +35,21 @@ public class ProveedorService {
 		return proveedorRepo.findAll();
 	}
 
-	public void save(Proveedor proveedor) {
-		proveedorRepo.save(proveedor);
-	}
-	
+	@Transactional
 	public void deleteProveedor(Proveedor proveedor) {
 		proveedorRepo.delete(proveedor);
 	}
-
+	@Transactional
 	public void deleteById(Integer id) {
 		Proveedor proveedorBorrar = findProveedorById(id).get();
 		deleteProveedor(proveedorBorrar);
 	}
-	
+	@Transactional(readOnly=true)
 	public Optional<Proveedor> findProveedorByUsername(String username) {
 		// TODO Auto-generated method stub
 		return proveedorRepo.findProveedorByUsername(username);
 	}
-	
+	@Transactional(readOnly=true)
 	public Optional<Proveedor> findProveedorById(int id) {
 		// TODO Auto-generated method stub
 		return proveedorRepo.findById(id);

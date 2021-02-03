@@ -13,34 +13,38 @@ public class RegistroHorasService {
 	@Autowired
 	private RegistroHorasRepository registroHorasRepo;
 	
-	@Transactional
+	@Transactional(readOnly=true)
 	public int RegistroHorasCount() {
 		return (int) registroHorasRepo.count();
 	}
 	
-	@Transactional
+	@Transactional(readOnly=true)
 	public Iterable<RegistroHoras> findAll() {
 		return registroHorasRepo.findAll();
 	}
 	
+	@Transactional
 	public void saveRegistroHoras(RegistroHoras registroHoras) {
 		registroHorasRepo.save(registroHoras);
 	}
 	
+	@Transactional
 	public void deleteRegistroHoras(RegistroHoras registroHoras) {
 		registroHorasRepo.delete(registroHoras);
 	}
 	
+	@Transactional
 	public void deleteById(Integer id) {
 		RegistroHoras registroHorasBorrar = findRegistroHorasById(id).get();
 		deleteRegistroHoras(registroHorasBorrar);
 	}
 
+	@Transactional(readOnly=true)
 	public Iterable<RegistroHoras> findRegistroHorasByTrabajadorId(String nombre) {
 		return registroHorasRepo.findRegistroHorasByTrabajadorId(nombre);
 	}
 	
-	
+	@Transactional(readOnly=true)
 	public Optional<RegistroHoras> findRegistroHorasById(Integer id) {
 		return registroHorasRepo.findById(id);
 	}

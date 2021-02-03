@@ -22,7 +22,6 @@ import lombok.Setter;
 @Table(name="trabajador")
 public class Trabajador extends PersonaEntity {
 
-    @Column(name="tipocategoria")
     @NotNull
     private TipoCategoria tipocategoria;
     
@@ -38,7 +37,7 @@ public class Trabajador extends PersonaEntity {
     @OneToMany(cascade = CascadeType.ALL, mappedBy="trabajador")
     private Set<RegistroHoras> registroHoras;
 
-	  @OneToOne(cascade = CascadeType.ALL)
+	@OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "username", referencedColumnName = "username")
 	  private User user;
 	

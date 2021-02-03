@@ -51,7 +51,6 @@ public class ContratoTrabajadorController {
 		}else {
 			contratoTrabajadorService.save(contratoTrabajador);
 			modelMap.addAttribute("message", "Contrato actualizado!");
-			view=listadoContratosTrabajadores(modelMap);
 		}
 		return view;
 	}
@@ -65,7 +64,6 @@ public class ContratoTrabajadorController {
 			modelmap.addAttribute("message", "Contrato trabajador borrado correctamente");
 		}else {
 			modelmap.addAttribute("message", "Contrato trabajador no encontrado");
-			view=listadoContratosTrabajadores(modelmap);
 		}
 		return view;
 	}

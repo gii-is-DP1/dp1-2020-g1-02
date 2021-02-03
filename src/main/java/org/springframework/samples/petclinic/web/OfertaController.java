@@ -17,6 +17,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -45,9 +46,8 @@ public class OfertaController {
 	public String crearOferta(ModelMap modelMap) {
 		String view="ofertas/editOferta";
 		Iterable<Producto> productos = productoService.findAll();
-		Iterable<Proveedor> proveedores = proveedorService.findAll();
 		User user =  userService.getLoggedUser();
-		if(user.getAuthorities().getAuthority() == "proveedor" ) {
+		if(user.getAuthorities().getAuthority().equalsIgnoreCase("proveedor") ) {
 			Proveedor prov = proveedorService.findProveedorByUsername(user.getUsername()).get();
 			modelMap.addAttribute("proveedor", prov);
 			modelMap.addAttribute("productos", productos);
@@ -55,8 +55,6 @@ public class OfertaController {
 		}else {
 			return "exception";
 		}
-		
-		
 		return view;
 	}
 	
@@ -66,11 +64,9 @@ public class OfertaController {
 		Optional<Producto> producto = productoService.findByName(oferta.getName());
 		oferta.setProducto(producto.get());
 		if(result.hasErrors()) {
-			
 			modelMap.addAttribute("oferta", oferta);
 			return "ofertas/editOferta";
 		}else {
-			
 			if(!proveedorService.findProveedorById(oferta.getProveedor().getId()).isPresent()) {
 				modelMap.addAttribute("oferta", oferta);
 				modelMap.addAttribute("error", "No existe el proveedor que ha seleccionado.");
@@ -78,25 +74,18 @@ public class OfertaController {
 			}else {
 			ofertaService.save(oferta);
 			modelMap.addAttribute("message", "Oferta añadida!");
-//			view=listadoOfertas(modelMap);
 			}
 		}
 		return view;
 	}
 	
-//	@GetMapping(path="/delete/{ofertaId}")
-//	public String borrarTrabajador(@PathVariable("trabajadorId") int trabajadorId, ModelMap modelmap) {
-//		String view="trabajadores/listadoTrabajadores";
-//		Optional<Trabajador> trabajador=trabajadorService.findTrabajadorById(trabajadorId);
-//		if(trabajador.isPresent()) {
-//			trabajadorService.delete(trabajador.get());
-//			modelmap.addAttribute("message", "Trabajador borrado correctamente");
-//		}else {
-//			modelmap.addAttribute("message", "Trabajador on encontrado");
-//			view=listadoTrabajadores(modelmap);
-//		}
-//		return view;
-//	}
+	@GetMapping(path="/delete/{ofertaId}")
+	public String borrarOferta(@PathVariable("ofertaId") int ofertaId, ModelMap modelmap) {
+		Oferta oferta = ofertaService.findOfertaById(ofertaId).get();
+		ofertaService.delete(oferta);
+		modelmap.addAttribute("message", "oferta borrada!");
+		return "redirect:/ofertas";
+	}
 	
 }
 

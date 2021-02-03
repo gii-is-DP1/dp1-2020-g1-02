@@ -5,6 +5,7 @@ import java.util.Optional;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.samples.petclinic.model.Oferta;
 import org.springframework.samples.petclinic.model.Proveedor;
 import org.springframework.samples.petclinic.model.Trabajador;
 import org.springframework.samples.petclinic.service.ProveedorService;
@@ -33,27 +34,6 @@ public class ProveedorController {
 		return vista;
 	}
 	
-	@GetMapping(path="/new")
-	public String crearProveedor(ModelMap modelMap) {
-		String view="proveedores/editProveedor";
-		modelMap.addAttribute("proveedor", new Proveedor());
-		return view;
-	}
-	
-	@PostMapping(path="/save")
-	public String salvarProveedor(@Valid Proveedor prov, BindingResult result,ModelMap modelMap) {
-		String view="redirect:/proveedores";
-		if(result.hasErrors()) {
-			modelMap.addAttribute("proveedor", prov);
-			return "proveedores/editProveedor";
-		}else {
-			provService.save(prov);
-			modelMap.addAttribute("message", "Proveedor actualizado!");
-//			view=listadoProv(modelMap);
-		}
-		return view;
-	}
-	
 	@GetMapping(value = "/{proveedorId}/edit")
 	public String editarProveedor(@PathVariable("proveedorId") int proveedorId, ModelMap modelMap) {
 		Proveedor proveedor = this.provService.findProveedorById(proveedorId).get();
@@ -61,17 +41,12 @@ public class ProveedorController {
 		return "proveedores/editProveedores";
 	}
 	
-	@GetMapping(path="/delete/{provName}")
-	public String borrarProveedor(@PathVariable("provName") int provId, ModelMap modelmap) {
-		String view="redirect:/proveedores";
-		Optional<Proveedor> prov=provService.findProveedorById(provId);
-//		if(prov.isPresent()) {
-			provService.deleteProveedor(prov.get());
-			modelmap.addAttribute("message", "Proveedor borrado correctamente");
-//		}else {
-//			modelmap.addAttribute("message", "Proveedor no encontrado");
-//			view=listadoProv(modelmap);
-//		}
-		return view;
-	}
+//	@GetMapping(path="/delete/{provName}")
+//	public String borrarProveedor(@PathVariable("provName") String provName, ModelMap modelmap) {
+//		Proveedor prov = provService.findProveedorByName(provName).get();
+//		provService.deleteProveedor(prov);
+//		modelmap.addAttribute("message", "Proveedor borrado!");
+//		return "redirect:/proveedores";
+//	}
+	
 }

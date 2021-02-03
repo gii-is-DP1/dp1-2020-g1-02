@@ -11,30 +11,22 @@ import javax.validation.constraints.Size;
 public class PersonaEntity extends BaseEntity {
 
     @Size(min = 3, max = 50)
-	@Column(name = "nombre")
     @NotEmpty
 	private String nombre;
     
     @Size(min = 3, max = 50)
-   	@Column(name = "apellidos")
     @NotEmpty
    	private String apellidos;
     
-    @Column(name="dni")
     private String dni;
     
-    @Column(name="telefono")
     private String telefono;
     
-    @Column(name="direccion")
     private String direccion;
     
     @NotBlank
-    @Column(name="correo")
     private String correo;
 
-    
-    
 	public String getNombre() {
 		return nombre;
 	}

@@ -51,7 +51,6 @@ public class HorarioController {
 		}else {
 			horarioService.save(horario);
 			modelMap.addAttribute("message", "Horario actualizado!");
-			view=listadoHorarios(modelMap);
 		}
 		return view;
 	}
@@ -65,7 +64,6 @@ public class HorarioController {
 			modelmap.addAttribute("message", "Horario borrada correctamente");
 		}else {
 			modelmap.addAttribute("message", "Horario no encontrada");
-			view=listadoHorarios(modelmap);
 		}
 		return view;
 	}

@@ -41,6 +41,12 @@
                         </spring:url>
                         <a href="${fn:escapeXml(addUrl)}" class="btn btn-default">Crear pedido</a>
                 </td>
+                <td>
+                	<spring:url value="/ofertas/delete/{ofertaId}" var="productUrl">
+                		<spring:param name="ofertaId" value="${oferta.id}"/>
+                	</spring:url>
+                	<a href="${fn:escapeXml(productUrl)}" class="btn btn-default">Borrar</a>
+                </td>
             </tr>
         </c:forEach>
         </tbody>

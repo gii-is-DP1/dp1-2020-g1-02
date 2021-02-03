@@ -12,33 +12,38 @@ public class InstalacionService {
 	@Autowired
 	private InstalacionRepository instalacionRepo;
 	
-	@Transactional
+	@Transactional(readOnly=true)
 	public int instalacionCount() {
 		return (int) instalacionRepo.count();
 	}
 	
-	@Transactional
+	@Transactional(readOnly=true)
 	public Iterable<Instalacion> findAll(){
 		return instalacionRepo.findAll();
 	}
-
+	
+	@Transactional
 	public void save(Instalacion instalacion) {
 		instalacionRepo.save(instalacion);
 	}
 	
+	@Transactional
 	public void delete(Instalacion instalacion) {
 		instalacionRepo.delete(instalacion);
 		
 	}
 
+	@Transactional(readOnly=true)
 	public Optional<Instalacion> findInstalacionById(Integer instalacionId) {
 		return instalacionRepo.findById(instalacionId);
 	}
 	
+	@Transactional(readOnly=true)
 	public Iterable<Instalacion> findInstalacionesByClienteName(String name) {
 		return instalacionRepo.findInstalacionesByClienteName(name);
 	}
 	
+	@Transactional
 	public void deleteById(Integer id) {
 		Instalacion instalacionBorrar = findInstalacionById(id).get();
 		delete(instalacionBorrar);
