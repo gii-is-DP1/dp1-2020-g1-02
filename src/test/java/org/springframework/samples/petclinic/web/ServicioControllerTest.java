@@ -22,8 +22,11 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.FilterType;
 import org.springframework.samples.petclinic.configuration.SecurityConfiguration;
 import org.springframework.samples.petclinic.model.EstadoServicio;
+import org.springframework.samples.petclinic.model.Presupuesto;
 import org.springframework.samples.petclinic.model.Servicio;
 import org.springframework.samples.petclinic.model.TipoCategoria;
+import org.springframework.samples.petclinic.model.TipoPresupuesto;
+import org.springframework.samples.petclinic.service.ClienteService;
 import org.springframework.samples.petclinic.service.PresupuestoService;
 import org.springframework.samples.petclinic.service.ServicioService;
 import org.springframework.security.config.annotation.web.WebSecurityConfigurer;
@@ -44,8 +47,11 @@ public class ServicioControllerTest {
 	private ServicioService servicioService;
 	@MockBean
 	private PresupuestoService presupuestoService;
+	@MockBean 
+	private ClienteService clienteService;
 	
 	private Servicio servicio;
+	private Presupuesto presupuesto;
 	
 	@BeforeEach
 	void setup() {
@@ -58,10 +64,21 @@ public class ServicioControllerTest {
 		servicio.setFechafin(LocalDate.of(2021, 01, 12));
 		
 		given(this.servicioService.findServicioById(1)).willReturn(Optional.of(servicio));
-		
 		List<Servicio> servicios = new ArrayList<Servicio>();
 		servicios.add(servicio);
 		given(this.servicioService.findAll()).willReturn(servicios);
+		
+		presupuesto = new Presupuesto();
+		presupuesto.setId(1);
+		presupuesto.setEstado(EstadoServicio.Espera);
+		presupuesto.setPrecio(800.0);
+		presupuesto.setTipopresupuesto(TipoPresupuesto.Cerrado);
+		presupuesto.setServicio(servicio);
+		
+		given(this.presupuestoService.findPresupuestoById(1)).willReturn(Optional.of(presupuesto));
+		List<Presupuesto> presupuestos= new ArrayList<Presupuesto>();
+		presupuestos.add(presupuesto);
+		given(this.presupuestoService.findAll()).willReturn(presupuestos);
 	}
 
 	@WithMockUser(value = "spring")
@@ -90,6 +107,8 @@ public class ServicioControllerTest {
 		.andExpect(status().is3xxRedirection()).andExpect(view().name("redirect:/servicios"));
 	}
 	
+
+	
 	@WithMockUser(value="spring")
 	@Test
 	void testAceptarServicio() throws Exception {
@@ -111,4 +130,33 @@ public class ServicioControllerTest {
 	void testCrearPresupuesto() throws Exception {
 		mockMvc.perform(get("/servicios/{servicioId}/presupuestos/new", 1)).andExpect(status().isOk()).andExpect(model().attributeExists("presupuesto")).andExpect(view().name("presupuestos/editPresupuesto"));
 	}
+	
+//	@WithMockUser(value="spring")
+//	@Test
+//	void testSavePresupuesto() throws Exception {
+//		mockMvc.perform(post("/servicios/presupuestos/save").with(csrf())
+//				.param("estado", "Espera")
+//				.param("precio", "12.0")
+//				.param("tipopresupuesto", "PorHoras")
+//				.param("servicio", "1"))
+//		.andExpect(status().is3xxRedirection()).andExpect(view().name("redirect:/servicios/1/presupuestos"));
+//	}
+	
+	@WithMockUser(value="spring")
+	@Test
+	void testAceptarPresupuesto() throws Exception {
+		mockMvc.perform(post("/servicios/{presupuestoId}/aceptar", 1).with(csrf())
+			.param("id","1"))
+		.andExpect(status().is3xxRedirection()).andExpect(view().name("redirect:/servicios/1/presupuestos"));
+	}
+	
+	@WithMockUser(value="spring")
+	@Test
+	void testRechazarPresupuesto() throws Exception {
+		mockMvc.perform(post("/servicios/{presupuestoId}/rechazar", 1).with(csrf())
+			.param("id","1"))
+		.andExpect(status().is3xxRedirection()).andExpect(view().name("redirect:/servicios/1/presupuestos"));
+	}
+	
+	
 }

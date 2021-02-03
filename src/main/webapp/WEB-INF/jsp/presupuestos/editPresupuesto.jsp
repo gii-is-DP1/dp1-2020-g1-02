@@ -16,11 +16,11 @@
        			 <input type="hidden" name="servicio" value='<c:out value="${presupuesto.servicio.id}"/>'/>
        			<petclinic:inputField label="precio" name="precio"/>
        			<input type="hidden" name="estado" value="Espera"/>
-       			<!-- <label for="tipopresupuesto">Tipo de Presupuesto</label> -->
-  				<form:select id="tipopresupuesto" name="tipopresupuesto">
+       			 <label for="tipopresupuesto">Tipo de Presupuesto</label>
+  				<select id="tipopresupuesto" name="tipopresupuesto">
     				<option value="PorHoras">Por horas</option>
 				    <option value="Cerrado">Cerrado</option> 
-  				</form:select> 
+  				</select> 
   				
        		</div>
             <div class="form-group">
