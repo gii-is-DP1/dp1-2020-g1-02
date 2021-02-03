@@ -41,6 +41,14 @@ public class ReclamacionController {
 		return vista;
 	}
 	
+	@GetMapping(value = "/{servicioId}")
+	public String listadoReclamacionesPorServicioId(@PathVariable("servicioId") int servicioId,ModelMap modelMap) {
+		String vista ="reclamaciones/listadoReclamacionesPorServicio";
+		Iterable<Reclamacion> reclamaciones = reclamacionService.findReclamacionesByServicioId(servicioId);
+		modelMap.addAttribute("reclamaciones", reclamaciones);
+		return vista;
+	}
+	
 	
 	@GetMapping(path="/new")
 	public String crearReclamacion(ModelMap modelMap) {

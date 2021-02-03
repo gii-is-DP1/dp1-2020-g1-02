@@ -41,9 +41,8 @@ public class ReclamacionService {
 	}
 	
 	@Transactional(readOnly=true)
-	public Iterable<Reclamacion> findReclamacionesByServicioId(String name) {
-		return null;
-		//return reclamacionRepo.findReclamacionesByServicioId(name);
+	public Iterable<Reclamacion> findReclamacionesByServicioId(Integer id) {
+		return reclamacionRepo.findReclamacionesByServicioId(id);
 	}
 	
 	@Transactional

@@ -5,6 +5,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.samples.petclinic.model.Horario;
+import org.springframework.samples.petclinic.model.Servicio;
 
 public interface HorarioRepository extends CrudRepository<Horario, Integer> {
 	
@@ -13,5 +14,8 @@ public interface HorarioRepository extends CrudRepository<Horario, Integer> {
 	
 	@Query("SELECT DISTINCT h FROM Horario h LEFT JOIN FETCH h.trabajador WHERE h.trabajador.nombre LIKE :nombreTrab%")
 	Collection<Horario> findHorariosByTrabajadorName(@Param("nombreTrab") String nombreTrab);
+	
+	@Query("SELECT h FROM Horario h WHERE h.trabajador.id = :trabajador")
+	Iterable<Horario> findHorariosByTrabajadorId(@Param("trabajador") Integer trabajador);
 
 }
