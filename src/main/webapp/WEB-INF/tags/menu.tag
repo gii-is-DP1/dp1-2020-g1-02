@@ -79,11 +79,11 @@
 						<span>Clientes</span>
 					</petclinic:menuItem>
 					
-					<petclinic:menuItem active="${name eq 'oferta'}" url="/ofertas/new"
+					<%-- <petclinic:menuItem active="${name eq 'oferta'}" url="/ofertas/new"
 						title="contacto">
 						<span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
 						<span>Contacto</span>
-					</petclinic:menuItem>
+					</petclinic:menuItem> --%>
 				</sec:authorize>
 				
 				<sec:authorize access="hasAuthority('trabajador')">
@@ -107,9 +107,23 @@
 				</sec:authorize>
 				
 				<sec:authorize access="hasAuthority('proveedor')">
-					
+				
+					<petclinic:menuItem active="${name eq 'ofertas'}" url="/ofertas/new"
+					title="Ofertas">
+					<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+					<span>Ofertar producto</span>
+				</petclinic:menuItem>
+				
+				 <petclinic:menuItem active="${name eq 'facturas'}" url="/facturas/misFacturas"
+					title="Facturas">
+					<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+					<span>Mis facturas</span>
+				</petclinic:menuItem> 
+				
 				</sec:authorize>
 
+				
+				
 				<petclinic:menuItem active="${name eq 'error'}" url="/oups"
 					title="trigger a RuntimeException to see how it is handled">
 					<span class="glyphicon glyphicon-warning-sign" aria-hidden="true"></span>

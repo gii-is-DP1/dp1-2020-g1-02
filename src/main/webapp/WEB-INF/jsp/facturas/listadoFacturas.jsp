@@ -7,17 +7,22 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="petclinic" tagdir="/WEB-INF/tags" %>
 
+<c:set var="user" value="${pageContext.request.userPrincipal.name}" />
+<c:set var="admin" value="admin" />
 <petclinic:layout pageName="facturas">
     <h2>Facturas</h2>
     
+    
+    
+    
+    <c:if test = "${user == admin}">
     <h3> Filtrar proveedor: </h3>
+        <form action="/facturas/filtrado"> 
+		   	<input type="text" name="nameProv" value="${filtrado}"> 
+		   	<button type="submit"> Filtrar </button>
+    	</form>
+     </c:if>
     
-    
-    
-    <form action="/facturas/filtrado"> 
-    	<input type="text" name="nameProv" value="${filtrado}"> 
-    	<button type="submit"> Filtrar </button>
-    </form>
 
     <table id="facturasTable" class="table table-striped">
         <thead>
