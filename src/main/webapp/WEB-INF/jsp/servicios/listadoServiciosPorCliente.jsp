@@ -50,11 +50,10 @@
                     <c:out value="${servicio.estado}"/>
                 </td>
                 <td>
-                	<a href="/reclamaciones/new">
-						<button type="button" class="btn btn-default btn-lg">
-  							<span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Poner reclamacion
-						</button>
-					</a>
+                	<spring:url value="/reclamaciones/new/{oId}" var="reclamacionUrl">
+              		<spring:param name="oId" value="${servicio.id}"/>
+	              	</spring:url>
+	              	<a href="${fn:escapeXml(reclamacionUrl)}">Poner reclamacion</a>
                 </td>
             </tr>
         </c:forEach>

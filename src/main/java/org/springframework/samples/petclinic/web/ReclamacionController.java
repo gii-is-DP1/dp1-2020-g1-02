@@ -1,5 +1,6 @@
 package org.springframework.samples.petclinic.web;
 
+import java.time.LocalDate;
 import java.util.Optional;
 
 import javax.validation.Valid;
@@ -55,16 +56,17 @@ public class ReclamacionController {
 	}
 	
 	
-	@GetMapping(path="/new")
-	public String crearReclamacion(ModelMap modelMap) {
+	@GetMapping(path="/new/{oId}")
+	public String crearReclamacion(@PathVariable("oId") Integer oId,ModelMap modelMap) {
 		String view="reclamaciones/newReclamacion";
-		Iterable<Servicio> servicios = servicioService.findAll();
+		Reclamacion r = new Reclamacion();
+		r.setServicio(servicioService.findServicioById(oId).get());
+		r.setFecha(LocalDate.now());
 		User user = userService.getLoggedUser();
 		if(user.getAuthorities().getAuthority().equalsIgnoreCase("cliente")) {
 			Cliente cliente = clienteService.findClienteByUsername(user.getUsername()).get();
 			modelMap.addAttribute("clientes", cliente);
-			modelMap.addAttribute("servicios", servicios);
-			modelMap.addAttribute("reclamacion", new Reclamacion());
+			modelMap.addAttribute("reclamacion", r);
 		}else {
 			return "exception";
 		}
