@@ -7,28 +7,46 @@
 
 <petclinic:layout pageName="Reclamaciones">
  	<jsp:attribute name="customScript">
-        <script>
-            $(function () {
-                $("#fecha").datepicker({dateFormat: 'yy/mm/dd'});
-            });
-        </script>
     </jsp:attribute>
     <jsp:body>
-       <h2>Poner una reclamacion</h2>
+    
+       <h2>Servicio seleccionado</h2>
+        <table id="serviciosTable" class="table table-striped">
+        <thead>
+        <tr>
+            <th style="width: 150px;">Lugar</th>
+            <th style="width: 150px;">Fecha Inicio</th>
+            <th style="width: 150px;">Fecha Fin</th>
+            <th style="width: 150px;">Tipo Categoria</th>
+             <th style="width: 150px;">Estado</th>
+        </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <c:out value="${reclamacion.servicio.lugar}"/>
+                </td>
+                <td>
+                    <c:out value="${reclamacion.servicio.fechainicio}"/>
+                </td>
+                 <td>
+                    <c:out value="${reclamacion.servicio.fechafin}"/>
+                </td>
+                <td>
+                    <c:out value="${reclamacion.servicio.tipocategoria}"/>
+                </td>
+                <td>
+                    <c:out value="${reclamacion.servicio.estado}"/>
+                </td>
+            </tr>
+        </tbody>
+    	</table>
+       <h2>Reclamacion</h2>
        <form:form modelAttribute="reclamacion" class="form-horizontal" action="/reclamaciones/save">
        		<div class="form-group has-feedback">
-       			<petclinic:inputField label="Fecha del Servicio" name="fecha"/>
+       			<petclinic:inputField label="Fecha" name="fecha"  disabled="true"/>
   				<petclinic:inputField label="Descripcion" name="descripcion"/>
-  				<input type="hidden" id="cliente" name="cliente" value="${cliente.id}" />
-  				<label for="servicio">ID del Servicio</label>
-  				<select id="servicio" name="servicio">
-  				<c:forEach items="${servicios}" var="servicio">
-		            <tr>
-		                <td>
-		                   <option><c:out value="${servicio.id}"/></option>
-		            </tr>
-		        </c:forEach>
-  				</select>
+  				<input type="hidden" id="cliente" name="cliente" value="${reclamacion.servicio.cliente.id}" />
        		</div>
             <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-10">
@@ -36,6 +54,9 @@
                 </div>
             </div>
         </form:form>
+        
+        <h3><c:out value="${error}"/></h3>
+        
     </jsp:body>
 
 </petclinic:layout>
