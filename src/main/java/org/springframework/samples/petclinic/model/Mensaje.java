@@ -19,15 +19,12 @@ import lombok.Data;
 @Table(name="mensaje")
 public class Mensaje extends BaseEntity{
 	
-	@Column(name="fecha")
 	@NotNull
 	private LocalDate fecha;
 	
-	@Column(name="asunto")
 	@NotEmpty
 	private String asunto; 
 	
-	@Column(name="cuerpo")
 	@NotEmpty
 	private String cuerpo;
 	
@@ -38,6 +35,5 @@ public class Mensaje extends BaseEntity{
 	@ManyToOne
 	@JoinColumn(name="emisor")
 	private User emisor;
-	
 	
 }

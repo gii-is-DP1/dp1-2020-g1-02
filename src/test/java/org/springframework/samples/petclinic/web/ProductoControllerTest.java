@@ -104,6 +104,12 @@ public class ProductoControllerTest {
 			.andExpect(view().name("productos/newProducto"));
 	}
 	
-	
+//	@WithMockUser(value = "spring")
+//	@Test
+//	void testRestarStock() throws Exception{
+//		mockMvc.perform(get("/productos/{productoId}/restar", 1)).andExpect(status().isOk())
+//		.andExpect(model().attributeExists("message"))
+//		.andExpect(view().name("redirect:/productos"));
+//	}
 
 }

@@ -19,12 +19,9 @@ import lombok.Data;
 @Table(name="factura")
 public class Factura extends BaseEntity {
 
-	
-	@Column(name="fecha")
 	@NotNull
 	private LocalDate fecha;
 	
-	@Column(name="precio_total")
 	@NotNull
 	private Double precio_total;
 	
