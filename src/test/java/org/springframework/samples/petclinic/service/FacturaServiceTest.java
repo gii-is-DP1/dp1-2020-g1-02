@@ -29,6 +29,8 @@ public class FacturaServiceTest {
 	private ProveedorService proveedorService;
 	@Autowired
 	private PedidoService pedidoService;
+	@Autowired
+	private UserService userService;
 	
 	//Test positivos
 	

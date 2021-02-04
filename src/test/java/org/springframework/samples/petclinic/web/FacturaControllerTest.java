@@ -5,6 +5,7 @@ import static org.hamcrest.Matchers.is;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.BDDMockito.when;
+import static org.mockito.BDDMockito.any;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -18,6 +19,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.assertj.core.util.Lists;
+import org.hamcrest.beans.HasPropertyWithValue;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -97,6 +99,7 @@ public class FacturaControllerTest {
 		given(this.provService.findProveedorById(1)).willReturn(Optional.of(proveedor));
 		given(this.facturaService.findFacturaById(1)).willReturn(Optional.of(factura));
 		given(this.facturaService.findAll()).willReturn(Lists.list(factura));
+		given(this.facturaService.findFacturaByProveedorName(any())).willReturn(Lists.list(factura));
 	}
 
 	
@@ -122,27 +125,24 @@ public class FacturaControllerTest {
 	@WithMockUser(value = "spring")
 	@Test
 	void testFiltrarFactura() throws Exception{
-		mockMvc.perform(get("/facturas/filtrado", "Lejias SL")).andExpect(status().isOk())
-		.andExpect(model().attribute("filtrado", "Lejias SL"))
-		.andExpect(model().attributeExists("facturas", "filtrado"))
-		.andExpect(model().attribute("factura", hasProperty("fecha", is(LocalDate.now()))))
-		.andExpect(model().attribute("factura", hasProperty("precio_total", is(11.75))))
-		.andExpect(model().attribute("factura", hasProperty("proveedor", is(proveedor))))
-		.andExpect(model().attribute("factura", hasProperty("pedido", is(pedido))))
+		mockMvc.perform(get("/facturas/filtrado").param("nameProv", "Lejias"))
+
+		.andExpect(status().isOk())
+
+		.andExpect(model().attributeExists("filtrado"))
+		.andExpect(model().attributeExists("facturas"))
 		.andExpect(view().name("facturas/listadoFacturas"));
 	}
 	
 //	@WithMockUser(value = "spring")
 //	@Test
-//	void testDeleteFactura() throws Exception {
-//		mockMvc.perform(get("/facturas/delete/{facturaId}", 1)).andExpect(status().is3xxRedirection())
-////		.andExpect(model().attributeExists("factura"))
-////		.andExpect(model().attribute("factura", hasProperty("id", is(1))))
-////		.andExpect(model().attribute("factura", hasProperty("precio_total", is(11.75))))
-////		.andExpect(model().attribute("factura", hasProperty("proveedor", is(proveedor))))
-////		.andExpect(model().attribute("factura", hasProperty("pedido", is(pedido))))
-//		.andExpect(view().name("redirect:/facturas"));
+//	void testListadoFacturasPorProveedor() throws Exception{
+//		mockMvc.perform(get("/facturas/misFacturas"))
+//		.andExpect(status().isOk())
+//		.andExpect(model().attributeExists("facturas"))
+//		.andExpect(view().name("facturas/listadoFacturas"));
 //	}
+	
 	
 
 

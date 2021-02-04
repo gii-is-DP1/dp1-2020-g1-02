@@ -20,8 +20,13 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class FacturaService {
 	
-	@Autowired
+	
 	private FacturaRepository facturaRepo;
+	
+	@Autowired
+	public FacturaService(FacturaRepository facturaRepo) {
+		this.facturaRepo = facturaRepo;
+	}
 	
 	@Transactional(readOnly=true)
 	public int facturaCount() {
