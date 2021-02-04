@@ -9,9 +9,11 @@ import org.springframework.samples.petclinic.model.Cliente;
 import org.springframework.samples.petclinic.model.Reclamacion;
 import org.springframework.samples.petclinic.model.Servicio;
 import org.springframework.samples.petclinic.model.Trabajador;
+import org.springframework.samples.petclinic.model.User;
 import org.springframework.samples.petclinic.service.ClienteService;
 import org.springframework.samples.petclinic.service.ReclamacionService;
 import org.springframework.samples.petclinic.service.ServicioService;
+import org.springframework.samples.petclinic.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -33,6 +35,9 @@ public class ReclamacionController {
 	@Autowired
 	private ServicioService servicioService;
 	
+	@Autowired
+	private UserService userService;
+	
 	@GetMapping()
 	public String listadoReclamaciones(ModelMap modelMap) {
 		String vista ="reclamaciones/listadoReclamaciones";
@@ -53,23 +58,35 @@ public class ReclamacionController {
 	@GetMapping(path="/new")
 	public String crearReclamacion(ModelMap modelMap) {
 		String view="reclamaciones/newReclamacion";
-		Iterable<Cliente> clientes = clienteService.findAll();
 		Iterable<Servicio> servicios = servicioService.findAll();
-		modelMap.addAttribute("clientes", clientes);
-		modelMap.addAttribute("servicios", servicios);
-		modelMap.addAttribute("reclamacion", new Reclamacion());
+		User user = userService.getLoggedUser();
+		if(user.getAuthorities().getAuthority().equalsIgnoreCase("cliente")) {
+			Cliente cliente = clienteService.findClienteByUsername(user.getUsername()).get();
+			modelMap.addAttribute("clientes", cliente);
+			modelMap.addAttribute("servicios", servicios);
+			modelMap.addAttribute("reclamacion", new Reclamacion());
+		}else {
+			return "exception";
+		}
+		
 		return view;
 	}
 	
 	@PostMapping(path="/save")
 	public String salvarReclamacion(@Valid Reclamacion reclamacion, BindingResult result,ModelMap modelMap) {
-		String view="redirect:/reclamaciones";
+		String view="succesful";
 		if(result.hasErrors()) {
 			modelMap.addAttribute("reclamacion", reclamacion);
 			return "reclamaciones/newReclamacion";
 		}else {
-			reclamacionService.save(reclamacion);
-			modelMap.addAttribute("message", "Reclamación realizada!");
+			if(!clienteService.findClienteById(reclamacion.getCliente().getId()).isPresent()) {
+				modelMap.addAttribute("reclamacion", reclamacion);
+				modelMap.addAttribute("error", "No existe el cliente");
+				return "reclamaciones/newReclamacion";
+			}else {
+				reclamacionService.save(reclamacion);
+				modelMap.addAttribute("message", "Reclamacion añadida");
+			}
 		}
 		return view;
 	}

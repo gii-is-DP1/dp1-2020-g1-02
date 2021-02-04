@@ -24,6 +24,7 @@ import org.springframework.samples.petclinic.configuration.SecurityConfiguration
 import org.springframework.samples.petclinic.model.Horario;
 import org.springframework.samples.petclinic.service.HorarioService;
 import org.springframework.samples.petclinic.service.TrabajadorService;
+import org.springframework.samples.petclinic.service.UserService;
 import org.springframework.security.config.annotation.web.WebSecurityConfigurer;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
@@ -43,6 +44,9 @@ public class HorarioControllerTest {
 	
 	@MockBean
 	private TrabajadorService trabajadorService;
+	
+	@MockBean
+	private UserService userService;
 	
 	private Horario horario;
 	

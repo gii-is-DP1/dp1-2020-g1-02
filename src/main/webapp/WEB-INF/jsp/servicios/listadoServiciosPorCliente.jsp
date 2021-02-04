@@ -49,6 +49,13 @@
                 <td>
                     <c:out value="${servicio.estado}"/>
                 </td>
+                <td>
+                	<a href="/reclamaciones/new">
+						<button type="button" class="btn btn-default btn-lg">
+  							<span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Poner reclamacion
+						</button>
+					</a>
+                </td>
             </tr>
         </c:forEach>
         </tbody>
