@@ -4,6 +4,8 @@ import static org.hamcrest.Matchers.hasProperty;
 import static org.hamcrest.Matchers.is;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.BDDMockito.given;
+import static org.mockito.BDDMockito.when;
+import static org.mockito.BDDMockito.any;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -15,8 +17,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import javax.persistence.EntityManager;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.BDDMockito;
+import org.mockito.stubbing.OngoingStubbing;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -56,6 +62,9 @@ public class OfertaControllerTest {
 	private ProveedorService provService;
 	@MockBean
 	private UserService userService;
+	@MockBean
+	private EntityManager entityManager;
+	
 	
 	private Oferta oferta;
 	private Producto producto;
@@ -70,6 +79,8 @@ public class OfertaControllerTest {
 		producto.setName("Fregona");
 		producto.setCantidad(5);
 		
+		authority = new Authorities();
+		user = new User();
 		authority.setAuthority("proveedor");
 		authority.setId(1);
 		user.setUsername("lejiassl");
@@ -93,6 +104,15 @@ public class OfertaControllerTest {
 		given(this.ofertaService.findOfertaById(1)).willReturn(Optional.of(oferta));
 		given(this.productoService.findByName("Fregona")).willReturn(Optional.of(producto));
 		given(this.provService.findProveedorById(1)).willReturn(Optional.of(proveedor));
+		given(this.entityManager.find(Oferta.class, 1)).willReturn(oferta);
+		given(this.entityManager.find(Proveedor.class, 1)).willReturn(proveedor);
+		
+		given(this.provService.findProveedorByUsername(any())).willReturn(Optional.of(proveedor));
+		given(this.userService.getLoggedUser()).willReturn(user);
+//		((BDDMockito) when(this.user.getAuthorities().getAuthority().equalsIgnoreCase("proveedor"))).willReturn(true);
+		
+		
+		
 		
 		List<Oferta> ofertas = new ArrayList<Oferta>();
 		ofertas.add(oferta);
@@ -102,7 +122,8 @@ public class OfertaControllerTest {
 	@WithMockUser(value = "spring")
 	@Test
 	void testListadoOfertas() throws Exception{
-		mockMvc.perform(get("/ofertas")).andExpect(status().isOk())
+		mockMvc.perform(get("/ofertas"))
+		.andExpect(status().isOk())
 		.andExpect(model().attributeExists("ofertas"))
 		.andExpect(view().name("ofertas/listadoOfertas"));
 	}
@@ -110,34 +131,51 @@ public class OfertaControllerTest {
 	@WithMockUser(value = "spring")
 	@Test
 	void testInitCreationForm() throws Exception{
-		mockMvc.perform(get("/ofertas/new")).andExpect(status().isOk()).andExpect(model().attributeExists("oferta", "proveedores", "productos"))
+		mockMvc.perform(get("/ofertas/new"))
+		.andExpect(status().isOk())
+		.andExpect(model().attributeExists("oferta", "proveedor", "productos"))
 		.andExpect(view().name("ofertas/editOferta"));
+	}
+	
+	@WithMockUser(value = "spring")
+    @Test
+    void testProcessCreationFormSuccess() throws Exception {
+		mockMvc.perform(post("/ofertas/save")
+						.with(csrf())
+						.param("name", "Fregona")
+						.param("precioU", "2.35")
+						.param("proveedor", "1"))
+			.andExpect(status().isOk())
+			.andExpect(view().name("succesful"));
+	}
+	
+	@WithMockUser(value = "spring")
+    @Test
+    void testProcessCreationFormHasErrors() throws Exception {
+		mockMvc.perform(post("/ofertas/save")
+						.with(csrf())
+						.param("name", "Fregona")
+						.param("precioU", "")
+						.param("proveedor", "1"))
+			.andExpect(status().isOk())
+			.andExpect(model().attributeHasErrors("oferta"))
+			.andExpect(model().attributeHasFieldErrors("oferta", "precioU"))
+			.andExpect(view().name("ofertas/editOferta"));
 	}
 	
 //	@WithMockUser(value = "spring")
 //    @Test
-//    void testProcessCreationFormSuccess() throws Exception {
+//    void testProcessCreationFormNoAuthority() throws Exception {
 //		mockMvc.perform(post("/ofertas/save")
 //						.with(csrf())
 //						.param("name", "Fregona")
-//						.param("precioU", "4.05")
-//						.param("proveedor", "1"))
-//			.andExpect(status().is3xxRedirection())
-//			.andExpect(view().name("redirect:/ofertas"));
-//	}
-	
-//	@WithMockUser(value = "spring")
-//    @Test
-//    void testProcessCreationFormHasErrors() throws Exception {
-//		mockMvc.perform(post("/ofertas/save")
-//						.with(csrf())
-//						.param("name", "Fregona")
-//						.param("precioU", "")
+//						.param("precioU", "2.35")
 //						.param("proveedor", "1"))
 //			.andExpect(status().isOk())
-//			.andExpect(model().attributeHasErrors("oferta"))
-//			.andExpect(model().attributeHasFieldErrors("oferta", "precioU"))
+//			.andExpect(model().attributeExists("error"))
+//			.andExpect(model().attributeExists("oferta"))
 //			.andExpect(view().name("ofertas/editOferta"));
 //	}
+
 
 }
