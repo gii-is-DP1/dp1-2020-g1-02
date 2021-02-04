@@ -119,7 +119,12 @@
 				</sec:authorize>
 				
 				<sec:authorize access="hasAuthority('trabajador')">
-					<petclinic:menuItem active="${name eq 'horario'}" url="/registroHoras/new"
+					<petclinic:menuItem active="${name eq 'registrohoras'}" url="/registroHoras/new"
+						title="horario">
+						<span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+						<span>Registrar Horas</span>
+					</petclinic:menuItem>
+					<petclinic:menuItem active="${name eq 'horario'}" url="/horarios/misHorarios"
 						title="horario">
 						<span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
 						<span>Horario</span>
@@ -136,6 +141,7 @@
 						<span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
 						<span>Contratos</span>
 					</petclinic:menuItem>
+					
 				</sec:authorize>
 				
 				<sec:authorize access="hasAuthority('proveedor')">
