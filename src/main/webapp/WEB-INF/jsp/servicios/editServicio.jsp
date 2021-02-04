@@ -27,7 +27,8 @@
   				<select id="tipocategoria" name="tipocategoria">
     				<option value="Limpieza">Limpieza</option>
 				    <option value="Mantenimiento">Mantenimiento</option>
-				    <option value="Lavandería">Lavandería</option>
+				    <option value="Cristaleria">Cristaleria</option>
+				    <option value="Jardineria">Jardineria</option>
   				</select>
   				
        		</div>

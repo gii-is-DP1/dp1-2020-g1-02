@@ -2,7 +2,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="petclinic" tagdir="/WEB-INF/tags"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
-<!--  >%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%-->
 <%@ attribute name="name" required="true" rtexprvalue="true"
 	description="Name of the active menu: home, owners, vets or error"%>
 
@@ -18,16 +17,15 @@
                     <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
                        <div class="top-box">
                         <ul class="sociel_link">
-                         <li> <a href="#"><i class="fa fa-facebook-f"></i></a></li>
-                         <li> <a href="#"><i class="fa fa-twitter"></i></a></li>
-                         <li> <a href="#"><i class="fa fa-instagram"></i></a></li>
-                         <li> <a href="#"><i class="fa fa-linkedin"></i></a></li>
+                         <li> <a target="_blank" href="https://www.facebook.com/disanlimpiezas/"><i class="fa fa-facebook"></i></a></li>
+                         <li> <a target="_blank" href="https://twitter.com/disan_limpiezas?lang=es"><i class="fa fa-twitter"></i></a></li>
+                         <li> <a target="_blank" href="https://www.instagram.com/disanlimpiezas/?hl=es"><i class="fa fa-instagram"></i></a></li>
                      </ul>
                     </div>
                   </div>
                   <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
                        <div class="top-box">
-                        <p>long established fact that a reader will be </p>
+                        <p>Disan Limpiezas. Servicio profesional y personalizado </p>
                     </div>
                   </div>
                </div>
@@ -66,6 +64,12 @@
 						<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
 						<span>Contratos</span>
 					</petclinic:menuItem>
+					
+					<petclinic:menuItem active="${name eq 'servicios'}" url="/servicios"
+						title="Servicios">
+						<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+						<span>Servicios</span>
+					</petclinic:menuItem>
 	
 					<petclinic:menuItem active="${name eq 'provs'}" url="/proveedores"
 						title="Proveedores">
@@ -77,6 +81,12 @@
 						title="clientes">
 						<span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
 						<span>Clientes</span>
+					</petclinic:menuItem>
+					
+					<petclinic:menuItem active="${nombre eq 'mensajes'}" url="/mensajes"
+						title="Mensajes">
+						<span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+						<span>Mensajes</span>
 					</petclinic:menuItem>
 					
 					<%-- <petclinic:menuItem active="${name eq 'oferta'}" url="/ofertas/new"
@@ -119,16 +129,15 @@
 					<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
 					<span>Mis facturas</span>
 				</petclinic:menuItem> 
-				
 				</sec:authorize>
 
-				
-				
-				<petclinic:menuItem active="${name eq 'error'}" url="/oups"
-					title="trigger a RuntimeException to see how it is handled">
-					<span class="glyphicon glyphicon-warning-sign" aria-hidden="true"></span>
-					<span>Error</span>
-				</petclinic:menuItem>
+				<c:if test="${user != null}">
+					<li><a href="/users/<c:out value="${user}"/>">Perfil</a></li>
+				</c:if>
+				<c:if test = "${user == null}">
+         				<li><a href="curriculums/new">Enviar curriculum</a></li>
+      			</c:if>
+
                            </ul>
                         </nav>
                      </div>
@@ -136,19 +145,16 @@
                </div>
                <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1">
                		<c:if test = "${user == null}">
-         				<li class="buy"> <a href="/users/new">signup</a> </li>
-      				</c:if>
-      				<c:if test="${user != null}">
-						<li class="buy"> <a href="/logout">logout</a> </li>
-					</c:if>
-                  
-               </div>
-               <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1">
-               		<c:if test = "${user == null}">
          				<li><a class="buy" href="/login">Login</a></li>
       				</c:if>
+               </div>
+               
+               <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1">
+               		<c:if test = "${user == null}">
+         				<li class="buy"> <a href="/users/new">Signup</a> </li>
+      				</c:if>
       				<c:if test="${user != null}">
-						<li><a class="buy" href="/users/<c:out value="${user}"/>">Perfil</a></li>
+						<li class="buy"> <a href="/logout">Logout</a> </li>
 					</c:if>
                   
                </div>
