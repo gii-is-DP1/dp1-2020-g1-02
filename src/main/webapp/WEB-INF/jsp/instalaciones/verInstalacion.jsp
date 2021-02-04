@@ -7,18 +7,8 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="petclinic" tagdir="/WEB-INF/tags" %>
 
-<c:set var="user" value="${pageContext.request.userPrincipal.name}" />
-<c:set var="admin" value="admin" />
 <petclinic:layout pageName="instalaciones">
     <h2>Instalaciones</h2>
-    
-      <c:if test = "${user == admin}">
-    <h3> Filtrar por nombre del cliente: </h3>
-        <form action="/instalaciones/filtrado"> 
-		   	<input type="text" name="nombreCli" value="${filtrado}"> 
-		   	<button type="submit"> Filtrar </button>
-    	</form>
-     </c:if>
     
     <a href="instalaciones/new">
 		<button type="button" class="btn btn-default btn-lg">
@@ -45,6 +35,12 @@
                 </td>
                 <td>
                     <c:out value="${instalacion.cliente.id}"/>
+                </td>
+                <td>
+                	<spring:url value="/instalaciones/delete/{instalacionId}" var="instalacionUrl">
+                		<spring:param name="instalacionId" value="${instalacion.id}"/>
+                	</spring:url>
+                	<a href="${fn:escapeXml(instalacionUrl)}">Delete</a>
                 </td>
             </tr>
         </c:forEach>

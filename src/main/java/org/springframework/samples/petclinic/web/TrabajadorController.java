@@ -109,7 +109,7 @@ public class TrabajadorController {
 	public String instalacionesCliente(ModelMap modelMap, String nombreCli) {
 		String view="trabajadores/listadoTrabajadores";
 		modelMap.addAttribute("instalacionesCliente", nombreCli);
-		modelMap.addAttribute("instalaciones", instalacionService.findInstalacionesByClienteName(nombreCli));
+		modelMap.addAttribute("instalaciones", instalacionService.findInstalacionByClienteName(nombreCli));
 		return view;
 	}
 }

@@ -3,8 +3,14 @@ package org.springframework.samples.petclinic.web;
 import java.util.Optional;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.samples.petclinic.model.Cliente;
+import org.springframework.samples.petclinic.model.Factura;
 import org.springframework.samples.petclinic.model.Instalacion;
+import org.springframework.samples.petclinic.model.Proveedor;
+import org.springframework.samples.petclinic.service.ClienteService;
 import org.springframework.samples.petclinic.service.InstalacionService;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -20,11 +26,40 @@ public class InstalacionController {
 	@Autowired
 	private InstalacionService instalacionService;
 	
+	@Autowired
+	private ClienteService clienteService;
+	
 	@GetMapping()
 	public String listadoInstalaciones(ModelMap modelMap) {
 		String vista ="instalaciones/listadoInstalaciones";
 		Iterable<Instalacion> instalaciones = instalacionService.findAll();
 		modelMap.addAttribute("instalacion", instalaciones);
+		return vista;
+	}
+	
+	@GetMapping(path="/{instalacionId}")
+	public String verInstalacion(@PathVariable("instalacionId") int instalacionId, ModelMap modelMap) {
+		String vista = "instalaciones/verInstalacion";
+		Instalacion instalacion = instalacionService.findInstalacionById(instalacionId).get();
+		modelMap.addAttribute("instalacion", instalacion);
+		return vista;
+	}
+	
+	@GetMapping(path="/filtrado")
+	public String filtradoInstalaciones(String nombreCli, ModelMap modelMap) {
+		String view="instalaciones/listadoInstalaciones";
+		modelMap.addAttribute("filtrado", nombreCli);
+		modelMap.addAttribute("instalaciones", instalacionService.findInstalacionByClienteName(nombreCli));
+		return view;
+	}
+	
+	@GetMapping(value = "/misInstalaciones")
+	public String listadoInstalacionesPorCliente(ModelMap modelMap) {
+		String vista = "instalaciones/listadoInstalaciones";
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		Cliente cliente = clienteService.findClienteByUsername(auth.getName()).get();
+		Iterable<Instalacion> instalaciones = instalacionService.findInstalacionByClienteName(cliente.getNombre());
+		modelMap.addAttribute("instalaciones", instalaciones);
 		return vista;
 	}
 	

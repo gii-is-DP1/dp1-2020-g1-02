@@ -21,6 +21,9 @@ import org.springframework.samples.petclinic.configuration.SecurityConfiguration
 import org.springframework.samples.petclinic.model.Administrador;
 import org.springframework.samples.petclinic.model.TipoCategoria;
 import org.springframework.samples.petclinic.service.AdministradorService;
+import org.springframework.samples.petclinic.service.ContratoServicioService;
+import org.springframework.samples.petclinic.service.ReclamacionService;
+import org.springframework.samples.petclinic.service.TrabajadorService;
 import org.springframework.security.config.annotation.web.WebSecurityConfigurer;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
@@ -37,6 +40,15 @@ public class AdministradorControllerTest {
 	
 	@MockBean
 	private AdministradorService administradorService;
+	
+	@MockBean
+	private ContratoServicioService contratoServicioService;
+	
+	@MockBean
+	private ReclamacionService reclamacionService;
+	
+	@MockBean
+	private TrabajadorService trabajadorService;
 	
 	private Administrador admin;
 	
@@ -64,7 +76,7 @@ public class AdministradorControllerTest {
 	@Test
 	void testEditAdministrador() throws Exception{
 		mockMvc.perform(get("/administradores/new")).andExpect(status().isOk()).andExpect(model().attributeExists("administrador"))
-		.andExpect(view().name("administradores/editAdmin"));
+		.andExpect(view().name("administradores/newAdministrador"));
 	}
 	
 	@WithMockUser(value = "spring")

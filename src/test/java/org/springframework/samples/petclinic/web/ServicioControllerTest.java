@@ -27,8 +27,10 @@ import org.springframework.samples.petclinic.model.Servicio;
 import org.springframework.samples.petclinic.model.TipoCategoria;
 import org.springframework.samples.petclinic.model.TipoPresupuesto;
 import org.springframework.samples.petclinic.service.ClienteService;
+import org.springframework.samples.petclinic.service.InstalacionService;
 import org.springframework.samples.petclinic.service.PresupuestoService;
 import org.springframework.samples.petclinic.service.ServicioService;
+import org.springframework.samples.petclinic.service.UserService;
 import org.springframework.security.config.annotation.web.WebSecurityConfigurer;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
@@ -49,6 +51,9 @@ public class ServicioControllerTest {
 	private PresupuestoService presupuestoService;
 	@MockBean 
 	private ClienteService clienteService;
+	
+	@MockBean
+	private UserService userService;
 	
 	private Servicio servicio;
 	private Presupuesto presupuesto;

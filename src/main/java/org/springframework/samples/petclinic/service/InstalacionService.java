@@ -1,7 +1,9 @@
 package org.springframework.samples.petclinic.service;
 
+import java.util.Collection;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.samples.petclinic.model.Factura;
 import org.springframework.samples.petclinic.model.Instalacion;
 import org.springframework.samples.petclinic.repository.InstalacionRepository;
 import org.springframework.stereotype.Service;
@@ -38,15 +40,15 @@ public class InstalacionService {
 		return instalacionRepo.findById(instalacionId);
 	}
 	
-	@Transactional(readOnly=true)
-	public Iterable<Instalacion> findInstalacionesByClienteName(String name) {
-		return instalacionRepo.findInstalacionesByClienteName(name);
-	}
-	
 	@Transactional
 	public void deleteById(Integer id) {
 		Instalacion instalacionBorrar = findInstalacionById(id).get();
 		delete(instalacionBorrar);
+	}
+
+	@Transactional(readOnly=true)
+	public Iterable<Instalacion> findInstalacionByClienteName(String nombreCli) {
+		return instalacionRepo.findAllByClienteName(nombreCli.toLowerCase());
 	}
 
 }
