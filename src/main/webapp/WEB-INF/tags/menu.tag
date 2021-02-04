@@ -116,6 +116,11 @@
 						<span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
 						<span>Morosos</span>
 					</petclinic:menuItem>
+					<petclinic:menuItem active="${name eq 'instalaciones'}" url="/instalaciones/new"
+					title="Ofertas">
+					<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+					<span>Crear instalacion</span>
+					</petclinic:menuItem>
 				</sec:authorize>
 				
 				<sec:authorize access="hasAuthority('trabajador')">
@@ -146,12 +151,20 @@
 						<span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
 						<span>Mis Valoraciones</span>
 					</petclinic:menuItem>
+          
+					
+					<petclinic:menuItem active="${name eq 'instalaciones'}" url="/instalaciones/misInstalaciones" title="Instalaciones">
+						<span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+						<span>Mis Instalaciones</span>
+					</petclinic:menuItem>
+
+
 
 				</sec:authorize>
 				
 				<sec:authorize access="hasAuthority('proveedor')">
 				
-					<petclinic:menuItem active="${name eq 'ofertas'}" url="/ofertas/new"
+				<petclinic:menuItem active="${name eq 'ofertas'}" url="/ofertas/new"
 					title="Ofertas">
 					<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
 					<span>Ofertar producto</span>

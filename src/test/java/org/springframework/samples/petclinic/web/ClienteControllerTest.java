@@ -88,7 +88,7 @@ public class ClienteControllerTest {
 						.param("direccion", "Calle Huertas 31")
 						.param("correo", "jcmorales2400@gmail.com"))	
 			.andExpect(status().is2xxSuccessful())
-			.andExpect(view().name("clientes/listadoClientes"));
+			.andExpect(view().name("clientes/newClientes"));
 	}
 	
 	@WithMockUser(value = "spring")

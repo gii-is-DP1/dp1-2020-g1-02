@@ -22,8 +22,10 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.FilterType;
 import org.springframework.samples.petclinic.configuration.SecurityConfiguration;
 import org.springframework.samples.petclinic.model.RegistroHoras;
+import org.springframework.samples.petclinic.service.InstalacionService;
 import org.springframework.samples.petclinic.service.RegistroHorasService;
 import org.springframework.samples.petclinic.service.TrabajadorService;
+import org.springframework.samples.petclinic.service.UserService;
 import org.springframework.security.config.annotation.web.WebSecurityConfigurer;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
@@ -43,6 +45,9 @@ public class RegistroHorasControllerTest {
 	
 	@MockBean
 	private TrabajadorService trabajadorService;
+	
+	@MockBean
+	private UserService userService;
 	
 	private RegistroHoras registroHora;
 	
