@@ -1,11 +1,8 @@
 package org.springframework.samples.petclinic.service;
 
 import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.samples.petclinic.model.Reclamacion;
 import org.springframework.samples.petclinic.model.Valoracion;
-import org.springframework.samples.petclinic.repository.ReclamacionRepository;
 import org.springframework.samples.petclinic.repository.ValoracionRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -53,6 +50,11 @@ public class ValoracionService {
 	public void deleteById(Integer id) {
 		Valoracion valoracionBorrar = findValoracionById(id).get();
 		delete(valoracionBorrar);
+	}
+
+	@Transactional(readOnly=true)
+	public Iterable<Valoracion> findValoracionByClienteName(String nombre) {
+		return valoracionRepo.findAllByClienteName(nombre.toLowerCase());
 	}
 
 }
