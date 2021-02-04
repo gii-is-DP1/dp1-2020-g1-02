@@ -10,31 +10,32 @@
 <petclinic:layout pageName="registro_horas">
     <h2>Registro de Horas</h2>
     
-    <a href="registroHoras/new">
-		<button type="button" class="btn btn-default btn-lg">
-  			<span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Nuevo Registro de Horas
-		</button>
-	</a>
 
     <table id="registro_horastable" class="table table-striped">
         <thead>
         <tr>
-            <th style="width: 150px;">Hora Entrada</th>
-            <th style="width: 200px;">Hora Salida</th>
-            <th style="width: 200px;">Nombre del Trabajador</th>
+            <th style="width: 180px;">Hora Entrada</th>
+            <th style="width: 180px;">Hora Salida</th>
+            <th style="width: 200px;">Nombre</th>
+            <th style="width: 200px;">Apellido</th>
         </tr>
         </thead>
         <tbody>
         <c:forEach items="${registro_horas}" var="registro_hora">
             <tr>
                 <td>
-                    <c:out value="${registro_hora.hora_entrada}"/>
+                	<fmt:parseDate value="${registro_hora.hora_entrada}" pattern="yyyy-MM-dd'T'HH:mm" var="date"/>
+					<fmt:formatDate value="${date}" type = "both" dateStyle="long" timeStyle="short" />
                 </td>
                 <td>
-                    <c:out value="${registro_hora.hora_salida}"/>
+                	<fmt:parseDate value="${registro_hora.hora_salida}" pattern="yyyy-MM-dd'T'HH:mm" var="date"/>
+					<fmt:formatDate value="${date}" type = "both" dateStyle="long" timeStyle="short" />
                 </td>
                  <td>
                     <c:out value="${registro_hora.trabajador.nombre}"/>
+                </td>
+                <td>
+                    <c:out value="${registro_hora.trabajador.apellidos}"/>
                 </td>
                 <td>
                 	<spring:url value="/registroHoras/delete/{registroHorasId}" var="registroHorasUrl">

@@ -20,12 +20,10 @@ import lombok.Setter;
 @Table(name="registro_hora")
 public class RegistroHoras extends BaseEntity {
 	
-	@Column(name="hora_entrada")
     @DateTimeFormat(pattern = "yyyy/MM/dd HH:mm")
     @NotNull
     private LocalDateTime hora_entrada;
 
-    @Column(name="hora_salida")
     @DateTimeFormat(pattern = "yyyy/MM/dd HH:mm")
     @NotNull
     private LocalDateTime hora_salida;
