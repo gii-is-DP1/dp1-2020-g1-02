@@ -7,8 +7,18 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="petclinic" tagdir="/WEB-INF/tags" %>
 
+<c:set var="user" value="${pageContext.request.userPrincipal.name}" />
+<c:set var="admin" value="admin" />
 <petclinic:layout pageName="valoraciones">
     <h2>Valoraciones</h2>
+    
+    <c:if test = "${user == admin}">
+    <h3> Filtrar por nombre del cliente: </h3>
+        <form action="/valoraciones/filtrado"> 
+		   	<input type="text" name="nombreCli" value="${filtrado}"> 
+		   	<button type="submit"> Filtrar </button>
+    	</form>
+     </c:if>
 
     <table id="valoracionesTable" class="table table-striped">
         <thead>
@@ -33,12 +43,6 @@
                 </td>
                 <td>
                     <c:out value="${valoracion.servicio.id}"/>
-                </td>
-                <td>
-                	<spring:url value="/valoraciones/delete/{valoracionId}" var="valoracionUrl">
-                		<spring:param name="valoracionId" value="${valoracion.id}"/>
-                	</spring:url>
-                	<a href="${fn:escapeXml(valoracionUrl)}">Delete</a>
                 </td>
             </tr>
         </c:forEach>

@@ -142,6 +142,11 @@
 						<span>Contratos</span>
 					</petclinic:menuItem>
 					
+					<petclinic:menuItem active="${name eq 'valoraciones'}" url="/valoraciones/misValoraciones" title="Valoraciones">
+						<span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+						<span>Mis Valoraciones</span>
+					</petclinic:menuItem>
+
 				</sec:authorize>
 				
 				<sec:authorize access="hasAuthority('proveedor')">
