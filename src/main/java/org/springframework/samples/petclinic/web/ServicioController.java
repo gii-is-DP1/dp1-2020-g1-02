@@ -8,9 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.samples.petclinic.model.Cliente;
 import org.springframework.samples.petclinic.model.Presupuesto;
 import org.springframework.samples.petclinic.model.Servicio;
+import org.springframework.samples.petclinic.model.User;
 import org.springframework.samples.petclinic.service.ClienteService;
 import org.springframework.samples.petclinic.service.PresupuestoService;
 import org.springframework.samples.petclinic.service.ServicioService;
+import org.springframework.samples.petclinic.service.UserService;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -31,6 +33,8 @@ public class ServicioController {
 	private ClienteService clienteService;
 	@Autowired
 	private PresupuestoService presupuestoService;
+	@Autowired
+	private UserService userService;
 	
 	@GetMapping()
 	public String listadoServicios(ModelMap modelMap) {
@@ -56,12 +60,16 @@ public class ServicioController {
 	
 	@PostMapping(path="/save")
 	public String salvarServicio(@Valid Servicio servicio, BindingResult result, ModelMap modelMap) {
-		String view="redirect:/servicios";
+		String view="redirect:/servicios/misServicios";
 		if(result.hasErrors()) {
 			modelMap.addAttribute("servicio", servicio);
 			return "servicios/editServicio";
 		}
 		else {
+			User user =  userService.getLoggedUser();
+			Cliente cliente=clienteService.findClienteByUsername(user.getUsername()).get();
+			servicio.setCliente(cliente);
+			
 			servicioService.save(servicio);
 			modelMap.addAttribute("message", "Servicio actualizado!");
 		}
@@ -70,7 +78,7 @@ public class ServicioController {
 	
 	@PostMapping(path="/aceptar")
 	public String aceptarServicio(Integer id, ModelMap modelMap) {
-		String view="redirect:/servicios";
+		String view="redirect:/servicios/" + id + "/presupuestos/new";
 		Optional<Servicio> s= servicioService.findServicioById(id);
 		servicioService.aceptar(s.get());
 		return view;

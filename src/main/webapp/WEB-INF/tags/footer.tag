@@ -1,15 +1,14 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 
- <footr>
+ <footer>
          <div class="footer">
             <div class="container">
                <div class="row">
                   <div class="col-md-6 offset-md-3">
                      <ul class="sociel">
-                         <li> <a href="#"><i class="fa fa-facebook-f"></i></a></li>
-                         <li> <a href="#"><i class="fa fa-twitter"></i></a></li>
-                         <li> <a href="#"><i class="fa fa-instagram"></i></a></li>
-                         <li> <a href="#"><i class="fa fa-instagram"></i></a></li>
+                        <li> <a target="_blank" href="https://www.facebook.com/disanlimpiezas/"><i class="fa fa-facebook"></i></a></li>
+                         <li> <a target="_blank" href="https://twitter.com/disan_limpiezas?lang=es"><i class="fa fa-twitter"></i></a></li>
+                         <li> <a target="_blank" href="https://www.instagram.com/disanlimpiezas/?hl=es"><i class="fa fa-instagram"></i></a></li>
                      </ul>
                   </div>
             </div>
@@ -37,12 +36,13 @@
                  <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12">
                   <div class="contact">
                      <h3>Servicios</h3>
-                      <ul class="lik">
-                    <li> <a href="#"> Limpieza</a></li>
+                     <ul class="lik">
+                    	<li> <a href="#"> Limpieza</a></li>
                          <li> <a href="#">Mantenimiento</a></li>
                          <li> <a href="#">Jardinería</a></li>
-                         <li> <a href="#">Lavandería</a></li>
-                          <li> <a href="#">Conserjería</a></li>
+                         <li> <a href="#">Cristaleria</a></li>
+          
+                     </ul>
                   </div>
                </div>
                  <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12">
@@ -58,7 +58,7 @@
             </div>
          
       </div>
-      </footr>
+      </footer>
       <!-- end footer -->
       <!-- Latest compiled and minified CSS -->
       <!-- Javascript files--> 

@@ -44,7 +44,7 @@ public class CurriculumControllerTest {
 		curriculum = new Curriculum();
 		curriculum.setId(1);
 		curriculum.setNombre("Jose Carlos");
-		curriculum.setTipocategoria(TipoCategoria.Lavanderia);
+		curriculum.setTipocategoria(TipoCategoria.Jardineria);
 		
 		given(this.curriculumService.findCurriculumById(1)).willReturn(Optional.of(curriculum));
 		

@@ -8,7 +8,13 @@
 <%@ taglib prefix="petclinic" tagdir="/WEB-INF/tags" %>
 
 <petclinic:layout pageName="bandejaEntrada">
-    <h2>Ofertas</h2>
+    <h2>Mensajes</h2>
+
+	<a href="mensajes/new">
+		<button type="button" class="btn btn-default btn-lg">
+  			<span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Nuevo mensajes
+		</button>
+	</a>
 
     <table id="mensajesTable" class="table table-striped">
         <thead>

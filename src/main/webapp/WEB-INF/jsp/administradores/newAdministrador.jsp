@@ -24,7 +24,8 @@
   				<form:select path="tipocategoria">
     				<option value='Limpieza'>Limpieza</option>
 				    <option value='Mantenimiento'>Mantenimiento</option>
-				    <option value='Lavanderia'>Lavandería</option>
+				    <option value="Cristaleria">Cristaleria</option>
+				    <option value="Jardineria">Jardineria</option>
   				</form:select>
        		</div>
             <div class="form-group">

@@ -2,7 +2,10 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="petclinic" tagdir="/WEB-INF/tags" %>
-<!-- %@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %-->  
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+<c:set var="user" value="${pageContext.request.userPrincipal.name}" />
 
 <petclinic:layout pageName="home">
 		 <section class="slider_section">
@@ -26,7 +29,19 @@
                         <h1>Nuestros <br> <strong class="black_bold">últimos Servicios </strong><br>
                            <strong class="yellow_bold">a tu disposición </strong></h1>
                         <p>Seleccione el servicio que usted necesita y configúrelo a su medida ¡No pague de más por algo que no le hace falta para nada!</p>
-                        <a  href="#">Ir a los Servicios</a>
+                        <c:if test = "${user == null}">
+         					 <a  href="/login">Ir a los Servicios</a>
+	      				</c:if>
+	      				<c:if test="${user != null}">
+	      					<sec:authorize access="hasAuthority('cliente')">
+							 <a  href="/servicios/misServicios">Ir a los Servicios</a>
+							</sec:authorize>
+							<sec:authorize access="hasAuthority('administrador')">
+							 <a  href="/servicios">Ir a los Servicios</a>
+							</sec:authorize>
+							
+						</c:if>
+                       
                      </div>
                   </div>
                </div>
@@ -63,36 +78,48 @@
          <div class="container">
             <div class="white_bg">
             <div class="row">
-               <dir class="col-xl-3 col-lg-3 col-md-6 col-sm-12">
+               <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12">
                   <div class="for_box">
                      <i><img src="resources/icon/1.png"/></i>
                      <h3>Jardinería</h3>
                      <p>Mantenimiento de jardines, corte de césped y poda de setos.</p>
                   </div>
-               </dir>
-               <dir class="col-xl-3 col-lg-3 col-md-6 col-sm-12">
+               </div>
+               <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12">
                   <div class="for_box">
                      <i><img src="resources/icon/2.png"/></i>
                      <h3>Limpieza</h3>
                      <p>Limpieza y desinfección de todo tipo de instalaciones.</p>
                   </div>
-               </dir>
-               <dir class="col-xl-3 col-lg-3 col-md-6 col-sm-12">
+               </div>
+               <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12">
                   <div class="for_box">
                      <i><img src="resources/icon/3.png"/></i>
                      <h3>Mantenimiento</h3>
                      <p>Servicios de mantenimiento en casas y edificios. Ej: Electricidad, Fontanería, etc.</p>
                   </div>
-               </dir>
-               <dir class="col-xl-3 col-lg-3 col-md-6 col-sm-12">
+               </div>
+               <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12">
                   <div class="for_box">
                      <i><img src="resources/icon/4.png"/></i>
                      <h3>Cristalería</h3>
                      <p>Limpieza y mantenimiento de cristales y cristaleras.</p>
                   </div>
-               </dir>
+               </div>
                <div class="col-md-12">
-                  <a class="read-more">Más Servicios</a>
+               <c:if test = "${user == null}">
+         					 <a href="/login" class="read-more">Más Servicios</a>
+	      				</c:if>
+	      				<c:if test="${user != null}">
+	      					<sec:authorize access="hasAuthority('cliente')">
+							 <a href="/servicios/misServicios" class="read-more">Más Servicios</a>
+							</sec:authorize>
+							<sec:authorize access="hasAuthority('administrador')">
+							  <a href="/servicios" class="read-more">Más Servicios</a>
+							</sec:authorize>
+							
+						</c:if>
+                 >
                </div>
             </div>
          </div>

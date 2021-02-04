@@ -58,7 +58,7 @@ public class ServicioControllerTest {
 		servicio = new Servicio();
 		servicio.setId(1);
 		servicio.setLugar("Acuario de Sevilla");
-		servicio.setTipocategoria(TipoCategoria.Lavanderia);
+		servicio.setTipocategoria(TipoCategoria.Cristaleria);
 		servicio.setEstado(EstadoServicio.Aceptado);
 		servicio.setFechainicio(LocalDate.of(2020, 12, 31));
 		servicio.setFechafin(LocalDate.of(2021, 01, 12));

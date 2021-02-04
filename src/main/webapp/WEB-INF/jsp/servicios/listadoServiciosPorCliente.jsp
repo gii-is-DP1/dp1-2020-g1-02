@@ -9,8 +9,13 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <petclinic:layout pageName="servicios">
-    <h2>Servicios por ID CLIENTE</h2>
+    <h2>Mis Servicios</h2>
 	
+	<a href="/servicios/new">
+		<button type="button" class="btn btn-default btn-lg">
+  			<span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Solicitar servicio
+		</button>
+	</a>
 	
     <table id="eventsTable" class="table table-striped">
         <thead>

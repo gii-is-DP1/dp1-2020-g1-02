@@ -37,7 +37,7 @@ public class ServicioServiceTest {
 		ser1.setFechafin(LocalDate.of(2020, 12, 12));
 		ser1.setFechainicio(LocalDate.of(2019, 12, 12));
 		ser1.setEstado(EstadoServicio.Espera);
-		ser1.setTipocategoria(TipoCategoria.Lavanderia);
+		ser1.setTipocategoria(TipoCategoria.Jardineria);
 		servicioService.save(ser1);
 		int count = servicioService.servicioCount();
 		//Assert
