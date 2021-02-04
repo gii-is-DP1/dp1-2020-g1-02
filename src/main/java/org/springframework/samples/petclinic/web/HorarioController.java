@@ -3,11 +3,16 @@ package org.springframework.samples.petclinic.web;
 import java.util.Optional;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.samples.petclinic.model.Cliente;
 import org.springframework.samples.petclinic.model.Horario;
 import org.springframework.samples.petclinic.model.Servicio;
 import org.springframework.samples.petclinic.model.Trabajador;
+import org.springframework.samples.petclinic.model.User;
 import org.springframework.samples.petclinic.service.HorarioService;
 import org.springframework.samples.petclinic.service.TrabajadorService;
+import org.springframework.samples.petclinic.service.UserService;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -25,6 +30,8 @@ public class HorarioController {
 	
 	@Autowired
 	private TrabajadorService trabajadorService;
+	@Autowired
+	private UserService userService;
 	
 	@GetMapping()
 	public String listadoHorarios(ModelMap modelMap) {
@@ -34,10 +41,12 @@ public class HorarioController {
 		return vista;
 	}
 	
-	@GetMapping(value = "/{trabajadorId}")
-	public String listadoHorariosPorTrabajadorId(@PathVariable("trabajadorId") int trabajadorId, ModelMap modelMap) {
+	@GetMapping(value = "/misHorarios")
+	public String listadoHorariosPorTrabajadorUsername(ModelMap modelMap) {
 		String vista = "horarios/listadoHorariosPorTrabajador";
-		Iterable<Horario> horarios = horarioService.findHorarioByTrabajadorId(trabajadorId);
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		Trabajador trabajador = trabajadorService.findTrabajadorByUsername(auth.getName()).get();
+		Iterable<Horario> horarios = horarioService.findHorarioByTrabajadorId(trabajador.getId());
 		modelMap.addAttribute("horarios", horarios);
 		return vista;
 	}
@@ -54,11 +63,15 @@ public class HorarioController {
 	
 	@PostMapping(path="/save")
 	public String salvarHorario(@Valid Horario horario, BindingResult result,ModelMap modelMap) {
-		String view="redirect:/horarios";
+		String view="redirect:/horarios/misHorarios";
 		if(result.hasErrors()) {
 			modelMap.addAttribute("horarios", horario);
 			return "horarios/newHorario";
 		}else {
+			User user = userService.getLoggedUser();
+			Trabajador trabajador = trabajadorService.findTrabajadorByUsername(user.getUsername()).get();
+			horario.setTrabajador(trabajador);
+			
 			horarioService.save(horario);
 			modelMap.addAttribute("message", "Horario actualizado!");
 		}

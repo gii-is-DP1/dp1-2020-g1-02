@@ -49,6 +49,12 @@
                 <td>
                     <c:out value="${servicio.estado}"/>
                 </td>
+                <td>
+                	<spring:url value="/reclamaciones/new/{oId}" var="reclamacionUrl">
+              		<spring:param name="oId" value="${servicio.id}"/>
+	              	</spring:url>
+	              	<a href="${fn:escapeXml(reclamacionUrl)}">Poner reclamacion</a>
+                </td>
             </tr>
         </c:forEach>
         </tbody>

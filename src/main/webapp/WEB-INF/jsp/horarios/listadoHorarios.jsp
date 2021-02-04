@@ -30,10 +30,12 @@
         <c:forEach items="${horarios}" var="horario">
             <tr>
                 <td>
-                    <c:out value="${horario.hora_inicio}"/>
+                    <fmt:parseDate value="${horario.hora_inicio}" pattern="yyyy-MM-dd'T'HH:mm" var="date"/>
+					<fmt:formatDate value="${date}" type = "both" dateStyle="long" timeStyle="short" />
                 </td>
                 <td>
-                    <c:out value="${horario.hora_fin}"/>
+                    <fmt:parseDate value="${horario.hora_fin}" pattern="yyyy-MM-dd'T'HH:mm" var="date"/>
+					<fmt:formatDate value="${date}" type = "both" dateStyle="long" timeStyle="short" />
                 </td>
                 <td>
                     <c:out value="${horario.trabajador.nombre}"/>
