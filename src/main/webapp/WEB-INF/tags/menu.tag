@@ -79,11 +79,32 @@
 						<span>Clientes</span>
 					</petclinic:menuItem>
 					
-					<%-- <petclinic:menuItem active="${name eq 'oferta'}" url="/ofertas/new"
-						title="contacto">
+					<petclinic:menuItem active="${name eq 'oferta'}" url="/ofertas"
+						title="Ofertas">
 						<span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
-						<span>Contacto</span>
-					</petclinic:menuItem> --%>
+						<span>Ofertas de productos</span>
+					</petclinic:menuItem>
+					
+					<petclinic:menuItem active="${name eq 'producto'}" url="/productos"
+						title="Productos">
+						<span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+						<span>Stock</span>
+					</petclinic:menuItem>
+					<petclinic:menuItem active="${name eq 'pedidos'}" url="/pedidos"
+						title="Pedidos">
+						<span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+						<span>Pedidos</span>
+					</petclinic:menuItem>
+					<petclinic:menuItem active="${name eq 'facturas'}" url="/facturas"
+						title="Facturas">
+						<span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+						<span>Facturas</span>
+					</petclinic:menuItem>
+					<petclinic:menuItem active="${name eq 'morosos'}" url="/administradores/morosos"
+						title="Morosos">
+						<span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+						<span>Morosos</span>
+					</petclinic:menuItem>
 				</sec:authorize>
 				
 				<sec:authorize access="hasAuthority('trabajador')">

@@ -17,7 +17,6 @@ import lombok.Data;
 @Table(name="producto")
 public class Producto extends NamedEntity {
 	
-	@Column(name="cantidad")
 	@NotNull
 	private Integer cantidad;
 	

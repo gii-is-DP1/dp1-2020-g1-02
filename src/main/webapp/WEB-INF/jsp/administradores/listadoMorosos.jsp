@@ -19,6 +19,7 @@
             <th>Direccion</th>
             <th>Dni</th>
             <th>Correo</th>
+            <%-- <th>Fecha final de contrato</th>--%>
         </tr>
         </thead>
         <tbody>
@@ -42,6 +43,9 @@
                  <td>
                     <c:out value="${moroso.correo}"/>
                 </td>
+                <%-- <td>
+                    <c:out value="${moroso.servicios.contrato.fechafinal}"/>
+                </td>--%>
                 
             </tr>
         </c:forEach>

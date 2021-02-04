@@ -1,13 +1,9 @@
 package org.springframework.samples.petclinic.web;
 
-import java.util.Optional;
-
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.samples.petclinic.model.Producto;
-import org.springframework.samples.petclinic.model.Proveedor;
-import org.springframework.samples.petclinic.model.Trabajador;
 import org.springframework.samples.petclinic.service.ProductoService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;

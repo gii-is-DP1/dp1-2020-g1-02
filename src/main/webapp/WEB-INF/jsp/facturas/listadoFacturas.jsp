@@ -16,7 +16,7 @@
     
     
     <c:if test = "${user == admin}">
-    <h3> Filtrar proveedor: </h3>
+    <h3> Filtrar por nombre del proveedor: </h3>
         <form action="/facturas/filtrado"> 
 		   	<input type="text" name="nameProv" value="${filtrado}"> 
 		   	<button type="submit"> Filtrar </button>
