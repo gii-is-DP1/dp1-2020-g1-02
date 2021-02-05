@@ -6,6 +6,9 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinTable;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -31,8 +34,14 @@ public class User{
 	@OneToOne(cascade = CascadeType.ALL, mappedBy = "user")
 	private Authorities authorities;
 	
-	@OneToMany(cascade = CascadeType.ALL, mappedBy="receptor")
-    private List<Mensaje> mensajes;
+	@ManyToMany
+	@JoinTable(name = "aux", 
+			  joinColumns = @JoinColumn(name = "username"), 
+			  inverseJoinColumns = @JoinColumn(name = "mensaje_id"))
+    private List<Mensaje> mensajesRecibidos;
+	
+	@OneToMany(cascade = CascadeType.ALL, mappedBy="emisor")
+    private List<Mensaje> mensajesEnviados;
 
 	public String getUsername() {
 		return username;
