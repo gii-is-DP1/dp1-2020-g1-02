@@ -18,6 +18,7 @@ import org.springframework.samples.petclinic.service.UserService;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -39,6 +40,9 @@ public class UserController {
 	private ClienteService clienteService;
 	@Autowired
 	private ProveedorService proveedorService;
+	@Autowired
+	private PasswordEncoder passwordEncoder;
+	
 	
 	public static String EXCEPTION_VIEW = "/exception";
 	public static String PERFIL_VIEW = "users/perfilView";
@@ -83,6 +87,10 @@ public class UserController {
 			modelMap.addAttribute("cliente", cliente);
 			return "users/new";
 		}else {
+			User user = cliente.getUser();
+			String password = user.getPassword();
+			user.setPassword(passwordEncoder.encode(password));
+			cliente.setUser(user);
 			clienteService.saveCliente(cliente);
 			//modelMap.addAttribute("message", "Cliente actualizado!");
 		}
