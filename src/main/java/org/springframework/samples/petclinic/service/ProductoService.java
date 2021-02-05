@@ -1,5 +1,6 @@
 package org.springframework.samples.petclinic.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,9 +12,13 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class ProductoService {
-	@Autowired
+	
 	private ProductoRepository productRepo;
 	
+	@Autowired
+	public ProductoService(ProductoRepository productoRepo) {
+		this.productRepo = productoRepo;
+	}
 	@Transactional(readOnly=true)
 	public int productCount() {
 		return (int) productRepo.count();
@@ -58,4 +63,9 @@ public class ProductoService {
 		return productRepo.findByName(name);
 	}
 
+	@Transactional
+	public List<String> getNombres(){
+		return productRepo.findAllNames();
+		
+	}
 }

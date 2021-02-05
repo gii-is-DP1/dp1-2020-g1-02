@@ -4,7 +4,9 @@ import java.time.LocalDate;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.samples.petclinic.model.ContratoServicio;
+import org.springframework.samples.petclinic.model.Servicio;
 import org.springframework.samples.petclinic.repository.ContratoServicioRepository;
+import org.springframework.samples.petclinic.repository.ServicioRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -13,6 +15,8 @@ public class ContratoServicioService {
 	
 	@Autowired
 	private ContratoServicioRepository contratoServicioRepo;
+//	@Autowired
+//	private ServicioRepository servicioRepo;
 	
 	@Transactional
 	public int contratoServicioCount() {
@@ -26,6 +30,9 @@ public class ContratoServicioService {
 	
 	public void save(ContratoServicio contratoServicio) {
 		contratoServicioRepo.save(contratoServicio);
+//		Servicio s= contratoServicio.getServicio();
+//		s.setContrato(contratoServicio);
+//		servicioRepo.save(s);
 	}
 	
 	public void delete(ContratoServicio contratoServicio) {

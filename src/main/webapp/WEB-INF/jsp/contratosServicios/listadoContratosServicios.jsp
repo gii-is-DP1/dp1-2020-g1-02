@@ -50,7 +50,7 @@
                     <c:out value="${contrato.periodoPrueba}"/>
                 </td>
                 <td>
-                    <c:out value="${contrato.servicio.tipocategoria}"/>
+                    <c:out value="${contrato.presupuesto.servicio.tipocategoria}"/>
                 </td>
             </tr>
         </c:forEach>
@@ -97,7 +97,7 @@
                     <c:out value="${contrato.periodoPrueba}"/>
                 </td>
                 <td>
-                    <c:out value="${contrato.servicio.tipocategoria}"/>
+                    <c:out value="${contrato.presupuesto.servicio.tipocategoria}"/>
                 </td>
             </tr>
         </c:forEach>

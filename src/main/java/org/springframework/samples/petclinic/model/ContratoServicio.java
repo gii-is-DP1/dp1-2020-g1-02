@@ -21,8 +21,6 @@ import lombok.Setter;
 @Table(name="contratoservicio")
 public class ContratoServicio extends Contrato {
 	
-	
-	
 	@DateTimeFormat(pattern = "yyyy/MM/dd")
 	private LocalDate fechapago;
 	
@@ -30,16 +28,12 @@ public class ContratoServicio extends Contrato {
 	@JoinColumn(name="cliente")
 	private Cliente cliente;
 	
-	@ManyToOne
-	@JoinColumn(name = "presupuesto")
-	private Presupuesto presupuesto;
-	
 	@Column(name="periodoprueba")
 	@NotNull
 	private Boolean periodoPrueba;
 	
 	@OneToOne(optional=false)
-	@JoinColumn(name="servicio")
-	private Servicio servicio;
+	@JoinColumn(name="presupuesto")
+	private Presupuesto presupuesto;
 
 }

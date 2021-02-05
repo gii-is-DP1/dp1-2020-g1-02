@@ -9,7 +9,6 @@ import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
@@ -40,10 +39,6 @@ public class Servicio extends BaseEntity {
 	
 	@NotNull
 	private EstadoServicio estado;
-	
-	@OneToOne(optional=true)
-	@JoinColumn(name="contrato_id")
-	private ContratoServicio contrato;
 	
 	@ManyToOne(fetch=FetchType.LAZY)
     @JoinColumn(name="cliente_id")

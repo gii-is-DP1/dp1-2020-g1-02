@@ -40,7 +40,7 @@ private static final String REQUIRED = "required";
 		Iterator<Servicio> itServicio = this.servicioService.findAll().iterator();
 		while(itServicio.hasNext()) {
 			Servicio servicio = itServicio.next();
-			String nombreCliCont = servicio.getContrato().getCliente().getNombre().toLowerCase();
+			String nombreCliCont = servicio.getPresupuestos().get(0).getContrato().getCliente().getNombre().toLowerCase();
 			if(nombreCliCont.equals(nombre)) {
 				result = true;
 			}

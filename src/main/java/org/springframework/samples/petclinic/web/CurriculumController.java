@@ -6,10 +6,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.samples.petclinic.model.Curriculum;
-import org.springframework.samples.petclinic.model.Horario;
-import org.springframework.samples.petclinic.model.Trabajador;
 import org.springframework.samples.petclinic.service.CurriculumService;
-import org.springframework.samples.petclinic.service.TrabajadorService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -25,9 +22,6 @@ public class CurriculumController {
 	@Autowired
 	private CurriculumService curriculumService;
 	
-	@Autowired
-	private TrabajadorService trabajadorService;
-	
 	@GetMapping()
 	public String listadoCurriculums(ModelMap modelMap) {
 		String vista ="curriculums/listadoCurriculums";
@@ -39,15 +33,24 @@ public class CurriculumController {
 	@GetMapping(path="/new")
 	public String crearCurriculum(ModelMap modelMap) {
 		String view="curriculums/newCurriculum";
-		Iterable<Trabajador> trabajadores = trabajadorService.findAll();
-		modelMap.addAttribute("trabajadores", trabajadores);
 		modelMap.addAttribute("curriculum", new Curriculum());
+		return view;
+	}
+	
+	@GetMapping(path="/view/{idCurriculum}")
+	public String crearCurriculum(@PathVariable("idCurriculum") int idCurriculum, ModelMap modelMap) {
+		String view="curriculums/viewCurriculum";
+		Optional<Curriculum> curriculum = curriculumService.findCurriculumById(idCurriculum);
+		if(curriculum.isEmpty()) {
+			throw new IllegalArgumentException("La id introducida no es válida");
+		}
+		modelMap.addAttribute("curriculum", curriculum.get());
 		return view;
 	}
 	
 	@PostMapping(path="/save")
 	public String salvarCurriculum(@Valid Curriculum curriculum, BindingResult result,ModelMap modelMap) {
-		String view="redirect:/curriculums";
+		String view="redirect:/";
 		if(result.hasErrors()) {
 			modelMap.addAttribute("curriculums", curriculum);
 			return "curriculums/newCurriculum";

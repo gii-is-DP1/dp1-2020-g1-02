@@ -67,6 +67,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 				
 				.antMatchers("/curriculums/new").permitAll()
 				
+				.antMatchers("/curriculums/save").permitAll()
+				
 				.antMatchers("/curriculums/**").hasAnyAuthority("administrador")
 				
 				.antMatchers("/proveedores/**").hasAnyAuthority("administrador")
@@ -129,11 +131,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	       "select username, authority "
 	        + "from authorities "
 	        + "where username = ?")	   	      
-	      .passwordEncoder(encoder());	
+	      .passwordEncoder(passwordEncoder());	
 	}
 	
 	@Bean
-	public PasswordEncoder encoder() {
+	public PasswordEncoder passwordEncoder() {
 	    return new BCryptPasswordEncoder();
 	}
 	

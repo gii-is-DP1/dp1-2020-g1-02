@@ -16,9 +16,9 @@
     <form:form modelAttribute="oferta" class="form-horizontal" id="add-oferta-form" action="/ofertas/save">
         <div class="form-group has-feedback">
         
-           <%--<petclinic:inputField label="Nombre" name="name"/> --%>  
+         <petclinic:selectField label="Producto" name="name" size="${size}" names="${productos}"></petclinic:selectField>
            
-           <label for="name">Producto a ofertar</label>
+           <%-- <label for="name">Producto a ofertar</label>
   				<select id="name" name="name">
   				<c:forEach items="${productos}" var="producto">
 		            <tr>
@@ -27,7 +27,9 @@
 		                </td>
 		            </tr>
 		        </c:forEach>
-  				</select>
+  				</select> --%>
+  				
+  				
             <petclinic:inputField label="PrecioUnidad" name="precioU"/>
             <input type="hidden" id="proveedor" name="proveedor" value="${proveedor.id}" />
             

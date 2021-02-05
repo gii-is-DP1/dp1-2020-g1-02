@@ -15,8 +15,21 @@
         	 <%--<label for="emisor">De: </label>
            <input type="text" name="emisor" id="emisor" value=' <c:out value="${principal.username}"/>' disabled> --%>
         	<petclinic:inputField label="De:" name="emisor" disabled="true"/>
- 			 <petclinic:selectField label="Para:" name="receptor" names="${users}" size="${size}" > 
-           </petclinic:selectField>
+ 			 <%-- <petclinic:selectField label="Para:" name="receptores" names="${users}" size="${size}" > 
+           </petclinic:selectField> --%>
+           
+           <%-- <petclinic:inputField label="Para:" name="receptores"></petclinic:inputField> --%>
+           <select name="receptores" size="10" multiple>
+           <c:forEach items="${users}" var="user">
+		            <tr>
+		                <td>
+		                   <option><c:out value="${user}"/></option>
+		                </td>
+		            </tr>
+		        </c:forEach>
+			
+			
+			</select>
            
 		   <petclinic:inputField label="Fecha" name="fecha" disabled="true"/>
            <petclinic:inputField label="Asunto" name="asunto"/>

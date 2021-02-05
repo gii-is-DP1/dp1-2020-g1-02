@@ -1,5 +1,6 @@
 package org.springframework.samples.petclinic.repository;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.Modifying;
@@ -16,5 +17,8 @@ public interface ProductoRepository extends CrudRepository<Producto, Integer> {
 
 	@Query("SELECT p FROM Producto p WHERE p.name = ?1")
 	Optional<Producto> findByName(String name);
+
+	@Query("SELECT p.name FROM Producto p")
+	List<String> findAllNames();
 	
 }
