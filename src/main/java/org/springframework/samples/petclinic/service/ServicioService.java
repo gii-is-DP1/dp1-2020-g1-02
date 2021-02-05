@@ -61,10 +61,11 @@ public class ServicioService {
 		m.setEmisor(userService.findUser("Sistema").get());
 		List<User> l=new ArrayList<>();
 		l.add(servicio.getCliente().getUser());
+		m.setLeido(false);
 		m.setReceptores(l);
 		m.setFecha(LocalDate.now());
 		m.setAsunto("Servicio: " + servicio.getLugar());
-		m.setCuerpo("Gracias por su solicitud de Servicio, El administrar " + userService.getLoggedUser() + "vha aceptado el servicio."
+		m.setCuerpo("Gracias por su solicitud de Servicio, El administrar " + userService.getLoggedUser().getUsername() + " ha aceptado el servicio."
 				+ "Procedemos a enviarle un presupuesto para que pueda estudiarlo, este podras aceptarlo o rechazarlo desde la misma aplicacion");
 		mensajesService.save(m);
 		
@@ -78,6 +79,7 @@ public class ServicioService {
 		m.setEmisor(userService.findUser("Sistema").get());
 		List<User> l=new ArrayList<>();
 		l.add(servicio.getCliente().getUser());
+		m.setLeido(false);
 		m.setReceptores(l);
 		m.setFecha(LocalDate.now());
 		m.setAsunto("Servicio: " + servicio.getLugar());

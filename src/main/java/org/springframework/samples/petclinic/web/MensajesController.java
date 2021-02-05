@@ -66,5 +66,12 @@ public class MensajesController {
 		return view;
 	}
 	
+	@PostMapping(path="/leido")
+	public String marcarLeido(Integer id, ModelMap modelMap) {
+		String view="redirect:/mensajes";
+		Mensaje m=mensajesService.findById(id).get();
+		mensajesService.marcarLeido(m);
+		return view;
+	}
 	
 }

@@ -65,9 +65,10 @@ public class PresupuestoService {
 		l.add(userService.findUser("admin").get());;
 		m.setReceptores(l);
 		
+		m.setLeido(false);
 		m.setFecha(LocalDate.now());
 		m.setAsunto("Presupuesto del servicio: " + presupuesto.getServicio().getLugar());
-		m.setCuerpo("El cliente " + userService.getLoggedUser() + "ha aceptado el presupuesto.");
+		m.setCuerpo("El cliente " + userService.getLoggedUser().getUsername() + " ha aceptado el presupuesto.");
 		mensajesService.save(m);
 	}
 	
@@ -83,9 +84,10 @@ public class PresupuestoService {
 		l.add(userService.findUser("admin").get());
 		m.setReceptores(l);
 		
+		m.setLeido(false);
 		m.setFecha(LocalDate.now());
 		m.setAsunto("Presupuesto del servicio: " + presupuesto.getServicio().getLugar());
-		m.setCuerpo("El cliente " + userService.getLoggedUser() + "ha rechazado el presupuesto.");
+		m.setCuerpo("El cliente " + userService.getLoggedUser().getUsername() + " ha rechazado el presupuesto.");
 		mensajesService.save(m);
 	}
 	
