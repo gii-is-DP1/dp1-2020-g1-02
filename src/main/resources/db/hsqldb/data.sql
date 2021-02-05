@@ -101,8 +101,14 @@ INSERT INTO reclamacion(fecha, descripcion, cliente_id, servicio_id) VALUES ('20
 INSERT INTO valoracion(fecha,nivelsatisfaccion, cliente_id, servicio_id) VALUES ('2019-10-20', 0, 1, 1);
 INSERT INTO valoracion(fecha,nivelsatisfaccion, cliente_id, servicio_id) VALUES ('2020-10-12', 2, 2, 2);
 
-INSERT INTO mensaje(fecha, asunto, cuerpo, receptor, emisor) VALUES ('2021-02-02', 'Hola que tal', 'Hola como estamos que tal', 'admin', 'JosePabloSL');
-INSERT INTO mensaje(fecha, asunto, cuerpo, receptor, emisor) VALUES ('2021-02-02', 'Muy bien gracias', 'Genial, y tu?', 'JosePabloSL', 'admin');
+
+
+INSERT INTO mensaje(id, fecha, asunto, cuerpo, emisor) VALUES (1, '2021-02-02', 'Hola que tal', 'Hola como estamos que tal', 'JosePabloSL');
+INSERT INTO mensaje(id, fecha, asunto, cuerpo, emisor) VALUES (2, '2021-02-02', 'Muy bien gracias', 'Genial, y tu?', 'admin');
+
+INSERT INTO aux VALUES ('admin', 1);
+INSERT INTO aux VALUES ('JosePabloSL', 2);
+INSERT INTO aux VALUES ('JoseCarlos', 2);
 
 
 /*-- One owner user, named owner1 with passwor 0wn3r

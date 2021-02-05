@@ -1,5 +1,6 @@
 package org.springframework.samples.petclinic.web;
 
+import java.util.List;
 import java.util.Optional;
 
 import javax.validation.Valid;
@@ -45,12 +46,13 @@ public class OfertaController {
 	@GetMapping(path="/new")
 	public String crearOferta(ModelMap modelMap) {
 		String view="ofertas/editOferta";
-		Iterable<Producto> productos = productoService.findAll();
+
 		User user =  userService.getLoggedUser();
 		if(user.getAuthorities().getAuthority().equalsIgnoreCase("proveedor") ) {
 			Proveedor prov = proveedorService.findProveedorByUsername(user.getUsername()).get();
 			modelMap.addAttribute("proveedor", prov);
-			modelMap.addAttribute("productos", productos);
+			modelMap.addAttribute("productos", productoService.getNombres());
+			modelMap.addAttribute("size", productoService.productCount());
 			modelMap.addAttribute("oferta", new Oferta());
 		}else {
 			return "exception";
