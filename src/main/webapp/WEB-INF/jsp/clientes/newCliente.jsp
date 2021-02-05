@@ -23,7 +23,8 @@
             <petclinic:inputField label="Dni" name="dni"/>
             <petclinic:inputField label="Correo" name="correo"/>
             <petclinic:inputField label="Username" name="user.username"/>
-            <petclinic:inputField label="Password" name="user.password"/>
+            <petclinic:inputPass  label="Password" name="user.password"/>
+            <petclinic:inputPass  label="Confirma Contraseña" name="user.retypePassword"/>
         </div>
         <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
