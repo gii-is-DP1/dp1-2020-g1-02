@@ -49,12 +49,6 @@
                 	</spring:url>
                 	<a href="${fn:escapeXml(horarioUrl)}">Delete</a>
                 </td>
-                <td>
-                	<spring:url value="/horario/{horarioId}/edit" var="horarioUrl">
-                		<spring:param name="horarioId" value="${horario.id}"/>
-                	</spring:url>
-                	<a href="${fn:escapeXml(horarioUrl)}">Editar</a>
-                </td>
             </tr>
         </c:forEach>
         </tbody>

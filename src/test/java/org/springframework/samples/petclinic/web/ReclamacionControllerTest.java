@@ -25,6 +25,7 @@ import org.springframework.samples.petclinic.model.Reclamacion;
 import org.springframework.samples.petclinic.service.ClienteService;
 import org.springframework.samples.petclinic.service.ReclamacionService;
 import org.springframework.samples.petclinic.service.ServicioService;
+import org.springframework.samples.petclinic.service.UserService;
 import org.springframework.security.config.annotation.web.WebSecurityConfigurer;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
@@ -47,6 +48,9 @@ public class ReclamacionControllerTest {
 	
 	@MockBean
 	private ServicioService servicioService;
+	
+	@MockBean
+	private UserService userService;
 	
 	private Reclamacion reclamacion;
 	
@@ -75,7 +79,8 @@ public class ReclamacionControllerTest {
 	@WithMockUser(value = "spring")
 	@Test
 	void testNewReclamacion() throws Exception{
-		mockMvc.perform(get("/reclamaciones/new")).andExpect(status().isOk()).andExpect(model().attributeExists("reclamacion"))
+		mockMvc.perform(get("/reclamaciones/new/{oId}",1))
+		.andExpect(status().isOk()).andExpect(model().attributeExists("reclamacion"))
 		.andExpect(view().name("reclamaciones/newReclamacion"));
 	}
 	

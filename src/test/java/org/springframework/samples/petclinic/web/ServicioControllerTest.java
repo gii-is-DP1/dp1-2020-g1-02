@@ -108,9 +108,9 @@ public class ServicioControllerTest {
 			.param("tipocategoria", "Limpieza")
 			.param("fechainicio", "2020/01/01")
 			.param("fechafin", "2020/02/01")
-			.param("estado", "Aceptado")
-			.param("cliente", "1"))
-		.andExpect(status().isOk()).andExpect(view().name("redirect:/servicios"));
+
+			.param("estado", "Aceptado"))
+		.andExpect(status().is2xxSuccessful()).andExpect(view().name("servicios/editServicio"));
 	}
 	
 

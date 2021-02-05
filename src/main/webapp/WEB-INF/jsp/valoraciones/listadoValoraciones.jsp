@@ -25,7 +25,7 @@
         <tr>
             <th style="width: 150px;">Fecha</th>
             <th style="width: 200px;">Nivel de Satisfaccion</th>
-            <th>ID Cliente</th>
+            <th>Nombre Cliente</th>
             <th>ID Servicio</th> 
         </tr>
         </thead>
@@ -39,7 +39,7 @@
                     <c:out value="${valoracion.nivelsatisfaccion}"/>
                 </td>
                 <td>
-                    <c:out value="${valoracion.cliente.id}"/>
+                    <c:out value="${valoracion.cliente.nombre}"/>
                 </td>
                 <td>
                     <c:out value="${valoracion.servicio.id}"/>

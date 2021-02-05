@@ -6,8 +6,6 @@
 
 
 <petclinic:layout pageName="Reclamaciones">
- 	<jsp:attribute name="customScript">
-    </jsp:attribute>
     <jsp:body>
     
        <h2>Servicio seleccionado</h2>
