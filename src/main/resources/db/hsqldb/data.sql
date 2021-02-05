@@ -25,8 +25,9 @@ INSERT INTO horario(hora_inicio, hora_fin, trabajador, descripcion) VALUES ('202
 INSERT INTO registro_hora(hora_entrada, hora_salida, trabajador) VALUES ('2019-06-16 11:00', '2019-06-16 14:00', 1);
 INSERT INTO registro_hora(hora_entrada, hora_salida, trabajador) VALUES ('2019-08-16 19:00', '2019-08-16 23:00', 2);
 
-INSERT INTO contratoTrabajador(id,fechainicial,fechafinal,trabajador_id,sueldo) VALUES (1, '2010-01-01', '2019-12-31', 1, 1200.0);
-INSERT INTO contratoTrabajador(id,fechainicial,fechafinal,trabajador_id,sueldo) VALUES (2, '2010-01-01', '2019-12-31', 1, 1200.0);
+INSERT INTO contratoTrabajador(fechainicial,fechafinal,trabajador_id,sueldo) VALUES ('2010-01-01', '2019-12-31', 1, 1200.0);
+INSERT INTO contratoTrabajador(fechainicial,fechafinal,trabajador_id,sueldo) VALUES ('2010-01-01', '2019-12-31', 2, 1200.0);
+INSERT INTO contratoTrabajador(fechainicial,fechafinal,trabajador_id,sueldo) VALUES ('2020-01-01', '2020-12-31', 2, 1200.0);
 
 INSERT INTO cliente(id, nombre,apellidos,telefono,direccion,dni,correo, username) VALUES (1, 'Jesus', 'Garcia', '644586245', 'Calle Cristie', '33445566P', 'jesus@gmail.com', 'Nick Furia');
 INSERT INTO cliente(id, nombre,apellidos,telefono,direccion,dni,correo, username) VALUES (2, 'Ruben', 'Bueno', '655788999', 'Calle Misco', '11223344T', 'ruben@gmail.com', 'Ironman');
@@ -76,22 +77,23 @@ INSERT INTO administrador(id,nombre,apellidos,dni,telefono, direccion, correo, t
 INSERT INTO administrador(nombre, apellidos, tipocategoria) VALUES ('Carlos','Borreguero', 0);
 
 
-INSERT INTO servicio(lugar, tipocategoria, fechainicio, fechafin, estado, cliente_id) VALUES ('Av Reina Mercedes', 0, '2019-10-20', '2020-12-31', 0, 1);
 INSERT INTO servicio(lugar, tipocategoria, fechainicio, fechafin, estado, cliente_id) VALUES ('Av Reina Mercedes', 0, '2019-10-20', '2020-12-31', 1, 1);
-INSERT INTO servicio(lugar, tipocategoria, fechainicio, fechafin, estado, cliente_id) VALUES ('Av Reina Mercedes', 1, '2019-10-20', '2020-12-31', 1, 1);
-INSERT INTO servicio(lugar, tipocategoria, fechainicio, fechafin, estado, cliente_id) VALUES ('Av Reina Mercedes', 2, '2019-10-20', '2020-12-31', 1, 1);
-INSERT INTO servicio(lugar, tipocategoria, fechainicio, fechafin, estado, cliente_id) VALUES ('Av Reina Mercedes', 0, '2019-10-20', '2020-12-31', 1, 2);
-INSERT INTO servicio(lugar, tipocategoria, fechainicio, fechafin, estado, cliente_id) VALUES ('Av Reina Mercedes', 0, '2019-10-20', '2021-02-28', 1, 2);
+INSERT INTO servicio(lugar, tipocategoria, fechainicio, fechafin, estado, cliente_id) VALUES ('Benito Villamarin', 0, '2019-10-20', '2020-12-31', 1, 1);
+INSERT INTO servicio(lugar, tipocategoria, fechainicio, fechafin, estado, cliente_id) VALUES ('Acuario de Sevilla', 1, '2019-10-20', '2020-12-31', 1, 1);
+INSERT INTO servicio(lugar, tipocategoria, fechainicio, fechafin, estado, cliente_id) VALUES ('Oficinas Sabadell', 2, '2019-10-20', '2020-12-31', 1, 2);
+INSERT INTO servicio(lugar, tipocategoria, fechainicio, fechafin, estado, cliente_id) VALUES ('Teatro la Maestranza', 2, '2019-10-20', '2020-12-31', 0, 2);
+INSERT INTO servicio(lugar, tipocategoria, fechainicio, fechafin, estado, cliente_id) VALUES ('Ayuntamiento Sanlucar la Mayor', 0, '2019-10-20', '2021-02-28', 2, 3);
 
-INSERT INTO presupuesto(precio, tipopresupuesto, servicio_id, estado) VALUES (4579.5, 1, 1, 0);
-INSERT INTO presupuesto(precio, tipopresupuesto, servicio_id, estado) VALUES (50.0, 0, 1, 0);
-INSERT INTO presupuesto(precio, tipopresupuesto, servicio_id, estado) VALUES (123.12, 0, 1, 0);
-INSERT INTO presupuesto(precio, tipopresupuesto, servicio_id, estado) VALUES (18000.0, 1, 1, 1);
+INSERT INTO presupuesto(precio, tipopresupuesto, servicio_id, estado) VALUES (4579.5, 1, 1, 2);
+INSERT INTO presupuesto(precio, tipopresupuesto, servicio_id, estado) VALUES (50.0, 0, 1, 1);
+INSERT INTO presupuesto(precio, tipopresupuesto, servicio_id, estado) VALUES (123.12, 0, 2, 0);
+INSERT INTO presupuesto(precio, tipopresupuesto, servicio_id, estado) VALUES (18000.0, 1, 2, 1);
+INSERT INTO presupuesto(precio, tipopresupuesto, servicio_id, estado) VALUES (100.0, 1, 3, 1);
+INSERT INTO presupuesto(precio, tipopresupuesto, servicio_id, estado) VALUES (100.0, 1, 4, 1);
 
-INSERT INTO contratoservicio(fechainicial, fechafinal, fechapago, cliente, presupuesto, periodoprueba, servicio) VALUES ('2019-10-20', '2020-12-31', '2020-12-10', 1, 2, 0, 2);
-INSERT INTO contratoservicio(fechainicial, fechafinal, fechapago, cliente, presupuesto, periodoprueba, servicio) VALUES ('2019-10-20', '2021-02-28', '2020-12-10', 1, 2, 0, 5);
-INSERT INTO contratoservicio(fechainicial, fechafinal, fechapago, cliente, presupuesto, periodoprueba, servicio) VALUES ('2019-10-20', '2020-12-31', '2020-12-10', 3, 3, 1, 3);
-INSERT INTO contratoservicio(fechainicial, fechafinal, cliente, presupuesto, periodoprueba, servicio) VALUES ('2020-10-20', '2021-10-20', 2, 1, 1, 4);
+INSERT INTO contratoservicio(fechainicial, fechafinal, fechapago, cliente,  periodoprueba, presupuesto) VALUES ('2019-10-20', '2020-12-31', '2020-12-10', 1, 0, 1);
+INSERT INTO contratoservicio(fechainicial, fechafinal, fechapago, cliente, periodoprueba, presupuesto) VALUES ('2019-10-20', '2020-12-31', '2020-12-10', 3, 1, 5);
+INSERT INTO contratoservicio(fechainicial, fechafinal, cliente, periodoprueba, presupuesto) VALUES ('2020-10-20', '2021-10-20', 2, 1, 6);
 
 INSERT INTO reclamacion(fecha, descripcion, cliente_id, servicio_id) VALUES ('2019-10-20', 'El servicio está incompleto', 1, 1);
 INSERT INTO reclamacion(fecha, descripcion, cliente_id, servicio_id) VALUES ('2019-10-20', 'El servicio está lamentable', 2, 2);

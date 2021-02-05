@@ -4,31 +4,33 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="petclinic" tagdir="/WEB-INF/tags" %>
 
-<petclinic:layout pageName="ContratosTrabajadores">
+<petclinic:layout pageName="ContratosServicios">
 
 <jsp:attribute name="customScript">
         <script>
             $(function () {
                 $("#fechainicial").datepicker({dateFormat: 'yy/mm/dd'});
                 $("#fechafinal").datepicker({dateFormat: 'yy/mm/dd'});
+                $("#fechapago").datepicker({dateFormat: 'yy/mm/dd'});
               });
         </script>
  </jsp:attribute>
     <jsp:body>
-       <h2>Contrato Trabajador</h2>
-       <form:form modelAttribute="contratoTrabajador" class="form-horizontal" action="/contratosTrabajadores/save">
+       <h2>Contrato Servicio</h2>
+       <form:form modelAttribute="contratoServicio" class="form-horizontal" action="/contratosServicios/save">
        		<div class="form-group has-feedback">
        			<petclinic:inputField label="Fecha Inicial" name="fechainicial"/>
        			<petclinic:inputField label="Fecha Final" name="fechafinal"/>
-       			<petclinic:inputField label="Sueldo" name="sueldo"/>
-       			
-       			<input type="hidden" name="trabajador" value=' <c:out value="${contratoTrabajador.trabajador.id}"/>'>
+       			<petclinic:inputField label="Fecha Pago" name="fechapago"/>
+ 				<input type="hidden" name="periodoPrueba" value="False"/>
+       			<input type="hidden" name="presupuesto" value=' <c:out value="${contratoServicio.presupuesto.id}"/>'>
+       			<input type="hidden" name="cliente" value=' <c:out value="${contratoServicio.presupuesto.servicio.cliente.id}"/>'>
        			
        		</div>
             <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-10">
-                    <input type="hidden" name="id" value="${contratoTrabajador.id}"/>
-                    <button class="btn btn-default" type="submit">Save Contrato</button>
+                    <input type="hidden" name="id" value="${contratoServicio.id}"/>
+                    <button class="btn btn-default" type="submit">Crear Contrato</button>
                 </div>
             </div>
         </form:form>
