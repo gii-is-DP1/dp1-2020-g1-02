@@ -68,8 +68,8 @@ INSERT INTO factura(fecha, precio_total, proveedor, pedido) VALUES ('2020-10-20'
 INSERT INTO factura(fecha, precio_total, proveedor, pedido) VALUES ('2021-01-20', 56.01, 3, 3);
 
 
-INSERT INTO curriculum(nombre, tipocategoria) VALUES ('Carlos Jesus', 0);
-INSERT INTO curriculum(nombre, tipocategoria) VALUES ('Carlos Jesus2', 2);
+INSERT INTO curriculum(nombre, apellidos, telefono, correo, descripcion, tipocategoria) VALUES ('Carlos', 'Villadiego', '666666666', 'carvilgar1@us.es', 'Mucha experiencia en el sector', 0);
+INSERT INTO curriculum(nombre, apellidos, telefono, correo, descripcion, tipocategoria) VALUES ('Carlos Jesus2', 'Villadiego', '666666666', 'carvilgar1@us.es', 'Muchas ganas de trabajar', 2);
 
 
 INSERT INTO administrador(id,nombre,apellidos,dni,telefono, direccion, correo, tipocategoria, username) VALUES (1,'CARLOS JESUS', 'VILLADIEGO GARCIA', '78461836B','666666666','C/Motorhead, 6', 'calvirgar@alum.us.es', 0, 'admin');

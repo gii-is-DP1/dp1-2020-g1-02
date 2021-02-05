@@ -38,12 +38,6 @@ public class CurriculumService {
 	public Optional<Curriculum> findCurriculumById(Integer curriculumId) {
 		return curriculumRepo.findById(curriculumId);
 	}
-
-	@Transactional(readOnly=true)
-	public Iterable<Curriculum> findCurriculumByTrabajadorId(String name) {
-		return null;
-		//return curriculumRepo.findCurriculumByTrabajadorId(name);
-	}
 	
 	@Transactional
 	public void deleteById(Integer id) {

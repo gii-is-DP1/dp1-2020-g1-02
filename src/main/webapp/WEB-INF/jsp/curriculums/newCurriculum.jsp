@@ -11,6 +11,10 @@
        <form:form modelAttribute="curriculum" class="form-horizontal" action="/curriculums/save">
        		<div class="form-group has-feedback">
        			<petclinic:inputField label="Nombre" name="nombre" />
+       			<petclinic:inputField label="Apellidos" name="apellidos" />
+       			<petclinic:inputField label="Telefono" name="telefono"/>
+       			<petclinic:inputField label="Correo" name="correo"/>
+       			<petclinic:inputDescripcion label="Descripción" name="descripcion" row="5" cols="30"/>
   				<form:select path="tipocategoria">
 				   <form:options/>
 				</form:select>
