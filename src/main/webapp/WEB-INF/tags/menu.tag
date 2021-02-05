@@ -83,12 +83,6 @@
 						<span>Clientes</span>
 					</petclinic:menuItem>
 					
-					<petclinic:menuItem active="${nombre eq 'mensajes'}" url="/mensajes"
-						title="Mensajes">
-						<span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
-						<span>Mensajes</span>
-					</petclinic:menuItem>
-
 					<petclinic:menuItem active="${name eq 'oferta'}" url="/ofertas"
 						title="Ofertas">
 
@@ -178,6 +172,13 @@
 				</sec:authorize>
 
 				<c:if test="${user != null}">
+				
+					<petclinic:menuItem active="${nombre eq 'mensajes'}" url="/mensajes"
+						title="Mensajes">
+						<span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+						<span>Mensajes</span>
+					</petclinic:menuItem>
+					
 					<li><a href="/users/<c:out value="${user}"/>">Perfil</a></li>
 				</c:if>
 				<c:if test = "${user == null}">

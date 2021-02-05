@@ -90,6 +90,11 @@ public class MensajesService {
 		mensajesRepo.deleteAll();
 	}
 
+	@Transactional
+	public void marcarLeido(Mensaje m) {
+		m.setLeido(true);
+		mensajesRepo.save(m);
+	}
 	
 	
 }

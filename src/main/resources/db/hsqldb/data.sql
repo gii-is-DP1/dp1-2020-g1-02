@@ -105,8 +105,8 @@ INSERT INTO valoracion(fecha,nivelsatisfaccion, cliente_id, servicio_id) VALUES 
 
 
 
-INSERT INTO mensaje(id, fecha, asunto, cuerpo, emisor) VALUES (1, '2021-02-02', 'Hola que tal', 'Hola como estamos que tal', 'JosePabloSL');
-INSERT INTO mensaje(id, fecha, asunto, cuerpo, emisor) VALUES (2, '2021-02-02', 'Muy bien gracias', 'Genial, y tu?', 'admin');
+INSERT INTO mensaje(id, fecha, asunto, cuerpo, emisor, leido) VALUES (1, '2021-02-02', 'Hola que tal', 'Hola como estamos que tal', 'JosePabloSL', FALSE);
+INSERT INTO mensaje(id, fecha, asunto, cuerpo, emisor, leido) VALUES (2, '2021-02-02', 'Muy bien gracias', 'Genial, y tu?', 'admin', TRUE);
 
 INSERT INTO aux VALUES ('admin', 1);
 INSERT INTO aux VALUES ('JosePabloSL', 2);

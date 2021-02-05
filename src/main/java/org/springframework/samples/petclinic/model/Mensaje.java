@@ -32,6 +32,9 @@ public class Mensaje extends BaseEntity{
 	@NotEmpty
 	private String cuerpo;
 	
+	@NotNull
+	private Boolean leido;
+	
 	@ManyToMany(mappedBy = "mensajesRecibidos")
 	private List<User> receptores;
 	
