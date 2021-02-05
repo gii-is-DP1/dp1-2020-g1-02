@@ -11,6 +11,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 
@@ -28,6 +29,9 @@ public class User{
 	String username;
 	@NotEmpty
 	String password;
+	
+	@Transient
+    private String retypePassword;
 	
 	boolean enabled;
 	
