@@ -34,6 +34,10 @@ public class CurriculumServiceTest {
 	public void testSaveCurriculum() {
 		Curriculum curriculumNew = new Curriculum();
 		curriculumNew.setNombre("Jesús");
+		curriculumNew.setApellidos("Villa");
+		curriculumNew.setTelefono("666666666");
+		curriculumNew.setCorreo("carvilgar1@gmail.com");
+		curriculumNew.setDescripcion("Holaaaaaaaaaaaa");
 		curriculumNew.setTipocategoria(TipoCategoria.Limpieza);
 
 		curriculumService.save(curriculumNew);
