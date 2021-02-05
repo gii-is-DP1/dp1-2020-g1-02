@@ -21,12 +21,10 @@ import lombok.Setter;
 @Table(name = "reclamacion")
 public class Reclamacion extends BaseEntity {
 
-	@Column(name="fecha")
 	@DateTimeFormat(pattern = "yyyy/MM/dd")
 	@NotNull
 	private LocalDate fecha;
 	
-	@Column(name = "descripcion")
 	@NotEmpty
 	private String descripcion;
 	

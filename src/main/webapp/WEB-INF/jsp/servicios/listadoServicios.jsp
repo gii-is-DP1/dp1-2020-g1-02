@@ -10,6 +10,10 @@
 
 <petclinic:layout pageName="servicios">
     <h2>Servicios</h2>
+    
+       <spring:url value="/valoraciones" var="valoracionUrl">
+    </spring:url>
+    <a href="${fn:escapeXml(valoracionUrl)}" class="btn btn-default">Ver Valoraciones</a>
 	
 	
     <table id="eventsTable" class="table table-striped">
