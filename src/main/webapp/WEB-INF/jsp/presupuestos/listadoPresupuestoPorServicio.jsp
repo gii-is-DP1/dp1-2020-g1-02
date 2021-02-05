@@ -36,29 +36,40 @@
                 </td>
               
                <c:if test="${presupuesto.estado eq 'Espera'}">
-               <sec:authorize access="hasAuthority('cliente')">
-                <td>
-               	 	<form:form modelAttribute="presupuesto" class="form-horizontal" action="aceptar">
-       						<input type="hidden" id="id" name="id" value=' <c:out value="${presupuesto.id}"/>'>
-       						<button type="submit">Aceptar presupuesto</button>
-       				</form:form>
-       			 </td>
+               		<sec:authorize access="hasAuthority('cliente')">
+               			 <td>
+               	 				<form:form modelAttribute="presupuesto" class="form-horizontal" action="aceptar">
+       								<input type="hidden" id="id" name="id" value=' <c:out value="${presupuesto.id}"/>'>
+       								<button type="submit">Aceptar presupuesto</button>
+       							</form:form>
+       					 </td>
          		
-         		<td>
-               	 	<form:form modelAttribute="presupuesto" class="form-horizontal" action="rechazar">
-       						<input type="hidden" id="id" name="id" value=' <c:out value="${presupuesto.id}"/>'>
-       						<button type="submit">Rechazar presupuesto</button>
-       				</form:form>
-       			 </td>
-       			</sec:authorize>
- 				</c:if>
- 				<c:if test="${presupuesto.estado != 'Espera'}">
-       			 	<td>
-       			 	</td>
-       			 	<td>
-       			 	</td>
-       			 </c:if>
-       
+         				 <td>
+               	 				<form:form modelAttribute="presupuesto" class="form-horizontal" action="rechazar">
+       								<input type="hidden" id="id" name="id" value=' <c:out value="${presupuesto.id}"/>'>
+       								<button type="submit">Rechazar presupuesto</button>
+       							</form:form>
+       				 	 </td>
+       				</sec:authorize>
+       				<sec:authorize access="hasAuthority('administrador')"><td></td> <td></td></sec:authorize>
+ 			  </c:if>
+ 			  <c:if test="${presupuesto.estado != 'Espera'}"><td></td> <td></td></c:if>
+ 			  
+ 			  
+      	 	  <c:if test="${presupuesto.estado eq 'Aceptado'}"> <c:if test="${presupuesto.contrato eq null}">
+      	 	  	
+      	 	  	<sec:authorize access="hasAuthority('administrador')">
+      	 	  	
+      	 	    <td>
+                	<spring:url value="/contratosServicios/{pId}/new" var="contratoUrl">
+                		<spring:param name="pId" value="${presupuesto.id}"/>
+                	</spring:url>
+                	<a href="${fn:escapeXml(contratoUrl)}">Crear Contrato</a>
+                </td>
+                </sec:authorize>
+                <sec:authorize access="hasAuthority('cliente')"><td></td> <td></td></sec:authorize>
+      	 	  </c:if></c:if>
+       		   <c:if test="${presupuesto.estado != 'Aceptado'}"><td></td> <td></td></c:if>
             </tr>
         </c:forEach>
         </tbody>
