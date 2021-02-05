@@ -1,7 +1,6 @@
 package org.springframework.samples.petclinic.model;
 
 import java.util.List;
-import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -10,8 +9,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
-
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -19,7 +16,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Table(name = "users")
-public class User{
+public class User{ 
 	@Id
 	@NotBlank
 	String username;

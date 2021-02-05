@@ -7,8 +7,8 @@
 
 <petclinic:layout pageName="Events">
     <jsp:body>
-       <h2><c:if test="${trabajador['new']}">Nuevo </c:if>Administrador</h2>
        <div class="container">
+       <h2><c:if test="${trabajador['new']}">Nuevo </c:if>Administrador</h2>
        <form:form modelAttribute="trabajador" class="form-horizontal" action="/users/saveAdministrador">
        		<div class="form-group has-feedback">
        			<input type="hidden" id="id" name="id" value=' <c:out value="${trabajador.id}"/>'>
