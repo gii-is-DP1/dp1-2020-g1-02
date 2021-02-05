@@ -6,6 +6,7 @@ INSERT INTO users(username,password,enabled) VALUES ('Capitan America','$2a$10$s
 INSERT INTO users(username,password,enabled) VALUES ('Don Limpio','$2a$10$scVXDdcGmWu8SNk/6EP/y.ox5UKp8eQoTpZTzYC6Q.Rgf0/gJW6C6',TRUE);
 INSERT INTO users(username,password,enabled) VALUES ('JosePabloSL','$2a$10$scVXDdcGmWu8SNk/6EP/y.ox5UKp8eQoTpZTzYC6Q.Rgf0/gJW6C6',TRUE);
 INSERT INTO users(username,password,enabled) VALUES ('JoseCarlos','$2a$10$scVXDdcGmWu8SNk/6EP/y.ox5UKp8eQoTpZTzYC6Q.Rgf0/gJW6C6',TRUE);
+INSERT INTO users(username,password,enabled) VALUES ('Sistema','$2a$10$scVXDdcGmWu8SNk/6EP/y.ox5UKp8eQoTpZTzYC6Q.Rgf0/gJW6C6',TRUE);
 
 INSERT INTO authorities(id,username,authority) VALUES (1,'admin','administrador');
 INSERT INTO authorities(id,username,authority) VALUES (2,'Nick Furia','cliente');
@@ -14,6 +15,7 @@ INSERT INTO authorities(id,username,authority) VALUES (4,'Capitan America','clie
 INSERT INTO authorities(id,username,authority) VALUES (5,'Don Limpio','proveedor');
 INSERT INTO authorities(id,username,authority) VALUES (6,'JosePabloSL','proveedor');
 INSERT INTO authorities(id,username,authority) VALUES (7,'JoseCarlos','trabajador');
+INSERT INTO authorities(id,username,authority) VALUES (8,'Sistema','administrador');
 
 INSERT INTO trabajador(id,nombre,apellidos,dni,telefono, direccion, correo, tipocategoria) VALUES (1,'Carlos Jesus', 'Villadiego', '78461836B','666888888','C/Garcia Marquez n2', 'calvirgar@alum.us.es', 0);
 INSERT INTO trabajador(id,nombre,apellidos,dni,telefono, direccion, correo, tipocategoria) VALUES (2,'Carlos Jesus2', 'Villadiego', '78461836B','666888888','C/Garcia Marquez n2', 'calvirgar@alum.us.es', 2);
