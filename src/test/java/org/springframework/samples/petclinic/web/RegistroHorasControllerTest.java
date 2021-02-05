@@ -1,5 +1,6 @@
 package org.springframework.samples.petclinic.web;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -13,6 +14,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import javax.persistence.EntityManager;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +24,13 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.FilterType;
 import org.springframework.samples.petclinic.configuration.SecurityConfiguration;
+import org.springframework.samples.petclinic.model.Authorities;
+import org.springframework.samples.petclinic.model.Oferta;
+import org.springframework.samples.petclinic.model.Proveedor;
 import org.springframework.samples.petclinic.model.RegistroHoras;
+import org.springframework.samples.petclinic.model.TipoCategoria;
+import org.springframework.samples.petclinic.model.Trabajador;
+import org.springframework.samples.petclinic.model.User;
 import org.springframework.samples.petclinic.service.InstalacionService;
 import org.springframework.samples.petclinic.service.RegistroHorasService;
 import org.springframework.samples.petclinic.service.TrabajadorService;
@@ -49,7 +58,14 @@ public class RegistroHorasControllerTest {
 	@MockBean
 	private UserService userService;
 	
+	@MockBean
+	private EntityManager entityManager;
+	
+	
 	private RegistroHoras registroHora;
+	private User user;
+	private Authorities authority;
+	private Trabajador trabajador;
 	
 	@BeforeEach
 	void setup() {
@@ -58,11 +74,41 @@ public class RegistroHorasControllerTest {
 		registroHora.setHora_entrada(LocalDateTime.of(2020, 12, 10, 8, 00));
 		registroHora.setHora_salida(LocalDateTime.of(2020, 12, 10, 15, 00));
 		
+		authority = new Authorities();
+		user = new User();
+		authority.setAuthority("trabajador");
+		authority.setId(1);
+		user.setUsername("JoseCarlos");
+		authority.setUser(user);
+		user.setAuthorities(authority);
+		user.setPassword("admin");
+		
+		trabajador = new Trabajador();
+		trabajador.setId(1);
+		trabajador.setNombre("Jose");
+		trabajador.setApellidos("Morales");
+		trabajador.setTelefono("666333222");
+		trabajador.setDireccion("calle huertas, n12");
+		trabajador.setCorreo("jc@gmail.com");
+		trabajador.setDni("20099008W");
+		trabajador.setTipocategoria(TipoCategoria.Cristaleria);
+		
+		
 		given(this.registroHorasService.findRegistroHorasById(1)).willReturn(Optional.of(registroHora));
+		given(this.trabajadorService.findTrabajadorById(1)).willReturn(Optional.of(trabajador));
+		given(this.entityManager.find(RegistroHoras.class, 1)).willReturn(registroHora);
+		given(this.entityManager.find(Trabajador.class, 1)).willReturn(trabajador);
+		
+		
+		
+		given(this.trabajadorService.findTrabajadorByUsername(any())).willReturn(Optional.of(trabajador));
+		given(this.userService.getLoggedUser()).willReturn(user);
+		
 		
 		List<RegistroHoras> registroHoras = new ArrayList<RegistroHoras>();
 		registroHoras.add(registroHora);
 		given(this.registroHorasService.findAll()).willReturn(registroHoras);
+		
 	}
 
 	@WithMockUser(value = "spring")
@@ -76,7 +122,9 @@ public class RegistroHorasControllerTest {
 	@WithMockUser(value = "spring")
 	@Test
 	void testNewRegistroHoras() throws Exception{
-		mockMvc.perform(get("/registroHoras/new")).andExpect(status().isOk()).andExpect(model().attributeExists("registro_horas"))
+		mockMvc.perform(get("/registroHoras/new"))
+		.andExpect(status().isOk())
+		.andExpect(model().attributeExists("registro_horas", "trabajador"))
 		.andExpect(view().name("registroHoras/newRegistroHoras"));
 	}
 	
