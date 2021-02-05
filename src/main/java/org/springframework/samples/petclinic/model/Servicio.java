@@ -2,8 +2,8 @@ package org.springframework.samples.petclinic.model;
 
 import java.time.LocalDate;
 import java.util.List;
+
 import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
