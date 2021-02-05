@@ -53,6 +53,13 @@
                 </td>
                 
                 <td>
+                	<spring:url value="/valoraciones/new/{oId}" var="reclamacionUrl">
+              		<spring:param name="oId" value="${servicio.id}"/>
+	              	</spring:url>
+	              	<a href="${fn:escapeXml(reclamacionUrl)}">Poner valoracion</a>
+                </td>
+                
+                <td>
                 	<spring:url value="/servicios/{servicioId}/presupuestos" var="servicioUrl">
                 		<spring:param name="servicioId" value="${servicio.id}"/>
                 	</spring:url>

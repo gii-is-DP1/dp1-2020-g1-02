@@ -21,10 +21,11 @@
 		</button>
 	</a>
 	
-	<form action="/trabajadores/horariosTrabajador"> 
-    	<input type="text" name="nameTrab" value="${filtrado}"> 
-    	<button type="submit"> Filtrar Horarios De Trabajador </button>
-    </form>
+	<a href="/horarios">
+		<button type="button" class="btn btn-default btn-lg">
+  			<span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Horarios Trabajadores
+		</button>
+	</a>
 	
     <table id="eventsTable" class="table table-striped">
         <thead>
@@ -36,8 +37,7 @@
             <th style="width: 150px;">CORREO</th>
             <th style="width: 150px;">TELEFONO</th>
             <th style="width: 150px;">CATEGORIA</th>
-            <th style="width: 150px;">Contrato</th>
-            <th style="width: 150px;">HORARIOS</th>  
+            <th style="width: 150px;">CONTRATO</th>
         </tr>
         </thead>
         <tbody>
@@ -68,16 +68,6 @@
           		<td>
                 	<c:forEach var="contrato" items="${trabajador.contratos}">
                 			<c:out value="${contrato.id}"/>
-                  	</c:forEach> 
-                </td> 
-                <td>
-                	<c:forEach var="horario" items="${trabajador.horarios}">
-                			<c:out value="${horario.id}"/>
-                  	</c:forEach> 
-                </td> 
-                <td>
-                	<c:forEach var="registroHoras" items="${trabajador.registroHoras}">
-                			<c:out value="${registroHoras.id}"/>
                   	</c:forEach> 
                 </td> 
                 <td>

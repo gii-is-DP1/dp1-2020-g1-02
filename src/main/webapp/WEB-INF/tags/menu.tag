@@ -116,11 +116,6 @@
 						<span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
 						<span>Morosos</span>
 					</petclinic:menuItem>
-					<petclinic:menuItem active="${name eq 'instalaciones'}" url="/instalaciones/new"
-					title="Ofertas">
-					<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
-					<span>Crear instalacion</span>
-					</petclinic:menuItem>
 				</sec:authorize>
 				
 				<sec:authorize access="hasAuthority('trabajador')">

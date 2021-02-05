@@ -12,21 +12,14 @@
     </h2>
     <form:form modelAttribute="instalacion" class="form-horizontal" id="add-cliente-form" action="/instalaciones/save">
         <div class="form-group has-feedback">
-       	    <input type="hidden" id="id" name="id" value=' <c:out value="${cliente.nombre}"/>'>
+       	    <input type="hidden" id="cliente" name="cliente" value=' <c:out value="${cliente.id}"/>'>
             <petclinic:inputField label="Lugar" name="lugar"/>
             <petclinic:inputField label="Dimension" name="dimension"/>
         </div>
-        <div class="form-group">
-            <div class="col-sm-offset-2 col-sm-10">
-                <c:choose>
-                    <c:when test="${instalacion['new']}">
-                        <button class="btn btn-default" type="submit">Añadir Instalacion</button>
-                    </c:when>
-                    <c:otherwise>
-                        <button class="btn btn-default" type="submit">Actualizar Instalacion</button>
-                    </c:otherwise>
-                </c:choose>
-            </div>
-        </div>
+        	<div class="form-group">
+	                <div class="col-sm-offset-2 col-sm-10">
+	                    <button class="btn btn-default" type="submit">Guardar Instalacion</button>
+	                </div>
+	        </div>
     </form:form>
 </petclinic:layout>

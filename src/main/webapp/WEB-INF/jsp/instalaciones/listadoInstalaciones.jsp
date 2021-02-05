@@ -20,7 +20,7 @@
     	</form>
      </c:if>
     
-    <a href="instalaciones/new">
+    <a href="/instalaciones/new">
 		<button type="button" class="btn btn-default btn-lg">
   			<span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Nueva Instalacion
 		</button>

@@ -19,13 +19,10 @@ import lombok.Setter;
 @Table(name="horario")
 public class Horario extends BaseEntity {
 	
-	
-	@Column(name="hora_inicio")
     @DateTimeFormat(pattern = "yyyy/MM/dd HH:mm")
     @NotNull
     private LocalDateTime hora_inicio;
 
-    @Column(name="hora_fin")
     @DateTimeFormat(pattern = "yyyy/MM/dd HH:mm")
     @NotNull
     private LocalDateTime hora_fin;
@@ -34,7 +31,6 @@ public class Horario extends BaseEntity {
 	@JoinColumn(name="trabajador")
 	private Trabajador trabajador;
 	
-	@Column(name="descripcion")
     @NotNull
     private String descripcion;
 
