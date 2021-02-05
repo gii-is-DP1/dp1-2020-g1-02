@@ -44,7 +44,7 @@ public class TrabajadorService {
 		trabajadorRepo.delete(trabajador);
 	}
 
-	public Optional<Trabajador> findTrabajadorById(int trabajadorId) {
+	public Optional<Trabajador> findTrabajadorById(Integer trabajadorId) {
 		// TODO Auto-generated method stub
 		return trabajadorRepo.findById(trabajadorId);
 	}

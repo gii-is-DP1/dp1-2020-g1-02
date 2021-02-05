@@ -12,6 +12,9 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -23,7 +26,7 @@ public class User{
 	@Id
 	@NotBlank
 	String username;
-	
+	@NotEmpty
 	String password;
 	
 	boolean enabled;

@@ -50,7 +50,7 @@ public class ProveedorService {
 		return proveedorRepo.findProveedorByUsername(username);
 	}
 	@Transactional(readOnly=true)
-	public Optional<Proveedor> findProveedorById(int id) {
+	public Optional<Proveedor> findProveedorById(Integer id) {
 		// TODO Auto-generated method stub
 		return proveedorRepo.findById(id);
 	}
