@@ -2,7 +2,7 @@
 INSERT INTO users(username,password,enabled) VALUES ('admin','$2a$10$scVXDdcGmWu8SNk/6EP/y.ox5UKp8eQoTpZTzYC6Q.Rgf0/gJW6C6',TRUE);
 INSERT INTO users(username,password,enabled) VALUES ('Nick Furia','$2a$10$scVXDdcGmWu8SNk/6EP/y.ox5UKp8eQoTpZTzYC6Q.Rgf0/gJW6C6',TRUE);
 INSERT INTO users(username,password,enabled) VALUES ('Ironman','$2a$10$scVXDdcGmWu8SNk/6EP/y.ox5UKp8eQoTpZTzYC6Q.Rgf0/gJW6C6',TRUE);
-INSERT INTO users(username,password,enabled) VALUES ('Capitan América','$2a$10$scVXDdcGmWu8SNk/6EP/y.ox5UKp8eQoTpZTzYC6Q.Rgf0/gJW6C6',TRUE);
+INSERT INTO users(username,password,enabled) VALUES ('Capitan America','$2a$10$scVXDdcGmWu8SNk/6EP/y.ox5UKp8eQoTpZTzYC6Q.Rgf0/gJW6C6',TRUE);
 INSERT INTO users(username,password,enabled) VALUES ('Don Limpio','$2a$10$scVXDdcGmWu8SNk/6EP/y.ox5UKp8eQoTpZTzYC6Q.Rgf0/gJW6C6',TRUE);
 INSERT INTO users(username,password,enabled) VALUES ('JosePabloSL','$2a$10$scVXDdcGmWu8SNk/6EP/y.ox5UKp8eQoTpZTzYC6Q.Rgf0/gJW6C6',TRUE);
 INSERT INTO users(username,password,enabled) VALUES ('JoseCarlos','$2a$10$scVXDdcGmWu8SNk/6EP/y.ox5UKp8eQoTpZTzYC6Q.Rgf0/gJW6C6',TRUE);
@@ -10,7 +10,7 @@ INSERT INTO users(username,password,enabled) VALUES ('JoseCarlos','$2a$10$scVXDd
 INSERT INTO authorities(id,username,authority) VALUES (1,'admin','administrador');
 INSERT INTO authorities(id,username,authority) VALUES (2,'Nick Furia','cliente');
 INSERT INTO authorities(id,username,authority) VALUES (3,'Ironman','cliente');
-INSERT INTO authorities(id,username,authority) VALUES (4,'Capitan América','cliente');
+INSERT INTO authorities(id,username,authority) VALUES (4,'Capitan America','cliente');
 INSERT INTO authorities(id,username,authority) VALUES (5,'Don Limpio','proveedor');
 INSERT INTO authorities(id,username,authority) VALUES (6,'JosePabloSL','proveedor');
 INSERT INTO authorities(id,username,authority) VALUES (7,'JoseCarlos','trabajador');
@@ -31,7 +31,7 @@ INSERT INTO contratoTrabajador(fechainicial,fechafinal,trabajador_id,sueldo) VAL
 
 INSERT INTO cliente(id, nombre,apellidos,telefono,direccion,dni,correo, username) VALUES (1, 'Jesus', 'Garcia', '644586245', 'Calle Cristie', '33445566P', 'jesus@gmail.com', 'Nick Furia');
 INSERT INTO cliente(id, nombre,apellidos,telefono,direccion,dni,correo, username) VALUES (2, 'Ruben', 'Bueno', '655788999', 'Calle Misco', '11223344T', 'ruben@gmail.com', 'Ironman');
-INSERT INTO cliente(id, nombre,apellidos,telefono,direccion,dni,correo, username) VALUES (3, 'Manolito', 'Pies de Plata', '624586245', 'Calle Agata', '25673519P', 'manolito@gmail.com', 'Capitan América');
+INSERT INTO cliente(id, nombre,apellidos,telefono,direccion,dni,correo, username) VALUES (3, 'Manolito', 'Pies de Plata', '624586245', 'Calle Agata', '25673519P', 'manolito@gmail.com', 'Capitan America');
 
 INSERT INTO instalacion(lugar, dimension, cliente_id) VALUES ('Calle Águila Piso 1ºB',20.8, 1);
 INSERT INTO instalacion(lugar, dimension, cliente_id) VALUES ('Calle Betis Piso 1ºD',17.3, 2);
