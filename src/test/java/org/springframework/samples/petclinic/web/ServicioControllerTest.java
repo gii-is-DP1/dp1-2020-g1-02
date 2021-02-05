@@ -109,7 +109,7 @@ public class ServicioControllerTest {
 			.param("fechainicio", "2020/01/01")
 			.param("fechafin", "2020/02/01")
 			.param("estado", "Aceptado"))
-		.andExpect(status().is3xxRedirection()).andExpect(view().name("redirect:/servicios"));
+		.andExpect(status().is2xxSuccessful()).andExpect(view().name("servicios/editServicio"));
 	}
 	
 
@@ -119,7 +119,7 @@ public class ServicioControllerTest {
 	void testAceptarServicio() throws Exception {
 		mockMvc.perform(post("/servicios/aceptar").with(csrf())
 			.param("id","1"))
-		.andExpect(status().is3xxRedirection()).andExpect(view().name("redirect:/servicios"));
+		.andExpect(status().is3xxRedirection()).andExpect(view().name("redirect:/servicios/1/presupuestos/new"));
 	}
 	
 	@WithMockUser(value="spring")
