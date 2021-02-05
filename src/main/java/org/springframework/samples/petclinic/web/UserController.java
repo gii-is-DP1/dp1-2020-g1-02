@@ -81,7 +81,7 @@ public class UserController {
 		String view="redirect:/";
 		if(result.hasErrors()) {
 			modelMap.addAttribute("cliente", cliente);
-			return "users/new";
+			return "clientes/newCliente";
 		}else {
 			clienteService.saveCliente(cliente);
 			//modelMap.addAttribute("message", "Cliente actualizado!");
@@ -130,12 +130,12 @@ public class UserController {
 	
 	@PostMapping(path="/actualizarCliente")
 	public String actualizarCliente(@Valid Cliente cliente, BindingResult result,ModelMap modelMap) {
-		String view="redirect:/";
+		String view = "";
+		User principal = userService.getLoggedUser();
 		if(result.hasErrors()) {
 			modelMap.addAttribute("cliente", cliente);
-			return "users/new";
+			view = PERFIL_VIEW;
 		}else {
-			User principal = userService.getLoggedUser();
 			if(principal != null && principal.getUsername().equals(cliente.getUser().getUsername())) {
 				Cliente clientToUpDate = clienteService.findClienteById(cliente.getId()).get();
 				
@@ -159,11 +159,12 @@ public class UserController {
 	
 	@PostMapping(path="/actualizarTrabajador")
 	public String actualizarTrabajador(@Valid Trabajador trabajador, BindingResult result,ModelMap modelMap) {
-		String view = PERFIL_VIEW;
+		String view = "";
+		User principal = userService.getLoggedUser();
 		if(result.hasErrors()) {
 			modelMap.addAttribute("trabajador", trabajador);
+			view = PERFIL_VIEW;
 		}else {
-			User principal = userService.getLoggedUser();
 			if(principal != null && principal.getUsername().equals(trabajador.getUser().getUsername())) {
 				Trabajador employeeToUpDate = trabajadorService.findTrabajadorById(trabajador.getId()).get();
 				
@@ -187,11 +188,12 @@ public class UserController {
 	
 	@PostMapping(path="/actualizarProveedor")
 	public String actualizarProveedor(@Valid Proveedor proveedor, BindingResult result,ModelMap modelMap) {
-		String view = PERFIL_VIEW;
+		String view = "";
+		User principal = userService.getLoggedUser();
 		if(result.hasErrors()) {
 			modelMap.addAttribute("proveedor", proveedor);
+			view = PERFIL_VIEW;
 		}else {
-			User principal = userService.getLoggedUser();
 			if(principal != null && principal.getUsername().equals(proveedor.getUser().getUsername())) {
 				Proveedor supplierToUpDate = proveedorService.findProveedorById(proveedor.getId()).get();
 		
@@ -214,11 +216,12 @@ public class UserController {
 	
 	@PostMapping(path="/actualizarAdministrador")
 	public String actualizarAdministrador(@Valid Administrador trabajador, BindingResult result,ModelMap modelMap) {
-		String view = PERFIL_VIEW;
+		String view = "";
+		User principal = userService.getLoggedUser();
 		if(result.hasErrors()) {
 			modelMap.addAttribute("trabajador", trabajador);
+			view = PERFIL_VIEW;
 		}else {
-			User principal = userService.getLoggedUser();
 			if(principal != null && principal.getUsername().equals(trabajador.getUser().getUsername())) {
 				Administrador adminToUpDate = administradorService.findAdministradorById(trabajador.getId()).get();
 				

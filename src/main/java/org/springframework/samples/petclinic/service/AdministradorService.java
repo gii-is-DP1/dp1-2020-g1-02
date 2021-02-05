@@ -42,7 +42,7 @@ public class AdministradorService {
 	}
 	
 	@Transactional(readOnly=true)
-	public Optional<Administrador> findAdministradorById(int adminId) {
+	public Optional<Administrador> findAdministradorById(Integer adminId) {
 		return administradorRepo.findById(adminId);
 	}
 	
