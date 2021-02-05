@@ -21,7 +21,6 @@ import org.springframework.samples.petclinic.configuration.SecurityConfiguration
 import org.springframework.samples.petclinic.model.Curriculum;
 import org.springframework.samples.petclinic.model.TipoCategoria;
 import org.springframework.samples.petclinic.service.CurriculumService;
-import org.springframework.samples.petclinic.service.ReclamacionService;
 import org.springframework.samples.petclinic.service.TrabajadorService;
 import org.springframework.security.config.annotation.web.WebSecurityConfigurer;
 import org.springframework.security.test.context.support.WithMockUser;

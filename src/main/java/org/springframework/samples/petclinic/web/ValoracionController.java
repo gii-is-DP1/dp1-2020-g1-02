@@ -1,5 +1,6 @@
 package org.springframework.samples.petclinic.web;
 
+import java.time.LocalDate;
 import java.util.Optional;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,9 +8,11 @@ import org.springframework.samples.petclinic.model.Cliente;
 import org.springframework.samples.petclinic.model.Factura;
 import org.springframework.samples.petclinic.model.Proveedor;
 import org.springframework.samples.petclinic.model.Servicio;
+import org.springframework.samples.petclinic.model.User;
 import org.springframework.samples.petclinic.model.Valoracion;
 import org.springframework.samples.petclinic.service.ClienteService;
 import org.springframework.samples.petclinic.service.ServicioService;
+import org.springframework.samples.petclinic.service.UserService;
 import org.springframework.samples.petclinic.service.ValoracionService;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -34,6 +37,9 @@ public class ValoracionController {
 	
 	@Autowired
 	private ServicioService servicioService;
+	
+	@Autowired
+	private UserService userService;
 	
 	@GetMapping()
 	public String listadoValoraciones(ModelMap modelMap) {
@@ -70,26 +76,39 @@ public class ValoracionController {
 		return vista;
 	}
 	
-	@GetMapping(path="/new")
-	public String crearValoracion(ModelMap modelMap) {
+	@GetMapping(path="/new/{oId}")
+	public String crearValoracion(@PathVariable("oId") Integer oId,ModelMap modelMap) {
 		String view="valoraciones/newValoracion";
-		Iterable<Cliente> clientes = clienteService.findAll();
-		Iterable<Servicio> servicios = servicioService.findAll();
-		modelMap.addAttribute("clientes", clientes);
-		modelMap.addAttribute("servicios", servicios);
-		modelMap.addAttribute("valoracion", new Valoracion());
+		Valoracion v = new Valoracion();
+		v.setServicio(servicioService.findServicioById(oId).get());
+		v.setFecha(LocalDate.now());
+		User user = userService.getLoggedUser();
+		if(user.getAuthorities().getAuthority().equalsIgnoreCase("cliente")) {
+			Cliente cliente = clienteService.findClienteByUsername(user.getUsername()).get();
+			modelMap.addAttribute("clientes", cliente);
+			modelMap.addAttribute("valoracion", v);
+		}else {
+			return "exception";
+		}
+		
 		return view;
 	}
 	
 	@PostMapping(path="/save")
 	public String salvarValoracion(@Valid Valoracion valoracion, BindingResult result,ModelMap modelMap) {
-		String view="redirect:/valoraciones";
+		String view="succesful";
 		if(result.hasErrors()) {
 			modelMap.addAttribute("valoracion", valoracion);
 			return "valoraciones/newValoracion";
 		}else {
-			valoracionService.save(valoracion);
-			modelMap.addAttribute("message", "Valoracion realizada!");
+			if(!clienteService.findClienteById(valoracion.getCliente().getId()).isPresent()) {
+				modelMap.addAttribute("valoracion", valoracion);
+				modelMap.addAttribute("error", "No existe el cliente");
+				return "valoraciones/newValoracion";
+			}else {
+				valoracionService.save(valoracion);
+				modelMap.addAttribute("message", "Valoracion añadida");
+			}
 		}
 		return view;
 	}

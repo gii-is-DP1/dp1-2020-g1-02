@@ -81,8 +81,8 @@ public class InstalacionControllerTest {
 						.with(csrf())
 						.param("dimension", "120.3")
 						.param("lugar", "Calle Río Danubio 23"))
-			.andExpect(status().is2xxSuccessful())
-			.andExpect(view().name("instalaciones/listadoInstalaciones"));
+			.andExpect(status().is3xxRedirection())
+			.andExpect(view().name("redirect:/instalaciones"));
 	}
 	
 	@WithMockUser(value = "spring")
