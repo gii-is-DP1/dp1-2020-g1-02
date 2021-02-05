@@ -20,7 +20,6 @@
     <table id="eventsTable" class="table table-striped">
         <thead>
         <tr>
-        	<th style="width: 150px;">ID_SERVICIO</th>
             <th style="width: 150px;">LUGAR</th>
             <th style="width: 150px;">FECHAINICIO</th>
             <th style="width: 150px;">FECHAFIN</th>
@@ -31,9 +30,6 @@
         <tbody>
         <c:forEach items="${servicios}" var="servicio">
             <tr>
-            	<td>
-                    <c:out value="${servicio.id}"/>
-                </td>
                 <td>
                     <c:out value="${servicio.lugar}"/>
                 </td>
@@ -54,6 +50,13 @@
               		<spring:param name="oId" value="${servicio.id}"/>
 	              	</spring:url>
 	              	<a href="${fn:escapeXml(reclamacionUrl)}">Poner reclamacion</a>
+                </td>
+                
+                <td>
+                	<spring:url value="/servicios/{servicioId}/presupuestos" var="servicioUrl">
+                		<spring:param name="servicioId" value="${servicio.id}"/>
+                	</spring:url>
+                	<a href="${fn:escapeXml(servicioUrl)}">Ver Presupuestos</a>
                 </td>
             </tr>
         </c:forEach>

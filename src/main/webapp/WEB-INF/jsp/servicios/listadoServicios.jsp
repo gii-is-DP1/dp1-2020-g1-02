@@ -15,7 +15,6 @@
     <table id="eventsTable" class="table table-striped">
         <thead>
         <tr>
-        	<th style="width: 150px;">ID_SERVICIO</th>
             <th style="width: 150px;">LUGAR</th>
             <th style="width: 150px;">FECHAINICIO</th>
             <th style="width: 150px;">FECHAFIN</th>
@@ -26,9 +25,6 @@
         <tbody>
         <c:forEach items="${servicios}" var="servicio">
             <tr>
-            	<td>
-                    <c:out value="${servicio.id}"/>
-                </td>
                 <td>
                     <c:out value="${servicio.lugar}"/>
                 </td>
@@ -52,6 +48,7 @@
                 	<a href="${fn:escapeXml(servicioUrl)}">Delete</a>
                 </td>
                
+               <c:if test="${servicio.estado eq 'Espera'}">
                <!--    ACEPTAR RECHAZAR SERVICIO   -->
                
                 <td>
@@ -68,7 +65,13 @@
        						<button type="submit">Rechazar solicitud</button>
        				</form:form>
        			 </td>
-       			 
+       			 </c:if>
+       			 <c:if test="${servicio.estado != 'Espera'}">
+       			 	<td>
+       			 	</td>
+       			 	<td>
+       			 	</td>
+       			 </c:if>
        			 <!-- Ver Presupuesto -->
        			
        			<td>

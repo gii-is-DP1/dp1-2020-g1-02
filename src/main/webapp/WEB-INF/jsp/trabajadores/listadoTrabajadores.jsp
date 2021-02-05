@@ -29,7 +29,6 @@
     <table id="eventsTable" class="table table-striped">
         <thead>
         <tr>
-        	<th style="width: 150px;">ID_TRABAJADOR</th>
             <th style="width: 150px;">NOMBRE</th>
             <th style="width: 150px;">APELLIDOS</th>
             <th style="width: 150px;">DNI</th>
@@ -44,9 +43,6 @@
         <tbody>
         <c:forEach items="${trabajadores}" var="trabajador">
             <tr>
-            	<td>
-                    <c:out value="${trabajador.id}"/>
-                </td>
                 <td>
                     <c:out value="${trabajador.nombre}"/>
                 </td>
