@@ -123,7 +123,8 @@ public class PedidoControllerTest {
 	@WithMockUser(value = "spring")
 	@Test
 	void testNewPedido() throws Exception{
-		mockMvc.perform(get("/pedidos/new/{oId}", 1)).andExpect(status().isOk())
+		mockMvc.perform(get("/pedidos/new/{oId}", 1))
+		.andExpect(status().isOk())
 		.andExpect(model().attributeExists("pedido"))
 		.andExpect(model().attribute("pedido", hasProperty("oferta", is(oferta))))
 		.andExpect(view().name("administradores/editPedido"));
