@@ -18,5 +18,5 @@ public interface TrabajadorRepository extends CrudRepository<Trabajador, Integer
 
 	@Query("SELECT t.nombre FROM Trabajador t")
 	List<String> findAllNames();
-
+	
 }

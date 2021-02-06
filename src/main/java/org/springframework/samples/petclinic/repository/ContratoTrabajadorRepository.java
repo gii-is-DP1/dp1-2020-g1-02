@@ -16,4 +16,7 @@ public interface ContratoTrabajadorRepository extends CrudRepository<ContratoTra
 	@Query("SELECT count(*) FROM ContratoTrabajador c WHERE c.trabajador.id = :idTrabajador AND c.fechainicial < :fin AND c.fechafinal > :inicio")
 	Integer contratosTrabajadorSolapadosPorFechaIntroducida(@Param("idTrabajador") Integer idTrabajador, @Param("inicio") LocalDate inicio, @Param("fin") LocalDate fin);
 	
+	@Query("SELECT c FROM ContratoTrabajador c WHERE c.trabajador.id=:trabajador")
+	Iterable<ContratoTrabajador> contratosTrabajadorPorTrabajador(@Param("trabajador") Integer trabajador) throws DataAccessException;;
+
 }

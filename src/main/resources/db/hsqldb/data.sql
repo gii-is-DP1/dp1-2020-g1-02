@@ -18,7 +18,7 @@ INSERT INTO authorities(id,username,authority) VALUES (7,'JoseCarlos','trabajado
 INSERT INTO authorities(id,username,authority) VALUES (8,'Sistema','administrador');
 
 INSERT INTO trabajador(id,nombre,apellidos,dni,telefono, direccion, correo, tipocategoria) VALUES (1,'Carlos Jesus', 'Villadiego', '78461836B','666888888','C/Garcia Marquez n2', 'calvirgar@alum.us.es', 0);
-INSERT INTO trabajador(id,nombre,apellidos,dni,telefono, direccion, correo, tipocategoria) VALUES (2,'Carlos Jesus2', 'Villadiego', '78461836B','666888888','C/Garcia Marquez n2', 'calvirgar@alum.us.es', 2);
+INSERT INTO trabajador(id,nombre,apellidos,dni,telefono, direccion, correo, tipocategoria) VALUES (2,'Carlos Jesus2', 'Villadiego', '78461835B','666888888','C/Garcia Marquez n2', 'calvirgar@alum.us.es', 2);
 INSERT INTO trabajador(id,nombre,apellidos,dni,telefono, direccion, correo, tipocategoria, username) VALUES (3,'Jose Carlos', 'Morales', '20099009B','666888884','C/Huertas', 'josmorbor3@alum.us.es', 2, 'JoseCarlos');
 
 INSERT INTO horario(hora_inicio, hora_fin, trabajador, descripcion) VALUES ('2020-12-10 12:00', '2020-12-10 15:00', 1, 'Limpiar en Acuario de Sevilla');

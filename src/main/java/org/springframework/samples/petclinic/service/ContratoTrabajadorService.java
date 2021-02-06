@@ -45,7 +45,7 @@ public class ContratoTrabajadorService {
 		LocalDate now = LocalDate.now();
 		return contratoTrabajadorRepo.contratosTrabajadorQueCaducanEsteMes(now.getDayOfMonth(), now.getMonthValue(), now.getYear());
 	}
-	
+  
 	@Transactional(rollbackFor = SolapamientoFechasException.class)
 	public void crearContrato(ContratoTrabajador contratoTrabajador) throws SolapamientoFechasException {
 		Integer idTrabajador = contratoTrabajador.getTrabajador().getId();
@@ -57,6 +57,9 @@ public class ContratoTrabajadorService {
 		} else {
 			throw new SolapamientoFechasException();
 		}
+  
+	public Iterable<ContratoTrabajador> findContratoTrabajadorByTrabajador(Integer trabajador){
+		return contratoTrabajadorRepo.contratosTrabajadorPorTrabajador(trabajador);
 	}
 
 	
