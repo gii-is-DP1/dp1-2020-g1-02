@@ -57,7 +57,7 @@ public class ContratoTrabajadorController {
 	
 	@GetMapping(path="/delete/{contratoTrabajadorId}")
 	public String borrarContratoTrabajador(@PathVariable("contratoTrabajadorId") int contratoTrabajadorId, ModelMap modelmap) {
-		String view="redirect:/contratosTrabajadores";
+		String view="redirect:/contratos";
 		Optional<ContratoTrabajador> contratoTrabajador=contratoTrabajadorService.findContratoTrabajadorById(contratoTrabajadorId);
 		if(contratoTrabajador.isPresent()) {
 			contratoTrabajadorService.delete(contratoTrabajador.get());

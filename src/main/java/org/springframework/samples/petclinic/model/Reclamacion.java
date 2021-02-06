@@ -2,8 +2,8 @@ package org.springframework.samples.petclinic.model;
 
 import java.time.LocalDate;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -32,7 +32,7 @@ public class Reclamacion extends BaseEntity {
     @JoinColumn(name="cliente_id")
     private Cliente cliente;
 	
-	@ManyToOne
+	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="servicio_id")
 	private Servicio servicio;
 	

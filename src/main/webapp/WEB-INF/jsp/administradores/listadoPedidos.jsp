@@ -9,13 +9,18 @@
 
 <petclinic:layout pageName="pedidos">
     <h2>Pedidos</h2>
-
+	<a href="//facturas">
+		<button type="button" class="btn btn-default btn-lg">
+  			<span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Ver Facturas
+		</button>
+	</a>
     <table id="pedidosTable" class="table table-striped">
         <thead>
         <tr>
             <th style="width: 150px;">Fecha</th>
             <th style="width: 150px;">Cantidad del producto</th>
             <th style="width: 150px;">Nombre del producto</th>
+            <th style="width: 150px;"></th>
         </tr>
             
         </thead>
@@ -30,9 +35,6 @@
                 </td>
                 <td>
                     <c:out value="${pedido.oferta.producto.name}"/>
-                </td>
-                <td>
-                    <c:out value="${pedido.factura.id}"/>
                 </td>
                 
                 <td>

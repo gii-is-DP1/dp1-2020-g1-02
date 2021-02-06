@@ -6,6 +6,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.samples.petclinic.model.Cliente;
+import org.springframework.samples.petclinic.model.ContratoTrabajador;
 import org.springframework.samples.petclinic.model.Presupuesto;
 import org.springframework.samples.petclinic.model.Servicio;
 import org.springframework.samples.petclinic.model.User;
@@ -42,6 +43,19 @@ public class ServicioController {
 		Iterable<Servicio> servicios = servicioService.findAll();
 		modelMap.addAttribute("servicios", servicios);
 		return vista;
+	}
+	
+	@GetMapping(path="/delete/{servicioId}")
+	public String borrarServicio(@PathVariable("servicioId") int servicioId, ModelMap modelmap) {
+		String view="redirect:/servicios";
+		 Optional<Servicio> s=servicioService.findServicioById(servicioId);
+		if(s.isPresent()) {
+			servicioService.delete(s.get());
+			modelmap.addAttribute("message", "Servicio borrado correctamente");
+		}else {
+			modelmap.addAttribute("message", "Servicio no encontrado");
+		}
+		return view;
 	}
 	
 	@GetMapping(path="/edit")
