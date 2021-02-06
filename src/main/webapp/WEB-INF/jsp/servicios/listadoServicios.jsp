@@ -9,7 +9,15 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <petclinic:layout pageName="servicios">
+<spring:url value="/resources/images/delete.jpg" var="delete"/>
     <h2>Servicios</h2>
+    
+    <a href="/valoraciones">
+		<button type="button" class="btn btn-default btn-lg">
+  			<span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Ver valoraciones
+		</button>
+	</a>
+ 
 	
 	
     <table id="eventsTable" class="table table-striped">
@@ -20,6 +28,11 @@
             <th style="width: 150px;">FECHAFIN</th>
             <th style="width: 150px;">TIPOCATEGORIA</th>
             <th style="width: 150px;">ESTADO</th>
+            <th style="width: 150px;"></th>
+            <th style="width: 150px;"></th>
+            <th style="width: 150px;"></th>
+            <th style="width: 150px;"></th>
+            <th style="width: 150px;"></th>
         </tr>
         </thead>
         <tbody>
@@ -41,12 +54,7 @@
                     <c:out value="${servicio.estado}"/>
                 </td>
         		
-                <td>
-                	<spring:url value="/servicios/delete/{servicioId}" var="servicioUrl">
-                		<spring:param name="servicioId" value="${servicio.id}"/>
-                	</spring:url>
-                	<a href="${fn:escapeXml(servicioUrl)}">Delete</a>
-                </td>
+               
                
                <c:if test="${servicio.estado eq 'Espera'}">
                <!--    ACEPTAR RECHAZAR SERVICIO   -->
@@ -89,6 +97,12 @@
    					 </spring:url>
    					 <a href="${fn:escapeXml(addUrl)}" class="btn btn-default">Enviar presupuesto</a>
        			 </td>
+       			  <td>
+                	<spring:url value="/servicios/delete/{servicioId}" var="servicioUrl">
+                		<spring:param name="servicioId" value="${servicio.id}"/>
+                	</spring:url>
+                	<a href="${fn:escapeXml(servicioUrl)}"><img src="${delete}" width="30px"/></a>
+                </td>
             </tr>
         </c:forEach>
         </tbody>

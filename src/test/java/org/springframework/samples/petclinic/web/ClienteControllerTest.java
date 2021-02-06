@@ -87,8 +87,8 @@ public class ClienteControllerTest {
 						.param("telefono", "692069178")
 						.param("direccion", "Calle Huertas 31")
 						.param("correo", "jcmorales2400@gmail.com"))	
-			.andExpect(status().is2xxSuccessful())
-			.andExpect(view().name("clientes/newClientes"));
+			.andExpect(status().is3xxRedirection())
+			.andExpect(view().name("redirect:/clientes"));
 	}
 	
 	@WithMockUser(value = "spring")

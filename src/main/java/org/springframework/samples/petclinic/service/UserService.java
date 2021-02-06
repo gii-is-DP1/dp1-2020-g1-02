@@ -2,7 +2,6 @@ package org.springframework.samples.petclinic.service;
 
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
@@ -27,23 +26,24 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class UserService {
 	
-	@Autowired
 	private UserRepository userRepository;
 	
-	@Autowired
-	private PasswordEncoder passwordEncoder;
+//	@Autowired
+//	private PasswordEncoder passwordEncoder;
 	
 
 	@Autowired
 	public UserService(UserRepository userRepository) {
 		this.userRepository = userRepository;
+		
 	}
 
 	@Transactional
 	public void saveUser(User user) throws DataAccessException {
 		user.setEnabled(true);
-		String pass = user.getPassword();
-		user.setPassword(passwordEncoder.encode(pass));
+//		String pass = user.getPassword();
+//		user.setPassword(passwordEncoder.encode(pass));
+//		user.setPassword(pass);
 		userRepository.save(user);
 	}
 	

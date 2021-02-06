@@ -2,8 +2,8 @@ package org.springframework.samples.petclinic.model;
 
 import java.time.LocalDate;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -21,12 +21,10 @@ import lombok.Setter;
 @Table(name = "reclamacion")
 public class Reclamacion extends BaseEntity {
 
-	@Column(name="fecha")
 	@DateTimeFormat(pattern = "yyyy/MM/dd")
 	@NotNull
 	private LocalDate fecha;
 	
-	@Column(name = "descripcion")
 	@NotEmpty
 	private String descripcion;
 	
@@ -34,7 +32,7 @@ public class Reclamacion extends BaseEntity {
     @JoinColumn(name="cliente_id")
     private Cliente cliente;
 	
-	@ManyToOne
+	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="servicio_id")
 	private Servicio servicio;
 	

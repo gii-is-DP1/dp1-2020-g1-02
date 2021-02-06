@@ -19,7 +19,7 @@ import lombok.Setter;
 @Table(name="administrador")
 public class Administrador extends PersonaEntity{
 	
-    @Column(name="tipocategoria")
+    
     @NotNull
     private TipoCategoria tipocategoria; 
     

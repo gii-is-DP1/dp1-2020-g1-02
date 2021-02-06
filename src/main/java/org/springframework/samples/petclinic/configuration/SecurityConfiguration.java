@@ -51,17 +51,21 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 			
 				.antMatchers("/administradores/**").hasAnyAuthority("administrador")
 				
+				.antMatchers("/instalaciones/misInstalaciones").hasAuthority("cliente")
+				.antMatchers("/instalaciones/new").hasAuthority("cliente")
+				.antMatchers("/instalaciones/save").hasAuthority("cliente")
+				
 				.antMatchers("/instalaciones/**").permitAll()
 				
 				.antMatchers("/horarios/misHorarios").hasAnyAuthority("trabajador")
 				
 				.antMatchers("/horarios/**").hasAnyAuthority("administrador")
 				
+				.antMatchers("/contratos").hasAnyAuthority("administrador")
+				
 				.antMatchers("/contratosServicios/misContratos").hasAuthority("cliente")
 				
 				.antMatchers("/valoraciones/misValoraciones").hasAuthority("cliente")
-				
-				.antMatchers("/instalaciones/misInstalaciones").hasAuthority("cliente")
 				
 				.antMatchers("/contratosServicios/**").hasAuthority("administrador")
 				
@@ -103,8 +107,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 				.antMatchers("/presupuestos/**").permitAll()
 				.antMatchers("/admin/**").hasAnyAuthority("admin")
-				.antMatchers("/owners/**").hasAnyAuthority("owner")				
-				.antMatchers("/vets/**").authenticated()
 				.anyRequest().denyAll()
 				.and()
 				 	.formLogin()
@@ -138,6 +140,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	public PasswordEncoder passwordEncoder() {
 	    return new BCryptPasswordEncoder();
 	}
+	
 	
 }
 

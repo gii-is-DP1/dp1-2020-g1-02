@@ -34,6 +34,7 @@
 		   <petclinic:inputField label="Fecha" name="fecha" disabled="true"/>
            <petclinic:inputField label="Asunto" name="asunto"/>
            <petclinic:inputField label="Mensaje" name="cuerpo"/> 
+           <input type="hidden" name="leido" id="leido" value="false">
            
             
         </div>

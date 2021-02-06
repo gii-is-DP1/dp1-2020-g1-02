@@ -46,5 +46,12 @@ public class Servicio extends BaseEntity {
 	
 	@OneToMany(cascade=CascadeType.ALL, mappedBy="servicio")
     private List<Presupuesto> presupuestos;
+	
+    @OneToMany(cascade=CascadeType.ALL, mappedBy="servicio")
+    private List<Reclamacion> reclamaciones;
+    
+    @OneToMany(cascade=CascadeType.ALL, mappedBy="servicio")
+    private List<Valoracion> valoraciones;
+
 
 }

@@ -4,6 +4,7 @@ import java.time.LocalDate;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -20,13 +21,11 @@ import lombok.Setter;
 @Table(name = "valoracion")
 public class Valoracion extends BaseEntity {
 	
-	@Column(name="fecha")
 	@DateTimeFormat(pattern = "yyyy/MM/dd")
 	@NotNull
 	private LocalDate fecha;
 	
 	
-	@Column(name = "nivelsatisfaccion")
 	@NotNull
 	private NivelSatisfaccion nivelsatisfaccion;
 	
@@ -34,7 +33,7 @@ public class Valoracion extends BaseEntity {
     @JoinColumn(name="cliente_id")
     private Cliente cliente;
 	
-	@ManyToOne
+	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="servicio_id")
 	private Servicio servicio;
 

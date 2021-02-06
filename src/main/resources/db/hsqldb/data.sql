@@ -6,6 +6,7 @@ INSERT INTO users(username,password,enabled) VALUES ('Capitan America','$2a$10$s
 INSERT INTO users(username,password,enabled) VALUES ('Don Limpio','$2a$10$scVXDdcGmWu8SNk/6EP/y.ox5UKp8eQoTpZTzYC6Q.Rgf0/gJW6C6',TRUE);
 INSERT INTO users(username,password,enabled) VALUES ('JosePabloSL','$2a$10$scVXDdcGmWu8SNk/6EP/y.ox5UKp8eQoTpZTzYC6Q.Rgf0/gJW6C6',TRUE);
 INSERT INTO users(username,password,enabled) VALUES ('JoseCarlos','$2a$10$scVXDdcGmWu8SNk/6EP/y.ox5UKp8eQoTpZTzYC6Q.Rgf0/gJW6C6',TRUE);
+INSERT INTO users(username,password,enabled) VALUES ('Sistema','$2a$10$scVXDdcGmWu8SNk/6EP/y.ox5UKp8eQoTpZTzYC6Q.Rgf0/gJW6C6',TRUE);
 
 INSERT INTO authorities(id,username,authority) VALUES (1,'admin','administrador');
 INSERT INTO authorities(id,username,authority) VALUES (2,'Nick Furia','cliente');
@@ -14,6 +15,7 @@ INSERT INTO authorities(id,username,authority) VALUES (4,'Capitan America','clie
 INSERT INTO authorities(id,username,authority) VALUES (5,'Don Limpio','proveedor');
 INSERT INTO authorities(id,username,authority) VALUES (6,'JosePabloSL','proveedor');
 INSERT INTO authorities(id,username,authority) VALUES (7,'JoseCarlos','trabajador');
+INSERT INTO authorities(id,username,authority) VALUES (8,'Sistema','administrador');
 
 INSERT INTO trabajador(id,nombre,apellidos,dni,telefono, direccion, correo, tipocategoria) VALUES (1,'Carlos Jesus', 'Villadiego', '78461836B','666888888','C/Garcia Marquez n2', 'calvirgar@alum.us.es', 0);
 INSERT INTO trabajador(id,nombre,apellidos,dni,telefono, direccion, correo, tipocategoria) VALUES (2,'Carlos Jesus2', 'Villadiego', '78461836B','666888888','C/Garcia Marquez n2', 'calvirgar@alum.us.es', 2);
@@ -93,6 +95,7 @@ INSERT INTO presupuesto(precio, tipopresupuesto, servicio_id, estado) VALUES (10
 
 INSERT INTO contratoservicio(fechainicial, fechafinal, fechapago, cliente,  periodoprueba, presupuesto) VALUES ('2019-10-20', '2020-12-31', '2020-12-10', 1, 0, 1);
 INSERT INTO contratoservicio(fechainicial, fechafinal, fechapago, cliente, periodoprueba, presupuesto) VALUES ('2019-10-20', '2020-12-31', '2020-12-10', 3, 1, 5);
+INSERT INTO contratoservicio(fechainicial, fechafinal, fechapago, cliente, periodoprueba, presupuesto) VALUES ('2019-10-20', '2021-02-26', '2020-12-10', 1, 0, 4);
 INSERT INTO contratoservicio(fechainicial, fechafinal, cliente, periodoprueba, presupuesto) VALUES ('2020-10-20', '2021-10-20', 2, 1, 6);
 
 INSERT INTO reclamacion(fecha, descripcion, cliente_id, servicio_id) VALUES ('2019-10-20', 'El servicio está incompleto', 1, 1);
@@ -103,8 +106,8 @@ INSERT INTO valoracion(fecha,nivelsatisfaccion, cliente_id, servicio_id) VALUES 
 
 
 
-INSERT INTO mensaje(id, fecha, asunto, cuerpo, emisor) VALUES (1, '2021-02-02', 'Hola que tal', 'Hola como estamos que tal', 'JosePabloSL');
-INSERT INTO mensaje(id, fecha, asunto, cuerpo, emisor) VALUES (2, '2021-02-02', 'Muy bien gracias', 'Genial, y tu?', 'admin');
+INSERT INTO mensaje(id, fecha, asunto, cuerpo, emisor, leido) VALUES (1, '2021-02-02', 'Hola que tal', 'Hola como estamos que tal', 'JosePabloSL', FALSE);
+INSERT INTO mensaje(id, fecha, asunto, cuerpo, emisor, leido) VALUES (2, '2021-02-02', 'Muy bien gracias', 'Genial, y tu?', 'admin', TRUE);
 
 INSERT INTO aux VALUES ('admin', 1);
 INSERT INTO aux VALUES ('JosePabloSL', 2);
