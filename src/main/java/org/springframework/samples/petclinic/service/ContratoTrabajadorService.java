@@ -57,6 +57,7 @@ public class ContratoTrabajadorService {
 		} else {
 			throw new SolapamientoFechasException();
 		}
+	}
   
 	public Iterable<ContratoTrabajador> findContratoTrabajadorByTrabajador(Integer trabajador){
 		return contratoTrabajadorRepo.contratosTrabajadorPorTrabajador(trabajador);

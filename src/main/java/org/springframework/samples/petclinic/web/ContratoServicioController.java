@@ -9,6 +9,7 @@ import org.springframework.samples.petclinic.model.Presupuesto;
 import org.springframework.samples.petclinic.service.ClienteService;
 import org.springframework.samples.petclinic.service.ContratoServicioService;
 import org.springframework.samples.petclinic.service.PresupuestoService;
+import org.springframework.samples.petclinic.service.exceptions.SolapamientoFechasException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -67,8 +68,13 @@ public class ContratoServicioController {
 			modelMap.addAttribute("contratoServicio", contratoServicio);
 			return "contratosServicios/editContratoServicio";
 		}else {
-			contratoServicioService.save(contratoServicio);
-			modelMap.addAttribute("mensaje", "Contrato del servicio añadido!");
+			try {
+				contratoServicioService.crearContrato(contratoServicio);
+				modelMap.addAttribute("mensaje", "Contrato del servicio añadido!");
+			} catch(SolapamientoFechasException e) {
+				modelMap.addAttribute("message", "El servicio ya tiene un contrato en esas fechas");
+				view = "contratosServicios/" + contratoServicio.getPresupuesto().getId() + "/new";
+			}
 		}
 		return view;
 	}
