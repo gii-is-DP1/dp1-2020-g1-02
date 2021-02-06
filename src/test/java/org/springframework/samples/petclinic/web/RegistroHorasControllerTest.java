@@ -25,13 +25,10 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.FilterType;
 import org.springframework.samples.petclinic.configuration.SecurityConfiguration;
 import org.springframework.samples.petclinic.model.Authorities;
-import org.springframework.samples.petclinic.model.Oferta;
-import org.springframework.samples.petclinic.model.Proveedor;
 import org.springframework.samples.petclinic.model.RegistroHoras;
 import org.springframework.samples.petclinic.model.TipoCategoria;
 import org.springframework.samples.petclinic.model.Trabajador;
 import org.springframework.samples.petclinic.model.User;
-import org.springframework.samples.petclinic.service.InstalacionService;
 import org.springframework.samples.petclinic.service.RegistroHorasService;
 import org.springframework.samples.petclinic.service.TrabajadorService;
 import org.springframework.samples.petclinic.service.UserService;
@@ -133,10 +130,11 @@ public class RegistroHorasControllerTest {
     void testProcessCreationFormSuccess() throws Exception {
 		mockMvc.perform(post("/registroHoras/save")
 						.with(csrf())
-						.param("hora_entrada", "LocalDateTime.of(2020, 12, 10, 10, 00)")
-						.param("hora_salida", "LocalDateTime.of(2020, 12, 10, 15, 00)"))	
+						.param("hora_entrada", "2020/12/10 10:00")
+						.param("hora_salida", "2020/12/10 15:00")
+						.param("trabajador", "1"))	
 			.andExpect(status().is2xxSuccessful())
-			.andExpect(view().name("registroHoras/newRegistroHoras"));
+			.andExpect(view().name("succesful"));
 	}
 	
 	@WithMockUser(value = "spring")
@@ -145,7 +143,8 @@ public class RegistroHorasControllerTest {
 		mockMvc.perform(post("/registroHoras/save")
 						.with(csrf())
 						.param("hora_entrada", "")
-						.param("hora_salida", "LocalDateTime.of(2020, 12, 10, 15, 00)"))
+						.param("hora_salida", "2020/12/10 15:00")
+						.param("trabajador", "1"))
 			.andExpect(status().isOk())
 			.andExpect(model().attributeHasErrors("registroHoras"))
 			.andExpect(model().attributeHasFieldErrors("registroHoras", "hora_entrada"))

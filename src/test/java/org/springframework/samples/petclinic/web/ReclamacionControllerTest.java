@@ -19,7 +19,6 @@ import java.util.Optional;
 
 import javax.persistence.EntityManager;
 
-import org.hamcrest.beans.HasProperty;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,10 +31,8 @@ import org.springframework.samples.petclinic.model.Authorities;
 import org.springframework.samples.petclinic.model.Cliente;
 import org.springframework.samples.petclinic.model.EstadoServicio;
 import org.springframework.samples.petclinic.model.Reclamacion;
-import org.springframework.samples.petclinic.model.RegistroHoras;
 import org.springframework.samples.petclinic.model.Servicio;
 import org.springframework.samples.petclinic.model.TipoCategoria;
-import org.springframework.samples.petclinic.model.Trabajador;
 import org.springframework.samples.petclinic.model.User;
 import org.springframework.samples.petclinic.service.ClienteService;
 import org.springframework.samples.petclinic.service.ReclamacionService;
@@ -147,10 +144,11 @@ public class ReclamacionControllerTest {
     void testProcessCreationFormSuccess() throws Exception {
 		mockMvc.perform(post("/reclamaciones/save")
 						.with(csrf())
-						.param("fecha", "LocalDate.of(2020, 08, 07)")
-						.param("descripcion", "El operario no estaba"))	
+						.param("fecha", "2020/08/07")
+						.param("descripcion", "El operario no estaba")
+						.param("cliente", "1"))	
 			.andExpect(status().is2xxSuccessful())
-			.andExpect(view().name("reclamaciones/newReclamacion"));
+			.andExpect(view().name("succesful"));
 	}
 	
 	@WithMockUser(value = "spring")
@@ -158,8 +156,9 @@ public class ReclamacionControllerTest {
     void testProcessCreationFormHasErrors() throws Exception {
 		mockMvc.perform(post("/reclamaciones/save")
 						.with(csrf())
-						.param("fecha", "LocalDate.of(2020, 08, 07)")
-						.param("descripcion", ""))
+						.param("fecha", "2020/08/07")
+						.param("descripcion", "")
+						.param("cliente", "1"))
 			.andExpect(status().isOk())
 			.andExpect(model().attributeHasErrors("reclamacion"))
 			.andExpect(model().attributeHasFieldErrors("reclamacion", "descripcion"))

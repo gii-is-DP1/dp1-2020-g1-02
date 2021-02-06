@@ -4,6 +4,7 @@ import java.time.LocalDate;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.samples.petclinic.model.ContratoServicio;
+import org.springframework.samples.petclinic.repository.ContratoServicioRepository;
 import org.springframework.samples.petclinic.model.ContratoTrabajador;
 import org.springframework.samples.petclinic.model.Servicio;
 import org.springframework.samples.petclinic.repository.ContratoServicioRepository;
