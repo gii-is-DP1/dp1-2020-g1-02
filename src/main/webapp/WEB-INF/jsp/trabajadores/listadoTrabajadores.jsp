@@ -88,6 +88,12 @@
                 	</spring:url>
                 	<a href="${fn:escapeXml(trabajadorUrl)}">Nuevo Contrato</a>
                 </td>
+                <td>
+                	<spring:url value="/servicios/trabajadores/{trabajadorId}" var="serviciosUrl">
+                		<spring:param name="trabajadorId" value="${trabajador.id}"/>
+                	</spring:url>
+                	<a href="${fn:escapeXml(serviciosUrl)}">Ver servicios en los que trabaja</a>
+                </td>
             </tr>
         </c:forEach>
         </tbody>

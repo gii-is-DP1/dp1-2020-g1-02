@@ -74,9 +74,19 @@
        				</form:form>
        			 </td>
        			 </c:if>
-       			 <c:if test="${servicio.estado != 'Espera'}">
+       			 <c:if test="${servicio.estado eq 'Rechazado'}">
        			 	<td>
        			 	</td>
+       			 	<td>
+       			 	</td>
+       			 </c:if>
+       			 <c:if test="${servicio.estado eq 'Aceptado'}">
+       			 	<td>
+                	<spring:url value="/trabajadores/servicio/{servicioId}" var="trabajadoresUrl">
+                		<spring:param name="servicioId" value="${servicio.id}"/>
+                	</spring:url>
+                	<a href="${fn:escapeXml(trabajadoresUrl)}">Trabajadores encargados</a>
+                </td>
        			 	<td>
        			 	</td>
        			 </c:if>

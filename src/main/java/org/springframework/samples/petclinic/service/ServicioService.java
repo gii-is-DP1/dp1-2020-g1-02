@@ -114,4 +114,8 @@ public class ServicioService {
 	public Iterable<Servicio> serviciosByCliente(Integer id){
 		return servicioRepo.serviciosByCliente(id);
 	}
+	
+	public Iterable<Servicio> findServiciosByTrabajador(Integer trabajador) {
+		return servicioRepo.serviciosByTrabajador(trabajador);
+	}
 }

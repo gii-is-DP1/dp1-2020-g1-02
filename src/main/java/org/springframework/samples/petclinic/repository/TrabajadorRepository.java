@@ -10,4 +10,7 @@ import org.springframework.samples.petclinic.model.Trabajador;
 public interface TrabajadorRepository extends CrudRepository<Trabajador, Integer> {
 	@Query("SELECT t FROM Trabajador t WHERE t.user.username = :username")
 	Optional<Trabajador> findTrabajadorByUsername(@Param("username") String username);
+	
+	@Query("SELECT s.trabajadores FROM Servicio s WHERE s.id=:servicio")
+	Iterable<Trabajador> trabajadoresByServicio(@Param("servicio") Integer servicio);
 }

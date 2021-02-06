@@ -69,4 +69,8 @@ public class TrabajadorService {
 	public void actualizarTrabajador(Trabajador trabajador) throws DataAccessException {
 		trabajadorRepo.save(trabajador);
 	}
+	
+	public Iterable<Trabajador> findTrabajadoresByServicio(Integer servicio) {
+		return trabajadorRepo.trabajadoresByServicio(servicio);
+	}
 }
