@@ -113,6 +113,12 @@ INSERT INTO aux VALUES ('admin', 1);
 INSERT INTO aux VALUES ('JosePabloSL', 2);
 INSERT INTO aux VALUES ('JoseCarlos', 2);
 
+INSERT INTO aux_ts VALUES (1, 1);
+INSERT INTO aux_ts VALUES (2, 1);
+INSERT INTO aux_ts VALUES (2, 2);
+INSERT INTO aux_ts VALUES (3, 2);
+INSERT INTO aux_ts VALUES (1, 3);
+
 
 /*-- One owner user, named owner1 with passwor 0wn3r
 INSERT INTO users(username,password,enabled) VALUES ('owner1','0wn3r',TRUE);
