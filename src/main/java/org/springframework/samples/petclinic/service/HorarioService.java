@@ -1,9 +1,18 @@
 package org.springframework.samples.petclinic.service;
 
+import java.time.LocalDateTime;
+import java.util.Iterator;
 import java.util.Optional;
+import java.util.Set;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.samples.petclinic.model.Horario;
+import org.springframework.samples.petclinic.model.Servicio;
+import org.springframework.samples.petclinic.model.Trabajador;
+import org.springframework.samples.petclinic.model.User;
 import org.springframework.samples.petclinic.repository.HorarioRepository;
+import org.springframework.samples.petclinic.service.exceptions.HorarioException;
+import org.springframework.samples.petclinic.service.exceptions.LimitePedidoException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -11,6 +20,12 @@ import org.springframework.transaction.annotation.Transactional;
 public class HorarioService {
 	@Autowired
 	private HorarioRepository horarioRepo;
+	
+	@Autowired
+	private UserService userService;
+	
+	@Autowired
+	private TrabajadorService trabajadorService;
 	
 	@Transactional(readOnly=true)
 	public int horarioCount() {
@@ -46,6 +61,35 @@ public class HorarioService {
 	@Transactional(readOnly=true)
 	public Iterable<Horario> findHorarioByTrabajadorId(Integer id) {
 		return horarioRepo.findHorariosByTrabajadorId(id);
+	}
+	
+	public Integer findHorasSolapadas(Trabajador trabajador, Horario horario) {
+		return horarioRepo.findHorasSolapadas(trabajador.getId(), horario.getHora_inicio(), horario.getHora_fin());
+	}
+	
+	
+//	public boolean cumpleNoEsLaMismaHora(Horario horario, Trabajador trabajador) {
+//		Boolean res = false;
+//		Set<Horario> horariosTrabajador = trabajador.getHorarios();
+//		Iterator<Horario> iterador = horariosTrabajador.iterator();
+//		while(iterador.hasNext()) {
+//			LocalDateTime h1 = iterador.next().getHora_inicio();
+//			LocalDateTime h2 = iterador.next().getHora_fin();
+//			if() {
+//				res = true;
+//			}
+//		}
+//		return res;
+//	}
+	
+	@Transactional(rollbackFor = HorarioException.class)
+	public void crearHorario(Horario horario, Trabajador trabajador) throws HorarioException {
+		if(this.findHorasSolapadas(trabajador, horario) == 0) {
+			horario.setTrabajador(trabajador);
+			this.save(horario);
+		} else {
+			throw new HorarioException();
+		}
 	}
 	
 	

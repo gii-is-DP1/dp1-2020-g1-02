@@ -15,7 +15,6 @@ import javax.persistence.Transient;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 
-import org.springframework.samples.petclinic.web.Password;
 
 import lombok.Data;
 import lombok.Getter;

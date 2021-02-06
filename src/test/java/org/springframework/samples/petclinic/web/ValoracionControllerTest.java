@@ -1,5 +1,8 @@
 package org.springframework.samples.petclinic.web;
 
+import static org.hamcrest.Matchers.hasProperty;
+import static org.hamcrest.Matchers.is;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -13,6 +16,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import javax.persistence.EntityManager;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,10 +26,18 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.FilterType;
 import org.springframework.samples.petclinic.configuration.SecurityConfiguration;
+import org.springframework.samples.petclinic.model.Authorities;
+import org.springframework.samples.petclinic.model.Cliente;
+import org.springframework.samples.petclinic.model.EstadoServicio;
+import org.springframework.samples.petclinic.model.Instalacion;
 import org.springframework.samples.petclinic.model.NivelSatisfaccion;
+import org.springframework.samples.petclinic.model.Servicio;
+import org.springframework.samples.petclinic.model.TipoCategoria;
+import org.springframework.samples.petclinic.model.User;
 import org.springframework.samples.petclinic.model.Valoracion;
 import org.springframework.samples.petclinic.service.ClienteService;
 import org.springframework.samples.petclinic.service.ServicioService;
+import org.springframework.samples.petclinic.service.UserService;
 import org.springframework.samples.petclinic.service.ValoracionService;
 import org.springframework.security.config.annotation.web.WebSecurityConfigurer;
 import org.springframework.security.test.context.support.WithMockUser;
@@ -49,7 +62,17 @@ public class ValoracionControllerTest {
 	@MockBean
 	private ServicioService servicioService;
 	
+	@MockBean
+	private UserService userService;
+	
+	@MockBean
+	private EntityManager entityManager;
+	
 	private Valoracion valoracion;
+	private User user;
+	private Authorities authority;
+	private Cliente cliente;
+	private Servicio servicio;
 	
 	@BeforeEach
 	void setup() {
@@ -59,7 +82,41 @@ public class ValoracionControllerTest {
 		valoracion.setFecha(LocalDate.of(2019, 05, 15));
 		valoracion.setNivelsatisfaccion(NivelSatisfaccion.Medio);
 		
+		authority = new Authorities();
+		user = new User();
+		authority.setAuthority("cliente");
+		authority.setId(1);
+		user.setUsername("JoseCarlos");
+		authority.setUser(user);
+		user.setAuthorities(authority);
+		user.setPassword("admin");
+		
+		cliente = new Cliente();
+		cliente.setId(1);
+		cliente.setUser(user);
+		cliente.setDni("53985965D");
+		cliente.setNombre("Pablo");
+		cliente.setApellidos("Gonzalez");
+		cliente.setTelefono("633444555");
+		cliente.setDireccion("Calle Ave");
+		cliente.setCorreo("pablog@gmail.com");
+		
+		servicio = new Servicio();
+		servicio.setId(1);
+		servicio.setLugar("Acuario de Sevilla");
+		servicio.setTipocategoria(TipoCategoria.Cristaleria);
+		servicio.setEstado(EstadoServicio.Aceptado);
+		servicio.setFechainicio(LocalDate.of(2020, 12, 31));
+		servicio.setFechafin(LocalDate.of(2021, 01, 12));
+		
 		given(this.valoracionService.findValoracionById(1)).willReturn(Optional.of(valoracion));
+		given(this.clienteService.findClienteById(1)).willReturn(Optional.of(cliente));
+		given(this.entityManager.find(Valoracion.class, 1)).willReturn(valoracion);
+		given(this.entityManager.find(Cliente.class, 1)).willReturn(cliente);
+		given(this.servicioService.findServicioById(1)).willReturn(Optional.of(servicio));
+		
+		given(this.clienteService.findClienteByUsername(any())).willReturn(Optional.of(cliente));
+		given(this.userService.getLoggedUser()).willReturn(user);
 		
 		List<Valoracion> valoraciones = new ArrayList<Valoracion>();
 		valoraciones.add(valoracion);
@@ -69,7 +126,10 @@ public class ValoracionControllerTest {
 	@WithMockUser(value = "spring")
 	@Test
 	void testEditValoracion() throws Exception{
-		mockMvc.perform(get("/valoraciones/new")).andExpect(status().isOk()).andExpect(model().attributeExists("valoracion"))
+		mockMvc.perform(get("/valoraciones/new/{oId}",1))
+		.andExpect(status().isOk())
+		.andExpect(model().attributeExists("valoracion"))
+		.andExpect(model().attribute("valoracion", hasProperty("servicio", is(servicio))))
 		.andExpect(view().name("valoraciones/newValoracion"));
 	}
 	
@@ -87,10 +147,12 @@ public class ValoracionControllerTest {
     void testProcessCreationFormSuccess() throws Exception {
 		mockMvc.perform(post("/valoraciones/save")
 						.with(csrf())
-						.param("fecha", "LocalDate.of(2020, 04, 09)")
-						.param("nivel_satisfaccion", "NivelSatisfaccion.Bajo"))	
+						.param("fecha", "2020/04/09")
+						.param("nivelsatisfaccion", "Bajo")
+						.param("cliente", "1")
+						.param("servicio", "1"))	
 			.andExpect(status().is2xxSuccessful())
-			.andExpect(view().name("valoraciones/newValoracion"));
+			.andExpect(view().name("succesful"));
 	}
 	
 	@WithMockUser(value = "spring")
