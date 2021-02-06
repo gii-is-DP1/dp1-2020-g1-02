@@ -33,14 +33,14 @@
         </div>
         <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
-                <c:choose>
+                <%-- <c:choose>
                     <c:when test="${proveedor['new']}">
                         <button class="btn btn-default" type="submit">Añadir Proveedor</button>
                     </c:when>
                     <c:otherwise>
                         <button class="btn btn-default" type="submit">Actualizar Proveedor</button>
                     </c:otherwise>
-                </c:choose>
+                </c:choose> --%>
 				<button class="btn btn-default" type="submit" onclick="return Validate()">Añadir Proveedor</button>
             </div>
         </div>
