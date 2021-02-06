@@ -31,6 +31,7 @@ public class HorarioController {
 	
 	@Autowired
 	private TrabajadorService trabajadorService;
+	
 	@Autowired
 	private UserService userService;
 	
@@ -52,26 +53,35 @@ public class HorarioController {
 		return vista;
 	}
 	
+	@GetMapping(value="/{trabajadorId}")
+	public String horariosByTrabajador(@PathVariable("trabajadorId") Integer trabajadorId, ModelMap modelMap) {
+		String vista = "horarios/listadoHorariosPorTrabajador";
+		Iterable<Horario> horarios = horarioService.findHorarioByTrabajadorId(trabajadorId);
+		Trabajador t=trabajadorService.findTrabajadorById(trabajadorId).get();
+		String trabajador=t.getNombre() + " " + t.getApellidos();
+		modelMap.addAttribute("horarios", horarios);
+		modelMap.addAttribute("trabajador", trabajador);
+		return vista;
+	}
 	
-	@GetMapping(path="/new")
-	public String crearHorario(ModelMap modelMap) {
+	
+	@GetMapping(path="/new/{trabajadorId}")
+	public String crearHorario(@PathVariable("trabajadorId") Integer trabajadorId,ModelMap modelMap) {
 		String view="horarios/newHorario";
-		Iterable<Trabajador> trabajadores = trabajadorService.findAll();
-		modelMap.addAttribute("trabajadores", trabajadorService.getNombres());
+		modelMap.addAttribute("trabajador",trabajadorId);
 		modelMap.addAttribute("horario", new Horario());
 		return view;
 	}
 	
 	@PostMapping(path="/save")
 	public String salvarHorario(@Valid Horario horario, BindingResult result,ModelMap modelMap) {
-		String view="redirect:/horarios";
+		String view="redirect:/horarios/" + horario.getTrabajador().getId();
 		if(result.hasErrors()) {
 			modelMap.addAttribute("horario", horario);
 			return "horarios/newHorario";
 		}else {
 			try {
-				Trabajador trabajador = horario.getTrabajador();
-				horarioService.crearHorario(horario, trabajador);
+				horarioService.crearHorario(horario);
 				return view;
 			} catch (SolapamientoFechasException e) {
 				modelMap.addAttribute("horario", horario);
