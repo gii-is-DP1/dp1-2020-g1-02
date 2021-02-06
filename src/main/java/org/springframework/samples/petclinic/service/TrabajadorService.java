@@ -74,7 +74,8 @@ public class TrabajadorService {
 
 	public Iterable<Trabajador> findTrabajadoresByServicio(Integer servicio) {
 		return trabajadorRepo.trabajadoresByServicio(servicio);
-
+	}
+	
 	@Transactional
 	public List<String> getNombres(){
 		return trabajadorRepo.findAllNames();
