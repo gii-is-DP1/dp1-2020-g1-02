@@ -67,4 +67,12 @@ public class ContratoTrabajadorController {
 		}
 		return view;
 	}
+	
+	@GetMapping(path="/{trabajadorId}")
+	public String contratosByTrabajador(@PathVariable("trabajadorId") Integer tId, ModelMap modelMap) {
+		String view="contratosTrabajadores/contratosByTrabajador";
+		Iterable<ContratoTrabajador> contratos=contratoTrabajadorService.findContratoTrabajadorByTrabajador(tId);
+		modelMap.addAttribute("contratos", contratos);
+		return view;
+	}
 }
