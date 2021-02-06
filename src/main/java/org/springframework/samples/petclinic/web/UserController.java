@@ -1,7 +1,11 @@
 package org.springframework.samples.petclinic.web;
 
+import java.security.Principal;
 import java.util.Collection;
+import java.util.Locale;
+import java.util.Optional;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +22,8 @@ import org.springframework.samples.petclinic.service.UserService;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -26,6 +32,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequestMapping("/users")
@@ -78,6 +85,33 @@ public class UserController {
 		Trabajador trabajador = new Trabajador();
 		modelMap.addAttribute("trabajador", trabajador);
 		return vista;
+	}
+	
+	@GetMapping("/editContrasenya")
+	public String editContrasenya(Principal principal, ModelMap modelMap) {
+		String vista ="users/editContrasenya";
+		Optional<User> user = this.userService.findUser(principal.getName());
+		if(user.isEmpty()) {
+			throw new UsernameNotFoundException("No has iniciado sesión");
+		}
+		modelMap.addAttribute("actualPass", user.get().getPassword());
+		return vista;
+	}
+	
+	@PostMapping("/updatePassword")
+	public String changeUserPassword(Locale locale, 
+	  @RequestParam("password") String password, @RequestParam("oldpassword") String oldPassword) {
+	    User user = userService.findUser(
+	      SecurityContextHolder.getContext().getAuthentication().getName()).get();
+	    
+	    BCryptPasswordEncoder b = new BCryptPasswordEncoder();
+	    
+	    if (!b.matches(oldPassword, user.getPassword())) {
+	        throw new IllegalAccessError();
+	    }
+	    user.setPassword(password);
+	    userService.saveUser(user);
+	    return "redirect:/";
 	}
 	
 	@PostMapping(path="/saveCliente")
