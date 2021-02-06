@@ -14,6 +14,8 @@ import org.springframework.samples.petclinic.service.ClienteService;
 import org.springframework.samples.petclinic.service.PresupuestoService;
 import org.springframework.samples.petclinic.service.ServicioService;
 import org.springframework.samples.petclinic.service.UserService;
+import org.springframework.samples.petclinic.service.exceptions.PresupuestoYaAceptadoException;
+import org.springframework.samples.petclinic.service.exceptions.ServicioNoAceptadoException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -144,17 +146,20 @@ public class ServicioController {
 	@PostMapping(path="/presupuestos/save")
 	public String salvarPresupuesto(@Valid Presupuesto presupuesto, BindingResult result, ModelMap modelMap) {
 		String view = "redirect:/servicios/"  + presupuesto.getServicio().getId() + "/presupuestos";
-		Integer a=presupuestoService.numeroPresupuestosByServicioConEstadoAceptado(presupuesto.getServicio().getId());
 		if(result.hasErrors()) {
 			modelMap.addAttribute("presupuesto", presupuesto);
 			return "presupuestos/editPresupuesto";
 		}else {
-			if(a>0) {
-				modelMap.addAttribute("message", "No se enviar presupuesto a un servicio que ya tiene un presupuesto aceptado");
-				view="redirect:/error";
-			}else {
-			presupuestoService.save(presupuesto);
-			modelMap.addAttribute("message", "Presupuesto actualizado!!");
+			try {
+				presupuestoService.presupuestoYaAceptado(presupuesto);
+				presupuestoService.servicioNoAceptado(presupuesto);
+				modelMap.addAttribute("message", "Presupuesto actualizado!!");
+			} catch(PresupuestoYaAceptadoException e) {
+				modelMap.addAttribute("message", "No se puede enviar un presupuesto a un servicio que ya tiene un presupuesto aceptado");
+				view="/exception";
+			} catch(ServicioNoAceptadoException e) {
+				modelMap.addAttribute("message", "No se puede enviar un presupuesto a un servicio que no está aceptado");
+				view="/exception";
 			}
 		}
 		return view;
