@@ -17,8 +17,6 @@
   			<span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Ver valoraciones
 		</button>
 	</a>
- 
-	
 	
     <table id="eventsTable" class="table table-striped">
         <thead>
@@ -101,12 +99,18 @@
        			
                 <!-- AÑADIR BOTON PARA CREAR PRESUPUESTO  -->
                 
+                <c:if test="${servicio.estado eq 'Aceptado' }">
                 <td>
        				<spring:url value="servicios/{servicioId}/presupuestos/new" var="addUrl">
       				  <spring:param name="servicioId" value="${servicio.id}"/>
    					 </spring:url>
    					 <a href="${fn:escapeXml(addUrl)}" class="btn btn-default">Enviar presupuesto</a>
        			 </td>
+       			 </c:if>
+       			 <c:if test="${servicio.estado != 'Aceptado' }">
+       			 <td>
+       			 </td>
+       			 </c:if>
        			  <td>
                 	<spring:url value="/servicios/delete/{servicioId}" var="servicioUrl">
                 		<spring:param name="servicioId" value="${servicio.id}"/>

@@ -11,6 +11,7 @@ import org.springframework.samples.petclinic.model.User;
 import org.springframework.samples.petclinic.service.HorarioService;
 import org.springframework.samples.petclinic.service.TrabajadorService;
 import org.springframework.samples.petclinic.service.UserService;
+import org.springframework.samples.petclinic.service.exceptions.HorarioException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -56,26 +57,28 @@ public class HorarioController {
 	public String crearHorario(ModelMap modelMap) {
 		String view="horarios/newHorario";
 		Iterable<Trabajador> trabajadores = trabajadorService.findAll();
-		modelMap.addAttribute("trabajadores", trabajadores);
-		modelMap.addAttribute("horarios", new Horario());
+		modelMap.addAttribute("trabajadores", trabajadorService.getNombres());
+		modelMap.addAttribute("horario", new Horario());
 		return view;
 	}
 	
 	@PostMapping(path="/save")
 	public String salvarHorario(@Valid Horario horario, BindingResult result,ModelMap modelMap) {
-		String view="redirect:/horarios/misHorarios";
+		String view="redirect:/horarios";
 		if(result.hasErrors()) {
-			modelMap.addAttribute("horarios", horario);
+			modelMap.addAttribute("horario", horario);
 			return "horarios/newHorario";
 		}else {
-			User user = userService.getLoggedUser();
-			Trabajador trabajador = trabajadorService.findTrabajadorByUsername(user.getUsername()).get();
-			horario.setTrabajador(trabajador);
-			
-			horarioService.save(horario);
-			modelMap.addAttribute("message", "Horario actualizado!");
+			try {
+				Trabajador trabajador = horario.getTrabajador();
+				horarioService.crearHorario(horario, trabajador);
+				return view;
+			} catch (HorarioException e) {
+				modelMap.addAttribute("horario", horario);
+				modelMap.addAttribute("error", "Las horas se solapan");
+				return  "horarios/newHorario";
+			}
 		}
-		return view;
 	}
 	
 	@GetMapping(path="/delete/{horarioId}")

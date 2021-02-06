@@ -6,11 +6,15 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.CrudRepository;
 import org.springframework.samples.petclinic.model.EstadoServicio;
 import org.springframework.samples.petclinic.model.Mensaje;
 import org.springframework.samples.petclinic.model.Presupuesto;
 import org.springframework.samples.petclinic.model.User;
 import org.springframework.samples.petclinic.repository.PresupuestoRepository;
+import org.springframework.samples.petclinic.service.exceptions.LimitePedidoException;
+import org.springframework.samples.petclinic.service.exceptions.PresupuestoYaAceptadoException;
+import org.springframework.samples.petclinic.service.exceptions.ServicioNoAceptadoException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -94,6 +98,26 @@ public class PresupuestoService {
 	
 	public Integer numeroPresupuestosByServicioConEstadoAceptado(Integer id) {
 		return presupuestoRepo.numeroPresupuestosByServicioConEstadoAceptado(id);
+	}
+	
+	@Transactional(rollbackFor = PresupuestoYaAceptadoException.class)
+	public void presupuestoYaAceptado(Presupuesto presupuesto) throws PresupuestoYaAceptadoException {
+		Integer a=presupuestoRepo.numeroPresupuestosByServicioConEstadoAceptado(presupuesto.getServicio().getId());
+		boolean b = a > 0;
+		if(b == false) {
+			this.save(presupuesto);
+		} else {
+			throw new PresupuestoYaAceptadoException();
+		}
+	}
+	
+	@Transactional(rollbackFor = ServicioNoAceptadoException.class)
+	public void servicioNoAceptado(Presupuesto presupuesto) throws ServicioNoAceptadoException {
+		if(presupuesto.getServicio().getEstado() == EstadoServicio.Aceptado) {
+			this.save(presupuesto);
+		} else {
+			throw new ServicioNoAceptadoException();
+		}
 	}
 
 }
