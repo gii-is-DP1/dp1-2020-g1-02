@@ -68,7 +68,7 @@ public class HorarioControllerTest {
 	@WithMockUser(value = "spring")
 	@Test
 	void testEditHorario() throws Exception{
-		mockMvc.perform(get("/horarios/new")).andExpect(status().isOk()).andExpect(model().attributeExists("horarios"))
+		mockMvc.perform(get("/horarios/new")).andExpect(status().isOk()).andExpect(model().attributeExists("horario"))
 		.andExpect(view().name("horarios/newHorario"));
 	}
 	

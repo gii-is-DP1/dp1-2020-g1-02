@@ -52,6 +52,10 @@ private static final String REQUIRED = "required";
 		if (hora_salida == null || !Pattern.matches("yyyy/MM/dd HH:mm", hora_salida.format(DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm")))) {
 			errors.rejectValue("hora_salida", REQUIRED + " debe tener 4 dígitos el año, 2 dígitos el mes, 2 dígitos el día y estar separados por barra. También debe de tener 2 dígitos la hora, 2 dígitos el minuto y estar separados por 2 puntos", REQUIRED + " debe tener 4 dígitos el año, 2 dígitos el mes, 2 dígitos el día y estar separados por barra. También debe de tener 2 dígitos la hora, 2 dígitos el minuto y estar separados por 2 puntos");
 		}
+		
+		if (hora_salida.isBefore(hora_entrada)) {
+			errors.rejectValue("La hora de salida no puede ser antes que la hora de entrada", REQUIRED);
+		}
 
 	}
 	

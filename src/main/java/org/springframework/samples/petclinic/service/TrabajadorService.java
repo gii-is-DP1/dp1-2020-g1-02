@@ -9,7 +9,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.samples.petclinic.model.Horario;
 import org.springframework.samples.petclinic.model.Trabajador;
 import org.springframework.samples.petclinic.repository.TrabajadorRepository;
-import org.springframework.samples.petclinic.service.exceptions.HorarioServicioException;
+import org.springframework.samples.petclinic.service.exceptions.HorarioException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
