@@ -20,6 +20,8 @@ PetClinic :: a Spring Framework demonstration
       <link rel="stylesheet" href="/resources/css/bootstrap.min.css">
       <!-- style css -->
       <link rel="stylesheet" href="/resources/css/style.css">
+      <!-- pass css -->
+      <link rel="stylesheet" href="/resources/css/password.css">
       <!-- Responsive-->
       <link rel="stylesheet" href="/resources/css/responsive.css">
       <!-- fevicon -->
