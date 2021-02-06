@@ -2,6 +2,7 @@ package org.springframework.samples.petclinic.service;
 
 import java.time.LocalDateTime;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -68,5 +69,11 @@ public class TrabajadorService {
 	@Transactional
 	public void actualizarTrabajador(Trabajador trabajador) throws DataAccessException {
 		trabajadorRepo.save(trabajador);
+	}
+	
+	@Transactional
+	public List<String> getNombres(){
+		return trabajadorRepo.findAllNames();
+		
 	}
 }

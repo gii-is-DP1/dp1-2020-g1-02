@@ -7,20 +7,21 @@
 <%@ taglib prefix="petclinic" tagdir="/WEB-INF/tags" %>
 
 <petclinic:layout pageName="horario">
+	<jsp:attribute name="customScript">
+        <script>
+	            $(function () {
+                $("#hora_inicio").datepicker({dateFormat: 'yy/mm/dd HH:mm'});
+                $("#hora_fin").datepicker({dateFormat: 'yy/mm/dd HH:mm'});
+            }); 
+            
+        </script>
+    </jsp:attribute>
+    <jsp:body> 
     <h2>
         <c:if test="${horarios['new']}">Nuevo </c:if> Horario
     </h2>
     <form:form modelAttribute="horario" class="form-horizontal" id="add-cliente-form" action="/horarios/save">
         <div class="form-group has-feedback">
-       	    <%-- <label for="trabajador">Nombre del trabajador</label>
-  				<select id="trabajador" name="trabajador">
-  				<c:forEach items="${trabajadores}" var="trabajador">
-		            <tr>
-		                <td>
-		                   <option><c:out value="${trabajador.nombre}"/></option>
-		            </tr>
-		        </c:forEach>
-  				</select> --%>
   			<petclinic:selectField label="Nombre Trabajador" name="trabajador" size="${size}" names="${trabajadores}"></petclinic:selectField>
             <petclinic:inputField label="HoraInicio" name="hora_inicio"/>
             <petclinic:inputField label="HoraFin" name="hora_fin"/>
@@ -32,7 +33,8 @@
 	                </div>
 	            </div>
     </form:form>
-    
     <h3><c:out value="${error}"/></h3>
+   </jsp:body>   
+    
     
 </petclinic:layout>
