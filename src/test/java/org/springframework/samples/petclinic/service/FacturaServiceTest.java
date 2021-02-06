@@ -8,6 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import java.time.LocalDate;
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
@@ -15,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.samples.petclinic.model.Factura;
+import org.springframework.samples.petclinic.model.Oferta;
 import org.springframework.samples.petclinic.model.Pedido;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -31,6 +33,8 @@ public class FacturaServiceTest {
 	private PedidoService pedidoService;
 	@Autowired
 	private UserService userService;
+	@Autowired
+	private OfertaService ofertaService;
 	
 	//Test positivos
 	
@@ -42,44 +46,41 @@ public class FacturaServiceTest {
 	
 	@Test
 	public void testFindFacturaById() {
-		Factura facturaFind = facturaService.findFacturaById(1).get();
-		assertEquals(Factura.class, facturaFind.getClass());
+		Factura facturaFind = facturaService.findFacturaById(2).get();
+		assertEquals(137.89, facturaFind.getPrecio_total());
 	}
 	
-
-	@Test
-	@Transactional
-	public void testSaveFactura() {
-		Factura facturaNew = new Factura();
-		facturaNew.setFecha(LocalDate.now());
-		facturaNew.setPrecio_total(50.0);
-//		facturaNew.setProveedor(proveedorService.findProveedorById(2).get());
-//		
-		Pedido ped = new Pedido();
-		ped.setFechaPedido(LocalDate.now());
-		pedidoService.save(ped);
-		facturaNew.setPedido(ped);;
-
-		facturaService.save(facturaNew);
-		
-		Integer cantidad = facturaService.facturaCount();
-		
-		assertEquals(4, cantidad);
-	}
-	
-	
+//	@Test
+//	@Transactional
+//	public void testCreaFactura() {
+//		Oferta o = ofertaService.findOfertaById(1).get();
+//		Pedido p = new Pedido();
+//		p.setId(1);
+//		p.setFechaPedido(LocalDate.now());
+//		p.setCantidadProducto(7);
+//		p.setOferta(o);
+//		facturaService.creaFactura(p);
+//		Double precioTotal = Double.parseDouble(p.getOferta().getPrecioU()) * p.getCantidadProducto();
+//		assertEquals(precioTotal, 17.5);
+//	}
 
 	@Test
 	public void testFindAllFacturasByProveedor() {
 		Collection<Factura> facturasIT = facturaService.findFacturaByProveedorName("Lejias");
-		assertEquals(2, facturasIT.size());
+		assertEquals(1, facturasIT.size());
 	}
 	
 	@Test
 	@Transactional
-	public void deleteFacturaById() {
+	public void testDeleteFacturaById() {
 		facturaService.deleteById(1);
 		assertEquals(false, facturaService.findFacturaById(1).isPresent());
+	}
+	
+	@Test
+	public void testFindAll() {
+		List<Factura> facturas = (List<Factura>) facturaService.findAll();
+		assertEquals(facturaService.facturaCount(), facturas.size());
 	}
 	
 	//Test negativos
@@ -90,13 +91,10 @@ public class FacturaServiceTest {
 		assertEquals(false, facturaFind.isPresent());
 	}
 	
-//	@Test
-//	public void testNotFindAllFacturasByProveedor() {
-//		Iterable<Factura> facturaFind = facturaService.findFacturaByProveedorId(50);
-//		Iterator<Factura> iterador = facturaFind.iterator();
-//		int cont = 0;
-//		while(iterador.hasNext()) cont++;
-//		assertEquals(0, cont);
-//	}
+	@Test
+	public void testNotFindAllFacturasByProveedor() {
+		Collection<Factura> facturaFind = facturaService.findFacturaByProveedorName("pepino");
+		assertEquals(true, facturaFind.isEmpty());
+	}
 	
 }

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.samples.petclinic.model.Oferta;
 import org.springframework.samples.petclinic.model.Producto;
 import org.springframework.samples.petclinic.repository.OfertaRepository;
+import org.springframework.samples.petclinic.service.exceptions.LimiteOfertaException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -14,6 +15,8 @@ public class OfertaService {
 
 	@Autowired
 	private OfertaRepository ofertaRepo;
+	@Autowired
+	private ProductoService productoService;
 	
 	@Transactional(readOnly=true)
 	public int ofertasCount() {
@@ -40,6 +43,24 @@ public class OfertaService {
 	@Transactional(readOnly=true)
 	public Optional<Oferta> findOfertaById(Integer id) {
 		return ofertaRepo.findById(id);
+	}
+	
+	public boolean ofertaMayor65(Oferta o) {
+		boolean b = true;
+		Double precio = Double.valueOf(o.getPrecioU());
+		if(precio > 65) b = false;
+		return b;
+	}
+	
+	@Transactional(rollbackFor = LimiteOfertaException.class)
+	public void crearOferta(Oferta o) throws LimiteOfertaException {
+		if(this.ofertaMayor65(o)) {
+			Optional<Producto> producto = productoService.findByName(o.getName());
+			o.setProducto(producto.get());
+			this.save(o);
+		} else {
+			throw new LimiteOfertaException();
+		}
 	}
 
 }
