@@ -24,10 +24,6 @@ public class ContratoServicio extends Contrato {
 	@DateTimeFormat(pattern = "yyyy/MM/dd")
 	private LocalDate fechapago;
 	
-	@ManyToOne
-	@JoinColumn(name="cliente")
-	private Cliente cliente;
-	
 	@Column(name="periodoprueba")
 	@NotNull
 	private Boolean periodoPrueba;

@@ -7,6 +7,8 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="petclinic" tagdir="/WEB-INF/tags" %>
 
+<spring:url value="/resources/images/delete.jpg" var="delete"/>
+
 <petclinic:layout pageName="clientes">
     <h2>Clientes</h2>
 
@@ -52,7 +54,7 @@
                 	<spring:url value="/clientes/delete/{clienteId}" var="clienteUrl">
                 		<spring:param name="clienteId" value="${cliente.id}"/>
                 	</spring:url>
-                	<a href="${fn:escapeXml(clienteUrl)}">Delete</a>
+                	<a href="${fn:escapeXml(clienteUrl)}"><img src="${delete}" width="30px"/></a>
                 </td>
             </tr>
         </c:forEach>

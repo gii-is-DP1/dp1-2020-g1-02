@@ -24,7 +24,6 @@
        			<petclinic:inputField label="Fecha Pago" name="fechapago"/>
  				<input type="hidden" name="periodoPrueba" value="False"/>
        			<input type="hidden" name="presupuesto" value=' <c:out value="${contratoServicio.presupuesto.id}"/>'>
-       			<input type="hidden" name="cliente" value=' <c:out value="${contratoServicio.presupuesto.servicio.cliente.id}"/>'>
        			
        		</div>
             <div class="form-group">
