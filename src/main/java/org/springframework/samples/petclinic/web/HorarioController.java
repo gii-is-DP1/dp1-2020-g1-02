@@ -11,7 +11,7 @@ import org.springframework.samples.petclinic.model.User;
 import org.springframework.samples.petclinic.service.HorarioService;
 import org.springframework.samples.petclinic.service.TrabajadorService;
 import org.springframework.samples.petclinic.service.UserService;
-import org.springframework.samples.petclinic.service.exceptions.HorarioException;
+import org.springframework.samples.petclinic.service.exceptions.SolapamientoFechasException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -73,7 +73,7 @@ public class HorarioController {
 				Trabajador trabajador = horario.getTrabajador();
 				horarioService.crearHorario(horario, trabajador);
 				return view;
-			} catch (HorarioException e) {
+			} catch (SolapamientoFechasException e) {
 				modelMap.addAttribute("horario", horario);
 				modelMap.addAttribute("error", "Las horas se solapan");
 				return  "horarios/newHorario";

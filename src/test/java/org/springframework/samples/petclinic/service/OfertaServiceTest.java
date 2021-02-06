@@ -37,7 +37,7 @@ public class OfertaServiceTest {
 	public void testGuardarOferta() {
 		Oferta ofertaGuardar = new Oferta();
 		ofertaGuardar.setName("lejia");
-		ofertaGuardar.setPrecioU("2.85");
+		ofertaGuardar.setPrecioU(2.85);
 		ofertaService.save(ofertaGuardar);
 		int count = ofertaService.ofertasCount();
 		assertEquals(count, 3);

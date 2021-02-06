@@ -32,7 +32,7 @@ public class PedidoServiceTest {
 	void setup() {
 		
 		Oferta o = new Oferta();
-		o.setPrecioU("20.0");
+		o.setPrecioU(20.0);
 		o.setProducto(productoService.findProductoById(2).get());
 		Pedido ped = new Pedido();
 		ped.setOferta(o);

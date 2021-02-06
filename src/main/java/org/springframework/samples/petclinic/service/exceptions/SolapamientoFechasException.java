@@ -1,6 +1,6 @@
 package org.springframework.samples.petclinic.service.exceptions;
 
-public class HorarioException extends Exception{
+public class SolapamientoFechasException extends Exception{
 	
 	/**
 	 * 

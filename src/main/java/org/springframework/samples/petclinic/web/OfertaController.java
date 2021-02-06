@@ -1,6 +1,5 @@
 package org.springframework.samples.petclinic.web;
 
-import java.util.List;
 import java.util.Optional;
 
 import javax.validation.Valid;
@@ -14,7 +13,6 @@ import org.springframework.samples.petclinic.service.OfertaService;
 import org.springframework.samples.petclinic.service.ProductoService;
 import org.springframework.samples.petclinic.service.ProveedorService;
 import org.springframework.samples.petclinic.service.UserService;
-import org.springframework.samples.petclinic.service.exceptions.LimiteOfertaException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -66,21 +64,17 @@ public class OfertaController {
 		String view="succesful";
 		if(result.hasErrors()) {
 			modelMap.addAttribute("oferta", oferta);
+			Proveedor prov = proveedorService.findProveedorByUsername(userService.getLoggedUser().getUsername()).get();
+			modelMap.addAttribute("proveedor", prov);
+			modelMap.addAttribute("productos", productoService.getNombres());
+			modelMap.addAttribute("size", productoService.productCount());
 			return "ofertas/editOferta";
 		}else {
-			try {
-				ofertaService.crearOferta(oferta);
-				modelMap.addAttribute("message", "Oferta añadida!");
-				return view;
-			} catch(LimiteOfertaException e) {
-        		modelMap.addAttribute("oferta", oferta);
-    			Proveedor prov = proveedorService.findProveedorByUsername(userService.getLoggedUser().getUsername()).get();
-    			modelMap.addAttribute("proveedor", prov);
-    			modelMap.addAttribute("productos", productoService.getNombres());
-    			modelMap.addAttribute("size", productoService.productCount());
-        		modelMap.addAttribute("error", "El precio de la oferta no puede superar 65 euros.");
-        		return "ofertas/editOferta";
-			}
+			Optional<Producto> producto = productoService.findByName(oferta.getName());
+			oferta.setProducto(producto.get());
+			ofertaService.save(oferta);
+			modelMap.addAttribute("message", "Oferta añadida!");
+			return view;
 		}
 	}
 	
