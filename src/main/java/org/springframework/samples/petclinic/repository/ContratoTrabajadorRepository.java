@@ -10,4 +10,7 @@ public interface ContratoTrabajadorRepository extends CrudRepository<ContratoTra
 	
 	@Query("SELECT s FROM ContratoTrabajador s WHERE day(s.fechafinal) >= :dia and month(s.fechafinal) = :mes and year(s.fechafinal) = :anyo")
 	Iterable<ContratoTrabajador> contratosTrabajadorQueCaducanEsteMes(@Param("dia") int dia, @Param("mes") int mes, @Param("anyo") int anyo) throws DataAccessException;
+	
+	@Query("SELECT c FROM ContratoTrabajador c WHERE c.trabajador.id=:trabajador")
+	Iterable<ContratoTrabajador> contratosTrabajadorPorTrabajador(@Param("trabajador") Integer trabajador) throws DataAccessException;;
 }

@@ -44,6 +44,10 @@ public class ContratoTrabajadorService {
 		LocalDate now = LocalDate.now();
 		return contratoTrabajadorRepo.contratosTrabajadorQueCaducanEsteMes(now.getDayOfMonth(), now.getMonthValue(), now.getYear());
 	}
+	
+	public Iterable<ContratoTrabajador> findContratoTrabajadorByTrabajador(Integer trabajador){
+		return contratoTrabajadorRepo.contratosTrabajadorPorTrabajador(trabajador);
+	}
 
 	
 }
