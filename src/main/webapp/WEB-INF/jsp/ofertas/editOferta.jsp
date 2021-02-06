@@ -40,4 +40,5 @@
                 </div>
         </div>
     </form:form>
+    <h3><c:out value="${error}"/></h3>
 </petclinic:layout>

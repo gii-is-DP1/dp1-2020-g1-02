@@ -14,6 +14,7 @@ import org.springframework.samples.petclinic.service.OfertaService;
 import org.springframework.samples.petclinic.service.ProductoService;
 import org.springframework.samples.petclinic.service.ProveedorService;
 import org.springframework.samples.petclinic.service.UserService;
+import org.springframework.samples.petclinic.service.exceptions.LimiteOfertaException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -63,16 +64,24 @@ public class OfertaController {
 	@PostMapping(path="/save")
 	public String salvarOferta(@Valid Oferta oferta, BindingResult result, ModelMap modelMap) {
 		String view="succesful";
-		Optional<Producto> producto = productoService.findByName(oferta.getName());
-		oferta.setProducto(producto.get());
 		if(result.hasErrors()) {
 			modelMap.addAttribute("oferta", oferta);
 			return "ofertas/editOferta";
 		}else {
-			ofertaService.save(oferta);
-			modelMap.addAttribute("message", "Oferta añadida!");
+			try {
+				ofertaService.crearOferta(oferta);
+				modelMap.addAttribute("message", "Oferta añadida!");
+				return view;
+			} catch(LimiteOfertaException e) {
+        		modelMap.addAttribute("oferta", oferta);
+    			Proveedor prov = proveedorService.findProveedorByUsername(userService.getLoggedUser().getUsername()).get();
+    			modelMap.addAttribute("proveedor", prov);
+    			modelMap.addAttribute("productos", productoService.getNombres());
+    			modelMap.addAttribute("size", productoService.productCount());
+        		modelMap.addAttribute("error", "El precio de la oferta no puede superar 65 euros.");
+        		return "ofertas/editOferta";
+			}
 		}
-		return view;
 	}
 	
 	@GetMapping(path="/delete/{ofertaId}")
