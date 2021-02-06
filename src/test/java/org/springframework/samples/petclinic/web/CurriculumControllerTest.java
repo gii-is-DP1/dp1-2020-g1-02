@@ -1,7 +1,9 @@
 package org.springframework.samples.petclinic.web;
 
 import static org.mockito.BDDMockito.given;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
@@ -57,11 +59,52 @@ public class CurriculumControllerTest {
 		given(this.curriculumService.findAll()).willReturn(curriculums);
 	}
 	
+
+	@WithMockUser(value = "spring")
+	@Test
+	void testNewCurriculum() throws Exception{
+		mockMvc.perform(get("/curriculums/new")).andExpect(status().isOk()).andExpect(model().attributeExists("curriculum"))
+		.andExpect(view().name("curriculums/newCurriculum"));
+	}
+	
 	@WithMockUser(value = "spring")
 	@Test
 	void testListadoCurriculums() throws Exception{
 		mockMvc.perform(get("/curriculums")).andExpect(status().isOk())
 		.andExpect(model().attributeExists("curriculum"))
 		.andExpect(view().name("curriculums/listadoCurriculums"));
+	}
+	
+	
+	@WithMockUser(value = "spring")
+    @Test
+    void testProcessCreationFormSuccess() throws Exception {
+		mockMvc.perform(post("/curriculums/save")
+						.with(csrf())
+						.param("nombre", "Jose Carlos")
+						.param("apellidos", "Morales Borreguero")
+						.param("telefono", "692069178")
+						.param("correo", "jcmorales2400@gmail.com")
+						.param("descripcion", "Muy trabajador")
+						.param("tipocategoria", "Jardineria"))	
+			.andExpect(status().is3xxRedirection())
+			.andExpect(view().name("redirect:/"));
+	}
+	
+	@WithMockUser(value = "spring")
+    @Test
+    void testProcessCreationFormHasErrors() throws Exception {
+		mockMvc.perform(post("/curriculums/save")
+						.with(csrf())
+						.param("nombre", "")
+						.param("apellidos", "Morales Borreguero")
+						.param("telefono", "692069178")
+						.param("correo", "jcmorales2400@gmail.com")
+						.param("descripcion", "Muy trabajador")
+						.param("tipocategoria", "Jardineria"))	
+			.andExpect(status().isOk())
+			.andExpect(model().attributeHasErrors("curriculum"))
+			.andExpect(model().attributeHasFieldErrors("curriculum", "nombre"))
+			.andExpect(view().name("curriculums/newCurriculum"));
 	}
 }

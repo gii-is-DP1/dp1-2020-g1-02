@@ -25,6 +25,9 @@
             <th style="width: 150px;">FECHAFIN</th>
             <th style="width: 150px;">TIPOCATEGORIA</th>
             <th style="width: 150px;">ESTADO</th>
+            <th style="width: 150px;"></th>
+            <th style="width: 150px;"></th>
+            <th style="width: 150px;"></th>
         </tr>
         </thead>
         <tbody>

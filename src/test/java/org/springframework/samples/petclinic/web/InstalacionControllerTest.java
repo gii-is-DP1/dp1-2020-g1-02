@@ -26,8 +26,6 @@ import org.springframework.samples.petclinic.configuration.SecurityConfiguration
 import org.springframework.samples.petclinic.model.Authorities;
 import org.springframework.samples.petclinic.model.Cliente;
 import org.springframework.samples.petclinic.model.Instalacion;
-import org.springframework.samples.petclinic.model.RegistroHoras;
-import org.springframework.samples.petclinic.model.Trabajador;
 import org.springframework.samples.petclinic.model.User;
 import org.springframework.samples.petclinic.service.ClienteService;
 import org.springframework.samples.petclinic.service.InstalacionService;
@@ -135,7 +133,8 @@ public class InstalacionControllerTest {
 		mockMvc.perform(post("/instalaciones/save")
 						.with(csrf())
 						.param("dimension", "")
-						.param("lugar", "Calle Santa Maria"))
+						.param("lugar", "Calle Santa Maria")
+						.param("cliente", "1"))
 			.andExpect(status().isOk())
 			.andExpect(model().attributeHasErrors("instalacion"))
 			.andExpect(model().attributeHasFieldErrors("instalacion", "dimension"))
