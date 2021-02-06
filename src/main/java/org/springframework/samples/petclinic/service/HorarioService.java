@@ -11,7 +11,7 @@ import org.springframework.samples.petclinic.model.Servicio;
 import org.springframework.samples.petclinic.model.Trabajador;
 import org.springframework.samples.petclinic.model.User;
 import org.springframework.samples.petclinic.repository.HorarioRepository;
-import org.springframework.samples.petclinic.service.exceptions.HorarioException;
+import org.springframework.samples.petclinic.service.exceptions.SolapamientoFechasException;
 import org.springframework.samples.petclinic.service.exceptions.LimitePedidoException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -82,13 +82,13 @@ public class HorarioService {
 //		return res;
 //	}
 	
-	@Transactional(rollbackFor = HorarioException.class)
-	public void crearHorario(Horario horario, Trabajador trabajador) throws HorarioException {
+	@Transactional(rollbackFor = SolapamientoFechasException.class)
+	public void crearHorario(Horario horario, Trabajador trabajador) throws SolapamientoFechasException {
 		if(this.findHorasSolapadas(trabajador, horario) == 0) {
 			horario.setTrabajador(trabajador);
 			this.save(horario);
 		} else {
-			throw new HorarioException();
+			throw new SolapamientoFechasException();
 		}
 	}
 	
