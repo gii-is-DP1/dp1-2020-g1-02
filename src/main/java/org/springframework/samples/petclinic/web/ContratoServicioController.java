@@ -63,7 +63,7 @@ public class ContratoServicioController {
 	
 	@PostMapping(path="/save")
 	public String salvarContratoServicio(@Valid ContratoServicio contratoServicio, BindingResult result, ModelMap modelMap) {
-		String view="redirect:/contratosServicios";
+		String view="redirect:/contratos";
 		if(result.hasErrors()) {
 			modelMap.addAttribute("contratoServicio", contratoServicio);
 			return "contratosServicios/editContratoServicio";

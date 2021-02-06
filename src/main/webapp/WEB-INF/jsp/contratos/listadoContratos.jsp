@@ -42,10 +42,11 @@
 	                 <fmt:formatDate value="${date}" type = "date" dateStyle="long"/> 
                 </td>
                 <td>
-                    <c:out value="${contrato.fechapago}"/>
+                    <fmt:parseDate value="${contrato.fechapago}" pattern="yyyy-MM-dd" var="date"/>
+	                 <fmt:formatDate value="${date}" type = "date" dateStyle="long"/> 
                 </td>
                 <td>
-                    <c:out value="${contrato.cliente.dni}"/>
+                    <c:out value="${contrato.presupuesto.servicio.cliente.dni}"/>
                 </td>
                 <td>
                     <c:out value="${contrato.presupuesto.precio}"/>
@@ -87,10 +88,11 @@
 	                 <fmt:formatDate value="${date}" type = "date" dateStyle="long"/> 
                 </td>
                 <td>
-                    <c:out value="${contrato.fechapago}"/>
+                      <fmt:parseDate value="${contrato.fechapago}" pattern="yyyy-MM-dd" var="date"/>
+	                 <fmt:formatDate value="${date}" type = "date" dateStyle="long"/> 
                 </td>
                 <td>
-                    <c:out value="${contrato.cliente.dni}"/>
+                    <c:out value="${contrato.presupuesto.servicio.cliente.dni}"/>
                 </td>
                 <td>
                     <c:out value="${contrato.presupuesto.precio}"/>
