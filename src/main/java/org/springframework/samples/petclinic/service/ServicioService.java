@@ -12,11 +12,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.samples.petclinic.model.EstadoServicio;
 import org.springframework.samples.petclinic.model.Horario;
 import org.springframework.samples.petclinic.model.Mensaje;
+import org.springframework.samples.petclinic.model.Presupuesto;
 import org.springframework.samples.petclinic.model.Servicio;
 import org.springframework.samples.petclinic.model.Trabajador;
 import org.springframework.samples.petclinic.model.User;
 import org.springframework.samples.petclinic.repository.ServicioRepository;
-import org.springframework.samples.petclinic.service.exceptions.HorarioException;
+import org.springframework.samples.petclinic.service.exceptions.SolapamientoFechasException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -92,10 +93,12 @@ public class ServicioService {
 		m.setCuerpo("Gracias por su solicitud de Servicio, lo sentimos pero hemos decidido rechazar su propuesta");
 		mensajesService.save(m);
 	}
-	
-
-	
+  
 	public Iterable<Servicio> serviciosByCliente(Integer id){
 		return servicioRepo.serviciosByCliente(id);
+	}
+	
+	public Iterable<Servicio> findServiciosByTrabajador(Integer trabajador) {
+		return servicioRepo.serviciosByTrabajador(trabajador);
 	}
 }

@@ -1,11 +1,14 @@
 package org.springframework.samples.petclinic.model;
 
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -40,6 +43,12 @@ public class Trabajador extends PersonaEntity {
 	@OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "username", referencedColumnName = "username")
 	  private User user;
+	
+	@ManyToMany
+	@JoinTable(name = "aux_ts", 
+			  joinColumns = @JoinColumn(name = "trabajador_id"), 
+			  inverseJoinColumns = @JoinColumn(name = "servicio_id"))
+    private List<Servicio> servicios;
 	
 	  public User getUser() {
 		  return user;

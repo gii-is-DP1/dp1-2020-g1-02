@@ -70,7 +70,7 @@ public class FacturaControllerTest {
 		
 		oferta = new Oferta();
 		oferta.setId(1);
-		oferta.setPrecioU("2.35");
+		oferta.setPrecioU(2.35);
 		oferta.setProducto(producto);
 		oferta.setProveedor(proveedor);
 		

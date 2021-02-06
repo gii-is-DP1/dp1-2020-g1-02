@@ -18,6 +18,7 @@ public class PersonaEntity extends BaseEntity {
     @NotEmpty
    	private String apellidos;
     
+    @Column(unique=true)
     private String dni;
     
     private String telefono;
