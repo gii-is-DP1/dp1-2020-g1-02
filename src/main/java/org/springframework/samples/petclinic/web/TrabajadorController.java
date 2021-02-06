@@ -55,7 +55,6 @@ public class TrabajadorController {
 		}else {
 			trabajadorService.save(trabajador);
 			modelMap.addAttribute("message", "Trabajador actualizado!");
-			view=listadoTrabajadores(modelMap);
 		}
 		return view;
 	}

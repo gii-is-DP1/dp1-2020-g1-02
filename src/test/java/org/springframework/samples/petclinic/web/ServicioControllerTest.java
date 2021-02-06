@@ -104,13 +104,13 @@ public class ServicioControllerTest {
 	@Test
 	void testSaveServicio() throws Exception {
 		mockMvc.perform(post("/servicios/save").with(csrf())
+			.param("id", "1")
+			.param("estado", "Espera")
 			.param("lugar", "Promociones Sanlucar")
 			.param("tipocategoria", "Limpieza")
 			.param("fechainicio", "2020/01/01")
-			.param("fechafin", "2020/02/01")
-
-			.param("estado", "Aceptado"))
-		.andExpect(status().is2xxSuccessful()).andExpect(view().name("servicios/editServicio"));
+			.param("fechafin", "2020/02/01"))
+		.andExpect(status().is2xxSuccessful()).andExpect(view().name("redirect:/servicios/misServicios"));
 	}
 	
 

@@ -85,11 +85,11 @@ public class HorarioControllerTest {
     void testProcessCreationFormSuccess() throws Exception {
 		mockMvc.perform(post("/horarios/save")
 						.with(csrf())
-						.param("hora_inicio", "LocalDateTime.of(2018, 10, 03, 14, 30)")
-						.param("hora_fin", "LocalDateTime.of(2018, 10, 03, 17, 30)")
+						.param("hora_inicio", "2018/10/03 14:30")
+						.param("hora_fin", "2018/10/03 17:30")
 						.param("descripcion", "Ese es tu horario de hoy"))
-			.andExpect(status().is2xxSuccessful())
-			.andExpect(view().name("horarios/newHorario"));
+			.andExpect(status().is3xxRedirection())
+			.andExpect(view().name("redirect:/horarios"));
 	}
 	
 	@WithMockUser(value = "spring")
@@ -98,7 +98,7 @@ public class HorarioControllerTest {
 		mockMvc.perform(post("/horarios/save")
 						.with(csrf())
 						.param("hora_inicio", "")
-						.param("hora_fin", "LocalDateTime.of(2018, 10, 03, 17, 30)")
+						.param("hora_fin", "2018/10/03 17:30")
 						.param("descripcion", "Ese es tu horario de hoy"))
 			.andExpect(status().isOk())
 			.andExpect(model().attributeHasErrors("horario"))
