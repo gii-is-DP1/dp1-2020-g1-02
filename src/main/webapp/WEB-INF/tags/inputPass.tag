@@ -3,7 +3,9 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ attribute name="name" required="true" rtexprvalue="true"
               description="Name of corresponding property in bean object" %>
-<%@ attribute name="label" required="true" rtexprvalue="true"
+<%@ attribute name="id" required="true" rtexprvalue="true"
+              description="id para validación con js" %>
+<%@ attribute name="label" required="false" rtexprvalue="true"
               description="Label appears in red color if input is considered as invalid after submission" %>
 
 <spring:bind path="${name}">
@@ -13,7 +15,7 @@
         <label class="col-sm-2 control-label">${label}</label>
 
         <div class="col-sm-10">
-            <form:input class="form-control" type="password" path="${name}" id="${name}"/>
+            <form:input class="form-control" type="password" path="${name}" id="${id}" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Debe tener al menos 8 caracteres, así como contener como mínimo una letra minúscula, otra mayúscula y un número" required="true"/>
             <c:if test="${valid}">
                 <span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>
             </c:if>
