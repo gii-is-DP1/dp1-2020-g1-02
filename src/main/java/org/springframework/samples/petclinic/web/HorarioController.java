@@ -57,7 +57,7 @@ public class HorarioController {
 	public String crearHorario(ModelMap modelMap) {
 		String view="horarios/newHorario";
 		Iterable<Trabajador> trabajadores = trabajadorService.findAll();
-		modelMap.addAttribute("trabajadores", trabajadores);
+		modelMap.addAttribute("trabajadores", trabajadorService.getNombres());
 		modelMap.addAttribute("horario", new Horario());
 		return view;
 	}
