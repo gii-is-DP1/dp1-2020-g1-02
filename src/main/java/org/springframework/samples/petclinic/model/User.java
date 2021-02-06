@@ -15,6 +15,7 @@ import javax.persistence.Transient;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 
+
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
@@ -27,11 +28,13 @@ public class User{
 	@Id
 	@NotBlank
 	String username;
-	@NotEmpty
+	
+	
 	String password;
 	
-	@Transient
-    private String retypePassword;
+	@Transient 
+	private String retypePassword;
+	 
 	
 	boolean enabled;
 	

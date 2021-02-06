@@ -40,12 +40,12 @@ public class PedidoService {
 		pedidoRepo.delete(pedido);
 	}
 	
-	public boolean pedidoMenor100(Pedido pedido) {
+	public boolean pedidoMenor200(Pedido pedido) {
 		boolean b=true;
 		Integer cantidad = pedido.getCantidadProducto();
 		Double precio = Double.valueOf(pedido.getOferta().getPrecioU());
 		
-		if ((cantidad * precio) >100.0) b=false;
+		if ((cantidad * precio) >200.0) b=false;
 		
 		return b;
 		
@@ -53,7 +53,7 @@ public class PedidoService {
 	
 	@Transactional(rollbackFor = LimitePedidoException.class)
 	public void crearPedido(Pedido pedido) throws LimitePedidoException {
-		if(this.pedidoMenor100(pedido)) {
+		if(this.pedidoMenor200(pedido)) {
     		pedido.setFechaPedido(LocalDate.now());
     		this.save(pedido);
     		Producto producto = productoService.findByName(pedido.getOferta().getName()).get();
