@@ -68,6 +68,7 @@ public class OfertaController {
 			modelMap.addAttribute("proveedor", prov);
 			modelMap.addAttribute("productos", productoService.getNombres());
 			modelMap.addAttribute("size", productoService.productCount());
+			modelMap.addAttribute("message", "Errores en el formulario");
 			return "ofertas/editOferta";
 		}else {
 			Optional<Producto> producto = productoService.findByName(oferta.getName());
