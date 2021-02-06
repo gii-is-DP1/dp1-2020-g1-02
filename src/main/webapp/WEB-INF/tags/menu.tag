@@ -59,7 +59,7 @@
 						<span>Trabajadores</span>
 					</petclinic:menuItem>
 					
-					<petclinic:menuItem active="${name eq 'trabsC'}" url="/contratosTrabajadores"
+					<petclinic:menuItem active="${name eq 'contratos'}" url="/contratos"
 						title="Contratos">
 						<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
 						<span>Contratos</span>
@@ -83,32 +83,10 @@
 						<span>Clientes</span>
 					</petclinic:menuItem>
 					
-					<petclinic:menuItem active="${name eq 'oferta'}" url="/ofertas"
-						title="Ofertas">
-
-						<span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
-						<span>Ofertas de productos</span>
-					</petclinic:menuItem>
-					
 					<petclinic:menuItem active="${name eq 'producto'}" url="/productos"
 						title="Productos">
 						<span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
 						<span>Stock</span>
-					</petclinic:menuItem>
-					<petclinic:menuItem active="${name eq 'pedidos'}" url="/pedidos"
-						title="Pedidos">
-						<span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
-						<span>Pedidos</span>
-					</petclinic:menuItem>
-					<petclinic:menuItem active="${name eq 'facturas'}" url="/facturas"
-						title="Facturas">
-						<span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
-						<span>Facturas</span>
-					</petclinic:menuItem>
-					<petclinic:menuItem active="${name eq 'morosos'}" url="/administradores/morosos"
-						title="Morosos">
-						<span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
-						<span>Morosos</span>
 					</petclinic:menuItem>
 				</sec:authorize>
 				

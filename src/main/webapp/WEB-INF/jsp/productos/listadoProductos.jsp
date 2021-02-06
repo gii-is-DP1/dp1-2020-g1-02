@@ -13,6 +13,14 @@
     <spring:url value="/productos/new" var="productUrl">
     </spring:url>
     <a href="${fn:escapeXml(productUrl)}" class="btn btn-default">Añadir Producto</a>
+    
+     <spring:url value="/ofertas" var="ofertasUrl">
+    </spring:url>
+    <a href="${fn:escapeXml(ofertasUrl)}" class="btn btn-default">Ver Ofertas</a>
+    
+     <spring:url value="/pedidos" var="pedidosUrl">
+    </spring:url>
+    <a href="${fn:escapeXml(pedidosUrl)}" class="btn btn-default">Ver Pedidos</a>
 
     <table id="productosTable" class="table table-striped">
         <thead>

@@ -95,6 +95,7 @@ INSERT INTO presupuesto(precio, tipopresupuesto, servicio_id, estado) VALUES (10
 
 INSERT INTO contratoservicio(fechainicial, fechafinal, fechapago, cliente,  periodoprueba, presupuesto) VALUES ('2019-10-20', '2020-12-31', '2020-12-10', 1, 0, 1);
 INSERT INTO contratoservicio(fechainicial, fechafinal, fechapago, cliente, periodoprueba, presupuesto) VALUES ('2019-10-20', '2020-12-31', '2020-12-10', 3, 1, 5);
+INSERT INTO contratoservicio(fechainicial, fechafinal, fechapago, cliente, periodoprueba, presupuesto) VALUES ('2019-10-20', '2021-02-26', '2020-12-10', 1, 0, 4);
 INSERT INTO contratoservicio(fechainicial, fechafinal, cliente, periodoprueba, presupuesto) VALUES ('2020-10-20', '2021-10-20', 2, 1, 6);
 
 INSERT INTO reclamacion(fecha, descripcion, cliente_id, servicio_id) VALUES ('2019-10-20', 'El servicio está incompleto', 1, 1);
