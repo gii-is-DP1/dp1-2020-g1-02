@@ -66,8 +66,10 @@
       <script src="/resources/js/popper.min.js"></script> 
       <script src="/resources/js/password.js"></script> 
       <script src="/resources/js/bootstrap.bundle.min.js"></script> 
-      <script src="/resources/js/jquery-3.0.0.min.js"></script> 
+      <script src="/resources/js/jquery-3.0.0.min.js"></script>
       <script src="/resources/js/plugin.js"></script> 
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js" integrity="sha512-ux1VHIyaPxawuad8d1wr1i9l4mTwukRq5B3s8G3nEmdENnKF5wKfOV6MEUH0k/rNT4mFr/yL+ozoDiwhUQekTg==" crossorigin="anonymous"></script>
+
       <!-- sidebar --> 
       <script src="/resources/js/jquery.mCustomScrollbar.concat.min.js"></script> 
       <script src="/resources/js/custom.js"></script>

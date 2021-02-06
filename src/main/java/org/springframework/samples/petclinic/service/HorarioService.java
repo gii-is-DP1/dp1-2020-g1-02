@@ -1,18 +1,11 @@
 package org.springframework.samples.petclinic.service;
 
-import java.time.LocalDateTime;
-import java.util.Iterator;
 import java.util.Optional;
-import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.samples.petclinic.model.Horario;
-import org.springframework.samples.petclinic.model.Servicio;
-import org.springframework.samples.petclinic.model.Trabajador;
-import org.springframework.samples.petclinic.model.User;
 import org.springframework.samples.petclinic.repository.HorarioRepository;
 import org.springframework.samples.petclinic.service.exceptions.SolapamientoFechasException;
-import org.springframework.samples.petclinic.service.exceptions.LimitePedidoException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -63,8 +56,8 @@ public class HorarioService {
 		return horarioRepo.findHorariosByTrabajadorId(id);
 	}
 	
-	public Integer findHorasSolapadas(Trabajador trabajador, Horario horario) {
-		return horarioRepo.findHorasSolapadas(trabajador.getId(), horario.getHora_inicio(), horario.getHora_fin());
+	public Integer findHorasSolapadas(Horario horario) {
+		return horarioRepo.findHorasSolapadas(horario.getTrabajador().getId(), horario.getHora_inicio(), horario.getHora_fin(), horario.getFecha());
 	}
 	
 	
@@ -83,9 +76,8 @@ public class HorarioService {
 //	}
 	
 	@Transactional(rollbackFor = SolapamientoFechasException.class)
-	public void crearHorario(Horario horario, Trabajador trabajador) throws SolapamientoFechasException {
-		if(this.findHorasSolapadas(trabajador, horario) == 0) {
-			horario.setTrabajador(trabajador);
+	public void crearHorario(Horario horario) throws SolapamientoFechasException {
+		if(this.findHorasSolapadas(horario) == 0) {
 			this.save(horario);
 		} else {
 			throw new SolapamientoFechasException();

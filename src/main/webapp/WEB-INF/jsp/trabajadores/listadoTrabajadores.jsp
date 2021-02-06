@@ -23,12 +23,6 @@
 		</button>
 	</a>
 	
-	<a href="/horarios">
-		<button type="button" class="btn btn-default btn-lg">
-  			<span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Horarios Trabajadores
-		</button>
-	</a>
-	
     <table id="eventsTable" class="table table-striped">
         <thead>
         <tr>
@@ -85,6 +79,14 @@
                 	</spring:url>
                 	<a href="${fn:escapeXml(serviciosUrl)}">Servicios</a>
                 </td>
+                
+                 <td>
+                	<spring:url value="/horarios/{trabajadorId}" var="horariosUrl">
+                		<spring:param name="trabajadorId" value="${trabajador.id}"/>
+                	</spring:url>
+                	<a href="${fn:escapeXml(horariosUrl)}">Horarios</a>
+                </td>
+                
                   <td>
                 	<spring:url value="/trabajadores/delete/{trabajadorId}" var="trabajadorUrl">
                 		<spring:param name="trabajadorId" value="${trabajador.id}"/>

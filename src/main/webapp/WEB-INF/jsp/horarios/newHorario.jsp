@@ -10,9 +10,10 @@
 	<jsp:attribute name="customScript">
         <script>
 	            $(function () {
-                $("#hora_inicio").datepicker({dateFormat: 'yy/mm/dd HH:mm'});
-                $("#hora_fin").datepicker({dateFormat: 'yy/mm/dd HH:mm'});
-            }); 
+               	 	$("#fecha").datepicker({dateFormat: 'yy/mm/dd'});
+               	 	$("#hora_inicio").timepicker({ timeFormat: 'HH:mm'});
+               	 	$("#hora_fin").timepicker({timeFormat: 'HH:mm'});
+           		 }); 
             
         </script>
     </jsp:attribute>
@@ -22,7 +23,8 @@
     </h2>
     <form:form modelAttribute="horario" class="form-horizontal" id="add-cliente-form" action="/horarios/save">
         <div class="form-group has-feedback">
-  			<petclinic:selectField label="Nombre Trabajador" name="trabajador" size="${size}" names="${trabajadores}"></petclinic:selectField>
+  			<input type="hidden" name="trabajador" id="trabajador" value="${trabajador}">
+  			<petclinic:inputField label="Fecha" name="fecha"/>
             <petclinic:inputField label="HoraInicio" name="hora_inicio"/>
             <petclinic:inputField label="HoraFin" name="hora_fin"/>
             <petclinic:inputField label="Descripcion" name="descripcion"/>
