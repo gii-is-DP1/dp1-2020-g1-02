@@ -81,6 +81,22 @@ public class AdministradorControllerTest {
 	
 	@WithMockUser(value = "spring")
 	@Test
+	void testListadoReclamaciones() throws Exception{
+		mockMvc.perform(get("/administradores/reclamaciones")).andExpect(status().isOk())
+		.andExpect(model().attributeExists("reclamacion"))
+		.andExpect(view().name("administradores/listadoReclamaciones"));
+	}
+	
+	@WithMockUser(value = "spring")
+	@Test
+	void testListaMorosos() throws Exception{
+		mockMvc.perform(get("/administradores/morosos")).andExpect(status().isOk())
+		.andExpect(model().attributeExists("morosos"))
+		.andExpect(view().name("administradores/listadoMorosos"));
+	}
+	
+	@WithMockUser(value = "spring")
+	@Test
 	void testListadoAdministradores() throws Exception{
 		mockMvc.perform(get("/administradores")).andExpect(status().isOk())
 		.andExpect(model().attributeExists("administrador"))

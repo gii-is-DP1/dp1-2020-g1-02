@@ -69,6 +69,13 @@ public class CurriculumControllerTest {
 	
 	@WithMockUser(value = "spring")
 	@Test
+	void testVerCurriculum() throws Exception{
+		mockMvc.perform(get("/curriculums/view/{idCurriculum}",1)).andExpect(status().isOk()).andExpect(model().attributeExists("curriculum"))
+		.andExpect(view().name("curriculums/viewCurriculum"));
+	}
+	
+	@WithMockUser(value = "spring")
+	@Test
 	void testListadoCurriculums() throws Exception{
 		mockMvc.perform(get("/curriculums")).andExpect(status().isOk())
 		.andExpect(model().attributeExists("curriculum"))

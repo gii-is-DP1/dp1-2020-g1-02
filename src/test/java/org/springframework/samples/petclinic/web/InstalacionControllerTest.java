@@ -110,6 +110,27 @@ public class InstalacionControllerTest {
 	
 	@WithMockUser(value = "spring")
 	@Test
+	void testVerInstalacion() throws Exception{
+		mockMvc.perform(get("/instalaciones/{instalacionId}",1)).andExpect(status().isOk()).andExpect(model().attributeExists("instalacion"))
+		.andExpect(view().name("instalaciones/verInstalacion"));
+	}
+	
+	@WithMockUser(value = "spring")
+	@Test
+	void testFiltradoInstalaciones() throws Exception{
+		mockMvc.perform(get("/instalaciones/filtrado")).andExpect(status().isOk()).andExpect(model().attributeExists("instalaciones"))
+		.andExpect(view().name("instalaciones/listadoInstalaciones"));
+	}
+	
+	@WithMockUser(value = "spring")
+	@Test
+	void testListadoInstalacionesPorCliente() throws Exception{
+		mockMvc.perform(get("/instalaciones/misInstalaciones")).andExpect(status().isOk()).andExpect(model().attributeExists("instalaciones"))
+		.andExpect(view().name("instalaciones/listadoInstalaciones"));
+	}
+	
+	@WithMockUser(value = "spring")
+	@Test
 	void testInitCreationForm() throws Exception{
 		mockMvc.perform(get("/instalaciones/new")).andExpect(status().isOk()).andExpect(model().attributeExists("instalacion"))
 		.andExpect(view().name("instalaciones/newInstalacion"));

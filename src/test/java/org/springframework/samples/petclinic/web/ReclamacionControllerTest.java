@@ -130,6 +130,14 @@ public class ReclamacionControllerTest {
 	
 	@WithMockUser(value = "spring")
 	@Test
+	void testListadoReclamacionesPorServicioId() throws Exception{
+		mockMvc.perform(get("/reclamaciones/{servicioId}",1)).andExpect(status().isOk())
+		.andExpect(model().attributeExists("reclamaciones"))
+		.andExpect(view().name("reclamaciones/listadoReclamacionesPorServicio"));
+	}
+	
+	@WithMockUser(value = "spring")
+	@Test
 	void testNewReclamacion() throws Exception{
 		mockMvc.perform(get("/reclamaciones/new/{oId}",1))
 		.andExpect(status().isOk())

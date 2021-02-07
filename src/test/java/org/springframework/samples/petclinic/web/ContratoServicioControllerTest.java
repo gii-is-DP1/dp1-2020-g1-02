@@ -151,11 +151,12 @@ public class ContratoServicioControllerTest {
 		mockMvc.perform(post("/contratosServicios/save")
 						.with(csrf())
 						.param("fechainicial", "2020/11/17")
-						.param("fechafinal", "2020/12/19")
+						.param("fechafinal", "2020/12/10")
 						.param("fechapago", "2020/12/15")
 						.param("periodoPrueba", "true")
-						.param("presupuesto", "1"))
-			.andExpect(status().isOk())
+						.param("presupuesto", "1")
+						.param("id", "1"))
+			.andExpect(status().is3xxRedirection())
 			.andExpect(view().name("redirect:/contratos"));
 	}
 	
@@ -164,14 +165,15 @@ public class ContratoServicioControllerTest {
     void testProcessCreationFormHasErrors() throws Exception {
 		mockMvc.perform(post("/contratosServicios/save")
 						.with(csrf())
-						.param("fechainicial", "")
+						.param("fechainicial", "2020/11/19")
 						.param("fechafinal", "2020/12/19")
 						.param("fechapago", "2020/12/15")
 						.param("periodoprueba", "true")
-						.param("presupuesto", "1"))
+						.param("presupuesto", "1")
+						.param("id", ""))
 			.andExpect(status().isOk())
 			.andExpect(model().attributeHasErrors("contratoServicio"))
-			.andExpect(model().attributeHasFieldErrors("contratoServicio", "fechainicial"))
+			.andExpect(model().attributeHasFieldErrors("contratoServicio", "id"))
 			.andExpect(view().name("contratosServicios/editContratoServicio"));
 	}
 }

@@ -38,12 +38,9 @@ public class CurriculumController {
 	}
 	
 	@GetMapping(path="/view/{idCurriculum}")
-	public String crearCurriculum(@PathVariable("idCurriculum") int idCurriculum, ModelMap modelMap) {
+	public String verCurriculum(@PathVariable("idCurriculum") int idCurriculum, ModelMap modelMap) {
 		String view="curriculums/viewCurriculum";
 		Optional<Curriculum> curriculum = curriculumService.findCurriculumById(idCurriculum);
-		if(!curriculum.isPresent()) {
-			throw new IllegalArgumentException("La id introducida no es válida");
-		}
 		modelMap.addAttribute("curriculum", curriculum.get());
 		return view;
 	}
