@@ -36,6 +36,7 @@
             <th style="width: 150px;"></th>
             <th style="width: 150px;"></th>
             <th style="width: 150px;"></th>
+            <th style="width: 150px;"></th>
             
         </tr>
         </thead>
@@ -84,6 +85,12 @@
                 		<spring:param name="trabajadorId" value="${trabajador.id}"/>
                 	</spring:url>
                 	<a href="${fn:escapeXml(horariosUrl)}">Horarios</a>
+                </td>
+                <td>
+                	<spring:url value="/registroHoras/{trabajadorId}" var="horasUrl">
+                		<spring:param name="trabajadorId" value="${trabajador.id}"/>
+                	</spring:url>
+                	<a href="${fn:escapeXml(horasUrl)}">Registro de horas</a>
                 </td>
                 <td>
                 	<spring:url value="/trabajadores/{trabajadorId}/edit" var="trabajadorUrl">
