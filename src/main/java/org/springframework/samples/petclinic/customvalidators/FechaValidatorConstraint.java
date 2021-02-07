@@ -1,4 +1,4 @@
-package org.springframework.samples.petclinic.web;
+package org.springframework.samples.petclinic.customvalidators;
 
 import java.lang.annotation.ElementType;  
 import java.lang.annotation.Retention;  
