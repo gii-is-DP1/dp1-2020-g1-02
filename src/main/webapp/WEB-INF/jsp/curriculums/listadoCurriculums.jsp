@@ -9,17 +9,19 @@
 
 <petclinic:layout pageName="curriculums">
 	<jsp:body>
-       <div class="container">
+       
 		    <h2>Curriculums</h2>
 		    <table id="curriculumsTable" class="table table-striped">
 		        <thead>
 		        <tr>
-		            <th style="width: 150px;">Nombre</th>
-		            <th style="width: 150px;">Apellidos</th>
-		            <th style="width: 150px;">Telefono</th>
-		            <th style="width: 150px;">Correo</th>
-		            <th style="width: 150px;">Descripcion</th>
-		            <th style="width: 200px;">TipoCategoria</th>
+		            <th style="width: 15%;">Nombre</th>
+		            <th style="width: 15%;">Apellidos</th>
+		            <th style="width: 15%;">Telefono</th>
+		            <th style="width: 15%;">Correo</th>
+		            <th style="width: 15%;">Descripcion</th>
+		            <th style="width: 10%;">TipoCategoria</th>
+		            <th style="width: 10%"></th>
+		            <th style="width: 5%;"></th>
 		        </tr>
 		        </thead>
 		        <tbody>
@@ -44,12 +46,6 @@
 		                    <c:out value="${curriculum.tipocategoria}"/>
 		                </td>
 						<td>
-                			<spring:url value="/delete/{curriculumId}" var="curriculumUrl">
-                				<spring:param name="curriculumId" value="${curriculum.id}"/>
-                			</spring:url>
-                			<a href="${fn:escapeXml(curriculumUrl)}">Eliminar</a>
-               		 	</td>
-               		 	<td>
                		 	<c:if test="${curriculum.trabajador eq null}">
 							<spring:url value="/users/newTrabajador/{idCurriculum}" var="trabajadorUrl">
 							<spring:param name="idCurriculum" value="${curriculum.id}"/>
@@ -57,10 +53,16 @@
                 			<a href="${fn:escapeXml(trabajadorUrl)}">Añadir Trabajador</a>               			
                		 	</c:if>		                
                		 	</td>
+               		 	<td>
+                			<spring:url value="/delete/{curriculumId}" var="curriculumUrl">
+                				<spring:param name="curriculumId" value="${curriculum.id}"/>
+                			</spring:url>
+                			<a href="${fn:escapeXml(curriculumUrl)}"><img src="/resources/images/delete.jpg" width="30px"/></a>
+               		 	</td>
 		            </tr>
 		        </c:forEach>
 		        </tbody>
 		    </table>
-	     </div>
+
     </jsp:body>
 </petclinic:layout>

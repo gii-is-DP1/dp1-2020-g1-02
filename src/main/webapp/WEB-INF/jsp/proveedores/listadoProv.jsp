@@ -13,11 +13,11 @@
     <table id="proveedoresTable" class="table table-striped">
         <thead>
         <tr>
-            <th style="width: 150px;">Nombre Empresa</th>
-            <th style="width: 150px;">Telefono</th>
-            <th style="width: 150px;">Email</th>
-            <th style="width: 150px;">Direccion</th>
-            <th> </th>
+            <th style="width: 23%;">Nombre Empresa</th>
+            <th style="width: 23%;">Telefono</th>
+            <th style="width: 23%;">Email</th>
+            <th style="width: 23%;">Direccion</th>
+            <th style="width: 8%;"> </th>
 
 
         </tr>

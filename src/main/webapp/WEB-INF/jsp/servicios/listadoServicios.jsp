@@ -12,11 +12,10 @@
 <spring:url value="/resources/images/delete.jpg" var="delete"/>
     <h2>Servicios</h2>
     
-    <a href="/valoraciones">
-		<button type="button" class="btn btn-default btn-lg">
-  			<span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Ver valoraciones
-		</button>
-	</a>
+    	<spring:url value="/valoraciones" var="valoracionesUrl">
+    </spring:url>
+    <a href="${fn:escapeXml(valoracionesUrl)}" class="btn btn-default">Ver valoraciones</a>
+
 	
     <table id="eventsTable" class="table table-striped">
         <thead>

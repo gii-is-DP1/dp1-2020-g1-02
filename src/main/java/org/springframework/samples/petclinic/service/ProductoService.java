@@ -49,8 +49,8 @@ public class ProductoService {
 	}
 	
 	@Transactional
-	public void sumarProducto(Producto product, Pedido pedido) {
-		Integer cantidadActual = product.getCantidad() + pedido.getCantidadProducto();
+	public void sumarProducto(Producto product, Integer cantidad) {
+		Integer cantidadActual = product.getCantidad() + cantidad;
 		productRepo.modificarPruducto(product.getId(), cantidadActual);
 	}
 

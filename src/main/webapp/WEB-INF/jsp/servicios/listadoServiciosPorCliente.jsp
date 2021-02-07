@@ -12,12 +12,11 @@
 <c:set var="serviciosV" value="${serviciosV}" />
 <petclinic:layout pageName="servicios">
     <h2>Mis Servicios</h2>
+    
+	<spring:url value="/servicios/new" var="serviciosUrl">
+    </spring:url>
+    <a href="${fn:escapeXml(serviciosUrl)}" class="btn btn-default">Solicitar nuevo servicio</a>
 	
-	<a href="/servicios/new">
-		<button type="button" class="btn btn-default btn-lg">
-  			<span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Solicitar servicio
-		</button>
-	</a>
 	
     <table id="eventsTable" class="table table-striped">
         <thead>

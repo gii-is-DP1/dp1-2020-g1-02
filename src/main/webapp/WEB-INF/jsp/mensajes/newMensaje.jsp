@@ -15,6 +15,7 @@
         	
         	<petclinic:inputField label="De:" name="emisor" disabled="true"/>
  			 
+ 			<Label for="receptores">  Para:</Label>  </br>
            <select name="receptores" size="10" multiple>
            <c:forEach items="${users}" var="user">
 		            <tr>

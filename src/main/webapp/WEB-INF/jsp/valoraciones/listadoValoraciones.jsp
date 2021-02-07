@@ -12,20 +12,26 @@
 <petclinic:layout pageName="valoraciones">
     <h2>Valoraciones</h2>
     
-
- <c:forEach items="${valoraciones}" var="valoracion">
-    <div>
-         <div>
-            <th style="width: 150px;"><c:out value="${valoracion.key}"/></th>
-            
-        </div>
-         <div>
-         	<c:forEach begin="1" step="1" end="${valoracion.value}" >
-						<img src="${star}" width="30px"/>
-					</c:forEach>
-               </div>
- 
-        
-    </div>
-    </c:forEach>
+         <div class="container">
+            <div class="white_bg">
+            <div class="row">
+			    <c:forEach items="${valoraciones}" var="valoracion" varStatus="index">
+							    <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12">
+			                  		<div class="for_box">
+							            <i><img src="resources/icon/${index.index}.png"/></i>
+					                    <h3><c:out value="${valoracion.key}"/></h3>
+					                    <h4> Valoracion de nuestros clientes</h4>
+							            <p> <c:forEach begin="1" step="1" end="${valoracion.value}" >
+													<img src="${star}" width="30px"/>
+												</c:forEach>
+										</p>
+							        </div>
+							        
+			   					</div>
+			    		</c:forEach>
+    		
+    		</div>
+         </div>
+       </div>
+       </br>
 </petclinic:layout>

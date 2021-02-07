@@ -10,11 +10,7 @@
 
 <petclinic:layout pageName="contratosServicios"> 
 <spring:url value="/resources/images/delete.jpg" var="delete"/>
-<a href="/administradores/morosos">
-		<button type="button" class="btn btn-default btn-lg">
-  			<span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Ver Morosos
-		</button>
-</a>
+
  <c:if test="${avisoServicio.size() >0 }">
     <h2>Contratos que expiran el  próximo mes</h2>
      <table id="contratosServicios" class="" style="background-color: yellow;">
@@ -194,4 +190,10 @@
         </c:forEach>
         </tbody>
     </table>
+    </br>
+    <a href="/administradores/morosos">
+		<button type="button" class="btn btn-default btn-lg">
+  			<span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Ver Morosos
+		</button>
+	</a></br></br>
 </petclinic:layout>

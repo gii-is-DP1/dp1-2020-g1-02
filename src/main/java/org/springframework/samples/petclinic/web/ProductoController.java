@@ -57,6 +57,14 @@ public class ProductoController {
 		return "redirect:/productos";
 	}
 	
+	@GetMapping(path="/{productoId}/sumar")
+	public String sumarStock(@PathVariable("productoId") int productoId, ModelMap modelmap) {
+		Producto product = productService.findProductoById(productoId).get();
+		productService.sumarProducto(product, 1);
+		modelmap.addAttribute("message", "Producto actualizado!");
+		return "redirect:/productos";
+	}
+	
 	@GetMapping(path="/delete/{productoId}")
 	public String borrarProducto(@PathVariable("productoId") int productoId, ModelMap modelmap) {
 		Producto product = productService.findProductoById(productoId).get();
@@ -64,5 +72,7 @@ public class ProductoController {
 		modelmap.addAttribute("message", "Producto borrado!");
 		return "redirect:/productos";
 	}
+	
+	
 
 }

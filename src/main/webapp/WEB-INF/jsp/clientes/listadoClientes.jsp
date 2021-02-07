@@ -15,14 +15,14 @@
     <table id="clientesTable" class="table table-striped">
         <thead>
         <tr>
-            <th style="width: 150px;">Nombre</th>
-            <th style="width: 200px;">Apellidos</th>
-            <th>Telefono</th>
-            <th>Direccion</th>
-            <th>Dni</th>
-            <th>Correo</th>
-            <th style="width: 150px;">Instalaciones</th>  
-            <th> </th>
+            <th style="width: 11%;">Nombre</th>
+            <th style="width: 11%;">Apellidos</th>
+            <th style="width: 11%;">Telefono</th>
+            <th style="width: 11%;">Direccion</th>
+            <th style="width: 11%;">Dni</th>
+            <th style="width: 11%;">Correo</th>
+            <th style="width: 11%;">Instalaciones</th>  
+            <th style="width: 3%;"> </th>
         </tr>
         </thead>
         <tbody>
