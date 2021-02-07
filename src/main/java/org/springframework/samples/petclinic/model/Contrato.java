@@ -6,7 +6,7 @@ import javax.persistence.MappedSuperclass;
 import javax.validation.constraints.NotNull;
 
 import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.samples.petclinic.web.FechaValidatorConstraint;
+import org.springframework.samples.petclinic.customvalidators.FechaValidatorConstraint;
 
 import lombok.Getter;
 import lombok.Setter;

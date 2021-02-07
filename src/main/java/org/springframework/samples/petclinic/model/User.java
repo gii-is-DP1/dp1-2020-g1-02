@@ -14,8 +14,6 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
-
-
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
@@ -28,8 +26,7 @@ public class User{
 	@Id
 	@NotBlank
 	String username;
-	
-	
+
 	String password;
 	
 	@Transient 

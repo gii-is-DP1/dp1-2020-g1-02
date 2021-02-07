@@ -54,7 +54,6 @@ public class UserController {
 	
 	public static String EXCEPTION_VIEW = "/exception";
 	public static String PERFIL_VIEW = "users/perfilView";
-	public static Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 	
 	@GetMapping("/new")
 	public String nuevoCliente(ModelMap modelMap) {
@@ -91,10 +90,11 @@ public class UserController {
 	@GetMapping("/editContrasenya")
 	public String editContrasenya(Principal principal, ModelMap modelMap) {
 		String vista ="users/editContrasenya";
-		Optional<User> user = this.userService.findUser(principal.getName());
-		if(user.isEmpty()) {
+		if(principal == null) {
+			modelMap.addAttribute("error", "No has iniciado sesión");
 			throw new UsernameNotFoundException("No has iniciado sesión");
 		}
+		Optional<User> user = this.userService.findUser(principal.getName());
 		modelMap.addAttribute("actualPass", user.get().getPassword());
 		return vista;
 	}

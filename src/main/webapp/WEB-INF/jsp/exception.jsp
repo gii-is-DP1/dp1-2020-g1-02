@@ -13,7 +13,7 @@
     	<div class="col-6 text-center">
     		<h2 style="color: red;">Something happened...</h2>
     		<p>${exception.message}</p>
-    		<%-- <h1><c:out value="${error}"/></h1> --%>
+    		 <h1><c:out value="${error}"/></h1>
     	</div>
     </div>
 </petclinic:layout>
