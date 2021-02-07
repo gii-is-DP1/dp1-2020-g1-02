@@ -30,6 +30,7 @@ import org.springframework.samples.petclinic.service.ClienteService;
 import org.springframework.samples.petclinic.service.InstalacionService;
 import org.springframework.samples.petclinic.service.PresupuestoService;
 import org.springframework.samples.petclinic.service.ServicioService;
+import org.springframework.samples.petclinic.service.TrabajadorService;
 import org.springframework.samples.petclinic.service.UserService;
 import org.springframework.security.config.annotation.web.WebSecurityConfigurer;
 import org.springframework.security.test.context.support.WithMockUser;
@@ -51,6 +52,9 @@ public class ServicioControllerTest {
 	private PresupuestoService presupuestoService;
 	@MockBean 
 	private ClienteService clienteService;
+	
+	@MockBean 
+	private TrabajadorService trabajadorService;
 	
 	@MockBean
 	private UserService userService;
