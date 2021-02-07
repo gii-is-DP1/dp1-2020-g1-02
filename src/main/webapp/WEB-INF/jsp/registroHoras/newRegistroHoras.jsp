@@ -10,9 +10,10 @@
  	<jsp:attribute name="customScript">
         <script>
 	            $(function () {
-                $("#hora_entrada").datepicker({dateFormat: 'yy/mm/dd HH:mm'});
-                $("#hora_salida").datepicker({dateFormat: 'yy/mm/dd HH:mm'});
-            }); 
+	            	$("#fecha").datepicker({dateFormat: 'yy/mm/dd'});
+               	 	$("#hora_inicio").timepicker({ timeFormat: 'HH:mm'});
+               	 	$("#hora_fin").timepicker({timeFormat: 'HH:mm'});
+            	}); 
             
         </script>
     </jsp:attribute>
@@ -20,18 +21,21 @@
 	    <h2>
 	        <c:if test="${registroHoras['new']}">Nuevo </c:if> Registro Horas
 	    </h2>
-	    <form:form modelAttribute="registro_horas" class="form-horizontal" id="add-registroHora-form" action="/registroHoras/save">
-	        <div class="form-group has-feedback">
-	            <petclinic:inputField label="Hora Entrada (Introduce la hora manualmente)" name="hora_entrada"/>   
-	            <petclinic:inputField label="Hora Salida (Introduce la hora manualmente)" name="hora_salida"/>
-	            <input type="hidden" id="trabajador" name="trabajador" value="${trabajador.id}" />
-	            
-	        </div>
-	            <div class="form-group">
+	   <form:form modelAttribute="registro_horas" class="form-horizontal" id="add-cliente-form" action="/registroHoras/save">
+        <div class="form-group has-feedback">
+  			<input type="hidden" name="trabajador" id="trabajador" value="${trabajador.id}">
+  			<petclinic:inputField label="Fecha" name="fecha"/>
+            <petclinic:inputField label="HoraInicio" name="hora_inicio"/>
+            <petclinic:inputField label="HoraFin" name="hora_fin"/>
+        </div>
+        <div class="form-group">
 	                <div class="col-sm-offset-2 col-sm-10">
-	                    <button class="btn btn-default" type="submit">Guardar Registro</button>
+	                    <button class="btn btn-default" type="submit">Añadir Registro de Horas</button>
 	                </div>
 	            </div>
-	    </form:form>
-    </jsp:body> 
+    </form:form>
+    <h3><c:out value="${error}"/></h3>
+   </jsp:body>   
+    
+    
 </petclinic:layout>

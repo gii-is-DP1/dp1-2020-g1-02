@@ -30,8 +30,8 @@ INSERT INTO trabajador(id,nombre,apellidos,dni,telefono, direccion, correo, tipo
 INSERT INTO horario(fecha, hora_inicio, hora_fin, trabajador, descripcion) VALUES ('2020-12-10' , '12:00', '15:00', 1, 'Limpiar en Acuario de Sevilla');
 INSERT INTO horario(fecha, hora_inicio, hora_fin, trabajador, descripcion) VALUES ('2020-12-10', '17:30', '20:30', 3, 'Limpiar en Hostal San Jerónimo (Sevilla)');
 
-INSERT INTO registro_hora(hora_entrada, hora_salida, trabajador) VALUES ('2019-06-16 11:00', '2019-06-16 14:00', 1);
-INSERT INTO registro_hora(hora_entrada, hora_salida, trabajador) VALUES ('2019-08-16 19:00', '2019-08-16 23:00', 2);
+INSERT INTO registro_hora(fecha, hora_inicio, hora_fin, trabajador) VALUES ('2019-06-16', '11:00', '14:00', 1);
+INSERT INTO registro_hora(fecha, hora_inicio, hora_fin, trabajador) VALUES ('2019-08-16', '19:00', '23:00', 2);
 
 INSERT INTO contratoTrabajador(fechainicial,fechafinal,trabajador_id,sueldo) VALUES ('2010-01-01', '2019-12-31', 1, 1200.0);
 INSERT INTO contratoTrabajador(fechainicial,fechafinal,trabajador_id,sueldo) VALUES ('2010-01-01', '2019-12-31', 2, 1200.0);

@@ -14,8 +14,9 @@
     <table id="registro_horastable" class="table table-striped">
         <thead>
         <tr>
-            <th style="width: 180px;">Hora Entrada</th>
-            <th style="width: 180px;">Hora Salida</th>
+        	<th style="width: 180px;">Fecha</th>
+            <th style="width: 180px;">Hora Inicio</th>
+            <th style="width: 180px;">Hora Fin</th>
             <th style="width: 200px;">Nombre</th>
             <th style="width: 200px;">Apellido</th>
             <th> </th>
@@ -24,23 +25,25 @@
         <tbody>
         <c:forEach items="${registro_horas}" var="registro_hora">
             <tr>
-                <td>
-                	<fmt:parseDate value="${registro_hora.hora_entrada}" pattern="yyyy-MM-dd'T'HH:mm" var="date"/>
-					<fmt:formatDate value="${date}" type = "both" dateStyle="long" timeStyle="short" />
+            	<td>
+                    <fmt:parseDate value="${registro_horas.fecha}" pattern="yyyy-MM-dd" var="date"/>
+					<fmt:formatDate value="${date}" type = "date" dateStyle="long"/>
                 </td>
                 <td>
-                	<fmt:parseDate value="${registro_hora.hora_salida}" pattern="yyyy-MM-dd'T'HH:mm" var="date"/>
-					<fmt:formatDate value="${date}" type = "both" dateStyle="long" timeStyle="short" />
+	              <c:out value="${registro_horas.hora_inicio}" />            
                 </td>
                  <td>
-                    <c:out value="${registro_hora.trabajador.nombre}"/>
+					<c:out value="${registro_horas.hora_fin}" />
+                <td>
+                 <td>
+                    <c:out value="${registro_horas.trabajador.nombre}"/>
                 </td>
                 <td>
-                    <c:out value="${registro_hora.trabajador.apellidos}"/>
+                    <c:out value="${registro_horas.trabajador.apellidos}"/>
                 </td>
                 <td>
                 	<spring:url value="/registroHoras/delete/{registroHorasId}" var="registroHorasUrl">
-                		<spring:param name="registroHorasId" value="${registro_hora.id}"/>
+                		<spring:param name="registroHorasId" value="${registro_horas.id}"/>
                 	</spring:url>
                 	<a href="${fn:escapeXml(registroHorasUrl)}">Delete</a>
                 </td>

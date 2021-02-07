@@ -7,6 +7,7 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
@@ -40,13 +41,10 @@ public class HorarioServiceTest {
 	public void testSaveHorario() throws ParseException {
 		Horario horarioNew = new Horario();
 	
-		String myDateString = "14:00:00";
-		SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
-		Date date = sdf.parse(myDateString);
 		
-		horarioNew.setFecha(LocalDate.of(2020, 1, 1));
-		horarioNew.setHora_inicio(date);
-		horarioNew.setHora_fin(date);
+		horarioNew.setFecha(LocalDate.of(2021, 07,25));
+		horarioNew.setHora_inicio(LocalTime.of(12, 00));
+		horarioNew.setHora_fin(LocalTime.of(15, 00));
 		horarioNew.setDescripcion("En acuario de Sevilla");
 
 		horarioService.save(horarioNew);

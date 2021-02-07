@@ -165,15 +165,15 @@ public class ContratoServicioControllerTest {
     void testProcessCreationFormHasErrors() throws Exception {
 		mockMvc.perform(post("/contratosServicios/save")
 						.with(csrf())
-						.param("fechainicial", "2020/11/19")
-						.param("fechafinal", "2020/12/19")
+						.param("fechainicial", "2020/12/01")
+						.param("fechafinal", "")
 						.param("fechapago", "2020/12/15")
 						.param("periodoprueba", "true")
 						.param("presupuesto", "1")
-						.param("id", ""))
+						.param("id", "1"))
 			.andExpect(status().isOk())
 			.andExpect(model().attributeHasErrors("contratoServicio"))
-			.andExpect(model().attributeHasFieldErrors("contratoServicio", "id"))
+			.andExpect(model().attributeHasFieldErrors("contratoServicio", "fechafinal"))
 			.andExpect(view().name("contratosServicios/editContratoServicio"));
 	}
 }
