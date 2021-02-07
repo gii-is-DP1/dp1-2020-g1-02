@@ -1,7 +1,10 @@
 package org.springframework.samples.petclinic.web;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.samples.petclinic.model.Proveedor;
+import org.springframework.samples.petclinic.model.Trabajador;
 import org.springframework.samples.petclinic.service.ProveedorService;
 
 import org.springframework.stereotype.Controller;
@@ -32,13 +35,16 @@ public class ProveedorController {
 		modelMap.addAttribute(proveedor);
 		return "proveedores/editProveedores";
 	}
-	
-//	@GetMapping(path="/delete/{provName}")
-//	public String borrarProveedor(@PathVariable("provName") String provName, ModelMap modelmap) {
-//		Proveedor prov = provService.findProveedorByName(provName).get();
-//		provService.deleteProveedor(prov);
-//		modelmap.addAttribute("message", "Proveedor borrado!");
-//		return "redirect:/proveedores";
-//	}
+	@GetMapping(path="/delete/{provId}")
+	public String borrarTrabajador(@PathVariable("provId") int provId, ModelMap modelmap) {
+		String view="redirect:/proveedores";
+		Optional<Proveedor> proveedor=provService.findProveedorById(provId);
+		if(proveedor.isPresent()) {
+			
+			provService.deleteProveedor(proveedor.get());
+			modelmap.addAttribute("message", "Proveedor borrado correctamente");
+		}
+		return view;
+	}
 	
 }

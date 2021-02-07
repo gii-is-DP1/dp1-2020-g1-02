@@ -10,6 +10,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
@@ -51,8 +52,8 @@ public class Servicio extends BaseEntity {
     @OneToMany(cascade=CascadeType.ALL, mappedBy="servicio")
     private List<Reclamacion> reclamaciones;
     
-    @OneToMany(cascade=CascadeType.ALL, mappedBy="servicio")
-    private List<Valoracion> valoraciones;
+    @OneToOne(cascade=CascadeType.ALL, mappedBy="servicio")
+    private Valoracion valoracion;
 
     @ManyToMany(mappedBy = "servicios")
 	private List<Trabajador> trabajadores;

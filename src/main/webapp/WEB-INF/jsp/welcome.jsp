@@ -4,7 +4,7 @@
 <%@ taglib prefix="petclinic" tagdir="/WEB-INF/tags" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
+<spring:url value="/resources/images/star.jpg" var="star"/>
 <c:set var="user" value="${pageContext.request.userPrincipal.name}" />
 
 <petclinic:layout pageName="home">
@@ -74,11 +74,45 @@
             </div>
          </div>
       </div>
+      
+      
+      <%-- <c:forEach items="${valoraciones}" var="valoracion">
+    <div>
+         <div>
+            <th style="width: 150px;"><c:out value="${valoracion.key}"/></th>
+            
+        </div>
+         <div>
+         	<c:forEach begin="1" step="1" end="${valoracion.value}" >
+						<img src="${star}" width="30px"/>
+					</c:forEach>
+               </div>
+ 
+        
+    </div>
+    </c:forEach> --%>
+      
+      
+      
+      
       <div class="choose_bg">
          <div class="container">
             <div class="white_bg">
             <div class="row">
-               <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12">
+            
+            <c:forEach items="${valoraciones}" var="valoracion" varStatus="index">
+				    <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12">
+                  		<div class="for_box">
+				            <i><img src="resources/icon/${index.index}.png"/></i>
+		                    <h3><c:out value="${valoracion.key}"/></h3>
+				            <c:forEach begin="1" step="1" end="${valoracion.value}" >
+										<img src="${star}" width="30px"/>
+									</c:forEach>
+				        </div>
+				        
+   					</div>
+    </c:forEach>
+               <!-- <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12">
                   <div class="for_box">
                      <i><img src="resources/icon/1.png"/></i>
                      <h3>Jardinería</h3>
@@ -105,8 +139,8 @@
                      <h3>Cristalería</h3>
                      <p>Limpieza y mantenimiento de cristales y cristaleras.</p>
                   </div>
-               </div>
-               <div class="col-md-12">
+               </div> -->
+               <!-- <div class="col-md-12">
                <c:if test = "${user == null}">
          					 <a href="/login" class="read-more">Más Servicios</a>
 	      				</c:if>
@@ -119,8 +153,8 @@
 							</sec:authorize>
 							
 						</c:if>
-                 >
-               </div>
+            
+               </div> -->
             </div>
          </div>
        </div>

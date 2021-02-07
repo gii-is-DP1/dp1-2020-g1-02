@@ -18,6 +18,7 @@
             <th style="width: 180px;">Hora Salida</th>
             <th style="width: 200px;">Nombre</th>
             <th style="width: 200px;">Apellido</th>
+            <th> </th>
         </tr>
         </thead>
         <tbody>

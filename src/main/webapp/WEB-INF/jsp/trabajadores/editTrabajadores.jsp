@@ -21,12 +21,12 @@
        			<petclinic:inputField label="Username" name="user.username"/>
            		<petclinic:inputField label="Password" name="user.password"/>
        			<label for="tipocategoria">Categoria</label>
-  				<form:select path="" id="tipocategoria" name="tipocategoria">
+  				<select name="tipocategoria">
     				<option value="Limpieza">Limpieza</option>
 				    <option value="Mantenimiento">Mantenimiento</option>
 				    <option value="Cristaleria">Cristaleria</option>
 				    <option value="Jardineria">Jardineria</option>
-  				</form:select>
+  				</select>
        		</div>
             <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-10">

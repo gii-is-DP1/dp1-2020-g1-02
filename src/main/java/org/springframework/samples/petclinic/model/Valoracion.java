@@ -7,9 +7,11 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.validator.constraints.Range;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import lombok.Getter;
@@ -25,15 +27,11 @@ public class Valoracion extends BaseEntity {
 	@NotNull
 	private LocalDate fecha;
 	
-	
+	@Range(min=0, max=5)
 	@NotNull
-	private NivelSatisfaccion nivelsatisfaccion;
+	private Integer valoracion;
 	
-	@ManyToOne
-    @JoinColumn(name="cliente_id")
-    private Cliente cliente;
-	
-	@ManyToOne(fetch=FetchType.LAZY)
+	@OneToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="servicio_id")
 	private Servicio servicio;
 
