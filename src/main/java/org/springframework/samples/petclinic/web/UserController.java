@@ -33,6 +33,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 @RequestMapping("/users")
@@ -100,18 +101,18 @@ public class UserController {
 	
 	@PostMapping("/updatePassword")
 	public String changeUserPassword(Locale locale, 
-	  @RequestParam("password") String password, @RequestParam("oldpassword") String oldPassword) {
+	  @RequestParam("psw") String password, @RequestParam("oldpass") String oldPassword) {
 	    User user = userService.findUser(
 	      SecurityContextHolder.getContext().getAuthentication().getName()).get();
 	    
-	    BCryptPasswordEncoder b = new BCryptPasswordEncoder();
-	    
-	    if (!b.matches(oldPassword, user.getPassword())) {
-	        throw new IllegalAccessError();
-	    }
-	    user.setPassword(password);
+		  if (!passwordEncoder.matches(oldPassword, user.getPassword())) { 
+			  throw new IllegalAccessError(); 
+		  }
+		 
+	    user.setPassword(passwordEncoder.encode(password));
 	    userService.saveUser(user);
-	    return "redirect:/";
+	    
+	    return "redirect:/users/" + user.getUsername();
 	}
 	
 	@PostMapping(path="/saveCliente")
@@ -138,6 +139,10 @@ public class UserController {
 			modelMap.addAttribute("trabajador", trabajador);
 			return "users/newTrabajador";
 		}else {
+			User user = trabajador.getUser();
+			String password = user.getPassword();
+			user.setPassword(passwordEncoder.encode(password));
+			trabajador.setUser(user);
 			trabajadorService.saveTrabajador(trabajador);
 			//modelMap.addAttribute("message", "Trabajador insertado correctamente!");
 		}
@@ -151,6 +156,10 @@ public class UserController {
 			modelMap.addAttribute("proveedor", proveedor);
 			return "users/newProveedor";
 		}else {
+			User user = proveedor.getUser();
+			String password = user.getPassword();
+			user.setPassword(passwordEncoder.encode(password));
+			proveedor.setUser(user);
 			proveedorService.saveProveedor(proveedor);
 			//modelMap.addAttribute("message", "Cliente actualizado!");
 		}
@@ -164,6 +173,10 @@ public class UserController {
 			modelMap.addAttribute("trabajador", trabajador);
 			return "users/newAdministrador";
 		}else {
+			User user = trabajador.getUser();
+			String password = user.getPassword();
+			user.setPassword(passwordEncoder.encode(password));
+			trabajador.setUser(user);
 			administradorService.saveAdministrador(trabajador);
 			//modelMap.addAttribute("message", "Cliente actualizado!");
 		}
