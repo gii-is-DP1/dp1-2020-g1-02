@@ -119,11 +119,6 @@
 						<span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
 						<span>Contratos</span>
 					</petclinic:menuItem>
-					
-					<petclinic:menuItem active="${name eq 'valoraciones'}" url="/valoraciones/misValoraciones" title="Valoraciones">
-						<span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
-						<span>Mis Valoraciones</span>
-					</petclinic:menuItem>
           
 					
 					<petclinic:menuItem active="${name eq 'instalaciones'}" url="/instalaciones/misInstalaciones" title="Instalaciones">

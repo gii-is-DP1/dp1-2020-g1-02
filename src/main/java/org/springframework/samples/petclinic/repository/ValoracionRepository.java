@@ -1,6 +1,7 @@
 package org.springframework.samples.petclinic.repository;
 
 import java.util.Collection;
+import java.util.List;
 
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
@@ -19,4 +20,7 @@ public interface ValoracionRepository extends CrudRepository<Valoracion, Integer
 	
 	@Query("SELECT count(v) FROM Valoracion v WHERE v.servicio.tipocategoria = :tipo")
 	Integer getCountValoracionesTipo(@Param("tipo") TipoCategoria tipo);
+	
+	@Query("SELECT v.servicio.id FROM Valoracion v")
+	List<Integer> serviciosConValoracion();
 }

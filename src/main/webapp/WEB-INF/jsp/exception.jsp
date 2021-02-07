@@ -5,13 +5,13 @@
 
 <petclinic:layout pageName="error">
 
-    <spring:url value="/resources/images/error.jpg" var="petsImage"/>
+    <spring:url value="/resources/images/error.png" var="petsImage"/>
     <div class="row">
     	<div class="col-6">
-    		<img src="${petsImage}" class=""/>
+    		<img  src="${petsImage}" class=""/>
     	</div>
     	<div class="col-6 text-center">
-    		<h2 style="color: red;">Something happened...</h2>
+    		<h2 style="color: red;">Ha surgido un problema.</h2>
     		<p>${exception.message}</p>
     		 <h1><c:out value="${error}"/></h1>
     	</div>

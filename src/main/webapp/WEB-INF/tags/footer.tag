@@ -90,4 +90,5 @@
          });
          });
          
-      </script> 
+      </script> <!-- 
+       <script src="/resources/js/checkbox.js"></script> -->

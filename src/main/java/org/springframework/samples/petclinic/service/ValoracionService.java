@@ -110,5 +110,10 @@ public class ValoracionService {
 		l.put(TipoCategoria.Mantenimiento, valMant);
 		return l;
 	}
+	
+	@Transactional(readOnly=true)
+	public List<Integer> serviciosConValoraciones(){
+		return valoracionRepo.serviciosConValoracion();
+	}
 
 }
