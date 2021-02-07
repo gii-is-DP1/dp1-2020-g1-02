@@ -1,7 +1,9 @@
 package org.springframework.samples.petclinic.service;
 
 import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.util.Pair;
 import org.springframework.samples.petclinic.model.RegistroHoras;
 import org.springframework.samples.petclinic.repository.RegistroHorasRepository;
 import org.springframework.stereotype.Service;
@@ -40,14 +42,18 @@ public class RegistroHorasService {
 	}
 
 	@Transactional(readOnly=true)
-	public Iterable<RegistroHoras> findRegistroHorasByTrabajadorId(String nombre) {
-		return registroHorasRepo.findRegistroHorasByTrabajadorId(nombre);
+	public Pair<Double, Iterable<RegistroHoras>> findRegistroHorasByTrabajadorId(Integer tId) {
+		Iterable<RegistroHoras>it=registroHorasRepo.findRegistroHorasByTrabajadorId(tId);
+		Double sum=registroHorasRepo.horasTotalesByTrabajador(tId);
+		return Pair.of(sum, it);
 	}
 	
 	@Transactional(readOnly=true)
 	public Optional<RegistroHoras> findRegistroHorasById(Integer id) {
 		return registroHorasRepo.findById(id);
 	}
+	
+
 
 
 }
