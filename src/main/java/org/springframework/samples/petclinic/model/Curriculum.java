@@ -1,6 +1,8 @@
 package org.springframework.samples.petclinic.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -37,5 +39,8 @@ public class Curriculum extends BaseEntity {
 	
 	@NotNull
 	private TipoCategoria tipocategoria;
+	
+	@OneToOne(cascade = CascadeType.ALL, mappedBy="curriculum")
+	private Trabajador trabajador;
 	
 }

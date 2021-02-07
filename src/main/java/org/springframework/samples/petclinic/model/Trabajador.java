@@ -34,7 +34,8 @@ public class Trabajador extends PersonaEntity {
     @OneToMany(cascade = CascadeType.ALL, mappedBy="trabajador")
     private Set<Horario> horarios;
     
-    @OneToOne(optional=true)
+    @OneToOne
+	@JoinColumn(name="curriculum")
     private Curriculum curriculum;
     
     @OneToMany(cascade = CascadeType.ALL, mappedBy="trabajador")
@@ -53,5 +54,6 @@ public class Trabajador extends PersonaEntity {
 	  public User getUser() {
 		  return user;
 	  }
+	 
 
 }

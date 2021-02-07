@@ -15,6 +15,10 @@
 		        <thead>
 		        <tr>
 		            <th style="width: 150px;">Nombre</th>
+		            <th style="width: 150px;">Apellidos</th>
+		            <th style="width: 150px;">Telefono</th>
+		            <th style="width: 150px;">Correo</th>
+		            <th style="width: 150px;">Descripcion</th>
 		            <th style="width: 200px;">TipoCategoria</th>
 		        </tr>
 		        </thead>
@@ -25,20 +29,34 @@
 		                    <c:out value="${curriculum.nombre}"/>
 		                </td>
 		                <td>
+		                    <c:out value="${curriculum.apellidos}"/>
+		                </td>
+		                <td>
+		                    <c:out value="${curriculum.telefono}"/>
+		                </td>
+		                <td>
+		                    <c:out value="${curriculum.correo}"/>
+		                </td>
+		                <td>
+		                    <c:out value="${curriculum.descripcion}"/>
+		                </td>
+		                <td>
 		                    <c:out value="${curriculum.tipocategoria}"/>
 		                </td>
-		                <td>
-		                	<spring:url value="/curriculums/view/{curriculumId}" var="curriculumUrl">
-		                		<spring:param name="curriculumId" value="${curriculum.id}"/>
-		                	</spring:url>
-		                	<a href="${fn:escapeXml(curriculumUrl)}">Más Info</a>
-		                </td>
-		                <td>
-		                	<spring:url value="/curriculums/delete/{curriculumId}" var="curriculumUrl">
-		                		<spring:param name="curriculumId" value="${curriculum.id}"/>
-		                	</spring:url>
-		                	<a href="${fn:escapeXml(curriculumUrl)}">Delete</a>
-		                </td>
+						<td>
+                			<spring:url value="/delete/{curriculumId}" var="curriculumUrl">
+                				<spring:param name="curriculumId" value="${curriculum.id}"/>
+                			</spring:url>
+                			<a href="${fn:escapeXml(curriculumUrl)}">Eliminar</a>
+               		 	</td>
+               		 	<td>
+               		 	<c:if test="${curriculum.trabajador eq null}">
+							<spring:url value="/users/newTrabajador/{idCurriculum}" var="trabajadorUrl">
+							<spring:param name="idCurriculum" value="${curriculum.id}"/>
+                			</spring:url>
+                			<a href="${fn:escapeXml(trabajadorUrl)}">Añadir Trabajador</a>               			
+               		 	</c:if>		                
+               		 	</td>
 		            </tr>
 		        </c:forEach>
 		        </tbody>
