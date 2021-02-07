@@ -50,7 +50,7 @@ public class TrabajadorService {
 		return trabajadorRepo.findById(trabajadorId);
 	}
 	
-	@Transactional
+	
 	public Optional<Trabajador> findTrabajadorByUsername(String trabajadorUsername) {
 		return trabajadorRepo.findTrabajadorByUsername(trabajadorUsername);
 	}
@@ -71,7 +71,7 @@ public class TrabajadorService {
 		trabajadorRepo.save(trabajador);
 	}
 	
-
+	
 	public Iterable<Trabajador> findTrabajadoresByServicio(Integer servicio) {
 		return trabajadorRepo.trabajadoresByServicio(servicio);
 	}

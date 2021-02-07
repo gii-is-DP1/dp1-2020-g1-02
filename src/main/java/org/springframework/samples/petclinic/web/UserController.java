@@ -11,11 +11,13 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.samples.petclinic.model.Administrador;
 import org.springframework.samples.petclinic.model.Cliente;
+import org.springframework.samples.petclinic.model.Curriculum;
 import org.springframework.samples.petclinic.model.Proveedor;
 import org.springframework.samples.petclinic.model.Trabajador;
 import org.springframework.samples.petclinic.model.User;
 import org.springframework.samples.petclinic.service.AdministradorService;
 import org.springframework.samples.petclinic.service.ClienteService;
+import org.springframework.samples.petclinic.service.CurriculumService;
 import org.springframework.samples.petclinic.service.ProveedorService;
 import org.springframework.samples.petclinic.service.TrabajadorService;
 import org.springframework.samples.petclinic.service.UserService;
@@ -46,6 +48,8 @@ public class UserController {
 	private AdministradorService administradorService;
 	@Autowired
 	private ClienteService clienteService;
+	@Autowired
+	private CurriculumService curriculumService;
 	@Autowired
 	private ProveedorService proveedorService;
 	@Autowired
@@ -84,6 +88,20 @@ public class UserController {
 	public String newTrabajador(ModelMap modelMap) {
 		String vista ="trabajadores/editTrabajadores";
 		Trabajador trabajador = new Trabajador();
+		modelMap.addAttribute("trabajador", trabajador);
+		return vista;
+	}
+	
+	@GetMapping("/newTrabajador/{idCurriculum}")
+	public String newTrabajadorCurriculum(@PathVariable("idCurriculum") Integer idCurriculum, ModelMap modelMap) {
+		String vista ="trabajadores/editTrabajadores";
+		Curriculum curriculum = curriculumService.findCurriculumById(idCurriculum).get();
+		Trabajador trabajador = new Trabajador();
+		trabajador.setNombre(curriculum.getNombre());
+		trabajador.setApellidos(curriculum.getApellidos());
+		trabajador.setTelefono(curriculum.getTelefono());
+		trabajador.setCorreo(curriculum.getCorreo());
+		trabajador.setTipocategoria(curriculum.getTipocategoria());
 		modelMap.addAttribute("trabajador", trabajador);
 		return vista;
 	}

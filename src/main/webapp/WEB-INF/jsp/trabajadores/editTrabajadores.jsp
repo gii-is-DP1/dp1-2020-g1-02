@@ -12,6 +12,7 @@
        <form:form modelAttribute="trabajador" class="form-horizontal" action="/users/saveTrabajador">
        		<div class="form-group has-feedback">
        			<input type="hidden" id="id" name="id" value=' <c:out value="${trabajador.id}"/>'>
+       			<input type="hidden" id="idCurriculum" name="idCurriculum" value=' <c:out value="${curriculum.id}"/>'>
        			<petclinic:inputField label="Nombre" name="nombre"/>
        			<petclinic:inputField label="Apellidos" name="apellidos"/>
        			<petclinic:inputField label="DNI" name="dni"/>

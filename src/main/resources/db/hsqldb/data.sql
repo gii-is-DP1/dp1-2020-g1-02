@@ -17,9 +17,15 @@ INSERT INTO authorities(id,username,authority) VALUES (6,'JosePabloSL','proveedo
 INSERT INTO authorities(id,username,authority) VALUES (7,'JoseCarlos','trabajador');
 INSERT INTO authorities(id,username,authority) VALUES (8,'Sistema','administrador');
 
-INSERT INTO trabajador(id,nombre,apellidos,dni,telefono, direccion, correo, tipocategoria) VALUES (1,'Carlos Jesus', 'Villadiego', '78461836B','666888888','C/Garcia Marquez n2', 'calvirgar@alum.us.es', 0);
-INSERT INTO trabajador(id,nombre,apellidos,dni,telefono, direccion, correo, tipocategoria) VALUES (2,'Carlos Jesus2', 'Villadiego', '78461835B','666888888','C/Garcia Marquez n2', 'calvirgar@alum.us.es', 2);
-INSERT INTO trabajador(id,nombre,apellidos,dni,telefono, direccion, correo, tipocategoria, username) VALUES (3,'Jose Carlos', 'Morales', '20099009B','666888884','C/Huertas', 'josmorbor3@alum.us.es', 2, 'JoseCarlos');
+INSERT INTO curriculum(nombre, apellidos, telefono, correo, descripcion, tipocategoria) VALUES ('Carlos', 'Villadiego', '666666666', 'carvilgar1@us.es', 'Mucha experiencia en el sector', 0);
+INSERT INTO curriculum(nombre, apellidos, telefono, correo, descripcion, tipocategoria) VALUES ('Carlos Jesus2', 'Villadiego', '666666666', 'carvilgar1@us.es', 'Muchas ganas de trabajar', 2);
+INSERT INTO curriculum(nombre, apellidos, telefono, correo, descripcion, tipocategoria) VALUES ('Jose Carlos', 'Morales', '666888884','josmorbor3@alum.us.es','Muchas ganas de trabajar', 2);
+INSERT INTO curriculum(nombre, apellidos, telefono, correo, descripcion, tipocategoria) VALUES ('Javier', 'Garcia', '666888887','javier@alum.us.es','Muchas ganas de empezar a trabajar', 1);
+INSERT INTO curriculum(nombre, apellidos, telefono, correo, descripcion, tipocategoria) VALUES ('Manuel', 'Ruiz', '666888800','manuel@alum.us.es','Gran experiencia en el sector', 1);
+
+INSERT INTO trabajador(id,nombre,apellidos,dni,telefono, direccion, correo, tipocategoria, curriculum) VALUES (1,'Carlos Jesus', 'Villadiego', '78461836B','666888888','C/Garcia Marquez n2', 'calvirgar@alum.us.es', 0, 1);
+INSERT INTO trabajador(id,nombre,apellidos,dni,telefono, direccion, correo, tipocategoria, curriculum) VALUES (2,'Carlos Jesus2', 'Villadiego', '78461835B','666888888','C/Garcia Marquez n2', 'calvirgar@alum.us.es', 2, 2);
+INSERT INTO trabajador(id,nombre,apellidos,dni,telefono, direccion, correo, tipocategoria, username, curriculum) VALUES (3,'Jose Carlos', 'Morales', '20099009B','666888884','C/Huertas', 'josmorbor3@alum.us.es', 2, 'JoseCarlos', 3);
 
 INSERT INTO horario(fecha, hora_inicio, hora_fin, trabajador, descripcion) VALUES ('2020-12-10' , '12:00', '15:00', 1, 'Limpiar en Acuario de Sevilla');
 INSERT INTO horario(fecha, hora_inicio, hora_fin, trabajador, descripcion) VALUES ('2020-12-10', '17:30', '20:30', 3, 'Limpiar en Hostal San Jerónimo (Sevilla)');
@@ -70,9 +76,6 @@ INSERT INTO factura(fecha, precio_total, proveedor, pedido) VALUES ('2020-10-20'
 INSERT INTO factura(fecha, precio_total, proveedor, pedido) VALUES ('2020-10-20', 137.89, 1, 2);
 INSERT INTO factura(fecha, precio_total, proveedor, pedido) VALUES ('2021-01-20', 56.01, 3, 3);
 
-
-INSERT INTO curriculum(nombre, apellidos, telefono, correo, descripcion, tipocategoria) VALUES ('Carlos', 'Villadiego', '666666666', 'carvilgar1@us.es', 'Mucha experiencia en el sector', 0);
-INSERT INTO curriculum(nombre, apellidos, telefono, correo, descripcion, tipocategoria) VALUES ('Carlos Jesus2', 'Villadiego', '666666666', 'carvilgar1@us.es', 'Muchas ganas de trabajar', 2);
 
 
 INSERT INTO administrador(id,nombre,apellidos,dni,telefono, direccion, correo, tipocategoria, username) VALUES (1,'CARLOS JESUS', 'VILLADIEGO GARCIA', '78461836B','666666666','C/Motorhead, 6', 'calvirgar@alum.us.es', 0, 'admin');

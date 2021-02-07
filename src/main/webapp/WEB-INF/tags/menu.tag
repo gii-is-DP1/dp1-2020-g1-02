@@ -88,6 +88,12 @@
 						<span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
 						<span>Stock</span>
 					</petclinic:menuItem>
+					
+					<petclinic:menuItem active="${name eq 'curriculums'}" url="/curriculums"
+						title="Curriculums">
+						<span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+						<span>Curriculums</span>
+					</petclinic:menuItem>
 				</sec:authorize>
 				
 				<sec:authorize access="hasAuthority('trabajador')">
