@@ -21,6 +21,7 @@
             <th style="width: 200px;">FECHA INICIO</th>
             <th style="width: 200px;">FECHA FIN</th>
             <th style="width: 200px;">SUELDO</th>
+            <th style="width: 200px;"></th>
         </tr>
         </thead>
         <tbody>

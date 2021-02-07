@@ -25,10 +25,11 @@
     <table id="productosTable" class="table table-striped">
         <thead>
         <tr>
-            <th style="width: 150px;">Nombre</th>
-            <th style="width: 150px;">Cantidad en Stock</th>
-            <th style="width: 150px;"></th>
-            <th style="width: 150px;"></th>
+            <th style="width: 35%;">Nombre</th>
+            <th style="width: 35%;">Cantidad en Stock</th>
+            <th style="width: 10%;"></th>
+            <th style="width: 10%;"></th>
+            <th style="width: 10%;"></th>
         </tr>
         </thead>
         <tbody>
@@ -40,18 +41,23 @@
                 <td>
                     <c:out value="${producto.cantidad}"/>
                 </td>
-                
+                <td>
+                	<spring:url value="/productos/{productId}/sumar" var="productUrl">
+                		<spring:param name="productId" value="${producto.id}"/>
+                	</spring:url>
+                	<a href="${fn:escapeXml(productUrl)}"><img src="/resources/images/sumar.png" width="30px"/></a>
+                </td>
                 <td>
                 	<spring:url value="/productos/{productId}/restar" var="productUrl">
                 		<spring:param name="productId" value="${producto.id}"/>
                 	</spring:url>
-                	<a href="${fn:escapeXml(productUrl)}">Restar unidad</a>
+                	<a href="${fn:escapeXml(productUrl)}"><img src="/resources/images/restar.png" width="30px"/></a>
                 </td>
                 <td>
                 	<spring:url value="/productos/delete/{productoId}" var="productUrl">
                 		<spring:param name="productoId" value="${producto.id}"/>
                 	</spring:url>
-                	<a href="${fn:escapeXml(productUrl)}">Borrar</a>
+                	<a href="${fn:escapeXml(productUrl)}"><img src="/resources/images/delete.jpg" width="30px"/></a>
                 </td>
             </tr>
         </c:forEach>

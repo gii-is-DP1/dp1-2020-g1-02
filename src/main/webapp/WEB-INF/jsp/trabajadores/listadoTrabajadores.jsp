@@ -12,16 +12,14 @@
 <petclinic:layout pageName="trabajadores">
     <h2>Trabajadores</h2>
 	
-	<a href="/users/newTrabajador">
-		<button type="button" class="btn btn-default btn-lg">
-  			<span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Nuevo trabajador
-		</button>
-	</a>
-	<a href="/users/newAdministrador">
-		<button type="button" class="btn btn-default btn-lg">
-  			<span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Nuevo administrador
-		</button>
-	</a>
+	
+	<spring:url value="/users/newTrabajador" var="trabajadorUrl">
+    </spring:url>
+    <a href="${fn:escapeXml(trabajadorUrl)}" class="btn btn-default">Nuevo trabajador</a>
+	
+	<spring:url value="/users/newAdministrador" var="administradorUrl">
+    </spring:url>
+    <a href="${fn:escapeXml(administradorUrl)}" class="btn btn-default">Nuevo administrador</a>
 	
     <table id="eventsTable" class="table table-striped">
         <thead>
@@ -33,6 +31,12 @@
             <th style="width: 150px;">CORREO</th>
             <th style="width: 150px;">TELEFONO</th>
             <th style="width: 150px;">CATEGORIA</th>
+            <th style="width: 150px;"></th>
+            <th style="width: 150px;"></th>
+            <th style="width: 150px;"></th>
+            <th style="width: 150px;"></th>
+            <th style="width: 150px;"></th>
+            
         </tr>
         </thead>
         <tbody>
@@ -60,12 +64,7 @@
                     <c:out value="${trabajador.tipocategoria}"/>
                 </td>          
               
-                <td>
-                	<spring:url value="/trabajadores/{trabajadorId}/edit" var="trabajadorUrl">
-                		<spring:param name="trabajadorId" value="${trabajador.id}"/>
-                	</spring:url>
-                	<a href="${fn:escapeXml(trabajadorUrl)}">Editar</a>
-                </td>
+                
                 	<td>
                 	<spring:url value="/contratosTrabajadores/{trabajadorId}" var="contratosUrl">
                 		<spring:param name="trabajadorId" value="${trabajador.id}"/>
@@ -86,7 +85,12 @@
                 	</spring:url>
                 	<a href="${fn:escapeXml(horariosUrl)}">Horarios</a>
                 </td>
-                
+                <td>
+                	<spring:url value="/trabajadores/{trabajadorId}/edit" var="trabajadorUrl">
+                		<spring:param name="trabajadorId" value="${trabajador.id}"/>
+                	</spring:url>
+                	<a href="${fn:escapeXml(trabajadorUrl)}"><img src="/resources/images/edit.jpg" width="30px"/></a>
+                </td>
                   <td>
                 	<spring:url value="/trabajadores/delete/{trabajadorId}" var="trabajadorUrl">
                 		<spring:param name="trabajadorId" value="${trabajador.id}"/>

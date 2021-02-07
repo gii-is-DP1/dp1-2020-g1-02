@@ -8,15 +8,18 @@
 <%@ taglib prefix="petclinic" tagdir="/WEB-INF/tags" %>
 
 <petclinic:layout pageName="facturas">
-    <h2>Factura</h2>
-
+    <h2>Factura: <c:out value="${factura.id}"/></h2>
+	<spring:url value="/facturas" var="facturaUrl">
+    </spring:url>
+    <a href="${fn:escapeXml(facturaUrl)}" class="btn btn-default">Ver todas las facturas</a>
     <table id="facturasTable" class="table table-striped">
         <thead>
         <tr>
-            <th style="width: 150px;">Fecha</th>
-            <th style="width: 150px;">Precio total</th>
-            <th style="width: 150px;">Nombre del proveedor</th>
-            <th style="width: 150px;">ID del pedido</th>
+            <th style="width: 20%;">Fecha</th>
+            <th style="width:  20%;">Precio total</th>
+            <th style="width:  20%;">Nombre del proveedor</th>
+            <th style="width:  20%;">ID del pedido</th>
+           
 
 
         </tr>
@@ -34,13 +37,6 @@
               </td>
               <td>
                   <c:out value="${factura.pedido.id}"/>
-              </td>
-              
-              <td>
-              	<spring:url value="/facturas/delete/{facturaId}" var="facturaUrl">
-              		<spring:param name="facturaId" value="${factura.id}"/>
-              	</spring:url>
-              	<a href="${fn:escapeXml(facturaUrl)}">Delete</a>
               </td>
           </tr>
             

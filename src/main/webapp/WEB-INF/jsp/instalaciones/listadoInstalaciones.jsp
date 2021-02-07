@@ -20,18 +20,18 @@
     	</form>
      </c:if>
     
-    <a href="/instalaciones/new">
-		<button type="button" class="btn btn-default btn-lg">
-  			<span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Nueva Instalacion
-		</button>
-	</a>
+    
+    <spring:url value="/instalaciones/new" var="instalacionesUrl">
+    </spring:url>
+    <a href="${fn:escapeXml(instalacionesUrl)}" class="btn btn-default">Nueva instalacion</a>
+  
 
     <table id="instalacionesTable" class="table table-striped">
         <thead>
         <tr>
-            <th style="width: 150px;">Lugar</th>
-            <th style="width: 200px;">Dimension</th>
-            <th>ID Cliente</th>
+            <th style="width: 30%;">Lugar</th>
+            <th style="width: 30%;">Dimension</th>
+            <th style="width: 30%;">ID Cliente</th>
         </tr>
         </thead>
         <tbody>

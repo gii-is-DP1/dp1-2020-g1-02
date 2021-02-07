@@ -112,12 +112,12 @@
 				<sec:authorize access="hasAuthority('cliente')">
 					<petclinic:menuItem active="${name eq 'servicios'}" url="/servicios/misServicios" title="servicios">
 						<span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
-						<span>Servicios</span>
+						<span>Mis servicios</span>
 					</petclinic:menuItem>
 					
 					<petclinic:menuItem active="${name eq 'contratos'}" url="/contratosServicios/misContratos" title="contratos">
 						<span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
-						<span>Contratos</span>
+						<span>Mis contratos</span>
 					</petclinic:menuItem>
           
 					

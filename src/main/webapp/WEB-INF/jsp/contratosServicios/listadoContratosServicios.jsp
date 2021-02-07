@@ -9,8 +9,8 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 
 <petclinic:layout pageName="contratosServicios"> 
-	<sec:authorize access="hasAuthority('administrador')">
-    <h2>Contratos que expiran el  próximo mes</h2>
+	
+<%--     <h2>Contratos que expiran el  próximo mes</h2>
      <table id="contratosServicios" class="" style="background-color: yellow;">
         <thead>
         <tr>
@@ -29,22 +29,22 @@
         <c:forEach items="${aviso}" var="contrato">
             <tr>
                 <td>
-                    <c:out value="${contrato.id}"/>
+                   <fmt:parseDate value="${contrato.fechainicial}" pattern="yyyy-MM-dd" var="date"/>
+	                <fmt:formatDate value="${date}" type = "date" dateStyle="long"/>     
                 </td>
                 <td>
-                    <c:out value="${contrato.fechainicial}"/>
+                    <fmt:parseDate value="${contrato.fechafinal}" pattern="yyyy-MM-dd" var="date"/>
+	                 <fmt:formatDate value="${date}" type = "date" dateStyle="long"/> 
                 </td>
                 <td>
-                    <c:out value="${contrato.fechafinal}"/>
+                    <fmt:parseDate value="${contrato.fechapago}" pattern="yyyy-MM-dd" var="date"/>
+	                 <fmt:formatDate value="${date}" type = "date" dateStyle="long"/> 
                 </td>
                 <td>
-                    <c:out value="${contrato.fechapago}"/>
+                    <c:out value="${contrato.presupuesto.servicio.cliente.dni}"/>
                 </td>
                 <td>
-                    <c:out value="${contrato.cliente.dni}"/>
-                </td>
-                <td>
-                    <c:out value="${contrato.presupuesto.id}"/>
+                    <c:out value="${contrato.presupuesto.precio}"/>
                 </td>
                 <td>
                     <c:out value="${contrato.periodoPrueba}"/>
@@ -55,13 +55,13 @@
             </tr>
         </c:forEach>
         </tbody>
-    </table>
-    </sec:authorize>
+    </table> --%>
+
 	<h2>Contratos de Servicios</h2>
     <table id="contratosServicios" class="table table-striped">
         <thead>
         <tr>
-            <th style="width: 150px;">ID</th>
+
             <th style="width: 200px;">Fecha Inicial</th>
             <th style="width: 200px;">Fecha Final</th>
             <th style="width: 200px;">Fecha Pago</th>
@@ -74,24 +74,24 @@
         </thead>
         <tbody>
         <c:forEach items="${contratosServicios}" var="contrato">
-            <tr>
+             <tr>
                 <td>
-                    <c:out value="${contrato.id}"/>
+                   <fmt:parseDate value="${contrato.fechainicial}" pattern="yyyy-MM-dd" var="date"/>
+	                <fmt:formatDate value="${date}" type = "date" dateStyle="long"/>     
                 </td>
                 <td>
-                    <c:out value="${contrato.fechainicial}"/>
+                    <fmt:parseDate value="${contrato.fechafinal}" pattern="yyyy-MM-dd" var="date"/>
+	                 <fmt:formatDate value="${date}" type = "date" dateStyle="long"/> 
                 </td>
                 <td>
-                    <c:out value="${contrato.fechafinal}"/>
+                    <fmt:parseDate value="${contrato.fechapago}" pattern="yyyy-MM-dd" var="date"/>
+	                 <fmt:formatDate value="${date}" type = "date" dateStyle="long"/> 
                 </td>
                 <td>
-                    <c:out value="${contrato.fechapago}"/>
+                    <c:out value="${contrato.presupuesto.servicio.cliente.dni}"/>
                 </td>
                 <td>
-                    <c:out value="${contrato.cliente.dni}"/>
-                </td>
-                <td>
-                    <c:out value="${contrato.presupuesto.id}"/>
+                    <c:out value="${contrato.presupuesto.precio}"/>
                 </td>
                 <td>
                     <c:out value="${contrato.periodoPrueba}"/>

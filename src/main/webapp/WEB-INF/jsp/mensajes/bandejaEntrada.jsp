@@ -13,11 +13,9 @@
 <spring:url value="/resources/images/cerrado.png" var="cerrado"/>
     <h2>Mensajes</h2>
 
-	<a href="mensajes/new">
-		<button type="button" class="btn btn-default btn-lg">
-  			<span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Nuevo mensajes
-		</button>
-	</a>
+	<spring:url value="/mensajes/new" var="mensajesUrl">
+    </spring:url>
+    <a href="${fn:escapeXml(mensajesUrl)}" class="btn btn-default">Nuevo mensaje</a>
 
     <table id="mensajesTable" class="table table-striped">
         <thead>

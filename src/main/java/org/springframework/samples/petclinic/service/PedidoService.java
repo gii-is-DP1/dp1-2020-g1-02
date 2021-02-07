@@ -57,7 +57,7 @@ public class PedidoService {
     		pedido.setFechaPedido(LocalDate.now());
     		this.save(pedido);
     		Producto producto = productoService.findByName(pedido.getOferta().getName()).get();
-    		productoService.sumarProducto(producto, pedido);
+    		productoService.sumarProducto(producto, pedido.getCantidadProducto());
     		facturaService.creaFactura(pedido);
 		} else {
 			throw new LimitePedidoException();

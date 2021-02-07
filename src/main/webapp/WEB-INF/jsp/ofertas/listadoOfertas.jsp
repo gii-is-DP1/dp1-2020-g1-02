@@ -15,10 +15,12 @@
     <table id="ofertasTable" class="table table-striped">
         <thead>
         <tr>
-            <th style="width: 150px;">ID</th>
-            <th style="width: 150px;">Producto</th>
-            <th style="width: 200px;">Precio por unidad</th>
-            <th style="width: 150px;">Proveedor</th>
+            <th style="width: 18%;">ID</th>
+            <th style="width: 18%;">Producto</th>
+            <th style="width: 18%;">Precio por unidad</th>
+            <th style="width: 18%;">Proveedor</th>
+            <th style="width: 18%;"></th>
+            <th style="width: 10%;"></th>
             <%-- <th style="width: 150px;">Cantidad deseada</th>--%>
         </tr>
         </thead>
