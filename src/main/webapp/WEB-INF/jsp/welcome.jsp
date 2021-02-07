@@ -105,13 +105,14 @@
                   		<div class="for_box">
 				            <i><img src="resources/icon/${index.index}.png"/></i>
 		                    <h3><c:out value="${valoracion.key}"/></h3>
-				            <c:forEach begin="1" step="1" end="${valoracion.value}" >
+				            <p> <c:forEach begin="1" step="1" end="${valoracion.value}" >
 										<img src="${star}" width="30px"/>
 									</c:forEach>
+							</p>
 				        </div>
 				        
    					</div>
-    </c:forEach>
+    		</c:forEach>
                <!-- <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12">
                   <div class="for_box">
                      <i><img src="resources/icon/1.png"/></i>
