@@ -11,6 +11,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -75,13 +76,10 @@ public class HorarioControllerTest {
 		
 		horario = new Horario();
 		horario.setId(1);
-		String myDateString = "14:00:00";
-		SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
-		Date date = sdf.parse(myDateString);
 		
 		horario.setFecha(LocalDate.of(2020, 1, 1));
-		horario.setHora_inicio(date);
-		horario.setHora_fin(date);
+		horario.setHora_inicio(LocalTime.of(12, 30));
+		horario.setHora_fin(LocalTime.of(17,30));
 		horario.setDescripcion("Ese es tu horario de hoy");
 		horario.setTrabajador(trabajador);
 		

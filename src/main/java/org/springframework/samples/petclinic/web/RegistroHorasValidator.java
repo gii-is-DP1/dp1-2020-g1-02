@@ -1,7 +1,9 @@
 package org.springframework.samples.petclinic.web;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.regex.Pattern;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,23 +40,14 @@ private static final String REQUIRED = "required";
 	public void validate(Object obj, Errors errors) {
 		RegistroHoras registroHoras = (RegistroHoras) obj;
 		String nombreTrab = registroHoras.getTrabajador().getNombre();
-		LocalDateTime hora_entrada = registroHoras.getHora_entrada();
-		LocalDateTime hora_salida = registroHoras.getHora_salida();
+		LocalDate fecha = registroHoras.getFecha();
 
 		if (nombreTrab == null || nombreTrab.trim().equals("")) {
 			errors.rejectValue("nombreTrab", REQUIRED, REQUIRED);
 		}
 		
-		if (hora_entrada == null || !Pattern.matches("yyyy/MM/dd HH:mm", hora_entrada.format(DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm")))) {
-			errors.rejectValue("hora_entrada", REQUIRED + " debe tener 4 dígitos el año, 2 dígitos el mes, 2 dígitos el día y estar separados por barra. También debe de tener 2 dígitos la hora, 2 dígitos el minuto y estar separados por 2 puntos", REQUIRED + " debe tener 4 dígitos el año, 2 dígitos el mes, 2 dígitos el día y estar separados por barra. También debe de tener 2 dígitos la hora, 2 dígitos el minuto y estar separados por 2 puntos");
-		}
-
-		if (hora_salida == null || !Pattern.matches("yyyy/MM/dd HH:mm", hora_salida.format(DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm")))) {
-			errors.rejectValue("hora_salida", REQUIRED + " debe tener 4 dígitos el año, 2 dígitos el mes, 2 dígitos el día y estar separados por barra. También debe de tener 2 dígitos la hora, 2 dígitos el minuto y estar separados por 2 puntos", REQUIRED + " debe tener 4 dígitos el año, 2 dígitos el mes, 2 dígitos el día y estar separados por barra. También debe de tener 2 dígitos la hora, 2 dígitos el minuto y estar separados por 2 puntos");
-		}
-		
-		if (hora_salida.isBefore(hora_entrada)) {
-			errors.rejectValue("La hora de salida no puede ser antes que la hora de entrada", REQUIRED);
+		if (fecha == null || !Pattern.matches("yyyy/MM/dd", fecha.format(DateTimeFormatter.ofPattern("yyyy/MM/dd")))) {
+			errors.rejectValue("fecha", REQUIRED + " debe tener 4 dígitos el año, 2 dígitos el mes, 2 dígitos el día y estar separados por barra.", REQUIRED + " debe tener 4 dígitos el año, 2 dígitos el mes, 2 dígitos el día y estar separados por barra");
 		}
 
 	}

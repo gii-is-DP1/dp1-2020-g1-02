@@ -131,7 +131,7 @@ public class ContratoTrabajadorControllerTest {
 						.param("fechafinal", "2020/12/19")
 						.param("sueldo", "20.8")
 						.param("trabajador", "1"))
-			.andExpect(status().isOk())
+			.andExpect(status().is3xxRedirection())
 			.andExpect(view().name("redirect:/contratosTrabajadores/1"));
 	}
 	

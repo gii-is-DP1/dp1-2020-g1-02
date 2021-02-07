@@ -9,7 +9,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -68,8 +70,9 @@ public class RegistroHorasControllerTest {
 	void setup() {
 		registroHora = new RegistroHoras();
 		registroHora.setId(1);
-		registroHora.setHora_entrada(LocalDateTime.of(2020, 12, 10, 8, 00));
-		registroHora.setHora_salida(LocalDateTime.of(2020, 12, 10, 15, 00));
+		registroHora.setFecha(LocalDate.of(2020, 1, 1));
+		registroHora.setHora_inicio(LocalTime.of(12, 30));
+		registroHora.setHora_fin(LocalTime.of(17,30));
 		
 		authority = new Authorities();
 		user = new User();
@@ -130,8 +133,9 @@ public class RegistroHorasControllerTest {
     void testProcessCreationFormSuccess() throws Exception {
 		mockMvc.perform(post("/registroHoras/save")
 						.with(csrf())
-						.param("hora_entrada", "2020/12/10 10:00")
-						.param("hora_salida", "2020/12/10 15:00")
+						.param("fecha", "2021/08/12")
+						.param("hora_inicio", "10:00")
+						.param("hora_fin", "15:00")
 						.param("trabajador", "1"))	
 			.andExpect(status().is2xxSuccessful())
 			.andExpect(view().name("succesful"));
@@ -142,12 +146,13 @@ public class RegistroHorasControllerTest {
     void testProcessCreationFormHasErrors() throws Exception {
 		mockMvc.perform(post("/registroHoras/save")
 						.with(csrf())
-						.param("hora_entrada", "")
-						.param("hora_salida", "2020/12/10 15:00")
+						.param("fecha", "2021/08/12")
+						.param("hora_inicio", "")
+						.param("hora_fin", "15:00")
 						.param("trabajador", "1"))
 			.andExpect(status().isOk())
 			.andExpect(model().attributeHasErrors("registroHoras"))
-			.andExpect(model().attributeHasFieldErrors("registroHoras", "hora_entrada"))
+			.andExpect(model().attributeHasFieldErrors("registroHoras", "hora_inicio"))
 			.andExpect(view().name("registroHoras/newRegistroHoras"));
 	}
 

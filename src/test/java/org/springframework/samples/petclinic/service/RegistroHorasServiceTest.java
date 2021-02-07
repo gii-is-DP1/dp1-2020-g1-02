@@ -1,7 +1,13 @@
 package org.springframework.samples.petclinic.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.util.Date;
 import java.util.Optional;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,10 +37,13 @@ public class RegistroHorasServiceTest {
 	}
 	
 	@Test
-	public void testSaveRegistroHoras() {
+	public void testSaveRegistroHoras() throws ParseException {
 		RegistroHoras registroHorasNew = new RegistroHoras();
-		registroHorasNew.setHora_entrada(LocalDateTime.MAX);
-		registroHorasNew.setHora_salida(LocalDateTime.MIN);
+		
+		registroHorasNew.setFecha(LocalDate.of(2021, 07,25));
+		registroHorasNew.setHora_inicio(LocalTime.of(12, 00));
+		registroHorasNew.setHora_fin(LocalTime.of(15, 00));
+		
 
 		registroHorasService.saveRegistroHoras(registroHorasNew);
 		
