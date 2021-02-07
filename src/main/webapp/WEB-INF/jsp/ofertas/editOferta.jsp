@@ -14,24 +14,30 @@
         <c:if test="${oferta['new']}">Nueva </c:if> Oferta
     </h2>
     <form:form modelAttribute="oferta" class="form-horizontal" id="add-oferta-form" action="/ofertas/save">
+    
         <div class="form-group has-feedback">
-        
-         <petclinic:selectField label="Producto" name="name" size="${size}" names="${productos}"></petclinic:selectField>
-           
-           <%-- <label for="name">Producto a ofertar</label>
-  				<select id="name" name="name">
-  				<c:forEach items="${productos}" var="producto">
+        	<%-- <div class="form-group">
+         	<petclinic:selectField label="Producto" name="name" size="1" names="${productos}"/>
+         	</div>  --%> 
+         	
+         	<label for="name"> Producto </label>
+           <select name="name" size="1" >
+           <c:forEach items="${productos}" var="producto">
 		            <tr>
 		                <td>
-		                   <option><c:out value="${producto.name}"/></option>
+		                   <option><c:out value="${producto}"/></option>
 		                </td>
 		            </tr>
 		        </c:forEach>
-  				</select> --%>
-  				
-  				
+			</select>  
+
+			
+         	 <div class="form-group">
             <petclinic:inputField label="PrecioUnidad" name="precioU"/>
+            </div> 
+         
             <input type="hidden" id="proveedor" name="proveedor" value="${proveedor.id}" />
+
             
         </div>
        	<div class="form-group">

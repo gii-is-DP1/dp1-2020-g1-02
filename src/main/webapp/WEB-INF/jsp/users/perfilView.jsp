@@ -100,6 +100,11 @@
 	            </div>
 	        	</form:form>
 			</sec:authorize>
+			<div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <a href="/users/editContrasenya"><button class="btn btn-default">Cambiar contraseña</button></a>
+                </div>
+            </div>
 			
         </div>
     </jsp:body>

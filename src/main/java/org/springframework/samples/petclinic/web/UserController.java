@@ -1,7 +1,11 @@
 package org.springframework.samples.petclinic.web;
 
+import java.security.Principal;
 import java.util.Collection;
+import java.util.Locale;
+import java.util.Optional;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +22,8 @@ import org.springframework.samples.petclinic.service.UserService;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -26,6 +32,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 @RequestMapping("/users")
@@ -80,6 +88,33 @@ public class UserController {
 		return vista;
 	}
 	
+	@GetMapping("/editContrasenya")
+	public String editContrasenya(Principal principal, ModelMap modelMap) {
+		String vista ="users/editContrasenya";
+		Optional<User> user = this.userService.findUser(principal.getName());
+		if(user.isEmpty()) {
+			throw new UsernameNotFoundException("No has iniciado sesión");
+		}
+		modelMap.addAttribute("actualPass", user.get().getPassword());
+		return vista;
+	}
+	
+	@PostMapping("/updatePassword")
+	public String changeUserPassword(Locale locale, 
+	  @RequestParam("psw") String password, @RequestParam("oldpass") String oldPassword) {
+	    User user = userService.findUser(
+	      SecurityContextHolder.getContext().getAuthentication().getName()).get();
+	    
+		  if (!passwordEncoder.matches(oldPassword, user.getPassword())) { 
+			  throw new IllegalAccessError(); 
+		  }
+		 
+	    user.setPassword(passwordEncoder.encode(password));
+	    userService.saveUser(user);
+	    
+	    return "redirect:/users/" + user.getUsername();
+	}
+	
 	@PostMapping(path="/saveCliente")
 	public String salvarCliente(@Valid Cliente cliente, BindingResult result,ModelMap modelMap) {
 		String view="redirect:/";
@@ -104,6 +139,10 @@ public class UserController {
 			modelMap.addAttribute("trabajador", trabajador);
 			return "users/newTrabajador";
 		}else {
+			User user = trabajador.getUser();
+			String password = user.getPassword();
+			user.setPassword(passwordEncoder.encode(password));
+			trabajador.setUser(user);
 			trabajadorService.saveTrabajador(trabajador);
 			//modelMap.addAttribute("message", "Trabajador insertado correctamente!");
 		}
@@ -117,6 +156,10 @@ public class UserController {
 			modelMap.addAttribute("proveedor", proveedor);
 			return "users/newProveedor";
 		}else {
+			User user = proveedor.getUser();
+			String password = user.getPassword();
+			user.setPassword(passwordEncoder.encode(password));
+			proveedor.setUser(user);
 			proveedorService.saveProveedor(proveedor);
 			//modelMap.addAttribute("message", "Cliente actualizado!");
 		}
@@ -130,6 +173,10 @@ public class UserController {
 			modelMap.addAttribute("trabajador", trabajador);
 			return "users/newAdministrador";
 		}else {
+			User user = trabajador.getUser();
+			String password = user.getPassword();
+			user.setPassword(passwordEncoder.encode(password));
+			trabajador.setUser(user);
 			administradorService.saveAdministrador(trabajador);
 			//modelMap.addAttribute("message", "Cliente actualizado!");
 		}

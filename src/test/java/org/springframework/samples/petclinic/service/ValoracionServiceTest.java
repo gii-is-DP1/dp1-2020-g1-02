@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.samples.petclinic.model.NivelSatisfaccion;
+import org.springframework.samples.petclinic.model.TipoCategoria;
 import org.springframework.samples.petclinic.model.Valoracion;
 import org.springframework.stereotype.Service;
 
@@ -35,7 +36,7 @@ public class ValoracionServiceTest {
 	public void testSaveValoracion() {
 		Valoracion valoracionNew = new Valoracion();
 		valoracionNew.setFecha(LocalDate.of(2019, 03, 31));
-		valoracionNew.setNivelsatisfaccion(NivelSatisfaccion.Medio);
+		valoracionNew.setValoracion(5);
 
 		valoracionService.save(valoracionNew);
 		
@@ -48,6 +49,12 @@ public class ValoracionServiceTest {
 		Valoracion valoracionFind = valoracionService.findValoracionById(1).get();
 		assertEquals(Valoracion.class, valoracionFind.getClass());
 	}
+	
+//	@Test 
+//	public void testGetMediaValoracion() {
+//		Integer media = valoracionService.getMediaValoraciones(TipoCategoria.Limpieza);
+//		
+//	}
 	
 	//Test negativos
 	
