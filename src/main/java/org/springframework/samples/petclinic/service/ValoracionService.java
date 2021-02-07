@@ -1,7 +1,12 @@
 package org.springframework.samples.petclinic.service;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.samples.petclinic.model.TipoCategoria;
 import org.springframework.samples.petclinic.model.Valoracion;
 import org.springframework.samples.petclinic.repository.ValoracionRepository;
 import org.springframework.stereotype.Service;
@@ -52,9 +57,33 @@ public class ValoracionService {
 		delete(valoracionBorrar);
 	}
 
+//	@Transactional(readOnly=true)
+//	public Iterable<Valoracion> findValoracionByClienteName(String nombre) {
+//		return valoracionRepo.findAllByClienteName(nombre.toLowerCase());
+//	}
+	
 	@Transactional(readOnly=true)
-	public Iterable<Valoracion> findValoracionByClienteName(String nombre) {
-		return valoracionRepo.findAllByClienteName(nombre.toLowerCase());
+	public Integer getMediaValoracionTipo(TipoCategoria tipo) {
+
+		Integer suma = valoracionRepo.getSumaValoracionesTipo(tipo);
+		Integer media = suma/valoracionRepo.getCountValoracionesTipo(tipo);
+		return media;
 	}
+	
+	public Map<TipoCategoria, Integer> getMediaValoraciones(){
+
+		Integer valLimp = getMediaValoracionTipo(TipoCategoria.Limpieza);
+		Integer valJard = getMediaValoracionTipo(TipoCategoria.Jardineria);
+		Integer valCrist = getMediaValoracionTipo(TipoCategoria.Cristaleria);
+		Integer valMant = getMediaValoracionTipo(TipoCategoria.Mantenimiento);
+		Map<TipoCategoria, Integer> l = new HashMap<TipoCategoria, Integer>();
+		l.put(TipoCategoria.Limpieza, valLimp);
+		l.put(TipoCategoria.Jardineria, valJard);
+		l.put(TipoCategoria.Cristaleria, valCrist);
+		l.put(TipoCategoria.Mantenimiento, valMant);
+		return l;
+	}
+	
+	
 
 }

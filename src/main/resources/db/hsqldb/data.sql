@@ -84,7 +84,7 @@ INSERT INTO servicio(lugar, tipocategoria, fechainicio, fechafin, estado, client
 INSERT INTO servicio(lugar, tipocategoria, fechainicio, fechafin, estado, cliente_id) VALUES ('Acuario de Sevilla', 1, '2019-10-20', '2020-12-31', 1, 1);
 INSERT INTO servicio(lugar, tipocategoria, fechainicio, fechafin, estado, cliente_id) VALUES ('Oficinas Sabadell', 2, '2019-10-20', '2020-12-31', 1, 2);
 INSERT INTO servicio(lugar, tipocategoria, fechainicio, fechafin, estado, cliente_id) VALUES ('Teatro la Maestranza', 2, '2019-10-20', '2020-12-31', 0, 2);
-INSERT INTO servicio(lugar, tipocategoria, fechainicio, fechafin, estado, cliente_id) VALUES ('Ayuntamiento Sanlucar la Mayor', 0, '2019-10-20', '2021-02-28', 2, 3);
+INSERT INTO servicio(lugar, tipocategoria, fechainicio, fechafin, estado, cliente_id) VALUES ('Ayuntamiento Sanlucar la Mayor', 3, '2019-10-20', '2021-02-28', 2, 3);
 
 INSERT INTO presupuesto(precio, tipopresupuesto, servicio_id, estado) VALUES (4579.5, 1, 1, 2);
 INSERT INTO presupuesto(precio, tipopresupuesto, servicio_id, estado) VALUES (50.0, 0, 1, 1);
@@ -101,8 +101,13 @@ INSERT INTO contratoservicio(fechainicial, fechafinal, periodoprueba, presupuest
 INSERT INTO reclamacion(fecha, descripcion, cliente_id, servicio_id) VALUES ('2019-10-20', 'El servicio está incompleto', 1, 1);
 INSERT INTO reclamacion(fecha, descripcion, cliente_id, servicio_id) VALUES ('2019-10-20', 'El servicio está lamentable', 2, 2);
 
-INSERT INTO valoracion(fecha,nivelsatisfaccion, cliente_id, servicio_id) VALUES ('2019-10-20', 0, 1, 1);
-INSERT INTO valoracion(fecha,nivelsatisfaccion, cliente_id, servicio_id) VALUES ('2020-10-12', 2, 2, 2);
+INSERT INTO valoracion(fecha,valoracion, servicio_id) VALUES ('2019-10-20', 4, 1);
+INSERT INTO valoracion(fecha,valoracion, servicio_id) VALUES ('2020-10-12', 5, 2);
+INSERT INTO valoracion(fecha,valoracion, servicio_id) VALUES ('2019-10-20', 4, 3);
+INSERT INTO valoracion(fecha,valoracion, servicio_id) VALUES ('2020-10-12', 5, 4);
+INSERT INTO valoracion(fecha,valoracion, servicio_id) VALUES ('2019-10-20', 4, 5);
+INSERT INTO valoracion(fecha,valoracion, servicio_id) VALUES ('2020-10-12', 5, 6);
+
 
 
 

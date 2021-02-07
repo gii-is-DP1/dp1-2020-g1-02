@@ -80,7 +80,7 @@ public class ValoracionControllerTest {
 		valoracion = new Valoracion();
 		valoracion.setId(1);
 		valoracion.setFecha(LocalDate.of(2019, 05, 15));
-		valoracion.setNivelsatisfaccion(NivelSatisfaccion.Medio);
+//		valoracion.setNivelsatisfaccion(NivelSatisfaccion.Medio);
 		
 		authority = new Authorities();
 		user = new User();

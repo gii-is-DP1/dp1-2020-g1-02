@@ -22,6 +22,7 @@
             <th>Dni</th>
             <th>Correo</th>
             <th style="width: 150px;">Instalaciones</th>  
+            <th> </th>
         </tr>
         </thead>
         <tbody>

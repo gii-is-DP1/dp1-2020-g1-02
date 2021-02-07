@@ -17,6 +17,7 @@
             <th style="width: 200px;">Descripcion</th>
             <th>ID Cliente</th>
             <th>ID Servicio</th> 
+            <th> </th>
         </tr>
         </thead>
         <tbody>
