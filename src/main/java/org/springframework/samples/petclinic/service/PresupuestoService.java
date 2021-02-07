@@ -104,20 +104,23 @@ public class PresupuestoService {
 	public void presupuestoYaAceptado(Presupuesto presupuesto) throws PresupuestoYaAceptadoException {
 		Integer a=presupuestoRepo.numeroPresupuestosByServicioConEstadoAceptado(presupuesto.getServicio().getId());
 		boolean b = a > 0;
-		if(b == false) {
-			this.save(presupuesto);
-		} else {
+		if(b == true) {
 			throw new PresupuestoYaAceptadoException();
 		}
 	}
 	
 	@Transactional(rollbackFor = ServicioNoAceptadoException.class)
 	public void servicioNoAceptado(Presupuesto presupuesto) throws ServicioNoAceptadoException {
-		if(presupuesto.getServicio().getEstado() == EstadoServicio.Aceptado) {
-			this.save(presupuesto);
-		} else {
+		if(presupuesto.getServicio().getEstado() != EstadoServicio.Aceptado) {
 			throw new ServicioNoAceptadoException();
 		}
+	}
+	
+	@Transactional
+	public void comprobarExcepciones(Presupuesto presupuesto) throws PresupuestoYaAceptadoException, ServicioNoAceptadoException {
+		this.presupuestoYaAceptado(presupuesto);
+		this.servicioNoAceptado(presupuesto);
+		this.save(presupuesto);
 	}
 
 }

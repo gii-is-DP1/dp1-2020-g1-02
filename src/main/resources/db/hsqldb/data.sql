@@ -80,8 +80,8 @@ INSERT INTO administrador(nombre, apellidos, tipocategoria) VALUES ('Carlos','Bo
 
 
 INSERT INTO servicio(lugar, tipocategoria, fechainicio, fechafin, estado, cliente_id) VALUES ('Av Reina Mercedes', 0, '2019-10-20', '2020-12-31', 1, 1);
-INSERT INTO servicio(lugar, tipocategoria, fechainicio, fechafin, estado, cliente_id) VALUES ('Benito Villamarin', 0, '2019-10-20', '2020-12-31', 1, 1);
-INSERT INTO servicio(lugar, tipocategoria, fechainicio, fechafin, estado, cliente_id) VALUES ('Acuario de Sevilla', 1, '2019-10-20', '2020-12-31', 1, 1);
+INSERT INTO servicio(lugar, tipocategoria, fechainicio, fechafin, estado, cliente_id) VALUES ('Benito Villamarin', 0, '2021-10-20', '2022-12-31', 1, 1);
+INSERT INTO servicio(lugar, tipocategoria, fechainicio, fechafin, estado, cliente_id) VALUES ('Acuario de Sevilla', 1, '2020-10-20', '2021-12-20', 2, 1);
 INSERT INTO servicio(lugar, tipocategoria, fechainicio, fechafin, estado, cliente_id) VALUES ('Oficinas Sabadell', 2, '2019-10-20', '2020-12-31', 1, 2);
 INSERT INTO servicio(lugar, tipocategoria, fechainicio, fechafin, estado, cliente_id) VALUES ('Teatro la Maestranza', 2, '2019-10-20', '2020-12-31', 0, 2);
 INSERT INTO servicio(lugar, tipocategoria, fechainicio, fechafin, estado, cliente_id) VALUES ('Ayuntamiento Sanlucar la Mayor', 3, '2019-10-20', '2021-02-28', 2, 3);

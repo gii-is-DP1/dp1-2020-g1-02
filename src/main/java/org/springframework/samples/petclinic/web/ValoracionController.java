@@ -11,16 +11,20 @@ import java.util.stream.Collectors;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.samples.petclinic.model.Cliente;
+
 import org.springframework.samples.petclinic.model.Factura;
 import org.springframework.samples.petclinic.model.Proveedor;
 import org.springframework.samples.petclinic.model.Servicio;
 import org.springframework.samples.petclinic.model.TipoCategoria;
+
 import org.springframework.samples.petclinic.model.User;
 import org.springframework.samples.petclinic.model.Valoracion;
 import org.springframework.samples.petclinic.service.ClienteService;
 import org.springframework.samples.petclinic.service.ServicioService;
 import org.springframework.samples.petclinic.service.UserService;
 import org.springframework.samples.petclinic.service.ValoracionService;
+import org.springframework.samples.petclinic.service.exceptions.AntesComenzarServicioException;
+import org.springframework.samples.petclinic.service.exceptions.ServicioNoAceptadoException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -104,18 +108,23 @@ public class ValoracionController {
 	
 	@PostMapping(path="/save")
 	public String salvarValoracion(@Valid Valoracion valoracion, BindingResult result,ModelMap modelMap) {
-		String view="succesful";
+		String view="redirect:/valoraciones/misValoraciones";
 		if(result.hasErrors()) {
 			modelMap.addAttribute("valoracion", valoracion);
+			modelMap.addAttribute("message", "Hay errores en el formulario");
 			return "valoraciones/newValoracion";
 		}else {
-			if(!clienteService.findClienteById(valoracion.getServicio().getCliente().getId()).isPresent()) {
+			try {
+				valoracionService.comprobarExcepciones(valoracion);
+				modelMap.addAttribute("message", "Valoracion añadida!");
+			} catch(ServicioNoAceptadoException e) {
 				modelMap.addAttribute("valoracion", valoracion);
-				modelMap.addAttribute("error", "No existe el cliente");
+				modelMap.addAttribute("message", "No se puede añadir una valoración a un servicio no aceptado");
 				return "valoraciones/newValoracion";
-			}else {
-				valoracionService.save(valoracion);
-				modelMap.addAttribute("message", "Valoracion añadida");
+			} catch(AntesComenzarServicioException e) {
+				modelMap.addAttribute("valoracion", valoracion);
+				modelMap.addAttribute("message", "No se puede añadir una valoración a un servicio que no ha comenzado");
+				return "valoraciones/newValoracion";
 			}
 		}
 		return view;

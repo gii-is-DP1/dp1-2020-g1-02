@@ -44,6 +44,7 @@
        		<div class="form-group has-feedback">
        			<petclinic:inputField label="Fecha" name="fecha"  disabled="true"/>
   				<petclinic:inputField label="Descripcion" name="descripcion"/>
+  				<input type="hidden" id="servicio" name="servicio" value="${reclamacion.servicio.id}" />
   				<input type="hidden" id="cliente" name="cliente" value="${reclamacion.servicio.cliente.id}" />
        		</div>
             <div class="form-group">

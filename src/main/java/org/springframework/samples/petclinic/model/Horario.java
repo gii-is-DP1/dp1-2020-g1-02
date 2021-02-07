@@ -11,7 +11,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.FutureOrPresent;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Past;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -27,6 +29,7 @@ public class Horario extends BaseEntity {
 	
 	@DateTimeFormat(pattern = "yyyy/MM/dd")
 	@NotNull
+	@FutureOrPresent
 	private LocalDate fecha;
 	
     @DateTimeFormat(pattern = "HH:mm")

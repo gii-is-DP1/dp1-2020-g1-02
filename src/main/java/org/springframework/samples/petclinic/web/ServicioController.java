@@ -154,8 +154,7 @@ public class ServicioController {
 			return "presupuestos/editPresupuesto";
 		}else {
 			try {
-				presupuestoService.presupuestoYaAceptado(presupuesto);
-				presupuestoService.servicioNoAceptado(presupuesto);
+				presupuestoService.comprobarExcepciones(presupuesto);
 				modelMap.addAttribute("message", "Presupuesto actualizado!!");
 			} catch(PresupuestoYaAceptadoException e) {
 				modelMap.addAttribute("message", "No se puede enviar un presupuesto a un servicio que ya tiene un presupuesto aceptado");

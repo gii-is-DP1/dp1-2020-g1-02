@@ -5,6 +5,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.samples.petclinic.model.Horario;
 import org.springframework.samples.petclinic.repository.HorarioRepository;
+import org.springframework.samples.petclinic.service.exceptions.HoraNoAdecuadaException;
 import org.springframework.samples.petclinic.service.exceptions.SolapamientoFechasException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -60,28 +61,25 @@ public class HorarioService {
 		return horarioRepo.findHorasSolapadas(horario.getTrabajador().getId(), horario.getHora_inicio(), horario.getHora_fin(), horario.getFecha());
 	}
 	
-	
-//	public boolean cumpleNoEsLaMismaHora(Horario horario, Trabajador trabajador) {
-//		Boolean res = false;
-//		Set<Horario> horariosTrabajador = trabajador.getHorarios();
-//		Iterator<Horario> iterador = horariosTrabajador.iterator();
-//		while(iterador.hasNext()) {
-//			LocalDateTime h1 = iterador.next().getHora_inicio();
-//			LocalDateTime h2 = iterador.next().getHora_fin();
-//			if() {
-//				res = true;
-//			}
-//		}
-//		return res;
-//	}
-	
 	@Transactional(rollbackFor = SolapamientoFechasException.class)
-	public void crearHorario(Horario horario) throws SolapamientoFechasException {
-		if(this.findHorasSolapadas(horario) == 0) {
-			this.save(horario);
-		} else {
+	public void solapamientoHorasEnHorarioTrabajador(Horario horario) throws SolapamientoFechasException {
+		if(this.findHorasSolapadas(horario) != 0) {
 			throw new SolapamientoFechasException();
 		}
+	}
+	
+//	@Transactional(rollbackFor = HoraNoAdecuadaException.class)
+//	public void horaIntroducidaNoAdecuada(Horario horario) throws HoraNoAdecuadaException {
+//		if(horario.getHora_inicio().getMinutes() != 00 || horario.getHora_inicio().getMinutes() != 30) {
+//			throw new HoraNoAdecuadaException();
+//		}
+//	}
+	
+	@Transactional
+	public void crearHorario(Horario horario) throws SolapamientoFechasException {
+		this.solapamientoHorasEnHorarioTrabajador(horario);
+//		this.horaIntroducidaNoAdecuada(horario);
+		this.save(horario);
 	}
 	
 	
