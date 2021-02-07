@@ -13,6 +13,8 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 
+import org.springframework.samples.petclinic.customvalidators.ContactNumberConstraint;
+
 import lombok.Data;
 
 
@@ -21,7 +23,7 @@ import lombok.Data;
 @Table(name="proveedor")
 public class Proveedor extends NamedEntity{
 	
-    @NotEmpty
+    @ContactNumberConstraint
     private String telefono;
     
     @NotEmpty

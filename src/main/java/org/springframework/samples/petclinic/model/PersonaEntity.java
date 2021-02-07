@@ -7,6 +7,9 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
+import org.springframework.samples.petclinic.customvalidators.ContactNumberConstraint;
+import org.springframework.samples.petclinic.customvalidators.DNIConstraint;
+
 @MappedSuperclass
 public class PersonaEntity extends BaseEntity {
 
@@ -19,8 +22,10 @@ public class PersonaEntity extends BaseEntity {
    	private String apellidos;
     
     @Column(unique=true)
+    @DNIConstraint
     private String dni;
     
+    @ContactNumberConstraint
     private String telefono;
     
     private String direccion;
