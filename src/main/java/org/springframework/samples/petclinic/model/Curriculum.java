@@ -8,6 +8,8 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import org.springframework.samples.petclinic.customvalidators.ContactNumberConstraint;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -25,8 +27,7 @@ public class Curriculum extends BaseEntity {
     @Size(min = 3, max = 50)
 	private String apellidos;
     
-    @NotBlank
-    @Size(min = 9, max = 9)
+    @ContactNumberConstraint
 	private String telefono;
     
     @NotBlank
