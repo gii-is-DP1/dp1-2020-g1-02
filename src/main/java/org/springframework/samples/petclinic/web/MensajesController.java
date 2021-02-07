@@ -1,6 +1,7 @@
 package org.springframework.samples.petclinic.web;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import javax.validation.Valid;
 
@@ -17,6 +18,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -40,7 +42,7 @@ public class MensajesController {
 	}
 	
 	@GetMapping(path="/new")
-	public String crearMensajeAdmin(ModelMap modelMap) {
+	public String crearMensaje(ModelMap modelMap) {
 		String view="mensajes/newMensaje";
 		modelMap.addAttribute("principal", userService.getLoggedUser());
 		modelMap.addAttribute("users", userService.findAllUsernames());
@@ -71,6 +73,22 @@ public class MensajesController {
 		String view="redirect:/mensajes";
 		Mensaje m=mensajesService.findById(id).get();
 		mensajesService.marcarLeido(m);
+		return view;
+	}
+	
+	@GetMapping(path="/new/{mId}")
+	public String responderMensaje(@PathVariable("mId") int mId, ModelMap modelMap) {
+		String view="mensajes/newMensaje";
+//		modelMap.addAttribute("principal", userService.getLoggedUser());
+		modelMap.addAttribute("users", userService.findAllUsernames());
+//		modelMap.addAttribute("size", userService.findAllUsernames().size());
+		Mensaje mensajeE = mensajesService.findById(mId).get();
+		Mensaje mensajeR = new Mensaje();
+		mensajeR.setEmisor(userService.getLoggedUser());
+		List<User> l = List.of(mensajeE.getEmisor());
+		mensajeR.setReceptores(l);
+		mensajeR.setFecha(LocalDate.now());
+		modelMap.addAttribute("mensajeR", mensajeR);
 		return view;
 	}
 	

@@ -64,7 +64,7 @@
                </td>
                 <td>
                 	<spring:url value="mensajes/new/{mId}" var="addUrl">
-                        <spring:param name="mId" value="${mensaje.id}"/>
+                        <spring:param name="mId" value="${msj.id}"/>
                         </spring:url>
                         <a href="${fn:escapeXml(addUrl)}" class="btn btn-default">Responder</a>
                 </td>

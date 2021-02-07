@@ -9,24 +9,34 @@
 <petclinic:layout pageName="ofertas">
     <h2> Nuevo mensaje
     </h2>
-    <form:form modelAttribute="mensaje" class="form-horizontal" id="add-mensajes-form" action="/mensajes/save">
+    <form:form modelAttribute="mensajeR" class="form-horizontal" id="add-mensajes-form" action="/mensajes/save">
         <div class="form-group has-feedback">
         
         	
         	<petclinic:inputField label="De:" name="emisor" disabled="true"/>
  			 
- 			<Label for="receptores">  Para:</Label>  </br>
-           <select name="receptores" size="10" multiple>
-           <c:forEach items="${users}" var="user">
-		            <tr>
-		                <td>
-		                   <option><c:out value="${user}"/></option>
-		                </td>
-		            </tr>
-		        </c:forEach>
-			
-			
-			</select>
+ 			
+ 			
+ 			<c:choose>
+			    <c:when test="${mensajeR.receptores != null}">
+			      
+			      <petclinic:inputField label="Para:" name="receptores" disabled="true"/>
+			        
+			    </c:when>    
+			    <c:otherwise>
+			    <Label for="receptores">  Para:</Label>  </br>
+			       <select name="receptores" size="10" multiple>
+          			 <c:forEach items="${users}" var="user">
+			            <tr>
+			                <td>
+			                   <option><c:out value="${user}"/></option>
+			                </td>
+			            </tr>
+			        </c:forEach>
+					</select>
+			    </c:otherwise>
+			</c:choose>
+           
            
 		   <petclinic:inputField label="Fecha" name="fecha" disabled="true"/>
            <petclinic:inputField label="Asunto" name="asunto"/>

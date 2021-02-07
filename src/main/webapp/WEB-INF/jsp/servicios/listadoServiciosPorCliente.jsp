@@ -72,9 +72,9 @@
 				        <td> </td>
 				    </c:otherwise>
 				</c:choose>
-                <c:if test="${not fn:contains(serviciosV, servicio.id)}">
+               <%--  <c:if test="${not fn:contains(serviciosV, servicio.id)}">
 	                
-                </c:if>
+                </c:if> --%>
                 <td>
                 	<spring:url value="/servicios/{servicioId}/presupuestos" var="servicioUrl">
                 		<spring:param name="servicioId" value="${servicio.id}"/>
