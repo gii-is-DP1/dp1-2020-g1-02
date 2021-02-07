@@ -39,12 +39,10 @@
 					<fmt:formatDate value="${date}" type = "date" dateStyle="long"/>
                 </td>
                 <td>
-	                <fmt:parseDate value="${horario.hora_inicio}" pattern="HH:mm:ss" var="inicio"/>
-					<fmt:formatDate value="${inicio}" type = "time" timeStyle="short"/>              
+	              <c:out value="${horario.hora_inicio}" />            
                 </td>
                  <td>
-	                <fmt:parseDate value="${horario.hora_fin}" pattern="HH:mm:ss" var="fin"/>
-					<fmt:formatDate value="${fin}" type = "time" timeStyle="short"/>              
+					<c:out value="${horario.hora_fin}" />        
                 </td>
                 <td>
                     <c:out value="${horario.trabajador.nombre}"/>

@@ -2,8 +2,8 @@ package org.springframework.samples.petclinic.model;
 
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Calendar;
-import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
@@ -13,7 +13,6 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.FutureOrPresent;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Past;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -33,14 +32,12 @@ public class Horario extends BaseEntity {
 	private LocalDate fecha;
 	
     @DateTimeFormat(pattern = "HH:mm")
-    @Temporal(TemporalType.TIME)
     @NotNull
-    private Date hora_inicio;
+    private LocalTime hora_inicio;
 
     @DateTimeFormat(pattern = "HH:mm")
-    @Temporal(TemporalType.TIME)
     @NotNull
-    private Date hora_fin;
+    private LocalTime hora_fin;
     	
 	@ManyToOne
 	@JoinColumn(name="trabajador")

@@ -1,8 +1,8 @@
 package org.springframework.samples.petclinic.repository;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Collection;
-import java.util.Date;
 
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
@@ -21,6 +21,6 @@ public interface HorarioRepository extends CrudRepository<Horario, Integer> {
 	Iterable<Horario> findHorariosByTrabajadorId(@Param("trabajador") Integer trabajador);
 	
 	@Query("SELECT count(*) FROM Horario h WHERE h.trabajador.id = :trabajador AND h.hora_inicio < :fin AND h.hora_fin > :inicio AND h.fecha=:fecha" )
-	Integer findHorasSolapadas(@Param("trabajador") Integer trabajador, @Param("inicio") Date inicio, @Param("fin") Date fin, @Param("fecha") LocalDate fecha);
+	Integer findHorasSolapadas(@Param("trabajador") Integer trabajador, @Param("inicio") LocalTime inicio, @Param("fin") LocalTime fin, @Param("fecha") LocalDate fecha);
 
 }

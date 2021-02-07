@@ -1,9 +1,7 @@
 package org.springframework.samples.petclinic.web;
 
-import java.time.format.DateTimeFormatter;
-import java.util.Date;
+import java.time.LocalTime;
 import java.util.Iterator;
-import java.util.regex.Pattern;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.samples.petclinic.model.Horario;
@@ -39,8 +37,8 @@ public class HorarioValidator implements Validator {
 	public void validate(Object obj, Errors errors) {
 		Horario horario = (Horario) obj;
 		String nombreTrab = horario.getTrabajador().getNombre();
-		Date hora_inicio = horario.getHora_inicio();
-		Date hora_fin = horario.getHora_fin();
+		LocalTime hora_inicio = horario.getHora_inicio();
+		LocalTime hora_fin = horario.getHora_fin();
 		
 		if (nombreTrab == null || nombreTrab.trim().equals("")) {
 			errors.rejectValue("nombreTrab", REQUIRED, REQUIRED);
