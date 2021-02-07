@@ -1,28 +1,29 @@
 package org.springframework.samples.petclinic.model;
 
 import java.util.List;
-import java.util.Set;
 
 import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
-import lombok.Data;
+import org.hibernate.validator.constraints.Range;
+
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
-@Data
+@Getter
+@Setter
 @Table(name="oferta")
 public class Oferta extends NamedEntity {
 	
-	@NotEmpty
-	private String precioU;
+	@NotNull
+	@Range(min=0, max=100)
+	private Double precioU;
 	
 	@ManyToOne
     @JoinColumn(name="producto_id")

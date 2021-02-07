@@ -7,6 +7,8 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="petclinic" tagdir="/WEB-INF/tags" %>
 
+<spring:url value="/resources/images/delete.jpg" var="delete"/>
+
 <petclinic:layout pageName="trabajadores">
     <h2>Trabajadores</h2>
 	
@@ -21,12 +23,6 @@
 		</button>
 	</a>
 	
-	<a href="/horarios">
-		<button type="button" class="btn btn-default btn-lg">
-  			<span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Horarios Trabajadores
-		</button>
-	</a>
-	
     <table id="eventsTable" class="table table-striped">
         <thead>
         <tr>
@@ -37,7 +33,6 @@
             <th style="width: 150px;">CORREO</th>
             <th style="width: 150px;">TELEFONO</th>
             <th style="width: 150px;">CATEGORIA</th>
-            <th style="width: 150px;">CONTRATO</th>
         </tr>
         </thead>
         <tbody>
@@ -63,30 +58,40 @@
                 </td>
                 <td>
                     <c:out value="${trabajador.tipocategoria}"/>
-                </td>
-                
-          		<td>
-                	<c:forEach var="contrato" items="${trabajador.contratos}">
-                			<c:out value="${contrato.id}"/>
-                  	</c:forEach> 
-                </td> 
-                <td>
-                	<spring:url value="/trabajadores/delete/{trabajadorId}" var="trabajadorUrl">
-                		<spring:param name="trabajadorId" value="${trabajador.id}"/>
-                	</spring:url>
-                	<a href="${fn:escapeXml(trabajadorUrl)}">Delete</a>
-                </td>
+                </td>          
+              
                 <td>
                 	<spring:url value="/trabajadores/{trabajadorId}/edit" var="trabajadorUrl">
                 		<spring:param name="trabajadorId" value="${trabajador.id}"/>
                 	</spring:url>
                 	<a href="${fn:escapeXml(trabajadorUrl)}">Editar</a>
                 </td>
-                <td>
-                	<spring:url value="contratosTrabajadores/{tId}/new" var="trabajadorUrl">
-                		<spring:param name="tId" value="${trabajador.id}"/>
+                	<td>
+                	<spring:url value="/contratosTrabajadores/{trabajadorId}" var="contratosUrl">
+                		<spring:param name="trabajadorId" value="${trabajador.id}"/>
                 	</spring:url>
-                	<a href="${fn:escapeXml(trabajadorUrl)}">Nuevo Contrato</a>
+                	<a href="${fn:escapeXml(contratosUrl)}">Contratos</a>
+                </td> 
+               
+                <td>
+                	<spring:url value="/servicios/trabajadores/{trabajadorId}" var="serviciosUrl">
+                		<spring:param name="trabajadorId" value="${trabajador.id}"/>
+                	</spring:url>
+                	<a href="${fn:escapeXml(serviciosUrl)}">Servicios</a>
+                </td>
+                
+                 <td>
+                	<spring:url value="/horarios/{trabajadorId}" var="horariosUrl">
+                		<spring:param name="trabajadorId" value="${trabajador.id}"/>
+                	</spring:url>
+                	<a href="${fn:escapeXml(horariosUrl)}">Horarios</a>
+                </td>
+                
+                  <td>
+                	<spring:url value="/trabajadores/delete/{trabajadorId}" var="trabajadorUrl">
+                		<spring:param name="trabajadorId" value="${trabajador.id}"/>
+                	</spring:url>
+                	<a href="${fn:escapeXml(trabajadorUrl)}"><img src="${delete}" width="30px"/></a>
                 </td>
             </tr>
         </c:forEach>

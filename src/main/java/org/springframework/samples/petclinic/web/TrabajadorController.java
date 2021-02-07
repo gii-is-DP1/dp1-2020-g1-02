@@ -5,10 +5,12 @@ import java.util.Optional;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.samples.petclinic.model.Servicio;
 import org.springframework.samples.petclinic.model.Trabajador;
 import org.springframework.samples.petclinic.service.HorarioService;
 import org.springframework.samples.petclinic.service.InstalacionService;
 import org.springframework.samples.petclinic.service.RegistroHorasService;
+import org.springframework.samples.petclinic.service.ServicioService;
 import org.springframework.samples.petclinic.service.TrabajadorService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -30,6 +32,8 @@ public class TrabajadorController {
 	private HorarioService horarioService;
 	@Autowired
 	private InstalacionService instalacionService;
+	@Autowired
+	private ServicioService servicioService;
 	
 	@GetMapping()
 	public String listadoTrabajadores(ModelMap modelMap) {
@@ -55,7 +59,6 @@ public class TrabajadorController {
 		}else {
 			trabajadorService.save(trabajador);
 			modelMap.addAttribute("message", "Trabajador actualizado!");
-			view=listadoTrabajadores(modelMap);
 		}
 		return view;
 	}
@@ -110,6 +113,15 @@ public class TrabajadorController {
 		String view="trabajadores/listadoTrabajadores";
 		modelMap.addAttribute("instalacionesCliente", nombreCli);
 		modelMap.addAttribute("instalaciones", instalacionService.findInstalacionByClienteName(nombreCli));
+		return view;
+	}
+	
+	@GetMapping(path="/servicio/{servicioId}")
+	public String trabajdoresByServicio(@PathVariable("servicioId") Integer servicioId, ModelMap modelMap) {
+		String view="trabajadores/trabajadoresByServicio";
+		Servicio s= servicioService.findServicioById(servicioId).get();
+		modelMap.addAttribute("trabajadores", trabajadorService.findTrabajadoresByServicio(servicioId));
+		modelMap.addAttribute("servicio", s.getLugar());
 		return view;
 	}
 }

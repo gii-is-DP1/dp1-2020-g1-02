@@ -9,11 +9,9 @@
 
 <petclinic:layout pageName="pedidos">
     <h2>Pedidos</h2>
-	<a href="//facturas">
-		<button type="button" class="btn btn-default btn-lg">
-  			<span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Ver Facturas
-		</button>
-	</a>
+    <spring:url value="/facturas" var="facturaUrl">
+    </spring:url>
+    <a href="${fn:escapeXml(facturaUrl)}" class="btn btn-default">Ver todas las facturas</a>
     <table id="pedidosTable" class="table table-striped">
         <thead>
         <tr>

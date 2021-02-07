@@ -9,14 +9,8 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <petclinic:layout pageName="servicios">
-    <h2>Mis Servicios</h2>
-	
-	<a href="/servicios/new">
-		<button type="button" class="btn btn-default btn-lg">
-  			<span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Solicitar servicio
-		</button>
-	</a>
-	
+    <h2>Servicios en los que trabaja: <c:out value="${trabajador.nombre}"/> &nbsp<c:out value="${trabajador.apellidos}"/></h2>
+
     <table id="eventsTable" class="table table-striped">
         <thead>
         <tr>
@@ -25,9 +19,7 @@
             <th style="width: 150px;">FECHAFIN</th>
             <th style="width: 150px;">TIPOCATEGORIA</th>
             <th style="width: 150px;">ESTADO</th>
-            <th style="width: 150px;"></th>
-            <th style="width: 150px;"></th>
-            <th style="width: 150px;"></th>
+
         </tr>
         </thead>
         <tbody>
@@ -48,26 +40,10 @@
                 <td>
                     <c:out value="${servicio.estado}"/>
                 </td>
-                <td>
-                	<spring:url value="/reclamaciones/new/{oId}" var="reclamacionUrl">
-              		<spring:param name="oId" value="${servicio.id}"/>
-	              	</spring:url>
-	              	<a href="${fn:escapeXml(reclamacionUrl)}">Poner reclamacion</a>
-                </td>
-                
-                <td>
-                	<spring:url value="/valoraciones/new/{oId}" var="reclamacionUrl">
-              		<spring:param name="oId" value="${servicio.id}"/>
-	              	</spring:url>
-	              	<a href="${fn:escapeXml(reclamacionUrl)}">Poner valoracion</a>
-                </td>
-                
-                <td>
-                	<spring:url value="/servicios/{servicioId}/presupuestos" var="servicioUrl">
-                		<spring:param name="servicioId" value="${servicio.id}"/>
-                	</spring:url>
-                	<a href="${fn:escapeXml(servicioUrl)}">Ver Presupuestos</a>
-                </td>
+        		
+               
+               
+               
             </tr>
         </c:forEach>
         </tbody>

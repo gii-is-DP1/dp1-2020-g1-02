@@ -24,7 +24,7 @@
             <th style="width: 200px;">Fecha Final</th>
             <th style="width: 200px;">Fecha Pago</th>
             <th style="width: 200px;">DNI del cliente</th>
-            <th style="width: 200px;">ID Presupuesto</th>
+            <th style="width: 200px;">Presupuesto</th>
             <th style="width: 200px;">Periodo de prueba</th>
             <th style="width: 200px;">Servicio</th>
          
@@ -34,16 +34,19 @@
         <c:forEach items="${avisoServicio}" var="contrato">
             <tr>
                 <td>
-                    <c:out value="${contrato.fechainicial}"/>
+	                <fmt:parseDate value="${contrato.fechainicial}" pattern="yyyy-MM-dd" var="date"/>
+	                <fmt:formatDate value="${date}" type = "date" dateStyle="long"/>     
                 </td>
                 <td>
-                    <c:out value="${contrato.fechafinal}"/>
+                     <fmt:parseDate value="${contrato.fechafinal}" pattern="yyyy-MM-dd" var="date"/>
+	                 <fmt:formatDate value="${date}" type = "date" dateStyle="long"/> 
                 </td>
                 <td>
-                    <c:out value="${contrato.fechapago}"/>
+                    <fmt:parseDate value="${contrato.fechapago}" pattern="yyyy-MM-dd" var="date"/>
+	                 <fmt:formatDate value="${date}" type = "date" dateStyle="long"/> 
                 </td>
                 <td>
-                    <c:out value="${contrato.cliente.dni}"/>
+                    <c:out value="${contrato.presupuesto.servicio.cliente.dni}"/>
                 </td>
                 <td>
                     <c:out value="${contrato.presupuesto.precio}"/>
@@ -67,7 +70,7 @@
             <th style="width: 200px;">Fecha Final</th>
             <th style="width: 200px;">Fecha Pago</th>
             <th style="width: 200px;">DNI del cliente</th>
-            <th style="width: 200px;">ID Presupuesto</th>
+            <th style="width: 200px;">Presupuesto</th>
             <th style="width: 200px;">Periodo de prueba</th>
             <th style="width: 200px;">Servicio</th>
          
@@ -77,19 +80,22 @@
         <c:forEach items="${contratosServicios}" var="contrato">
             <tr>
                 <td>
-                    <c:out value="${contrato.fechainicial}"/>
+	                <fmt:parseDate value="${contrato.fechainicial}" pattern="yyyy-MM-dd" var="date"/>
+	                <fmt:formatDate value="${date}" type = "date" dateStyle="long"/>     
                 </td>
                 <td>
-                    <c:out value="${contrato.fechafinal}"/>
+                     <fmt:parseDate value="${contrato.fechafinal}" pattern="yyyy-MM-dd" var="date"/>
+	                 <fmt:formatDate value="${date}" type = "date" dateStyle="long"/> 
                 </td>
                 <td>
-                    <c:out value="${contrato.fechapago}"/>
+                      <fmt:parseDate value="${contrato.fechapago}" pattern="yyyy-MM-dd" var="date"/>
+	                 <fmt:formatDate value="${date}" type = "date" dateStyle="long"/> 
                 </td>
                 <td>
-                    <c:out value="${contrato.cliente.dni}"/>
+                    <c:out value="${contrato.presupuesto.servicio.cliente.dni}"/>
                 </td>
                 <td>
-                    <c:out value="${contrato.presupuesto.id}"/>
+                    <c:out value="${contrato.presupuesto.precio}"/>
                 </td>
                 <td>
                     <c:out value="${contrato.periodoPrueba}"/>
@@ -126,11 +132,13 @@
                  <td>
                     <c:out value="${contrato.trabajador.dni}"/>
                 </td>
-                <td>
-                    <c:out value="${contrato.fechainicial}"/>
+                 <td>
+	                <fmt:parseDate value="${contrato.fechainicial}" pattern="yyyy-MM-dd" var="date"/>
+	                <fmt:formatDate value="${date}" type = "date" dateStyle="long"/>     
                 </td>
                 <td>
-                    <c:out value="${contrato.fechafinal}"/>
+                     <fmt:parseDate value="${contrato.fechafinal}" pattern="yyyy-MM-dd" var="date"/>
+	                 <fmt:formatDate value="${date}" type = "date" dateStyle="long"/> 
                 </td>
                 <td>
                     <c:out value="${contrato.sueldo}"/>
@@ -165,11 +173,13 @@
                  <td>
                     <c:out value="${contrato.trabajador.dni}"/>
                 </td>
-                <td>
-                    <c:out value="${contrato.fechainicial}"/>
+                 <td>
+	                <fmt:parseDate value="${contrato.fechainicial}" pattern="yyyy-MM-dd" var="date"/>
+	                <fmt:formatDate value="${date}" type = "date" dateStyle="long"/>     
                 </td>
                 <td>
-                    <c:out value="${contrato.fechafinal}"/>
+                     <fmt:parseDate value="${contrato.fechafinal}" pattern="yyyy-MM-dd" var="date"/>
+	                 <fmt:formatDate value="${date}" type = "date" dateStyle="long"/> 
                 </td>
                 <td>
                     <c:out value="${contrato.sueldo}"/>

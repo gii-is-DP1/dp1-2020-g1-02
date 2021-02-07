@@ -1,6 +1,5 @@
 package org.springframework.samples.petclinic.web;
 
-import java.util.List;
 import java.util.Optional;
 
 import javax.validation.Valid;
@@ -63,16 +62,21 @@ public class OfertaController {
 	@PostMapping(path="/save")
 	public String salvarOferta(@Valid Oferta oferta, BindingResult result, ModelMap modelMap) {
 		String view="succesful";
-		Optional<Producto> producto = productoService.findByName(oferta.getName());
-		oferta.setProducto(producto.get());
 		if(result.hasErrors()) {
 			modelMap.addAttribute("oferta", oferta);
+			Proveedor prov = proveedorService.findProveedorByUsername(userService.getLoggedUser().getUsername()).get();
+			modelMap.addAttribute("proveedor", prov);
+			modelMap.addAttribute("productos", productoService.getNombres());
+			modelMap.addAttribute("size", productoService.productCount());
+			modelMap.addAttribute("message", "Errores en el formulario");
 			return "ofertas/editOferta";
 		}else {
+			Optional<Producto> producto = productoService.findByName(oferta.getName());
+			oferta.setProducto(producto.get());
 			ofertaService.save(oferta);
 			modelMap.addAttribute("message", "Oferta añadida!");
+			return view;
 		}
-		return view;
 	}
 	
 	@GetMapping(path="/delete/{ofertaId}")

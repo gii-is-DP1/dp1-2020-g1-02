@@ -6,36 +6,37 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="petclinic" tagdir="/WEB-INF/tags" %>
 
-<petclinic:layout pageName="horarios">
+<petclinic:layout pageName="horario">
+	<jsp:attribute name="customScript">
+        <script>
+	            $(function () {
+               	 	$("#fecha").datepicker({dateFormat: 'yy/mm/dd'});
+               	 	$("#hora_inicio").timepicker({ timeFormat: 'HH:mm'});
+               	 	$("#hora_fin").timepicker({timeFormat: 'HH:mm'});
+           		 }); 
+            
+        </script>
+    </jsp:attribute>
+    <jsp:body> 
     <h2>
         <c:if test="${horarios['new']}">Nuevo </c:if> Horario
     </h2>
-    <form:form modelAttribute="horarios" class="form-horizontal" id="add-cliente-form" action="/horarios/save">
+    <form:form modelAttribute="horario" class="form-horizontal" id="add-cliente-form" action="/horarios/save">
         <div class="form-group has-feedback">
-       	    <label for="trabajador">ID del trabajador</label>
-  				<select id="trabajador" name="trabajador">
-  				<c:forEach items="${trabajadores}" var="trabajador">
-		            <tr>
-		                <td>
-		                   <option><c:out value="${trabajador.id}"/></option>
-		            </tr>
-		        </c:forEach>
-  				</select>
+  			<input type="hidden" name="trabajador" id="trabajador" value="${trabajador}">
+  			<petclinic:inputField label="Fecha" name="fecha"/>
             <petclinic:inputField label="HoraInicio" name="hora_inicio"/>
             <petclinic:inputField label="HoraFin" name="hora_fin"/>
             <petclinic:inputField label="Descripcion" name="descripcion"/>
         </div>
         <div class="form-group">
-            <div class="col-sm-offset-2 col-sm-10">
-                <c:choose>
-                    <c:when test="${horarios['new']}">
-                        <button class="btn btn-default" type="submit">Añadir Horario</button>
-                    </c:when>
-                    <c:otherwise>
-                        <button class="btn btn-default" type="submit">Actualizar Horario</button>
-                    </c:otherwise>
-                </c:choose>
-            </div>
-        </div>
+	                <div class="col-sm-offset-2 col-sm-10">
+	                    <button class="btn btn-default" type="submit">Añadir Horario</button>
+	                </div>
+	            </div>
     </form:form>
+    <h3><c:out value="${error}"/></h3>
+   </jsp:body>   
+    
+    
 </petclinic:layout>

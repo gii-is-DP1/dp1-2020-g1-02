@@ -11,6 +11,7 @@ import org.springframework.samples.petclinic.model.User;
 import org.springframework.samples.petclinic.service.HorarioService;
 import org.springframework.samples.petclinic.service.TrabajadorService;
 import org.springframework.samples.petclinic.service.UserService;
+import org.springframework.samples.petclinic.service.exceptions.SolapamientoFechasException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -30,6 +31,7 @@ public class HorarioController {
 	
 	@Autowired
 	private TrabajadorService trabajadorService;
+	
 	@Autowired
 	private UserService userService;
 	
@@ -51,31 +53,42 @@ public class HorarioController {
 		return vista;
 	}
 	
+	@GetMapping(value="/{trabajadorId}")
+	public String horariosByTrabajador(@PathVariable("trabajadorId") Integer trabajadorId, ModelMap modelMap) {
+		String vista = "horarios/listadoHorariosPorTrabajador";
+		Iterable<Horario> horarios = horarioService.findHorarioByTrabajadorId(trabajadorId);
+		Trabajador t=trabajadorService.findTrabajadorById(trabajadorId).get();
+		String trabajador=t.getNombre() + " " + t.getApellidos();
+		modelMap.addAttribute("horarios", horarios);
+		modelMap.addAttribute("trabajador", trabajador);
+		return vista;
+	}
 	
-	@GetMapping(path="/new")
-	public String crearHorario(ModelMap modelMap) {
+	
+	@GetMapping(path="/new/{trabajadorId}")
+	public String crearHorario(@PathVariable("trabajadorId") Integer trabajadorId,ModelMap modelMap) {
 		String view="horarios/newHorario";
-		Iterable<Trabajador> trabajadores = trabajadorService.findAll();
-		modelMap.addAttribute("trabajadores", trabajadores);
-		modelMap.addAttribute("horarios", new Horario());
+		modelMap.addAttribute("trabajador",trabajadorId);
+		modelMap.addAttribute("horario", new Horario());
 		return view;
 	}
 	
 	@PostMapping(path="/save")
 	public String salvarHorario(@Valid Horario horario, BindingResult result,ModelMap modelMap) {
-		String view="redirect:/horarios/misHorarios";
+		String view="redirect:/horarios/" + horario.getTrabajador().getId();
 		if(result.hasErrors()) {
-			modelMap.addAttribute("horarios", horario);
+			modelMap.addAttribute("horario", horario);
 			return "horarios/newHorario";
 		}else {
-			User user = userService.getLoggedUser();
-			Trabajador trabajador = trabajadorService.findTrabajadorByUsername(user.getUsername()).get();
-			horario.setTrabajador(trabajador);
-			
-			horarioService.save(horario);
-			modelMap.addAttribute("message", "Horario actualizado!");
+			try {
+				horarioService.crearHorario(horario);
+				return view;
+			} catch (SolapamientoFechasException e) {
+				modelMap.addAttribute("horario", horario);
+				modelMap.addAttribute("error", "Las horas se solapan");
+				return  "horarios/newHorario";
+			}
 		}
-		return view;
 	}
 	
 	@GetMapping(path="/delete/{horarioId}")

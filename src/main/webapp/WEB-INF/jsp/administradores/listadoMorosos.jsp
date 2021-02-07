@@ -19,33 +19,34 @@
             <th>Direccion</th>
             <th>Dni</th>
             <th>Correo</th>
-            <%-- <th>Fecha final de contrato</th>--%>
+           <th>Fecha final de contrato</th>
         </tr>
         </thead>
         <tbody>
         <c:forEach items="${morosos}" var="moroso">
             <tr>
                 <td>
-                    <c:out value="${moroso.nombre}"/>
+                    <c:out value="${moroso.presupuesto.servicio.cliente.nombre}"/>
                 </td>
                 <td>
-                    <c:out value="${moroso.apellidos}"/>
+                    <c:out value="${moroso.presupuesto.servicio.cliente.apellidos}"/>
                 </td>
                 <td>
-                    <c:out value="${moroso.telefono}"/>
+                    <c:out value="${moroso.presupuesto.servicio.cliente.telefono}"/>
                 </td>
                 <td>
-                    <c:out value="${moroso.direccion}"/>
+                    <c:out value="${moroso.presupuesto.servicio.cliente.direccion}"/>
                 </td>
                 <td>
-                    <c:out value="${moroso.dni}"/>
+                    <c:out value="${moroso.presupuesto.servicio.cliente.dni}"/>
                 </td>
                  <td>
-                    <c:out value="${moroso.correo}"/>
+                    <c:out value="${moroso.presupuesto.servicio.cliente.correo}"/>
                 </td>
-                <%-- <td>
-                    <c:out value="${moroso.servicios.contrato.fechafinal}"/>
-                </td>--%>
+                <td>
+               		 <fmt:parseDate value="${moroso.fechafinal}" pattern="yyyy-MM-dd" var="date"/>
+	                 <fmt:formatDate value="${date}" type = "date" dateStyle="long"/> 
+                </td>
                 
             </tr>
         </c:forEach>

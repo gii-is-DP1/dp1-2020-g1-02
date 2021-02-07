@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.samples.petclinic.model.ContratoTrabajador;
 import org.springframework.samples.petclinic.service.ContratoTrabajadorService;
 import org.springframework.samples.petclinic.service.TrabajadorService;
+import org.springframework.samples.petclinic.service.exceptions.SolapamientoFechasException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -44,15 +45,20 @@ public class ContratoTrabajadorController {
 	
 	@PostMapping(path="/save")
 	public String salvarContratoTrabajador(@Valid ContratoTrabajador contratoTrabajador, BindingResult result,ModelMap modelMap) {
-		String view="redirect:/contratosTrabajadores";
+		String view="redirect:/contratosTrabajadores/" + contratoTrabajador.getTrabajador().getId();
 		if(result.hasErrors()) {
 			modelMap.addAttribute("contratoTrabajador", contratoTrabajador);
 			return "contratosTrabajadores/editContratoTrabajador";
 		}else {
-			contratoTrabajadorService.save(contratoTrabajador);
-			modelMap.addAttribute("message", "Contrato actualizado!");
+			try {
+				contratoTrabajadorService.crearContrato(contratoTrabajador);
+				modelMap.addAttribute("message", "Contrato actualizado!");
+				return view;
+			} catch(SolapamientoFechasException e) {
+				modelMap.addAttribute("message", "El trabajador ya tiene un contrato en esas fechas");
+				return "contratosTrabajadores/editContratoTrabajador";
+			}
 		}
-		return view;
 	}
 	
 	@GetMapping(path="/delete/{contratoTrabajadorId}")
@@ -65,6 +71,14 @@ public class ContratoTrabajadorController {
 		}else {
 			modelmap.addAttribute("message", "Contrato trabajador no encontrado");
 		}
+		return view;
+	}
+	
+	@GetMapping(path="/{trabajadorId}")
+	public String contratosByTrabajador(@PathVariable("trabajadorId") Integer tId, ModelMap modelMap) {
+		String view="contratosTrabajadores/contratosByTrabajador";
+		Iterable<ContratoTrabajador> contratos=contratoTrabajadorService.findContratoTrabajadorByTrabajador(tId);
+		modelMap.addAttribute("contratos", contratos);
 		return view;
 	}
 }

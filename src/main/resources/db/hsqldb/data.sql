@@ -18,11 +18,11 @@ INSERT INTO authorities(id,username,authority) VALUES (7,'JoseCarlos','trabajado
 INSERT INTO authorities(id,username,authority) VALUES (8,'Sistema','administrador');
 
 INSERT INTO trabajador(id,nombre,apellidos,dni,telefono, direccion, correo, tipocategoria) VALUES (1,'Carlos Jesus', 'Villadiego', '78461836B','666888888','C/Garcia Marquez n2', 'calvirgar@alum.us.es', 0);
-INSERT INTO trabajador(id,nombre,apellidos,dni,telefono, direccion, correo, tipocategoria) VALUES (2,'Carlos Jesus2', 'Villadiego', '78461836B','666888888','C/Garcia Marquez n2', 'calvirgar@alum.us.es', 2);
+INSERT INTO trabajador(id,nombre,apellidos,dni,telefono, direccion, correo, tipocategoria) VALUES (2,'Carlos Jesus2', 'Villadiego', '78461835B','666888888','C/Garcia Marquez n2', 'calvirgar@alum.us.es', 2);
 INSERT INTO trabajador(id,nombre,apellidos,dni,telefono, direccion, correo, tipocategoria, username) VALUES (3,'Jose Carlos', 'Morales', '20099009B','666888884','C/Huertas', 'josmorbor3@alum.us.es', 2, 'JoseCarlos');
 
-INSERT INTO horario(hora_inicio, hora_fin, trabajador, descripcion) VALUES ('2020-12-10 12:00', '2020-12-10 15:00', 1, 'Limpiar en Acuario de Sevilla');
-INSERT INTO horario(hora_inicio, hora_fin, trabajador, descripcion) VALUES ('2020-01-31 17:30', '2020-01-31 20:30', 3, 'Limpiar en Hostal San Jerónimo (Sevilla)');
+INSERT INTO horario(fecha, hora_inicio, hora_fin, trabajador, descripcion) VALUES ('2020-12-10' , '12:00', '15:00', 1, 'Limpiar en Acuario de Sevilla');
+INSERT INTO horario(fecha, hora_inicio, hora_fin, trabajador, descripcion) VALUES ('2020-12-10', '17:30', '20:30', 3, 'Limpiar en Hostal San Jerónimo (Sevilla)');
 
 INSERT INTO registro_hora(hora_entrada, hora_salida, trabajador) VALUES ('2019-06-16 11:00', '2019-06-16 14:00', 1);
 INSERT INTO registro_hora(hora_entrada, hora_salida, trabajador) VALUES ('2019-08-16 19:00', '2019-08-16 23:00', 2);
@@ -93,10 +93,10 @@ INSERT INTO presupuesto(precio, tipopresupuesto, servicio_id, estado) VALUES (18
 INSERT INTO presupuesto(precio, tipopresupuesto, servicio_id, estado) VALUES (100.0, 1, 3, 1);
 INSERT INTO presupuesto(precio, tipopresupuesto, servicio_id, estado) VALUES (100.0, 1, 4, 1);
 
-INSERT INTO contratoservicio(fechainicial, fechafinal, fechapago, cliente,  periodoprueba, presupuesto) VALUES ('2019-10-20', '2020-12-31', '2020-12-10', 1, 0, 1);
-INSERT INTO contratoservicio(fechainicial, fechafinal, fechapago, cliente, periodoprueba, presupuesto) VALUES ('2019-10-20', '2020-12-31', '2020-12-10', 3, 1, 5);
-INSERT INTO contratoservicio(fechainicial, fechafinal, fechapago, cliente, periodoprueba, presupuesto) VALUES ('2019-10-20', '2021-02-26', '2020-12-10', 1, 0, 4);
-INSERT INTO contratoservicio(fechainicial, fechafinal, cliente, periodoprueba, presupuesto) VALUES ('2020-10-20', '2021-10-20', 2, 1, 6);
+INSERT INTO contratoservicio(fechainicial, fechafinal, fechapago,  periodoprueba, presupuesto) VALUES ('2019-10-20', '2020-12-31', '2020-12-10',0, 1);
+INSERT INTO contratoservicio(fechainicial, fechafinal, fechapago, periodoprueba, presupuesto) VALUES ('2019-10-20', '2020-12-31', '2020-12-10', 1, 5);
+INSERT INTO contratoservicio(fechainicial, fechafinal, fechapago, periodoprueba, presupuesto) VALUES ('2019-10-20', '2021-02-26', '2020-12-10', 0, 4);
+INSERT INTO contratoservicio(fechainicial, fechafinal, periodoprueba, presupuesto) VALUES ('2020-10-20', '2021-10-20', 1, 6);
 
 INSERT INTO reclamacion(fecha, descripcion, cliente_id, servicio_id) VALUES ('2019-10-20', 'El servicio está incompleto', 1, 1);
 INSERT INTO reclamacion(fecha, descripcion, cliente_id, servicio_id) VALUES ('2019-10-20', 'El servicio está lamentable', 2, 2);
@@ -112,6 +112,12 @@ INSERT INTO mensaje(id, fecha, asunto, cuerpo, emisor, leido) VALUES (2, '2021-0
 INSERT INTO aux VALUES ('admin', 1);
 INSERT INTO aux VALUES ('JosePabloSL', 2);
 INSERT INTO aux VALUES ('JoseCarlos', 2);
+
+INSERT INTO aux_ts VALUES (1, 1);
+INSERT INTO aux_ts VALUES (2, 1);
+INSERT INTO aux_ts VALUES (2, 2);
+INSERT INTO aux_ts VALUES (3, 2);
+INSERT INTO aux_ts VALUES (1, 3);
 
 
 /*-- One owner user, named owner1 with passwor 0wn3r

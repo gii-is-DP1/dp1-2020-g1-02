@@ -7,6 +7,8 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="petclinic" tagdir="/WEB-INF/tags" %>
 
+<spring:url value="/resources/images/delete.jpg" var="delete"/>
+
 <petclinic:layout pageName="ofertas">
     <h2>Ofertas</h2>
 
@@ -15,7 +17,7 @@
         <tr>
             <th style="width: 150px;">ID</th>
             <th style="width: 150px;">Producto</th>
-            <th style="width: 150px;">Precio por unidad</th>
+            <th style="width: 200px;">Precio por unidad</th>
             <th style="width: 150px;">Proveedor</th>
             <%-- <th style="width: 150px;">Cantidad deseada</th>--%>
         </tr>
@@ -45,7 +47,7 @@
                 	<spring:url value="/ofertas/delete/{ofertaId}" var="productUrl">
                 		<spring:param name="ofertaId" value="${oferta.id}"/>
                 	</spring:url>
-                	<a href="${fn:escapeXml(productUrl)}" class="btn btn-default">Borrar</a>
+                	<a href="${fn:escapeXml(productUrl)}" class="btn btn-default"><img src="${delete}" width="30px"/></a>
                 </td>
             </tr>
         </c:forEach>
