@@ -15,6 +15,8 @@ import org.springframework.samples.petclinic.service.ClienteService;
 import org.springframework.samples.petclinic.service.ReclamacionService;
 import org.springframework.samples.petclinic.service.ServicioService;
 import org.springframework.samples.petclinic.service.UserService;
+import org.springframework.samples.petclinic.service.exceptions.NoDuranteServicioException;
+import org.springframework.samples.petclinic.service.exceptions.ServicioNoAceptadoException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -81,13 +83,17 @@ public class ReclamacionController {
 			modelMap.addAttribute("reclamacion", reclamacion);
 			return "reclamaciones/newReclamacion";
 		}else {
-			if(!clienteService.findClienteById(reclamacion.getCliente().getId()).isPresent()) {
-				modelMap.addAttribute("reclamacion", reclamacion);
-				modelMap.addAttribute("error", "No existe el cliente");
-				return "reclamaciones/newReclamacion";
-			}else {
-				reclamacionService.save(reclamacion);
+			try {
+				reclamacionService.comprobarExcepciones(reclamacion);
 				modelMap.addAttribute("message", "Reclamacion añadida");
+			} catch(ServicioNoAceptadoException e) {
+				modelMap.addAttribute("reclamacion", reclamacion);
+				modelMap.addAttribute("message", "No se puede poner una reclamación a un servicio que no esté aceptado");
+				return "reclamaciones/newReclamacion";
+			} catch(NoDuranteServicioException e) {
+				modelMap.addAttribute("reclamacion", reclamacion);
+				modelMap.addAttribute("message", "No se puede poner una reclamación antes de que comience el servicio ni después de que finalice");
+				return "reclamaciones/newReclamacion";
 			}
 		}
 		return view;

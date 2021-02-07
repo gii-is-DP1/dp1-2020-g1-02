@@ -32,6 +32,7 @@
                     <button class="btn btn-default" type="submit">Crear Contrato</button>
                 </div>
             </div>
+            <h3><c:out value="${message}"/></h3>
         </form:form>
     </jsp:body>
 

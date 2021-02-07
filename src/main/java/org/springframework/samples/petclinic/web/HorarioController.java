@@ -11,6 +11,7 @@ import org.springframework.samples.petclinic.model.User;
 import org.springframework.samples.petclinic.service.HorarioService;
 import org.springframework.samples.petclinic.service.TrabajadorService;
 import org.springframework.samples.petclinic.service.UserService;
+import org.springframework.samples.petclinic.service.exceptions.HoraNoAdecuadaException;
 import org.springframework.samples.petclinic.service.exceptions.SolapamientoFechasException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -85,9 +86,14 @@ public class HorarioController {
 				return view;
 			} catch (SolapamientoFechasException e) {
 				modelMap.addAttribute("horario", horario);
-				modelMap.addAttribute("error", "Las horas se solapan");
+				modelMap.addAttribute("message", "Las horas se solapan");
 				return  "horarios/newHorario";
 			}
+//			} catch(HoraNoAdecuadaException e) {
+//				modelMap.addAttribute("horario", horario);
+//				modelMap.addAttribute("message", "Tiene que ser en punto o y media");
+//				return  "horarios/newHorario";
+//			}
 		}
 	}
 	

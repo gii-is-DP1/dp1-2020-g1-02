@@ -1,9 +1,13 @@
 package org.springframework.samples.petclinic.service;
 
+import java.time.LocalDate;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.samples.petclinic.model.EstadoServicio;
 import org.springframework.samples.petclinic.model.Valoracion;
 import org.springframework.samples.petclinic.repository.ValoracionRepository;
+import org.springframework.samples.petclinic.service.exceptions.AntesComenzarServicioException;
+import org.springframework.samples.petclinic.service.exceptions.ServicioNoAceptadoException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -55,6 +59,27 @@ public class ValoracionService {
 	@Transactional(readOnly=true)
 	public Iterable<Valoracion> findValoracionByClienteName(String nombre) {
 		return valoracionRepo.findAllByClienteName(nombre.toLowerCase());
+	}
+	
+	@Transactional(rollbackFor = ServicioNoAceptadoException.class)
+	public void valoracionServicioNoAceptado(Valoracion valoracion) throws ServicioNoAceptadoException {
+		if(valoracion.getServicio().getEstado() != EstadoServicio.Aceptado) {
+			throw new ServicioNoAceptadoException();
+		}
+	}
+	
+	@Transactional(rollbackFor = AntesComenzarServicioException.class)
+	public void valoracionAntesComenzarServicio(Valoracion valoracion) throws AntesComenzarServicioException {
+		if(valoracion.getServicio().getFechainicio().isAfter(LocalDate.now())) {
+			throw new AntesComenzarServicioException();
+		}
+	}
+	
+	@Transactional
+	public void comprobarExcepciones(Valoracion valoracion) throws ServicioNoAceptadoException, AntesComenzarServicioException {
+		this.valoracionServicioNoAceptado(valoracion);
+		this.valoracionAntesComenzarServicio(valoracion);
+		this.save(valoracion);
 	}
 
 }

@@ -56,7 +56,7 @@ public class PedidoController {
         		return view;
         	} catch(LimitePedidoException e) {
         		modelMap.addAttribute("pedido", pedido);
-        		modelMap.addAttribute("error", "El precio total del pedido no puede superar 200 euros.");
+        		modelMap.addAttribute("message", "El precio total del pedido no puede superar 200 euros.");
         		return "administradores/editPedido";
         	}
         }

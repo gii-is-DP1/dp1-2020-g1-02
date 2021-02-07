@@ -1,10 +1,15 @@
 package org.springframework.samples.petclinic.service;
 
+import java.time.LocalDate;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.samples.petclinic.model.EstadoServicio;
 import org.springframework.samples.petclinic.model.Reclamacion;
+import org.springframework.samples.petclinic.model.Valoracion;
 import org.springframework.samples.petclinic.repository.ReclamacionRepository;
+import org.springframework.samples.petclinic.service.exceptions.NoDuranteServicioException;
+import org.springframework.samples.petclinic.service.exceptions.ServicioNoAceptadoException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -49,6 +54,28 @@ public class ReclamacionService {
 	public void deleteById(Integer id) {
 		Reclamacion reclamacionBorrar = findReclamacionById(id).get();
 		delete(reclamacionBorrar);
+	}
+	
+	@Transactional(rollbackFor = ServicioNoAceptadoException.class)
+	public void reclamacionServicioNoAceptado(Reclamacion reclamacion) throws ServicioNoAceptadoException {
+		if(reclamacion.getServicio().getEstado() != EstadoServicio.Aceptado) {
+			throw new ServicioNoAceptadoException();
+		}
+	}
+	
+	@Transactional(rollbackFor = NoDuranteServicioException.class)
+	public void reclamacionDuranteServicio(Reclamacion reclamacion) throws NoDuranteServicioException {
+		if(LocalDate.now().isAfter(reclamacion.getServicio().getFechafin()) ||
+				LocalDate.now().isBefore(reclamacion.getServicio().getFechainicio())) {
+			throw new NoDuranteServicioException();
+		}
+	}
+	
+	@Transactional
+	public void comprobarExcepciones(Reclamacion reclamacion) throws ServicioNoAceptadoException, NoDuranteServicioException {
+		this.reclamacionServicioNoAceptado(reclamacion);
+		this.reclamacionDuranteServicio(reclamacion);
+		this.save(reclamacion);
 	}
 
 }
