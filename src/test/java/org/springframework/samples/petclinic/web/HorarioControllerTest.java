@@ -118,8 +118,8 @@ public class HorarioControllerTest {
 						.param("hora_fin", "17:30")
 						.param("trabajador","1")
 						.param("descripcion", "Ese es tu horario de hoy"))
-			.andExpect(status().is3xxRedirection())
-			.andExpect(view().name("redirect:/horarios/1"));
+			.andExpect(status().is2xxSuccessful())
+			.andExpect(view().name("horarios/newHorario"));
 	}
 	
 	@WithMockUser(value = "spring")

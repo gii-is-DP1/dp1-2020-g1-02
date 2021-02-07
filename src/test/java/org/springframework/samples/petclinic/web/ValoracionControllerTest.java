@@ -152,7 +152,7 @@ public class ValoracionControllerTest {
 						.param("cliente", "1")
 						.param("servicio", "1"))	
 			.andExpect(status().is2xxSuccessful())
-			.andExpect(view().name("succesful"));
+			.andExpect(view().name("valoraciones/newValoracion"));
 	}
 	
 	@WithMockUser(value = "spring")
