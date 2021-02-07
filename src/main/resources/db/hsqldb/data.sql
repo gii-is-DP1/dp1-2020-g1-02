@@ -108,7 +108,6 @@ INSERT INTO valoracion(fecha,valoracion, servicio_id) VALUES ('2019-10-20', 4, 1
 INSERT INTO valoracion(fecha,valoracion, servicio_id) VALUES ('2020-10-12', 5, 2);
 INSERT INTO valoracion(fecha,valoracion, servicio_id) VALUES ('2019-10-20', 4, 3);
 INSERT INTO valoracion(fecha,valoracion, servicio_id) VALUES ('2020-10-12', 5, 4);
-INSERT INTO valoracion(fecha,valoracion, servicio_id) VALUES ('2019-10-20', 4, 5);
 INSERT INTO valoracion(fecha,valoracion, servicio_id) VALUES ('2020-10-12', 5, 6);
 
 

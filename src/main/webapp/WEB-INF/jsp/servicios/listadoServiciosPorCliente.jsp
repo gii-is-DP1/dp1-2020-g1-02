@@ -5,9 +5,11 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
 <%@ taglib prefix="petclinic" tagdir="/WEB-INF/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
+<c:set var="serviciosV" value="${serviciosV}" />
 <petclinic:layout pageName="servicios">
     <h2>Mis Servicios</h2>
 	
@@ -25,7 +27,9 @@
             <th style="width: 150px;">FECHAFIN</th>
             <th style="width: 150px;">TIPOCATEGORIA</th>
             <th style="width: 150px;">ESTADO</th>
+          	
             <th style="width: 150px;"></th>
+
             <th style="width: 150px;"></th>
             <th style="width: 150px;"></th>
         </tr>
@@ -55,13 +59,23 @@
 	              	<a href="${fn:escapeXml(reclamacionUrl)}">Poner reclamacion</a>
                 </td>
                 
-                <td>
-                	<spring:url value="/valoraciones/new/{oId}" var="reclamacionUrl">
-              		<spring:param name="oId" value="${servicio.id}"/>
-	              	</spring:url>
-	              	<a href="${fn:escapeXml(reclamacionUrl)}">Poner valoracion</a>
-                </td>
-                
+                <c:choose>
+				    <c:when test="${not fn:contains(serviciosV, servicio.id)}">
+				      <td>
+	                	<spring:url value="/valoraciones/new/{oId}" var="reclamacionUrl">
+	              		<spring:param name="oId" value="${servicio.id}"/>
+		              	</spring:url>
+		              	<a href="${fn:escapeXml(reclamacionUrl)}">Valorar</a>
+	                </td>
+				        
+				    </c:when>    
+				    <c:otherwise>
+				        <td> </td>
+				    </c:otherwise>
+				</c:choose>
+                <c:if test="${not fn:contains(serviciosV, servicio.id)}">
+	                
+                </c:if>
                 <td>
                 	<spring:url value="/servicios/{servicioId}/presupuestos" var="servicioUrl">
                 		<spring:param name="servicioId" value="${servicio.id}"/>

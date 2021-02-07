@@ -43,16 +43,48 @@
        <h2>Poner una valoracion</h2>
        <form:form modelAttribute="valoracion" class="form-horizontal" action="/valoraciones/save">
        		<div class="form-group has-feedback">
-       			<petclinic:inputField label="Fecha" name="fecha"  disabled="true"/>
-  				<label for="nivelsatisfaccion">Nivel de Satisfaccion</label>
-  				<select id="nivelsatisfaccion" name="nivelsatisfaccion">
-    				<option value="MuyAlto">Muy Alto</option>
-				    <option value="Alto">Alto</option>
-				    <option value="Medio">Medio</option>
-				    <option value="Bajo">Bajo</option>
-				    <option value="MuyBajo">Muy Bajo</option>
-  				</select>
-  				<input type="hidden" id="cliente" name="cliente" value="${valoracion.servicio.cliente.id}" />
+       			<div>
+       			<table id="serviciosTable" class="table table-striped">
+				        <thead>
+				        <tr>
+				            <th style="width: 150px;"></th>
+				            <th style="width: 150px;"></th>
+				            <th style="width: 150px;"></th>
+				            <th style="width: 150px;"></th>
+							<th style="width: 150px;"></th>
+							<th style="width: 150px;"></th>
+							<th style="width: 150px;"></th>
+				        </tr>
+				        </thead>
+				        <tbody>
+				            <tr>
+				             	<td>
+				                    Nada recomendable 
+				                </td>
+				                <td>
+				                    <input type="radio" value="1"  name="valoracion" /> <br/>
+				                </td>
+				                <td>
+				                    <input type="radio" value="2" name="valoracion" /> <br/>
+				                </td>
+				                 <td>
+				                    <input type="radio"  value="3" name="valoracion" /> <br/>
+				                </td>
+				                <td>
+				                    <input type="radio" value="4" name="valoracion" /> <br/>
+				                </td>
+				                <td>
+				                    <input type="radio" value="5" name="valoracion" /> <br/>
+				                </td>
+				                <td>
+				                    Muy recomendable 
+				                </td>
+				            </tr>
+				        </tbody>
+    			</table>
+    			</div>
+			
+  				<petclinic:inputField label="Fecha de la valoracion" name="fecha"  disabled="true"/>
   				<input type="hidden" id="servicio" name="servicio" value="${valoracion.servicio.id}" />
        		</div>
             <div class="form-group">
@@ -65,5 +97,10 @@
         <h3><c:out value="${error}"/></h3>
         
     </jsp:body>
+    
 
+	
 </petclinic:layout>
+
+
+	

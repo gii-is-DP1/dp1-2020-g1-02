@@ -105,6 +105,7 @@
                   		<div class="for_box">
 				            <i><img src="resources/icon/${index.index}.png"/></i>
 		                    <h3><c:out value="${valoracion.key}"/></h3>
+		                    <h4> Valoracion de nuestros clientes</h4>
 				            <p> <c:forEach begin="1" step="1" end="${valoracion.value}" >
 										<img src="${star}" width="30px"/>
 									</c:forEach>

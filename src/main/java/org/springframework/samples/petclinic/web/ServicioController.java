@@ -15,6 +15,7 @@ import org.springframework.samples.petclinic.service.PresupuestoService;
 import org.springframework.samples.petclinic.service.ServicioService;
 import org.springframework.samples.petclinic.service.TrabajadorService;
 import org.springframework.samples.petclinic.service.UserService;
+import org.springframework.samples.petclinic.service.ValoracionService;
 import org.springframework.samples.petclinic.service.exceptions.PresupuestoYaAceptadoException;
 import org.springframework.samples.petclinic.service.exceptions.ServicioNoAceptadoException;
 import org.springframework.security.core.Authentication;
@@ -41,6 +42,8 @@ public class ServicioController {
 	private UserService userService;
 	@Autowired
 	private TrabajadorService trabajadorService;
+	@Autowired
+	private ValoracionService valoracionService;
 	
 	@GetMapping()
 	public String listadoServicios(ModelMap modelMap) {
@@ -116,6 +119,7 @@ public class ServicioController {
 		String vista = "servicios/listadoServiciosPorCliente";
 		Iterable<Servicio> servicios = servicioService.serviciosByCliente(clienteId);
 		modelMap.addAttribute("servicios", servicios);
+		
 		return vista;
 	}
 	
@@ -125,6 +129,7 @@ public class ServicioController {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		Cliente client = clienteService.findClienteByUsername(auth.getName()).get();
 		Iterable<Servicio> servicios = servicioService.serviciosByCliente(client.getId());
+		modelMap.addAttribute("serviciosV", valoracionService.serviciosConValoraciones());
 		modelMap.addAttribute("servicios", servicios);
 		return vista;
 	}
