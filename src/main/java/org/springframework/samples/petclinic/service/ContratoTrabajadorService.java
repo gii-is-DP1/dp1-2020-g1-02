@@ -36,11 +36,13 @@ public class ContratoTrabajadorService {
 		
 	}
 
+	@Transactional(readOnly=true)
 	public Optional<ContratoTrabajador> findContratoTrabajadorById(int contratoId) {
 		// TODO Auto-generated method stub
 		return contratoTrabajadorRepo.findById(contratoId);
 	}
 	
+	@Transactional(readOnly=true)
 	public Iterable<ContratoTrabajador> contratosTrabajdorQueCaducanEsteMes(){
 		LocalDate now = LocalDate.now();
 		return contratoTrabajadorRepo.contratosTrabajadorQueCaducanEsteMes(now.getDayOfMonth(), now.getMonthValue(), now.getYear());
@@ -59,6 +61,7 @@ public class ContratoTrabajadorService {
 		}
 	}
 
+	@Transactional(readOnly=true)
 	public Iterable<ContratoTrabajador> findContratoTrabajadorByTrabajador(Integer trabajador){
 		return contratoTrabajadorRepo.contratosTrabajadorPorTrabajador(trabajador);
 	}

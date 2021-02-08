@@ -35,6 +35,7 @@ public class PresupuestoService {
 		return (int) presupuestoRepo.count();
 	}
 	
+	@Transactional(readOnly=true)
 	public Iterable<Presupuesto> findAll() {
 		return presupuestoRepo.findAll();
 	}
@@ -49,10 +50,12 @@ public class PresupuestoService {
 		presupuestoRepo.delete(presupuesto);
 	}
 	
+	@Transactional(readOnly=true)
 	public Optional<Presupuesto> findPresupuestoById(int pId) {
 		return presupuestoRepo.findById(pId);
 	}
 	
+	@Transactional(readOnly=true)
 	public Iterable<Presupuesto>presupuestosByServicio(Integer id){
 		return presupuestoRepo.presupuestosByServicio(id);
 	}
@@ -95,7 +98,7 @@ public class PresupuestoService {
 		mensajesService.save(m);
 	}
 	
-	
+	@Transactional(readOnly=true)
 	public Integer numeroPresupuestosByServicioConEstadoAceptado(Integer id) {
 		return presupuestoRepo.numeroPresupuestosByServicioConEstadoAceptado(id);
 	}

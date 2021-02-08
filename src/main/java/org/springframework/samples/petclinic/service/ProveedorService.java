@@ -46,12 +46,10 @@ public class ProveedorService {
 	}
 	@Transactional(readOnly=true)
 	public Optional<Proveedor> findProveedorByUsername(String username) {
-		// TODO Auto-generated method stub
 		return proveedorRepo.findProveedorByUsername(username);
 	}
 	@Transactional(readOnly=true)
 	public Optional<Proveedor> findProveedorById(Integer id) {
-		// TODO Auto-generated method stub
 		return proveedorRepo.findById(id);
 	}
 	
