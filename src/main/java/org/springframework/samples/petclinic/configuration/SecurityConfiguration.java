@@ -33,26 +33,40 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests()
 				.antMatchers("/resources/**","/webjars/**","/h2-console/**").permitAll()
+				
 				.antMatchers(HttpMethod.GET, "/","/error").permitAll()
 				.antMatchers("/users/new").permitAll()
+				
+				.antMatchers("/users/newTrabajador").hasAuthority("administrador")
+				
+				.antMatchers("/users/newAdministrador").hasAuthority("administrador")
+				
+				.antMatchers("/users/saveTrabajador").hasAuthority("administrador")
+				
+				.antMatchers("/users/saveAdministrador").hasAuthority("administrador")
+				
+				.antMatchers("/users/**").hasAnyAuthority("administrador", "cliente", "proveedor")
 				
 				.antMatchers("/clientes/**").hasAuthority("administrador")
 				
 				.antMatchers("/reclamaciones/new/**").hasAnyAuthority("cliente")
+				
 				.antMatchers("/reclamaciones/save").hasAnyAuthority("cliente")
 				
 				.antMatchers("/reclamaciones/**").hasAnyAuthority("administrador")
 				
 				.antMatchers("/registroHoras/new").hasAnyAuthority("trabajador")
+				
 				.antMatchers("/registroHoras/save").hasAnyAuthority("trabajador")
 				
 				.antMatchers("/registroHoras/**").hasAnyAuthority("administrador")
 				
-			
 				.antMatchers("/administradores/**").hasAnyAuthority("administrador")
 				
 				.antMatchers("/instalaciones/misInstalaciones").hasAuthority("cliente")
+				
 				.antMatchers("/instalaciones/new").hasAuthority("cliente")
+				
 				.antMatchers("/instalaciones/save").hasAuthority("cliente")
 				
 				.antMatchers("/instalaciones/**").permitAll()
@@ -91,9 +105,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 				
 				.antMatchers("/productos/**").hasAnyAuthority("administrador")
 
-				.antMatchers("/trabajadores/**").permitAll()//.hasAnyAuthority("administrador", "trabajador")
-				
-				.antMatchers("/trabajadores/servicios/**").permitAll()
+				.antMatchers("/trabajadores/**").hasAnyAuthority("administrador")
 
 				.antMatchers("/contratosTrabajadores/**").hasAnyAuthority("administrador")
 

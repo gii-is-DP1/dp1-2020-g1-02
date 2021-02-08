@@ -70,16 +70,36 @@ public class TrabajadorController {
 		return "trabajadores/editTrabajadores";
 	}
 	
+	@PostMapping(path="/{trabajadorId}/update")
+	public String updateTrabajador(@PathVariable("trabajadorId") int trabajadorId, @Valid Trabajador trabajador, BindingResult result,ModelMap modelMap) {
+		String view="redirect:/trabajadores";
+		if(result.hasErrors()) {
+			modelMap.addAttribute("trabajador", trabajador);
+			return "trabajadores/editTrabajadores";
+		}else {
+			Trabajador trabajadorToUpdate = trabajadorService.findTrabajadorById(trabajadorId).get();
+			trabajadorToUpdate.setNombre(trabajador.getNombre());
+			trabajadorToUpdate.setApellidos(trabajador.getApellidos());
+			trabajadorToUpdate.setDni(trabajador.getDni());
+			trabajadorToUpdate.setCorreo(trabajador.getCorreo());
+			trabajadorToUpdate.setDireccion(trabajador.getDireccion());
+			trabajadorToUpdate.setTelefono(trabajador.getTelefono());
+			trabajadorToUpdate.setTipocategoria(trabajador.getTipocategoria());
+			trabajadorService.save(trabajadorToUpdate);
+			modelMap.addAttribute("message", "Trabajador actualizado!");
+		}
+		return view;
+	}
+	
 	@GetMapping(path="/delete/{trabajadorId}")
 	public String borrarTrabajador(@PathVariable("trabajadorId") int trabajadorId, ModelMap modelmap) {
 		String view="redirect:/trabajadores";
 		Optional<Trabajador> trabajador=trabajadorService.findTrabajadorById(trabajadorId);
 		if(trabajador.isPresent()) {
-			
 			trabajadorService.delete(trabajador.get());
 			modelmap.addAttribute("message", "Trabajador borrado correctamente");
 		}else {
-			modelmap.addAttribute("message", "Trabajador on encontrado");
+			modelmap.addAttribute("message", "Trabajador no encontrado");
 			view=listadoTrabajadores(modelmap);
 		}
 		return view;
