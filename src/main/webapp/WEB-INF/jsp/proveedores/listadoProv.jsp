@@ -8,6 +8,7 @@
 <%@ taglib prefix="petclinic" tagdir="/WEB-INF/tags" %>
 <spring:url value="/resources/images/delete.jpg" var="delete"/>
 <petclinic:layout pageName="proveedores">
+    
     <h2>Proveedores</h2>
 
     <table id="proveedoresTable" class="table table-striped">
@@ -40,8 +41,8 @@
                 
                 <td>
                 	<spring:url value="/proveedores/delete/{provId}" var="provUrl">
-                		<spring:param name="provId" value="${proveedor.id}"/>
-                	</spring:url>
+                		<spring:param name="provUrl" value="${proveedor.id}"/>
+                	</spring:url> 
                 	<a href="${fn:escapeXml(provUrl)}"><img src="${delete}" width="30px"/></a>
                 </td>
             </tr>

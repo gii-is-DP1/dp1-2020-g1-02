@@ -54,12 +54,12 @@ public class UserController {
 	private PasswordEncoder passwordEncoder;
 	
 	
-	public static String EXCEPTION_VIEW = "/exception";
+	public static String EXCEPTION_VIEW = "/error";
 	public static String PERFIL_VIEW = "users/perfilView";
 	
 	@GetMapping("/new")
 	public String nuevoCliente(ModelMap modelMap) {
-		String vista ="clientes/newCliente";
+		String vista ="users/newCliente";
 		ClienteForm clienteForm = new ClienteForm();
 		modelMap.addAttribute("clienteForm", clienteForm);
 		return vista;
@@ -67,7 +67,7 @@ public class UserController {
 	
 	@GetMapping("/newProveedor")
 	public String newProveedor(ModelMap modelMap) {
-		String vista ="proveedores/newProveedor";
+		String vista ="users/newProveedor";
 		ProveedorForm proveedorForm = new ProveedorForm();
 		modelMap.addAttribute("proveedorForm", proveedorForm);
 		return vista;
@@ -75,7 +75,7 @@ public class UserController {
 	
 	@GetMapping("/newAdministrador")
 	public String newAdministrador(ModelMap modelMap) {
-		String vista ="administradores/newAdministrador";
+		String vista ="users/newAdministrador";
 		TrabajadorForm administradorForm = new TrabajadorForm();
 		modelMap.addAttribute("administradorForm", administradorForm);
 		return vista;
@@ -83,7 +83,7 @@ public class UserController {
 	
 	@GetMapping("/newTrabajador")
 	public String newTrabajador(ModelMap modelMap) {
-		String vista ="trabajadores/editTrabajadores";
+		String vista ="users/editTrabajadores";
 		TrabajadorForm trabajadorForm = new TrabajadorForm();
 		modelMap.addAttribute("trabajadorForm", trabajadorForm);
 		return vista;
@@ -91,15 +91,15 @@ public class UserController {
 	
 	@GetMapping("/newTrabajador/{idCurriculum}")
 	public String newTrabajadorCurriculum(@PathVariable("idCurriculum") Integer idCurriculum, ModelMap modelMap) {
-		String vista ="trabajadores/editTrabajadores";
+		String vista ="users/editTrabajadores";
 		Curriculum curriculum = curriculumService.findCurriculumById(idCurriculum).get();
-		Trabajador trabajador = new Trabajador();
-		trabajador.setNombre(curriculum.getNombre());
-		trabajador.setApellidos(curriculum.getApellidos());
-		trabajador.setTelefono(curriculum.getTelefono());
-		trabajador.setCorreo(curriculum.getCorreo());
-		trabajador.setTipocategoria(curriculum.getTipocategoria());
-		modelMap.addAttribute("trabajador", trabajador);
+		TrabajadorForm trabajadorForm = new TrabajadorForm();
+		trabajadorForm.setNombre(curriculum.getNombre());
+		trabajadorForm.setApellidos(curriculum.getApellidos());
+		trabajadorForm.setTelefono(curriculum.getTelefono());
+		trabajadorForm.setCorreo(curriculum.getCorreo());
+		trabajadorForm.setTipocategoria(curriculum.getTipocategoria());
+		modelMap.addAttribute("trabajadorForm", trabajadorForm);
 		return vista;
 	}
 	
@@ -136,9 +136,8 @@ public class UserController {
 		String view="redirect:/";
 		if(result.hasErrors()) {
 			modelMap.addAttribute("clienteForm", clienteForm);
-			return "clientes/newCliente";
+			return "users/newCliente";
 		}else {
-
 			User newUser = new User();
 			newUser.setUsername(clienteForm.getUsername());
 			newUser.setPassword(clienteForm.getPassword());
@@ -153,7 +152,6 @@ public class UserController {
 			newCliente.setUser(newUser);
 			
 			clienteService.saveCliente(newCliente);
-
 			//modelMap.addAttribute("message", "Cliente actualizado!");
 		}
 		return view;
@@ -165,9 +163,8 @@ public class UserController {
 		String view="redirect:/";
 		if(result.hasErrors()) {
 			modelMap.addAttribute("proveedorForm", proveedorForm);
-			return "proveedores/newProveedor";
+			return "users/newProveedor";
 		}else {
-
 			User newUser = new User();
 			newUser.setUsername(proveedorForm.getUsername());
 			newUser.setPassword(proveedorForm.getPassword());
@@ -190,9 +187,8 @@ public class UserController {
 		String view="redirect:/";
 		if(result.hasErrors()) {
 			modelMap.addAttribute("trabajadorForm", trabajadorForm);
-			return "trabajadores/editTrabajadores";
+			return "users/editTrabajadores";
 		}else {
-
 			User newUser = new User();
 			newUser.setUsername(trabajadorForm.getUsername());
 			newUser.setPassword(trabajadorForm.getPassword());
@@ -219,9 +215,8 @@ public class UserController {
 		if(result.hasErrors()) {
 			modelMap.addAttribute("administradorForm", administradorForm);
 			modelMap.addAttribute("result", result);
-			return "administradores/newAdministrador";
+			return "users/newAdministrador";
 		}else {
-
 			User newUser = new User();
 			newUser.setUsername(administradorForm.getUsername());
 			newUser.setPassword(administradorForm.getPassword());
@@ -237,7 +232,6 @@ public class UserController {
 			newAdministrador.setUser(newUser);
 			
 			administradorService.saveAdministrador(newAdministrador);
-
 			//modelMap.addAttribute("message", "Cliente actualizado!");
 		}
 		return view;
