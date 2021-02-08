@@ -2,10 +2,11 @@ package org.springframework.samples.petclinic.service;
 
 import java.util.Optional;
 
+import javax.validation.ValidationException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.samples.petclinic.model.Horario;
 import org.springframework.samples.petclinic.repository.HorarioRepository;
-import org.springframework.samples.petclinic.service.exceptions.HoraNoAdecuadaException;
 import org.springframework.samples.petclinic.service.exceptions.SolapamientoFechasException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,12 +15,6 @@ import org.springframework.transaction.annotation.Transactional;
 public class HorarioService {
 	@Autowired
 	private HorarioRepository horarioRepo;
-	
-	@Autowired
-	private UserService userService;
-	
-	@Autowired
-	private TrabajadorService trabajadorService;
 	
 	@Transactional(readOnly=true)
 	public int horarioCount() {
@@ -31,8 +26,8 @@ public class HorarioService {
 		return horarioRepo.findAll();
 	}
 	
-	@Transactional
-	public void save(Horario horario) {
+	@Transactional(rollbackFor = ValidationException.class)
+	public void save(Horario horario) throws ValidationException {
 		horarioRepo.save(horario);
 	}
 	
@@ -76,7 +71,7 @@ public class HorarioService {
 //	}
 	
 	@Transactional
-	public void crearHorario(Horario horario) throws SolapamientoFechasException {
+	public void crearHorario(Horario horario) throws SolapamientoFechasException, ValidationException {
 		this.solapamientoHorasEnHorarioTrabajador(horario);
 //		this.horaIntroducidaNoAdecuada(horario);
 		this.save(horario);

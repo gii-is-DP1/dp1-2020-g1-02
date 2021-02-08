@@ -85,6 +85,7 @@ public class ServicioController {
 		String view="redirect:/servicios/misServicios";
 		if(result.hasErrors()) {
 			modelMap.addAttribute("servicio", servicio);
+			modelMap.addAttribute("message", "La fecha de inicio tiene que ser antes que la fecha de fin");
 			return "servicios/editServicio";
 		}
 		else {

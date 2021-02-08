@@ -2,6 +2,7 @@ package org.springframework.samples.petclinic.web;
 
 import java.util.Optional;
 import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.util.Pair;
 import org.springframework.samples.petclinic.model.RegistroHoras;
@@ -58,18 +59,14 @@ public class RegistroHorasController {
 	public String salvarRegistroHoras(@Valid RegistroHoras registroHora, BindingResult result,ModelMap modelMap) {
 		String view="succesful";
 		if(result.hasErrors()) {
+			Trabajador trabajador = trabajadorService.findTrabajadorByUsername(userService.getLoggedUser().getUsername()).get();
+			modelMap.addAttribute("trabajador", trabajador);
 			modelMap.addAttribute("registro_horas", registroHora);
 			return "registroHoras/newRegistroHoras";
 		}else {
-			if(!trabajadorService.findTrabajadorById(registroHora.getTrabajador().getId()).isPresent()) {
-			modelMap.addAttribute("registroHora", registroHora);
-			modelMap.addAttribute("error", "No existe el trabajador que ha seleccionado.");
-			return "registroHoras/newRegistroHoras";
-		} else {
-			registroHorasService.saveRegistroHoras(registroHora);
-			modelMap.addAttribute("message", "Registro Hora añadida!");
-			}
-		
+				registroHorasService.saveRegistroHoras(registroHora);
+				modelMap.addAttribute("message", "El tiempo trabajado se ha añadido!");
+
 		}
 		return view;
 	}
