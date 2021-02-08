@@ -2,16 +2,12 @@ package org.springframework.samples.petclinic.web;
 
 import java.util.Optional;
 import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.samples.petclinic.model.Cliente;
 import org.springframework.samples.petclinic.model.Horario;
-import org.springframework.samples.petclinic.model.Servicio;
 import org.springframework.samples.petclinic.model.Trabajador;
-import org.springframework.samples.petclinic.model.User;
 import org.springframework.samples.petclinic.service.HorarioService;
 import org.springframework.samples.petclinic.service.TrabajadorService;
-import org.springframework.samples.petclinic.service.UserService;
-import org.springframework.samples.petclinic.service.exceptions.HoraNoAdecuadaException;
 import org.springframework.samples.petclinic.service.exceptions.SolapamientoFechasException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -32,9 +28,6 @@ public class HorarioController {
 	
 	@Autowired
 	private TrabajadorService trabajadorService;
-	
-	@Autowired
-	private UserService userService;
 	
 	@GetMapping()
 	public String listadoHorarios(ModelMap modelMap) {
@@ -79,7 +72,9 @@ public class HorarioController {
 		String view="redirect:/horarios/" + horario.getTrabajador().getId();
 		if(result.hasErrors()) {
 			modelMap.addAttribute("horario", horario);
-			return "horarios/newHorario";
+			modelMap.addAttribute("trabajador", horario.getTrabajador().getId());
+			modelMap.addAttribute("message", "La hora de inicio tiene que ser antes que la hora de fin");
+			return  "horarios/newHorario";
 		}else {
 			try {
 				horarioService.crearHorario(horario);
@@ -87,13 +82,13 @@ public class HorarioController {
 			} catch (SolapamientoFechasException e) {
 				modelMap.addAttribute("horario", horario);
 				modelMap.addAttribute("message", "Las horas se solapan");
-				return  "horarios/newHorario";
-			}
+				return  "redirect:/horarios/new/" + horario.getTrabajador().getId();
 //			} catch(HoraNoAdecuadaException e) {
 //				modelMap.addAttribute("horario", horario);
 //				modelMap.addAttribute("message", "Tiene que ser en punto o y media");
 //				return  "horarios/newHorario";
 //			}
+			}
 		}
 	}
 	

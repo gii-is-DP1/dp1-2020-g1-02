@@ -52,8 +52,5 @@ public class RegistroHorasService {
 	public Optional<RegistroHoras> findRegistroHorasById(Integer id) {
 		return registroHorasRepo.findById(id);
 	}
-	
-
-
 
 }

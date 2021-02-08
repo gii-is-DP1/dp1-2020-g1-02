@@ -122,7 +122,7 @@ public class TrabajadorController {
 		String view="trabajadores/trabajadoresByServicio";
 		Servicio s= servicioService.findServicioById(servicioId).get();
 		modelMap.addAttribute("trabajadores", trabajadorService.findTrabajadoresByServicio(servicioId));
-		modelMap.addAttribute("servicio", s.getLugar());
+		modelMap.addAttribute("servicio", s);
 		return view;
 	}
 }

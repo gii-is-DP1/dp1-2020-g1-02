@@ -15,7 +15,6 @@
 				<form:form modelAttribute="administrador" class="form-horizontal" action="/users/actualizarAdministrador">
 	       		<div class="form-group has-feedback">
 	       			<input type="hidden" id="id" name="id" value=' <c:out value="${administrador.id}"/>'>
-	       			<form:input path="user.retypePassword" value="${administrador.user.password}" type="hidden"/>
 	       			<petclinic:inputField label="Username" name="user" disabled="true"/>
 	       			<petclinic:inputField label="Nombre" name="nombre" disabled="true"/>
 	       			<petclinic:inputField label="Apellidos" name="apellidos" disabled="true"/>
@@ -40,7 +39,6 @@
 				<form:form modelAttribute="trabajador" class="form-horizontal" action="/users/actualizarTrabajador">
 	       		<div class="form-group has-feedback">
 	       			<input type="hidden" id="id" name="id" value=' <c:out value="${trabajador.id}"/>'>
-	       			<form:input path="user.retypePassword" value="${trabajador.user.password}" type="hidden"/>
 	       			<petclinic:inputField label="Username" name="user" disabled="true"/>
 	       			<petclinic:inputField label="Nombre" name="nombre" disabled="true"/>
 	       			<petclinic:inputField label="Apellidos" name="apellidos" disabled="true"/>
@@ -65,7 +63,6 @@
 				<form:form modelAttribute="cliente" class="form-horizontal" action="/users/actualizarCliente">
 	       		<div class="form-group has-feedback">
 	       			<input type="hidden" id="id" name="id" value=' <c:out value="${cliente.id}"/>'>
-	       			<form:input path="user.retypePassword" value="${cliente.user.password}" type="hidden"/>
 	       			<petclinic:inputField label="Username" name="user" disabled="true"/>
 	       			<petclinic:inputField label="Nombre" name="nombre" disabled="true"/>
 	       			<petclinic:inputField label="Apellidos" name="apellidos" disabled="true"/>
@@ -89,7 +86,6 @@
 				<form:form modelAttribute="proveedor" class="form-horizontal" action="/users/actualizarProveedor">
 	       		<div class="form-group has-feedback">
 	       			<input type="hidden" id="id" name="id" value=' <c:out value="${proveedor.id}"/>'>
-	       			<form:input path="user.retypePassword" value="${proveedor.user.password}" type="hidden"/>
 	       			<petclinic:inputField label="Username" name="user" disabled="true"/>
 	       			<petclinic:inputField label="Nombre de Empresa" name="name" disabled="true"/>
 	       			<petclinic:inputField label="Telefono" name="telefono"/>

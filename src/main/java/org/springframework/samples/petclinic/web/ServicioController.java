@@ -78,11 +78,34 @@ public class ServicioController {
 		return view;
 	}
 	
+	@GetMapping(path="/{sId}/asignarTrabajadores")
+	public String asignarTrabajadores(@PathVariable("sId") Integer sId,ModelMap modelMap) {
+		String view="servicios/asignarTrabajadores";
+		modelMap.addAttribute("servicio", servicioService.findServicioById(sId).get());
+		modelMap.addAttribute("trabajadores", trabajadorService.findAll());
+		return view;
+	}
+	
+	@PostMapping(path="/asignar/save")
+	public String salvarAsignarTrabajadoresServicio(Servicio servicio, BindingResult result, ModelMap modelMap) {
+		String view="redirect:/trabajadores/servicio/" + servicio.getId();
+		if(result.hasErrors()) {
+			modelMap.addAttribute("servicio", servicio);
+			return "redirect:/servicios/" + servicio.getId() + "/asignarTrabajadores";
+		}else {
+			Servicio s=servicioService.findServicioById(servicio.getId()).get();
+			s.setTrabajadores(s.getTrabajadores());
+			servicioService.asignarTrabajadores(s);
+		}
+		return view;
+	}
+	
 	@PostMapping(path="/save")
 	public String salvarServicio(@Valid Servicio servicio, BindingResult result, ModelMap modelMap) {
 		String view="redirect:/servicios/misServicios";
 		if(result.hasErrors()) {
 			modelMap.addAttribute("servicio", servicio);
+			modelMap.addAttribute("message", "La fecha de inicio tiene que ser antes que la fecha de fin");
 			return "servicios/editServicio";
 		}
 		else {

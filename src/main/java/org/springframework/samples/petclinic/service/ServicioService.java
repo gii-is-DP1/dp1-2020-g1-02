@@ -54,6 +54,16 @@ public class ServicioService {
 		}
 	}
 	@Transactional
+	public void asignarTrabajadores(Servicio servicio) {
+		servicioRepo.save(servicio);
+		List<Trabajador> ls=servicio.getTrabajadores();
+		for(Trabajador t: ls) {
+			t.getServicios().add(servicio);
+			trabajadorService.save(t);
+		}
+	}
+	
+	@Transactional
 	public void delete(Servicio servicio) {
 		vaciarTrabajadores(servicio);
 		servicioRepo.delete(servicio);
