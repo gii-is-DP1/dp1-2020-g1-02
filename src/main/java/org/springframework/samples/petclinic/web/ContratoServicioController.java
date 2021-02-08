@@ -42,7 +42,7 @@ public class ContratoServicioController {
 	
 	
 	@GetMapping(value = "/misContratos")
-	public String listadoServiciosPorClienteUsername(ModelMap modelMap) {
+	public String listadoContratosPorClienteUsername(ModelMap modelMap) {
 		String vista ="contratosServicios/listadoContratosServicios";
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		Cliente client = clienteService.findClienteByUsername(auth.getName()).get();
