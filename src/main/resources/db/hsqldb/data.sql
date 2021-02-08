@@ -95,13 +95,11 @@ INSERT INTO presupuesto(precio, tipopresupuesto, servicio_id, estado) VALUES (45
 INSERT INTO presupuesto(precio, tipopresupuesto, servicio_id, estado) VALUES (50.0, 0, 1, 1);
 INSERT INTO presupuesto(precio, tipopresupuesto, servicio_id, estado) VALUES (123.12, 0, 2, 0);
 INSERT INTO presupuesto(precio, tipopresupuesto, servicio_id, estado) VALUES (18000.0, 1, 2, 1);
-INSERT INTO presupuesto(precio, tipopresupuesto, servicio_id, estado) VALUES (100.0, 1, 3, 1);
 INSERT INTO presupuesto(precio, tipopresupuesto, servicio_id, estado) VALUES (100.0, 1, 4, 1);
 
-INSERT INTO contratoservicio(fechainicial, fechafinal, fechapago,  periodoprueba, presupuesto) VALUES ('2019-10-20', '2020-12-31', '2020-12-10',0, 1);
-INSERT INTO contratoservicio(fechainicial, fechafinal, fechapago, periodoprueba, presupuesto) VALUES ('2019-10-20', '2020-12-31', '2020-12-10', 1, 5);
+INSERT INTO contratoservicio(fechainicial, fechafinal, fechapago,  periodoprueba, presupuesto) VALUES ('2019-10-20', '2020-12-31', '2020-12-10',0, 2);
 INSERT INTO contratoservicio(fechainicial, fechafinal, fechapago, periodoprueba, presupuesto) VALUES ('2019-10-20', '2021-02-26', '2020-12-10', 0, 4);
-INSERT INTO contratoservicio(fechainicial, fechafinal, periodoprueba, presupuesto) VALUES ('2020-10-20', '2021-10-20', 1, 6);
+INSERT INTO contratoservicio(fechainicial, fechafinal, periodoprueba, presupuesto) VALUES ('2020-10-20', '2021-10-20', 1, 5);
 
 INSERT INTO reclamacion(fecha, descripcion, cliente_id, servicio_id) VALUES ('2019-10-20', 'El servicio está incompleto', 1, 1);
 INSERT INTO reclamacion(fecha, descripcion, cliente_id, servicio_id) VALUES ('2019-10-20', 'El servicio está lamentable', 2, 2);
@@ -126,7 +124,6 @@ INSERT INTO aux_ts VALUES (1, 1);
 INSERT INTO aux_ts VALUES (2, 1);
 INSERT INTO aux_ts VALUES (2, 2);
 INSERT INTO aux_ts VALUES (3, 2);
-INSERT INTO aux_ts VALUES (1, 3);
 
 
 /*-- One owner user, named owner1 with passwor 0wn3r

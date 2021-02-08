@@ -68,6 +68,7 @@ public class CurriculumController {
 			modelmap.addAttribute("message", "Curriculum borrado correctamente");
 		}else {
 			modelmap.addAttribute("message", "Curriculum no encontrado");
+			view="/error";
 		}
 		return view;
 	}
