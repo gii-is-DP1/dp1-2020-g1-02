@@ -12,15 +12,22 @@
        <h2>Asignar trabajadores</h2>
        <form:form modelAttribute="servicio" class="form-horizontal" action="/servicios/asignar/save">
        		<div class="form-group has-feedback">
+       		
        			<input type="hidden" name="id" value=' <c:out value="${servicio.id}"/>'>
+       			
        			 <label for="trabajadores">  Trabajadores a asignar:</Label>  </br>
 			       <select name="trabajadores" size="10" multiple>
           			 <c:forEach items="${trabajadores}" var="trabajador">
-			          
-			        <option value="${trabajador.id}"><c:out value="${trabajador.nombre} ${trabajador.apellidos}"/></option>
-			           
+			          <tr>
+			                <td>
+			        	<option value="${trabajador.id}"><c:out value="${trabajador.nombre} ${trabajador.apellidos}"/></option>
+			             </td>
+			            </tr>			            
 			        </c:forEach>
 					</select>
+					
+				
+
   				
        		</div>
             <div class="form-group">
