@@ -5,6 +5,7 @@ import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
@@ -29,26 +30,28 @@ public class Trabajador extends PersonaEntity {
     @NotNull
     private TipoCategoria tipocategoria;
     
-    @OneToMany(cascade=CascadeType.ALL, mappedBy="trabajador")
+    @OneToMany(cascade=CascadeType.REMOVE, mappedBy="trabajador")
     private Set<ContratoTrabajador> contratos;
     
     @OneToMany(cascade = CascadeType.ALL, mappedBy="trabajador")
     private Set<Horario> horarios;
     
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name="curriculum")
     private Curriculum curriculum;
+    
+    
     
     @OneToMany(cascade = CascadeType.ALL, mappedBy="trabajador")
     private Set<RegistroHoras> registroHoras;
 
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "username", referencedColumnName = "username")
 	@PasswordConstraint
 	@ConfirmPassword
 	  private User user;
 	
-	@ManyToMany(cascade = CascadeType.ALL)
+	@ManyToMany(cascade = CascadeType.PERSIST)
 	@JoinTable(name = "aux_ts", 
 			  joinColumns = @JoinColumn(name = "trabajador_id"), 
 			  inverseJoinColumns = @JoinColumn(name = "servicio_id"))

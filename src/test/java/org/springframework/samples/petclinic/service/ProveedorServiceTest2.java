@@ -34,7 +34,7 @@ public class ProveedorServiceTest2 {
 	@BeforeEach
 	void setup() {
 		
-		provService = new ProveedorService(provRepo);	
+		provService = new ProveedorService();	
 		
 	}
 	

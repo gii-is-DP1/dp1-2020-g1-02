@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import org.assertj.core.util.Lists;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.FilterType;
 import org.springframework.samples.petclinic.configuration.SecurityConfiguration;
+import org.springframework.samples.petclinic.model.Factura;
 import org.springframework.samples.petclinic.model.Proveedor;
 import org.springframework.samples.petclinic.service.ProveedorService;
 import org.springframework.security.config.annotation.web.WebSecurityConfigurer;
@@ -47,7 +49,7 @@ public class ProveedorControllerTest {
 		proveedor.setTelefono("633444555");
 		proveedor.setEmail("pablog@gmail.com");
 		proveedor.setDireccion("Calle Conventual 17");
-		
+		proveedor.setFacturas(Lists.list(new Factura()));
 		given(this.provService.findProveedorById(1)).willReturn(Optional.of(proveedor));
 		
 		List<Proveedor> proveedores = new ArrayList<Proveedor>();
@@ -62,6 +64,15 @@ public class ProveedorControllerTest {
 		.andExpect(model().attributeExists("prov"))
 		.andExpect(view().name("proveedores/listadoProv"));
 	}
+	
+	@WithMockUser(value = "spring")
+	@Test
+	void testDeleteProveedor() throws Exception{
+		mockMvc.perform(get("/proveedores/delete/{provId}", 1))
+		.andExpect(status().is3xxRedirection())
+		.andExpect(view().name("redirect:/proveedores"));
+	}
+	
 	
 //	@WithMockUser(value = "spring")
 //	@Test

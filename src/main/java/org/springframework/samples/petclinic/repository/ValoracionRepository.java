@@ -16,7 +16,7 @@ public interface ValoracionRepository extends CrudRepository<Valoracion, Integer
 //	@Query("SELECT DISTINCT v FROM Valoracion v LEFT JOIN FETCH v.cliente WHERE lower(v.cliente.nombre) LIKE :nombreCli%")
 //	Collection<Valoracion> findAllByClienteName(@Param("nombreCli") String nombreCli);
 
-	@Query("SELECT sum(v.valoracion) FROM Valoracion v WHERE v.servicio.tipocategoria = :tipo")
+	@Query("SELECT sum(v.valor) FROM Valoracion v WHERE v.servicio.tipocategoria = :tipo")
 	Integer getSumaValoracionesTipo(@Param("tipo") TipoCategoria tipo) throws DataAccessException;
 	
 	@Query("SELECT count(v) FROM Valoracion v WHERE v.servicio.tipocategoria = :tipo")

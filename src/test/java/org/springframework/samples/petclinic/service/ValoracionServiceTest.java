@@ -34,7 +34,7 @@ public class ValoracionServiceTest {
 	public void testSaveValoracion() {
 		Valoracion valoracionNew = new Valoracion();
 		valoracionNew.setFecha(LocalDate.of(2019, 03, 31));
-		valoracionNew.setValoracion(5);
+		valoracionNew.setValor(5);
 
 		valoracionService.save(valoracionNew);
 		

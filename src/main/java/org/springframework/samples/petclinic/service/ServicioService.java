@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.samples.petclinic.model.EstadoServicio;
 import org.springframework.samples.petclinic.model.Mensaje;
 import org.springframework.samples.petclinic.model.Servicio;
+import org.springframework.samples.petclinic.model.Trabajador;
 import org.springframework.samples.petclinic.model.User;
 import org.springframework.samples.petclinic.repository.ServicioRepository;
 import org.springframework.stereotype.Service;
@@ -20,6 +21,8 @@ public class ServicioService {
 	@Autowired
 	private ServicioRepository servicioRepo;
 
+	@Autowired
+	private TrabajadorService trabajadorService;
 	
 	@Autowired
 	private MensajesService mensajesService;
@@ -43,8 +46,16 @@ public class ServicioService {
 		servicioRepo.save(servicio);
 	}
 	
+	
+	public void vaciarTrabajadores(Servicio servicio) {
+		List<Trabajador> trabajadores = (List<Trabajador>) trabajadorService.findTrabajadoresByServicio(servicio.getId());
+		for(Trabajador t : trabajadores) {
+			t.getServicios().remove(servicio);
+		}
+	}
 	@Transactional
 	public void delete(Servicio servicio) {
+		vaciarTrabajadores(servicio);
 		servicioRepo.delete(servicio);
 	}
 	

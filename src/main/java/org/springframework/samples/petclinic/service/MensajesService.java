@@ -77,9 +77,19 @@ public class MensajesService {
 	public void deleteById(Integer id) {
 		mensajesRepo.deleteById(id);
 	}
+	
+	public void vaciarReceptores(Mensaje mensaje) {
+		List<User> receptores = (List<User>) userRepo.findReceptoresByMensaje(mensaje.getId());
+		for(User u : receptores) {
+			u.getMensajesRecibidos().remove(mensaje);
+		}
+	}
+	
+
 	@Transactional
-	public void delete(Mensaje entity) {
-		mensajesRepo.delete(entity);
+	public void delete(Mensaje mensaje) {
+		vaciarReceptores(mensaje);
+		mensajesRepo.delete(mensaje);
 	}
 	@Transactional
 	public void deleteAll(Iterable<? extends Mensaje> entities) {

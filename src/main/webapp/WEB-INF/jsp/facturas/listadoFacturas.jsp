@@ -39,7 +39,8 @@
 	    	<c:forEach items="${facturas}" var="factura"> 
     	<tr>
               <td>
-                  <c:out value="${factura.fecha}"/>
+                  <fmt:parseDate value="${factura.fecha}" pattern="yyyy-MM-dd" var="date"/>
+	               <fmt:formatDate value="${date}" type = "date" dateStyle="long"/>  
               </td>
               <td>
                   <c:out value="${factura.precio_total}"/>

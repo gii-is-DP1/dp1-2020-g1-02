@@ -59,18 +59,18 @@
                 </td>
                 
             
-				    <c:if test="${not fn:contains(serviciosV, servicio.id)}">
+				    
 				      <td>
+				      <c:if test="${not fn:contains(serviciosV, servicio.id)}">
 	                	<spring:url value="/valoraciones/new/{oId}" var="reclamacionUrl">
 	              		<spring:param name="oId" value="${servicio.id}"/>
 		              	</spring:url>
 		              	<a href="${fn:escapeXml(reclamacionUrl)}">Valorar</a>
+		              	 </c:if>
 	                </td>
 				        
-				    </c:if>    
-				    <c:if test="${fn:contains(serviciosV, servicio.id)}" >
-				        <td> </td>
-				    </c:if>
+				     
+				    
 				
               
                 <td>

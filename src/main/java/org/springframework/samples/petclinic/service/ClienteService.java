@@ -64,6 +64,7 @@ public class ClienteService {
 		//creating owner
 		clienteRepo.save(client);
 		//creating user
+		
 		userService.saveUser(client.getUser());
 		//creating authorities
 		authoritiesService.saveAuthorities(client.getUser().getUsername(), "cliente");	

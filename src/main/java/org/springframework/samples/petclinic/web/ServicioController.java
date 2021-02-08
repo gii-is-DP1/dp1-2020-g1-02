@@ -59,9 +59,7 @@ public class ServicioController {
 		 Optional<Servicio> s=servicioService.findServicioById(servicioId);
 		if(s.isPresent()) {
 			servicioService.delete(s.get());
-			modelmap.addAttribute("message", "Servicio borrado correctamente");
-		}else {
-			modelmap.addAttribute("message", "Servicio no encontrado");
+			
 		}
 		return view;
 	}

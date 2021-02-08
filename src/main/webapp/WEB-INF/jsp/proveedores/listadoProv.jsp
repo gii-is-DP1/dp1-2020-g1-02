@@ -40,7 +40,7 @@
                 
                 <td>
                 	<spring:url value="/proveedores/delete/{provId}" var="provUrl">
-                		<spring:param name="provUrl" value="${proveedor.id}"/>
+                		<spring:param name="provId" value="${proveedor.id}"/>
                 	</spring:url>
                 	<a href="${fn:escapeXml(provUrl)}"><img src="${delete}" width="30px"/></a>
                 </td>

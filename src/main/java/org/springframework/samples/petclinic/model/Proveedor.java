@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -16,10 +17,13 @@ import org.springframework.samples.petclinic.customvalidators.ContactNumberConst
 import org.springframework.samples.petclinic.customvalidators.PasswordConstraint;
 
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 
 @Entity
-@Data
+@Getter
+@Setter
 @Table(name="proveedor")
 public class Proveedor extends NamedEntity{
 	
@@ -39,8 +43,9 @@ public class Proveedor extends NamedEntity{
     @OneToMany(cascade = CascadeType.ALL, mappedBy="proveedor")
     private List<Factura> facturas;
     
+    
     //
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "username", referencedColumnName = "username")
 	@PasswordConstraint
 	@ConfirmPassword

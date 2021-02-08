@@ -134,6 +134,7 @@ public class UserController {
 			modelMap.addAttribute("cliente", cliente);
 			return "clientes/newCliente";
 		}else {
+			cliente.getUser().setPassword(passwordEncoder.encode(cliente.getUser().getPassword()));
 			clienteService.saveCliente(cliente);
 			//modelMap.addAttribute("message", "Cliente actualizado!");
 		}
@@ -147,6 +148,7 @@ public class UserController {
 			modelMap.addAttribute("trabajador", trabajador);
 			return "users/newTrabajador";
 		}else {
+			trabajador.getUser().setPassword(passwordEncoder.encode(trabajador.getUser().getPassword()));
 			trabajadorService.saveTrabajador(trabajador);
 			//modelMap.addAttribute("message", "Trabajador insertado correctamente!");
 		}
@@ -160,6 +162,7 @@ public class UserController {
 			modelMap.addAttribute("proveedor", proveedor);
 			return "users/newProveedor";
 		}else {
+			proveedor.getUser().setPassword(passwordEncoder.encode(proveedor.getUser().getPassword()));
 			proveedorService.saveProveedor(proveedor);
 			//modelMap.addAttribute("message", "Cliente actualizado!");
 		}
@@ -173,6 +176,8 @@ public class UserController {
 			modelMap.addAttribute("trabajador", trabajador);
 			return "users/newAdministrador";
 		}else {
+
+			trabajador.getUser().setPassword(passwordEncoder.encode(trabajador.getUser().getPassword()));
 			administradorService.saveAdministrador(trabajador);
 			//modelMap.addAttribute("message", "Cliente actualizado!");
 		}
