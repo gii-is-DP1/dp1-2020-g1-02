@@ -83,11 +83,6 @@ public class HorarioController {
 				modelMap.addAttribute("horario", horario);
 				modelMap.addAttribute("message", "Las horas se solapan");
 				return  "redirect:/horarios/new/" + horario.getTrabajador().getId();
-//			} catch(HoraNoAdecuadaException e) {
-//				modelMap.addAttribute("horario", horario);
-//				modelMap.addAttribute("message", "Tiene que ser en punto o y media");
-//				return  "horarios/newHorario";
-//			}
 			}
 		}
 	}
