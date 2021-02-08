@@ -26,6 +26,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.FilterType;
 import org.springframework.samples.petclinic.configuration.SecurityConfiguration;
+import org.springframework.samples.petclinic.model.Authorities;
 import org.springframework.samples.petclinic.model.Cliente;
 import org.springframework.samples.petclinic.model.ContratoServicio;
 import org.springframework.samples.petclinic.model.EstadoServicio;
@@ -35,6 +36,7 @@ import org.springframework.samples.petclinic.model.Proveedor;
 import org.springframework.samples.petclinic.model.Servicio;
 import org.springframework.samples.petclinic.model.TipoCategoria;
 import org.springframework.samples.petclinic.model.TipoPresupuesto;
+import org.springframework.samples.petclinic.model.User;
 import org.springframework.samples.petclinic.service.ClienteService;
 import org.springframework.samples.petclinic.service.ContratoServicioService;
 import org.springframework.samples.petclinic.service.OfertaService;
@@ -64,11 +66,15 @@ public class ContratoServicioControllerTest {
 	private PresupuestoService presupuestoService;
 	@MockBean
 	private EntityManager entityManager;
+	@MockBean
+	private UserService userService;
 	
 	private ContratoServicio cS;
 	private Presupuesto prep;
 	private Servicio serv;
 	private Cliente cliente;
+	private User user;
+	private Authorities authority;
 	
 	@BeforeEach
 	void setup() {
@@ -80,6 +86,15 @@ public class ContratoServicioControllerTest {
 		cS.setFechapago(LocalDate.of(2019, 10, 30));
 		cS.setPeriodoPrueba(true);
 		cS.setPresupuesto(prep);
+		
+		authority = new Authorities();
+		user = new User();
+		authority.setAuthority("cliente");
+		authority.setId(1);
+		user.setUsername("Ironman");
+		authority.setUser(user);
+		user.setAuthorities(authority);
+		user.setPassword("admin");
 		
 		prep = new Presupuesto();
 		prep.setId(1);
@@ -114,7 +129,7 @@ public class ContratoServicioControllerTest {
 		given(this.entityManager.find(Cliente.class, 1)).willReturn(cliente);
 		
 		given(this.clienteService.findClienteByUsername(any())).willReturn(Optional.of(cliente));
-		//given(this.userService.getLoggedUser()).willReturn(user);
+		given(this.userService.getLoggedUser()).willReturn(user);
 //		((BDDMockito) when(this.user.getAuthorities().getAuthority().equalsIgnoreCase("proveedor"))).willReturn(true);
 		
 		
@@ -146,6 +161,16 @@ public class ContratoServicioControllerTest {
 	}
 	
 	@WithMockUser(value = "spring")
+	@Test
+	void testListadoContratoServicioPorCliente() throws Exception{
+		mockMvc.perform(get("/contratosServicios/misServicios"))
+		.andExpect(status().isOk())
+		.andExpect(model().attributeExists("contratoServicio"))
+		.andExpect(model().attribute("contratoServicio", hasProperty("cliente", is(cliente))))
+		.andExpect(view().name("contratosServicios/listadoContratosServicios"));
+	}
+	
+	@WithMockUser(value = "spring")
     @Test
     void testProcessCreationFormSuccess() throws Exception {
 		mockMvc.perform(post("/contratosServicios/save")
@@ -165,15 +190,15 @@ public class ContratoServicioControllerTest {
     void testProcessCreationFormHasErrors() throws Exception {
 		mockMvc.perform(post("/contratosServicios/save")
 						.with(csrf())
-						.param("fechainicial", "2020/12/01")
-						.param("fechafinal", "")
-						.param("fechapago", "2020/12/15")
-						.param("periodoprueba", "true")
+						.param("fechainicial", "2017/11/01")
+						.param("fechafinal", "2017/12/10")
+						.param("fechapago", "")
+						.param("periodoPrueba", "true")
 						.param("presupuesto", "1")
 						.param("id", "1"))
-			.andExpect(status().isOk())
+			.andExpect(status().is3xxRedirection())
 			.andExpect(model().attributeHasErrors("contratoServicio"))
-			.andExpect(model().attributeHasFieldErrors("contratoServicio", "fechafinal"))
+			.andExpect(model().attributeHasFieldErrors("contratoServicio", "fechapago"))
 			.andExpect(view().name("contratosServicios/editContratoServicio"));
 	}
 }

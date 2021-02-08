@@ -9,6 +9,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -34,6 +35,15 @@ import org.springframework.test.web.servlet.MockMvc;
 			excludeAutoConfiguration= SecurityConfiguration.class)
 
 public class AdministradorControllerTest {
+	
+	public static final Map<Integer, String> letrasDNI = Map.ofEntries(Map.entry( 0,"T"),
+			Map.entry( 1,"R" ), Map.entry( 2,"W" ), Map.entry( 3,"A" ),
+			Map.entry( 4,"G" ), Map.entry( 5,"M" ), Map.entry( 6,"Y" ),
+			Map.entry( 7,"F" ), Map.entry( 8,"P" ), Map.entry( 9,"D" ),
+			Map.entry( 10,"X" ),Map.entry( 11,"B" ),Map.entry( 12,"N" ),
+			Map.entry( 13,"J" ),Map.entry( 14,"Z" ),Map.entry( 15,"S" ),
+			Map.entry( 16,"Q" ),Map.entry( 17,"V" ),Map.entry( 18,"H" ),
+			Map.entry( 19,"L" ),Map.entry( 20,"C" ),Map.entry( 21,"K" ),Map.entry( 22,"E" )); 
 	
 	@Autowired
 	private MockMvc mockMvc;
@@ -104,11 +114,19 @@ public class AdministradorControllerTest {
 	}
 	
 	@WithMockUser(value = "spring")
+	@Test
+	void DeleteAdministrador() throws Exception{
+		mockMvc.perform(get("/administradores/delete/{adminId}", 1))
+		.andExpect(status().is3xxRedirection())
+		.andExpect(view().name("redirect:/administradores"));
+	}
+	
+	@WithMockUser(value = "spring")
     @Test
     void testProcessCreationFormSuccess() throws Exception {
 		mockMvc.perform(post("/administradores/save")
 						.with(csrf())
-						.param("dni", "23523464S")
+						.param("dni", "47390692C")
 						.param("nombre", "José Manuel")
 						.param("apellidos", "González Rodríguez")
 						.param("telefono", "635254643")
@@ -124,7 +142,7 @@ public class AdministradorControllerTest {
     void testProcessCreationFormHasErrors() throws Exception {
 		mockMvc.perform(post("/administradores/save")
 						.with(csrf())
-						.param("dni", "23523464S")
+						.param("dni", "34574634D")
 						.param("nombre", "")
 						.param("apellidos", "González Rodríguez")
 						.param("telefono", "635254643")

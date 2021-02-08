@@ -1,5 +1,7 @@
 package org.springframework.samples.petclinic.web;
 
+import static org.hamcrest.Matchers.hasProperty;
+import static org.hamcrest.Matchers.is;
 import static org.mockito.BDDMockito.given;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -119,6 +121,24 @@ public class HorarioControllerTest {
 			.andExpect(status().is2xxSuccessful())
 			.andExpect(view().name("horarios/newHorario"));
 	}
+	
+	@WithMockUser(value = "spring")
+	@Test
+	void testListadoHorariosPorTrabajador() throws Exception{
+		mockMvc.perform(get("/horarios/misHorarios")).andExpect(status().is2xxSuccessful())
+		.andExpect(view().name("horarios/listadoHorariosPorTrabajador"));
+	}
+	
+	@WithMockUser(value = "spring")
+	@Test
+	void DeleteHorario() throws Exception{
+		mockMvc.perform(get("/horarios/delete/{horarioId}", 1))
+		.andExpect(status().is3xxRedirection())
+		.andExpect(view().name("redirect:/horarios"));
+	}
+	
+	
+	
 	
 	@WithMockUser(value = "spring")
     @Test

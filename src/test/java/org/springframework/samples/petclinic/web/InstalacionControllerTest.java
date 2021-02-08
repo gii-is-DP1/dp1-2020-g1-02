@@ -149,6 +149,24 @@ public class InstalacionControllerTest {
 	}
 	
 	@WithMockUser(value = "spring")
+	@Test
+	void DeleteInstalacion() throws Exception{
+		mockMvc.perform(get("/instalaciones/delete/{instalacionId}", 1))
+		.andExpect(status().is3xxRedirection())
+		.andExpect(view().name("redirect:/instalaciones"));
+	}
+	
+	@WithMockUser(value = "spring")
+	@Test
+	void InstalacionePorCliente() throws Exception{
+		mockMvc.perform(get("/instalaciones/misInstalaciones"))
+		.andExpect(status().is2xxSuccessful())
+		.andExpect(view().name("instalaciones/listadoInstalaciones"));
+	}
+	
+	
+	
+	@WithMockUser(value = "spring")
     @Test
     void testProcessCreationFormHasErrors() throws Exception {
 		mockMvc.perform(post("/instalaciones/save")

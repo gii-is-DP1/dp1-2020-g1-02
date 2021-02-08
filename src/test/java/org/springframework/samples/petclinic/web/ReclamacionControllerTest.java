@@ -146,6 +146,22 @@ public class ReclamacionControllerTest {
 		.andExpect(view().name("reclamaciones/newReclamacion"));
 	}
 	
+	@WithMockUser(value = "spring")
+	@Test
+	void DeleteReclamacion() throws Exception{
+		mockMvc.perform(get("/reclamaciones/delete/{reclamacionId}", 1))
+		.andExpect(status().is3xxRedirection())
+		.andExpect(view().name("redirect:/reclamaciones"));
+	}
+	
+	
+	@WithMockUser(value = "spring")
+	@Test
+	void ListadoReclamacionesPorServicio() throws Exception{
+		mockMvc.perform(get("/reclamaciones/{servicioId}", 1))
+		.andExpect(status().is2xxSuccessful())
+		.andExpect(view().name("reclamaciones/listadoReclamacionesPorServicio"));
+	}
 	
 	@WithMockUser(value = "spring")
     @Test

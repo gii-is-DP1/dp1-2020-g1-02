@@ -69,6 +69,25 @@ public class CurriculumControllerTest {
 	
 	@WithMockUser(value = "spring")
 	@Test
+	void DeleteCurriculum() throws Exception{
+		mockMvc.perform(get("/curriculums/delete/{curriculumId}", 1))
+		.andExpect(status().is3xxRedirection())
+		.andExpect(view().name("redirect:/curriculums"));
+	}
+	
+	@WithMockUser(value = "spring")
+	@Test
+	void ViewCurriculum() throws Exception{
+		mockMvc.perform(get("/curriculums//view/{idCurriculum}", 1))
+		.andExpect(model().attributeExists("curriculum"))
+		.andExpect(status().is2xxSuccessful())
+		.andExpect(view().name("curriculums/viewCurriculum"));
+	}
+	
+	
+	
+	@WithMockUser(value = "spring")
+	@Test
 	void testVerCurriculum() throws Exception{
 		mockMvc.perform(get("/curriculums/view/{idCurriculum}",1)).andExpect(status().isOk()).andExpect(model().attributeExists("curriculum"))
 		.andExpect(view().name("curriculums/viewCurriculum"));

@@ -16,6 +16,7 @@ public class DNIValidator implements ConstraintValidator<DNIConstraint, String> 
 			Map.entry( 13,"J" ),Map.entry( 14,"Z" ),Map.entry( 15,"S" ),
 			Map.entry( 16,"Q" ),Map.entry( 17,"V" ),Map.entry( 18,"H" ),
 			Map.entry( 19,"L" ),Map.entry( 20,"C" ),Map.entry( 21,"K" ),Map.entry( 22,"E" )); 
+	
 
   @Override
   public void initialize(DNIConstraint dni) {

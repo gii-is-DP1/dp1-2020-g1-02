@@ -1,13 +1,10 @@
 package org.springframework.samples.petclinic.service;
 
 
-import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
-import java.time.LocalDate;
 import java.util.Collection;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 
@@ -16,8 +13,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.samples.petclinic.model.Factura;
-import org.springframework.samples.petclinic.model.Oferta;
-import org.springframework.samples.petclinic.model.Pedido;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -27,15 +22,7 @@ public class FacturaServiceTest {
 	
 	@Autowired
 	private FacturaService facturaService;
-	@Autowired
-	private ProveedorService proveedorService;
-	@Autowired
-	private PedidoService pedidoService;
-	@Autowired
-	private UserService userService;
-	@Autowired
-	private OfertaService ofertaService;
-	
+
 	//Test positivos
 	
 	@Test
