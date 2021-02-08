@@ -44,8 +44,6 @@ public class Trabajador extends PersonaEntity {
 
 	@OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "username", referencedColumnName = "username")
-	@PasswordConstraint
-	@ConfirmPassword
 	  private User user;
 	
 	@ManyToMany(cascade = CascadeType.ALL)

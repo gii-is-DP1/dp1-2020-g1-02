@@ -6,16 +6,16 @@ import javax.validation.ConstraintValidatorContext;
 import org.springframework.samples.petclinic.model.User;
 
 public class PasswordValidator implements 
-ConstraintValidator<PasswordConstraint, User> {
+ConstraintValidator<PasswordConstraint, String> {
 
   @Override
   public void initialize(PasswordConstraint psw) {
   }
 
   @Override
-  public boolean isValid(User user, ConstraintValidatorContext cxt) {
-      return user.getPassword() != null && user.getPassword().matches("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=\\S+$).{8,}$")
-    		  && (user.getPassword().length() > 8);
+  public boolean isValid(String psw, ConstraintValidatorContext cxt) {
+      return psw != null && psw.matches("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=\\S+$).{8,}$")
+    		  && (psw.length() > 8);
   }
 
 }
