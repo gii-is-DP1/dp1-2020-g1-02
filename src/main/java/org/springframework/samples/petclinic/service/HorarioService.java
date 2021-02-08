@@ -63,12 +63,6 @@ public class HorarioService {
 		}
 	}
 	
-//	@Transactional(rollbackFor = HoraNoAdecuadaException.class)
-//	public void horaIntroducidaNoAdecuada(Horario horario) throws HoraNoAdecuadaException {
-//		if(horario.getHora_inicio().getMinutes() != 00 || horario.getHora_inicio().getMinutes() != 30) {
-//			throw new HoraNoAdecuadaException();
-//		}
-//	}
 	
 	@Transactional
 	public void crearHorario(Horario horario) throws SolapamientoFechasException, ValidationException {
