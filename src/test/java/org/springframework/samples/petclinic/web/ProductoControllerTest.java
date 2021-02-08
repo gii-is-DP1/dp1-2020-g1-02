@@ -56,7 +56,7 @@ public class ProductoControllerTest {
 
 	@WithMockUser(value = "spring")
 	@Test
-	void testListadoOfertas() throws Exception{
+	void testListadoProductos() throws Exception{
 		mockMvc.perform(get("/productos")).andExpect(status().isOk())
 		.andExpect(model().attributeExists("producto"))
 		.andExpect(view().name("productos/listadoProductos"));
@@ -97,6 +97,15 @@ public class ProductoControllerTest {
 	@Test
 	void testRestarStock() throws Exception{
 		mockMvc.perform(get("/productos/{productoId}/restar", 1))
+		.andExpect(status().is3xxRedirection())
+//		.andExpect(model().attributeExists("message")
+		.andExpect(view().name("redirect:/productos"));
+	}
+	
+	@WithMockUser(value = "spring")
+	@Test
+	void testSumarStock() throws Exception{
+		mockMvc.perform(get("/productos/{productoId}/sumar", 1))
 		.andExpect(status().is3xxRedirection())
 //		.andExpect(model().attributeExists("message")
 		.andExpect(view().name("redirect:/productos"));

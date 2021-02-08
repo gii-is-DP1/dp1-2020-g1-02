@@ -73,6 +73,7 @@ public class RegistroHorasControllerTest {
 		registroHora.setFecha(LocalDate.of(2020, 1, 1));
 		registroHora.setHora_inicio(LocalTime.of(12, 30));
 		registroHora.setHora_fin(LocalTime.of(17,30));
+		registroHora.setTrabajador(trabajador);
 		
 		authority = new Authorities();
 		user = new User();
@@ -114,8 +115,10 @@ public class RegistroHorasControllerTest {
 	@WithMockUser(value = "spring")
 	@Test
 	void testListadoRegistroHoras() throws Exception{
-		mockMvc.perform(get("/registroHoras")).andExpect(status().isOk())
-		.andExpect(model().attributeExists("registro_horas"))
+		mockMvc.perform(get("/registroHoras/{tId}",1))
+		.andExpect(status().isOk())
+		.andExpect(model().attributeExists("registrohoras"))
+		.andExpect(status().is2xxSuccessful())
 		.andExpect(view().name("registroHoras/listadoRegistroHoras"));
 	}
 	

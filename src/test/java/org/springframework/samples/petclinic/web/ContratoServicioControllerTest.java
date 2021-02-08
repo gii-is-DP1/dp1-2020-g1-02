@@ -85,7 +85,6 @@ public class ContratoServicioControllerTest {
 		cS.setFechafinal(LocalDate.of(2019, 11, 03));
 		cS.setFechapago(LocalDate.of(2019, 10, 30));
 		cS.setPeriodoPrueba(true);
-		cS.setPresupuesto(prep);
 		
 		authority = new Authorities();
 		user = new User();
@@ -101,17 +100,19 @@ public class ContratoServicioControllerTest {
 		prep.setContrato(cS);
 		prep.setEstado(EstadoServicio.Aceptado);
 		prep.setPrecio(15.23);
-		prep.setServicio(serv);
 		prep.setTipopresupuesto(TipoPresupuesto.Cerrado);
+		
+		cS.setPresupuesto(prep);
 		
 		serv = new Servicio();
 		serv.setId(1);
-		serv.setCliente(cliente);
 		serv.setEstado(EstadoServicio.Aceptado);
 		serv.setFechainicio(LocalDate.of(2019, 05, 12));
 		serv.setFechafin(LocalDate.of(2019, 06, 14));
 		serv.setLugar("Sevilla");
 		serv.setTipocategoria(TipoCategoria.Limpieza);
+		
+		prep.setServicio(serv);
 		
 		cliente = new Cliente();
 		cliente.setId(1);
@@ -122,11 +123,15 @@ public class ContratoServicioControllerTest {
 		cliente.setDireccion("Calle Santana 12");
 		cliente.setTelefono("653793578");
 		
+		serv.setCliente(cliente);
+		
+		
 		//given(this.contratoServicioService.findAll()).willReturn(Optional.of(cS));
 		given(this.presupuestoService.findPresupuestoById(1)).willReturn(Optional.of(prep));
 		given(this.clienteService.findClienteById(1)).willReturn(Optional.of(cliente));
 		given(this.entityManager.find(ContratoServicio.class, 1)).willReturn(cS);
 		given(this.entityManager.find(Cliente.class, 1)).willReturn(cliente);
+		given(this.entityManager.find(Presupuesto.class, 1)).willReturn(prep);
 		
 		given(this.clienteService.findClienteByUsername(any())).willReturn(Optional.of(cliente));
 		given(this.userService.getLoggedUser()).willReturn(user);
@@ -163,10 +168,9 @@ public class ContratoServicioControllerTest {
 	@WithMockUser(value = "spring")
 	@Test
 	void testListadoContratoServicioPorCliente() throws Exception{
-		mockMvc.perform(get("/contratosServicios/misServicios"))
+		mockMvc.perform(get("/contratosServicios/misContratos"))
 		.andExpect(status().isOk())
-		.andExpect(model().attributeExists("contratoServicio"))
-		.andExpect(model().attribute("contratoServicio", hasProperty("cliente", is(cliente))))
+		.andExpect(model().attributeExists("contratosServicios"))
 		.andExpect(view().name("contratosServicios/listadoContratosServicios"));
 	}
 	
@@ -191,14 +195,13 @@ public class ContratoServicioControllerTest {
 		mockMvc.perform(post("/contratosServicios/save")
 						.with(csrf())
 						.param("fechainicial", "2017/11/01")
-						.param("fechafinal", "2017/12/10")
-						.param("fechapago", "")
+						.param("fechafinal", "")
+						.param("fechapago", "2017/12/10")
 						.param("periodoPrueba", "true")
-						.param("presupuesto", "1")
-						.param("id", "1"))
+						.param("presupuesto", "1"))
 			.andExpect(status().is3xxRedirection())
 			.andExpect(model().attributeHasErrors("contratoServicio"))
-			.andExpect(model().attributeHasFieldErrors("contratoServicio", "fechapago"))
+			.andExpect(model().attributeHasFieldErrors("contratoServicio", "fechafinal"))
 			.andExpect(view().name("contratosServicios/editContratoServicio"));
 	}
 }

@@ -114,6 +114,15 @@ public class ContratoTrabajadorControllerTest {
 	
 	@WithMockUser(value = "spring")
 	@Test
+	void testListadoContratosByTrabajador() throws Exception{
+		mockMvc.perform(get("/contratosTrabajadores/{trabajadorId}",1))
+		.andExpect(status().isOk())
+		.andExpect(model().attributeExists("contratos"))
+		.andExpect(view().name("contratosTrabajadores/contratosByTrabajador"));
+	}
+	
+	@WithMockUser(value = "spring")
+	@Test
 	void testNewContratoTrabajador() throws Exception{
 		mockMvc.perform(get("/contratosTrabajadores/{tId}/new", 1))
 		.andExpect(status().isOk())
