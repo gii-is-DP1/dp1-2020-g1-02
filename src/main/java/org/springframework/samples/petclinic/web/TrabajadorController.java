@@ -102,6 +102,7 @@ public class TrabajadorController {
 			modelmap.addAttribute("message", "Trabajador no encontrado");
 			view=listadoTrabajadores(modelmap);
 		}
+		
 		return view;
 	}
 	
@@ -141,7 +142,7 @@ public class TrabajadorController {
 		String view="trabajadores/trabajadoresByServicio";
 		Servicio s= servicioService.findServicioById(servicioId).get();
 		modelMap.addAttribute("trabajadores", trabajadorService.findTrabajadoresByServicio(servicioId));
-		modelMap.addAttribute("servicio", s.getLugar());
+		modelMap.addAttribute("servicio", s);
 		return view;
 	}
 }

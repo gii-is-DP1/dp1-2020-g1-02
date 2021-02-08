@@ -27,7 +27,7 @@ public class Administrador extends PersonaEntity{
     private TipoCategoria tipocategoria; 
     
     //
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "username", referencedColumnName = "username")
 	private User user;
 	//

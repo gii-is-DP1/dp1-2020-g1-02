@@ -33,10 +33,10 @@ public class User{
 	@NotNull
 	boolean enabled;
 	
-	@OneToOne(cascade = CascadeType.ALL, mappedBy = "user")
+	@OneToOne(cascade = CascadeType.PERSIST, mappedBy = "user")
 	private Authorities authorities;
 	
-	@ManyToMany
+	@ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
 	@JoinTable(name = "aux", 
 			  joinColumns = @JoinColumn(name = "username"), 
 			  inverseJoinColumns = @JoinColumn(name = "mensaje_id"))

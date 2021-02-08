@@ -109,6 +109,7 @@ public class ValoracionController {
 		return view;
 	}
 	
+	
 	@PostMapping(path="/save")
 	public String salvarValoracion(@Valid Valoracion valoracion, BindingResult result,ModelMap modelMap) {
 		String view="succesful";
@@ -119,7 +120,6 @@ public class ValoracionController {
 		}else {
 			try {
 				valoracionService.comprobarExcepciones(valoracion);
-				
 				modelMap.addAttribute("message", "Valoracion añadida! Gracias por tu ayuda a mejorar.");
 			} catch(ServicioNoAceptadoException e) {
 				modelMap.addAttribute("valoracion", valoracion);

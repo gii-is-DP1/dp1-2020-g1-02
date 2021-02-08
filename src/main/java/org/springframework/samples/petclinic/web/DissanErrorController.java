@@ -9,7 +9,7 @@ public class DissanErrorController implements ErrorController {
 
     @RequestMapping("/error")
     public String handleError() {
-        return "exception";
+        return "prohibido";
     }
 	
 	@Override

@@ -24,6 +24,7 @@ public class Curriculum extends BaseEntity {
     @Size(min = 3, max = 50)
 	private String nombre;
     
+    
     @NotBlank
     @Size(min = 3, max = 50)
 	private String apellidos;
@@ -43,7 +44,8 @@ public class Curriculum extends BaseEntity {
 	@NotNull
 	private TipoCategoria tipocategoria;
 	
-	@OneToOne(cascade = CascadeType.ALL, mappedBy="curriculum")
+	
+	@OneToOne( mappedBy="curriculum")
 	private Trabajador trabajador;
 	
 }

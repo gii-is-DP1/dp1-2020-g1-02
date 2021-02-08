@@ -8,6 +8,9 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
+import org.springframework.samples.petclinic.model.Mensaje;
+import org.springframework.samples.petclinic.model.Servicio;
+import org.springframework.samples.petclinic.model.Trabajador;
 import org.springframework.samples.petclinic.model.User;
 import org.springframework.samples.petclinic.repository.UserRepository;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -26,8 +29,13 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class UserService {
-	
+	@Autowired
 	private UserRepository userRepository;
+
+	@Autowired
+	private MensajesService mensajesService;
+
+
 	private static BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 	
 
@@ -36,9 +44,11 @@ public class UserService {
 		this.userRepository = userRepository;
 	}
 
+
 	@Transactional
 	public void saveUser(User user) throws DataAccessException {
 		user.setEnabled(true);
+
 		String pass = user.getPassword();
 		user.setPassword(encoder.encode(pass));
 		userRepository.save(user);
@@ -69,7 +79,22 @@ public class UserService {
 		}
 		return list;
 	}
+	@Transactional(readOnly=true)
+	public List<User> findReceptoresByMensaje(Mensaje mensaje) {
+		return userRepository.findReceptoresByMensaje(mensaje.getId());
+	}
 	
+	public void vaciarMensajesRecibidos(User user) {
+		List<Mensaje> mensajesRecibidos = (List<Mensaje>) mensajesService.findAllByReceptor(user);
+		for(Mensaje m : mensajesRecibidos) {
+			m.getReceptores().remove(user);
+		}
+	}
+	@Transactional
+	public void delete(User user) {
+		vaciarMensajesRecibidos(user);
+		userRepository.delete(user);
+	}
 	
 	
 	

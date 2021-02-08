@@ -59,9 +59,7 @@ public class ServicioController {
 		 Optional<Servicio> s=servicioService.findServicioById(servicioId);
 		if(s.isPresent()) {
 			servicioService.delete(s.get());
-			modelmap.addAttribute("message", "Servicio borrado correctamente");
-		}else {
-			modelmap.addAttribute("message", "Servicio no encontrado");
+			
 		}
 		return view;
 	}
@@ -77,6 +75,30 @@ public class ServicioController {
 	public String crearServicio(ModelMap modelMap) {
 		String view="servicios/editServicio";
 		modelMap.addAttribute("servicio", new Servicio());
+		return view;
+	}
+	
+	@GetMapping(path="/{sId}/asignarTrabajadores")
+	public String asignarTrabajadores(@PathVariable("sId") Integer sId,ModelMap modelMap) {
+		String view="servicios/asignarTrabajadores";
+		modelMap.addAttribute("servicio", servicioService.findServicioById(sId).get());
+		modelMap.addAttribute("trabajadores", trabajadorService.findAll());
+		return view;
+		
+	}
+	
+	@PostMapping(path="/asignar/save")
+	public String salvarAsignarTrabajadoresServicio(Servicio servicio, BindingResult result, ModelMap modelMap) {
+		String view="redirect:/trabajadores/servicio/" + servicio.getId();
+		if(result.hasErrors()) {
+			modelMap.addAttribute("servicio", servicio);
+			modelMap.addAttribute("trabajadores", trabajadorService.findAll());
+			return "servicios/asignarTrabajadores";
+		}else {
+			Servicio s=servicioService.findServicioById(servicio.getId()).get();
+			s.setTrabajadores(servicio.getTrabajadores());
+			servicioService.asignarTrabajadores(s);
+		}
 		return view;
 	}
 	
@@ -132,6 +154,7 @@ public class ServicioController {
 		Iterable<Servicio> servicios = servicioService.serviciosByCliente(client.getId());
 		modelMap.addAttribute("serviciosV", valoracionService.serviciosConValoraciones());
 		modelMap.addAttribute("servicios", servicios);
+		
 		return vista;
 	}
 	

@@ -3,6 +3,7 @@ package org.springframework.samples.petclinic.model;
 import java.time.LocalDate;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
@@ -32,7 +33,7 @@ public class Mensaje extends BaseEntity{
 	@NotNull
 	private Boolean leido;
 	
-	@ManyToMany(mappedBy = "mensajesRecibidos")
+	@ManyToMany(mappedBy = "mensajesRecibidos", cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
 	private List<User> receptores;
 	
 	

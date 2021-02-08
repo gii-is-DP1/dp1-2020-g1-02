@@ -9,7 +9,7 @@
 <petclinic:layout pageName="ofertas">
     <h2> Nuevo mensaje
     </h2>
-    <form:form modelAttribute="mensajeR" class="form-horizontal" id="add-mensajes-form" action="/mensajes/save">
+    <form:form modelAttribute="mensaje" class="form-horizontal" id="add-mensajes-form" action="/mensajes/save">
         <div class="form-group has-feedback">
         
         	
@@ -18,7 +18,7 @@
  			
  			
  			<c:choose>
-			    <c:when test="${mensajeR.receptores != null}">
+			    <c:when test="${mensaje.receptores != null}">
 			      
 			      <petclinic:inputField label="Para:" name="receptores" disabled="true"/>
 			        
