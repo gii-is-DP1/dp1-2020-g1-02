@@ -2,10 +2,7 @@ package org.springframework.samples.petclinic.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import java.util.Date;
-import java.text.DateFormat;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Optional;

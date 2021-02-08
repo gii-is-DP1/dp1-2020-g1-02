@@ -75,13 +75,20 @@ public class ClienteControllerTest {
 		.andExpect(view().name("clientes/listadoClientes"));
 	}
 	
+	@WithMockUser(value = "spring")
+	@Test
+	void DeleteCliente() throws Exception{
+		mockMvc.perform(get("/clientes/delete/{clienteId}", 1))
+		.andExpect(status().is3xxRedirection())
+		.andExpect(view().name("redirect:/clientes"));
+	}
 	
 	@WithMockUser(value = "spring")
     @Test
     void testProcessCreationFormSuccess() throws Exception {
 		mockMvc.perform(post("/clientes/save")
 						.with(csrf())
-						.param("dni", "20099008E")
+						.param("dni", "47390692C")
 						.param("nombre", "Jose Carlos")
 						.param("apellidos", "Morales Borreguero")
 						.param("telefono", "692069178")

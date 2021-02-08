@@ -1,6 +1,7 @@
 package org.springframework.samples.petclinic.web;
 
 import java.time.LocalDate;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -85,7 +86,7 @@ public class MensajesController {
 		Mensaje mensajeE = mensajesService.findById(mId).get();
 		Mensaje mensajeR = new Mensaje();
 		mensajeR.setEmisor(userService.getLoggedUser());
-		List<User> l = List.of(mensajeE.getEmisor());
+		List<User> l = Arrays.asList(mensajeE.getEmisor());
 		mensajeR.setReceptores(l);
 		mensajeR.setFecha(LocalDate.now());
 		modelMap.addAttribute("mensajeR", mensajeR);

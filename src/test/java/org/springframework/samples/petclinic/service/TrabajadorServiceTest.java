@@ -22,7 +22,7 @@ public class TrabajadorServiceTest {
 	@Test
 	public void testCountWithInitialData() {
 		int count = trabajadorService.eventCount();
-		assertEquals(count, 2);
+		assertEquals(count, 3);
 	}
 	
 	@Test
@@ -31,7 +31,7 @@ public class TrabajadorServiceTest {
 		Trabajador tr1 = new Trabajador();
 		tr1.setNombre("Trabajador1");
 		tr1.setApellidos("Trabajador1");
-		tr1.setDni("2556895C");
+		tr1.setDni("47390692C");
 		tr1.setCorreo("hjhjhjh@lk.com");
 		tr1.setTelefono("666666666");
 		tr1.setTipocategoria(TipoCategoria.Limpieza);
@@ -39,7 +39,7 @@ public class TrabajadorServiceTest {
 		trabajadorService.save(tr1);
 		int count = trabajadorService.eventCount();
 		//Assert
-		assertEquals(count, 3);
+		assertEquals(count, 4);
 		
 	}
 	
@@ -71,7 +71,7 @@ public class TrabajadorServiceTest {
 		trabajadorService.delete(trabajador.get());
 		int count = trabajadorService.eventCount();
 		//Assert
-		assertEquals(count, 1);
+		assertEquals(count, 3);
 		
 	}
 	

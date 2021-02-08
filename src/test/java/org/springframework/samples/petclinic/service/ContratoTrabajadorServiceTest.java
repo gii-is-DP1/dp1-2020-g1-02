@@ -19,13 +19,11 @@ public class ContratoTrabajadorServiceTest {
 	
 	@Autowired
 	private ContratoTrabajadorService contratoService;
-	@Autowired
-	private TrabajadorService trabajadorService;
 	
 	@Test
 	public void testCountWithInitialData() {
 		int count = contratoService.contratoTrabajadorCount();
-		assertEquals(count, 1);
+		assertEquals(count, 3);
 	}
 	
 	@Test
@@ -38,7 +36,7 @@ public class ContratoTrabajadorServiceTest {
 		
 		contratoService.save(ct);
 		int count =contratoService.contratoTrabajadorCount();
-		assertEquals(count,2);
+		assertEquals(count,4);
 	}
 	
 	@Test
@@ -57,7 +55,7 @@ public class ContratoTrabajadorServiceTest {
 		contratoService.delete(contrato);
 		int count = contratoService.contratoTrabajadorCount();
 		//Assert
-		assertEquals(count, 0);
+		assertEquals(count, 2);
 		
 	}
 }

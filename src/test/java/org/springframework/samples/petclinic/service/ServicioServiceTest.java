@@ -26,13 +26,14 @@ public class ServicioServiceTest {
 	@Test
 	public void testCountWithInitialData() {
 		int count = servicioService.servicioCount();
-		assertEquals(count, 5);
+		assertEquals(count, 6);
 	}
 	
 	@Test
 	public void testSaveService() {
 		//Arrange
 		Servicio ser1 = new Servicio();
+		ser1.setId(1);
 		ser1.setLugar("Lope de Vega");
 		ser1.setFechafin(LocalDate.of(2020, 12, 12));
 		ser1.setFechainicio(LocalDate.of(2019, 12, 12));
@@ -48,7 +49,7 @@ public class ServicioServiceTest {
 	@Test
 	public void testGetServiceById() {
 		//Arrange
-		int id = 1;
+		Integer id = 1;
 		//Act
 		Servicio ser1 = servicioService.findServicioById(id).get();
 		//Assert
@@ -71,9 +72,9 @@ public class ServicioServiceTest {
 	@Test
 	public void testDeleteServicio() {
 		//Arrange
-		Optional<Servicio> servicio = servicioService.findServicioById(1);
+		Servicio servicio = servicioService.findServicioById(1).get();
 		//Act
-		servicioService.delete(servicio.get());
+		servicioService.delete(servicio);
 		int count = servicioService.servicioCount();
 		//Assert
 		assertEquals(count, 3);

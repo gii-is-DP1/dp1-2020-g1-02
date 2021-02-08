@@ -7,9 +7,13 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
+
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +38,16 @@ import org.springframework.test.web.servlet.MockMvc;
 			excludeAutoConfiguration= SecurityConfiguration.class)
 
 public class AdministradorControllerTest {
+	
+	public static final Map<Integer, String> letrasDNI = new HashMap<Integer, String>() {{
+		put( 0,"T");put( 1,"R" ); put( 2,"W" );
+		put( 3,"A" );put( 4,"G" );put( 5,"M" ); 
+		put( 6,"Y" );put( 7,"F" );put( 8,"P" ); 
+		put( 9,"D" );put( 10,"X" );put( 11,"B" ); 
+		put( 12,"N" );put( 13,"J" );put( 14,"Z" );
+		put( 15,"S" );put( 16,"Q" );put( 17,"V" );
+		put( 18,"H" );put( 19,"L" );put( 20,"C" ); 
+		put( 21,"K" ); put( 22,"E" );}}; 
 	
 	@Autowired
 	private MockMvc mockMvc;
@@ -104,11 +118,19 @@ public class AdministradorControllerTest {
 	}
 	
 	@WithMockUser(value = "spring")
+	@Test
+	void DeleteAdministrador() throws Exception{
+		mockMvc.perform(get("/administradores/delete/{adminId}", 1))
+		.andExpect(status().is3xxRedirection())
+		.andExpect(view().name("redirect:/administradores"));
+	}
+	
+	@WithMockUser(value = "spring")
     @Test
     void testProcessCreationFormSuccess() throws Exception {
 		mockMvc.perform(post("/administradores/save")
 						.with(csrf())
-						.param("dni", "23523464S")
+						.param("dni", "47390692C")
 						.param("nombre", "José Manuel")
 						.param("apellidos", "González Rodríguez")
 						.param("telefono", "635254643")
@@ -124,7 +146,7 @@ public class AdministradorControllerTest {
     void testProcessCreationFormHasErrors() throws Exception {
 		mockMvc.perform(post("/administradores/save")
 						.with(csrf())
-						.param("dni", "23523464S")
+						.param("dni", "34574634D")
 						.param("nombre", "")
 						.param("apellidos", "González Rodríguez")
 						.param("telefono", "635254643")

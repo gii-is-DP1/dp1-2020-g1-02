@@ -3,8 +3,6 @@ package org.springframework.samples.petclinic.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
-
-import java.util.NoSuchElementException;
 import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
