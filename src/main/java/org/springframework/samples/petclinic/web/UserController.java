@@ -139,9 +139,6 @@ public class UserController {
 			return "clientes/newCliente";
 		}else {
 
-			cliente.getUser().setPassword(passwordEncoder.encode(cliente.getUser().getPassword()));
-			clienteService.saveCliente(cliente);
-
 			User newUser = new User();
 			newUser.setUsername(clienteForm.getUsername());
 			newUser.setPassword(clienteForm.getPassword());
