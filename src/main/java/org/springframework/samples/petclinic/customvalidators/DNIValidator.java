@@ -8,14 +8,15 @@ import javax.validation.ConstraintValidatorContext;
 
 public class DNIValidator implements ConstraintValidator<DNIConstraint, String> {
 	
-	public static final Map<Integer, String> letrasDNI = Map.ofEntries(Map.entry( 0,"T"),
-			Map.entry( 1,"R" ), Map.entry( 2,"W" ), Map.entry( 3,"A" ),
-			Map.entry( 4,"G" ), Map.entry( 5,"M" ), Map.entry( 6,"Y" ),
-			Map.entry( 7,"F" ), Map.entry( 8,"P" ), Map.entry( 9,"D" ),
-			Map.entry( 10,"X" ),Map.entry( 11,"B" ),Map.entry( 12,"N" ),
-			Map.entry( 13,"J" ),Map.entry( 14,"Z" ),Map.entry( 15,"S" ),
-			Map.entry( 16,"Q" ),Map.entry( 17,"V" ),Map.entry( 18,"H" ),
-			Map.entry( 19,"L" ),Map.entry( 20,"C" ),Map.entry( 21,"K" ),Map.entry( 22,"E" )); 
+	public static final Map<Integer, String> letrasDNI = new HashMap<Integer, String>() {{
+		put( 0,"T");put( 1,"R" ); put( 2,"W" );
+		put( 3,"A" );put( 4,"G" );put( 5,"M" ); 
+		put( 6,"Y" );put( 7,"F" );put( 8,"P" ); 
+		put( 9,"D" );put( 10,"X" );put( 11,"B" ); 
+		put( 12,"N" );put( 13,"J" );put( 14,"Z" );
+		put( 15,"S" );put( 16,"Q" );put( 17,"V" );
+		put( 18,"H" );put( 19,"L" );put( 20,"C" ); 
+		put( 21,"K" ); put( 22,"E" );}}; 
 	
 
   @Override

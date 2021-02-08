@@ -85,12 +85,12 @@ public class TrabajadorController {
 		return view;
 	}
 	
-	@GetMapping(path="/registroHoras/{nameTrabajador}")
-	public String filtradoFactura(@PathVariable("nameTrabajador") String nameTrabajador,ModelMap modelMap) {
-		String view="redirect:/registroHoras";
-		modelMap.addAttribute("registroHoras", registroHorasService.findRegistroHorasByTrabajadorId(nameTrabajador));
-		return view;
-	}
+//	@GetMapping(path="/registroHoras/{nameTrabajador}")
+//	public String filtradoFactura(@PathVariable("nameTrabajador") String nameTrabajador,ModelMap modelMap) {
+//		String view="redirect:/registroHoras";
+//		modelMap.addAttribute("registroHoras", registroHorasService.findRegistroHorasByTrabajadorId(nameTrabajador));
+//		return view;
+//	}
 	
 //	@GetMapping(path="/{trabajadorId}")
 //	public String listadoHorariosDeUnTrabajador(ModelMap modelMap, Trabajador trabajador) {
