@@ -26,7 +26,7 @@
 @import url(owl.carousel.min.css);
 @import url(slick.css);
 @import url(jquery-ui.css);
-@import url(nice-select.css);
+
 
 /*---------------------------------------------------------------------
     skeleton
@@ -2366,4 +2366,12 @@ text-align: center;
 	left: 10px;
 	top: inherit;
 	bottom: 10px;
+}
+
+.nice-select{
+    width:0px;
+    height:0px;
+    font-size: 0px;
+    border:none;
+    margin:0;
 }

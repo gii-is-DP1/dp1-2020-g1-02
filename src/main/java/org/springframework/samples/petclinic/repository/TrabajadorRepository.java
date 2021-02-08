@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
+import org.springframework.samples.petclinic.model.Servicio;
 import org.springframework.samples.petclinic.model.Trabajador;
 
 public interface TrabajadorRepository extends CrudRepository<Trabajador, Integer> {
@@ -15,6 +16,9 @@ public interface TrabajadorRepository extends CrudRepository<Trabajador, Integer
 
 	@Query("SELECT s.trabajadores FROM Servicio s WHERE s.id=:servicio")
 	Iterable<Trabajador> trabajadoresByServicio(@Param("servicio") Integer servicio);
+	
+	@Query("SELECT t FROM Trabajador t WHERE t NOT IN :servicio")
+	Iterable<Trabajador> trabajadoresByNotServicio(@Param("servicio") List<Trabajador> servicio);
 
 	@Query("SELECT t.nombre FROM Trabajador t")
 	List<String> findAllNames();

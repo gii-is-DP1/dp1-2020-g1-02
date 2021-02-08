@@ -2,6 +2,7 @@ package org.springframework.samples.petclinic.model;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;

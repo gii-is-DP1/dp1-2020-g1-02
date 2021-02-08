@@ -15,14 +15,11 @@
        		
        			<input type="hidden" name="id" value=' <c:out value="${servicio.id}"/>'>
        			
+       			
        			 <label for="trabajadores">  Trabajadores a asignar:</Label>  </br>
-			       <select name="trabajadores" size="10" multiple>
+			       <select class="form-control" name="trabajadores" size="${trabajadores.size()}" multiple>
           			 <c:forEach items="${trabajadores}" var="trabajador">
-			          <tr>
-			                <td>
-			        	<option value="${trabajador.id}"><c:out value="${trabajador.nombre} ${trabajador.apellidos}"/></option>
-			             </td>
-			            </tr>			            
+			        	<option value="${trabajador.id}"><c:out value="${trabajador.nombre} ${trabajador.apellidos}"/></option>                  
 			        </c:forEach>
 					</select>
 					
