@@ -28,7 +28,7 @@ public class Cliente extends PersonaEntity {
     private Set<Servicio> servicios;
 	
 	//
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "username", referencedColumnName = "username")
 	@PasswordConstraint
 	@ConfirmPassword
