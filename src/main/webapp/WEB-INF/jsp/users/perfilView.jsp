@@ -7,7 +7,6 @@
 
 
 <petclinic:layout pageName="Profile">
-    <jsp:body>
        <div class="container">
 			<sec:authorize access="hasAuthority('administrador')">
 				<div class="row">
@@ -16,7 +15,8 @@
 				<form:form modelAttribute="administrador" class="form-horizontal" action="/users/actualizarAdministrador">
 	       		<div class="form-group has-feedback">
 	       			<input type="hidden" id="id" name="id" value=' <c:out value="${administrador.id}"/>'>
-	       			<petclinic:inputField label="Username" name="user.username" disabled="true"/>
+	       			<form:input path="user.retypePassword" value="${administrador.user.password}" type="hidden"/>
+	       			<petclinic:inputField label="Username" name="user" disabled="true"/>
 	       			<petclinic:inputField label="Nombre" name="nombre" disabled="true"/>
 	       			<petclinic:inputField label="Apellidos" name="apellidos" disabled="true"/>
 	       			<petclinic:inputField label="DNI" name="dni" disabled="true"/>
@@ -40,7 +40,8 @@
 				<form:form modelAttribute="trabajador" class="form-horizontal" action="/users/actualizarTrabajador">
 	       		<div class="form-group has-feedback">
 	       			<input type="hidden" id="id" name="id" value=' <c:out value="${trabajador.id}"/>'>
-	       			<petclinic:inputField label="Username" name="user.username" disabled="true"/>
+	       			<form:input path="user.retypePassword" value="${trabajador.user.password}" type="hidden"/>
+	       			<petclinic:inputField label="Username" name="user" disabled="true"/>
 	       			<petclinic:inputField label="Nombre" name="nombre" disabled="true"/>
 	       			<petclinic:inputField label="Apellidos" name="apellidos" disabled="true"/>
 	       			<petclinic:inputField label="DNI" name="dni" disabled="true"/>
@@ -64,7 +65,8 @@
 				<form:form modelAttribute="cliente" class="form-horizontal" action="/users/actualizarCliente">
 	       		<div class="form-group has-feedback">
 	       			<input type="hidden" id="id" name="id" value=' <c:out value="${cliente.id}"/>'>
-	       			<petclinic:inputField label="Username" name="user.username" disabled="true"/>
+	       			<form:input path="user.retypePassword" value="${cliente.user.password}" type="hidden"/>
+	       			<petclinic:inputField label="Username" name="user" disabled="true"/>
 	       			<petclinic:inputField label="Nombre" name="nombre" disabled="true"/>
 	       			<petclinic:inputField label="Apellidos" name="apellidos" disabled="true"/>
 	       			<petclinic:inputField label="DNI" name="dni" disabled="true"/>
@@ -87,7 +89,8 @@
 				<form:form modelAttribute="proveedor" class="form-horizontal" action="/users/actualizarProveedor">
 	       		<div class="form-group has-feedback">
 	       			<input type="hidden" id="id" name="id" value=' <c:out value="${proveedor.id}"/>'>
-	       			<petclinic:inputField label="Username" name="user.username" disabled="true"/>
+	       			<form:input path="user.retypePassword" value="${proveedor.user.password}" type="hidden"/>
+	       			<petclinic:inputField label="Username" name="user" disabled="true"/>
 	       			<petclinic:inputField label="Nombre de Empresa" name="name" disabled="true"/>
 	       			<petclinic:inputField label="Telefono" name="telefono"/>
 	       			<petclinic:inputField label="Direccion" name="direccion"/>
@@ -107,6 +110,4 @@
             </div>
 			
         </div>
-    </jsp:body>
-
 </petclinic:layout>

@@ -112,7 +112,7 @@ public class UserController {
 	}
 	
 	@PostMapping("/updatePassword")
-	public String changeUserPassword(Locale locale, 
+	public String changeUserPassword(Locale locale,ModelMap modelMap, 
 	  @RequestParam("psw") String password, @RequestParam("oldpass") String oldPassword) {
 	    User user = userService.findUser(
 	      SecurityContextHolder.getContext().getAuthentication().getName()).get();
@@ -123,7 +123,7 @@ public class UserController {
 		 
 	    user.setPassword(passwordEncoder.encode(password));
 	    userService.saveUser(user);
-	    
+	    modelMap.addAttribute("message", "Contraseña actualizada con éxito!");
 	    return "redirect:/users/" + user.getUsername();
 	}
 	
@@ -181,25 +181,23 @@ public class UserController {
 	
 	@PostMapping(path="/actualizarCliente")
 	public String actualizarCliente(@Valid Cliente cliente, BindingResult result,ModelMap modelMap) {
-		String view = "";
+		String view = PERFIL_VIEW;
 		User principal = userService.getLoggedUser();
 		if(result.hasErrors()) {
 			modelMap.addAttribute("cliente", cliente);
-			view = PERFIL_VIEW;
 		}else {
 			if(principal != null && principal.getUsername().equals(cliente.getUser().getUsername())) {
 				Cliente clientToUpDate = clienteService.findClienteById(cliente.getId()).get();
 				
-				clientToUpDate.setNombre(cliente.getNombre());
-				clientToUpDate.setApellidos(cliente.getApellidos());
 				clientToUpDate.setCorreo(cliente.getCorreo());
 				clientToUpDate.setDireccion(cliente.getDireccion());
 				clientToUpDate.setTelefono(cliente.getTelefono());
 				
 				
 				clienteService.actualizarCliente(clientToUpDate);
-				//modelMap.addAttribute("message", "Cliente actualizado!");
-				view = "redirect:/users/" + principal.getUsername();
+				
+				modelMap.addAttribute("cliente", clientToUpDate);
+				modelMap.addAttribute("message", "Perfil actualizaddo con éxito!");
 			}else {
 				view = EXCEPTION_VIEW;
 				modelMap.addAttribute("error", "No tienes permisos para acceder a esta página");
@@ -210,17 +208,14 @@ public class UserController {
 	
 	@PostMapping(path="/actualizarTrabajador")
 	public String actualizarTrabajador(@Valid Trabajador trabajador, BindingResult result,ModelMap modelMap) {
-		String view = "";
+		String view = PERFIL_VIEW;
 		User principal = userService.getLoggedUser();
 		if(result.hasErrors()) {
 			modelMap.addAttribute("trabajador", trabajador);
-			view = PERFIL_VIEW;
 		}else {
 			if(principal != null && principal.getUsername().equals(trabajador.getUser().getUsername())) {
 				Trabajador employeeToUpDate = trabajadorService.findTrabajadorById(trabajador.getId()).get();
 				
-				employeeToUpDate.setNombre(trabajador.getNombre());
-				employeeToUpDate.setApellidos(trabajador.getApellidos());
 				employeeToUpDate.setCorreo(trabajador.getCorreo());
 				employeeToUpDate.setDireccion(trabajador.getDireccion());
 				employeeToUpDate.setTelefono(trabajador.getTelefono());
@@ -228,7 +223,8 @@ public class UserController {
 				
 				trabajadorService.actualizarTrabajador(employeeToUpDate);
 				
-				view = "redirect:/users/" + principal.getUsername();
+				modelMap.addAttribute("trabajador", employeeToUpDate);
+				modelMap.addAttribute("message", "Perfil actualizaddo con éxito!");
 			}else {
 				view = EXCEPTION_VIEW;
 				modelMap.addAttribute("error", "No tienes permisos para acceder a esta página");
@@ -239,11 +235,10 @@ public class UserController {
 	
 	@PostMapping(path="/actualizarProveedor")
 	public String actualizarProveedor(@Valid Proveedor proveedor, BindingResult result,ModelMap modelMap) {
-		String view = "";
+		String view = PERFIL_VIEW;
 		User principal = userService.getLoggedUser();
 		if(result.hasErrors()) {
 			modelMap.addAttribute("proveedor", proveedor);
-			view = PERFIL_VIEW;
 		}else {
 			if(principal != null && principal.getUsername().equals(proveedor.getUser().getUsername())) {
 				Proveedor supplierToUpDate = proveedorService.findProveedorById(proveedor.getId()).get();
@@ -255,8 +250,8 @@ public class UserController {
 				
 				proveedorService.actualizarProveedor(supplierToUpDate);
 				
-				view = "redirect:/users/" + principal.getUsername();
-				//modelMap.addAttribute("message", "Cliente actualizado!");
+				modelMap.addAttribute("proveedor", supplierToUpDate);
+				modelMap.addAttribute("message", "Perfil actualizado con éxito!");
 			}else {
 				view = EXCEPTION_VIEW;
 				modelMap.addAttribute("error", "No tienes permisos para acceder a esta página");
@@ -267,28 +262,22 @@ public class UserController {
 	
 	@PostMapping(path="/actualizarAdministrador")
 	public String actualizarAdministrador(@Valid Administrador trabajador, BindingResult result,ModelMap modelMap) {
-		String view = "";
+		String view = PERFIL_VIEW;
 		User principal = userService.getLoggedUser();
 		if(result.hasErrors()) {
 			modelMap.addAttribute("trabajador", trabajador);
-			view = PERFIL_VIEW;
 		}else {
 			if(principal != null && principal.getUsername().equals(trabajador.getUser().getUsername())) {
 				Administrador adminToUpDate = administradorService.findAdministradorById(trabajador.getId()).get();
 				
-				//BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-				//String password = trabajador.getUser().getPassword();
-				//String encodedPassword = passwordEncoder.encode(password);
-				
-				adminToUpDate.setNombre(trabajador.getNombre());
-				adminToUpDate.setApellidos(trabajador.getApellidos());
 				adminToUpDate.setCorreo(trabajador.getCorreo());
 				adminToUpDate.setDireccion(trabajador.getDireccion());
 				adminToUpDate.setTelefono(trabajador.getTelefono());
-				//adminToUpDate.getUser().setPassword(encodedPassword);
+				
 				administradorService.actualizarAdministrador(adminToUpDate);
 				
-				view = "redirect:/users/" + principal.getUsername();
+				modelMap.addAttribute("trabajador", adminToUpDate);
+				modelMap.addAttribute("message", "Perfil actualizado con éxito!");
 			}else {
 				view = EXCEPTION_VIEW;
 				modelMap.addAttribute("error", "No tienes permisos para acceder a esta página");
