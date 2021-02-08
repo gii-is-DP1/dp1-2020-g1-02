@@ -131,6 +131,7 @@ public class ServicioController {
 		Iterable<Servicio> servicios = servicioService.serviciosByCliente(client.getId());
 		modelMap.addAttribute("serviciosV", valoracionService.serviciosConValoraciones());
 		modelMap.addAttribute("servicios", servicios);
+		
 		return vista;
 	}
 	

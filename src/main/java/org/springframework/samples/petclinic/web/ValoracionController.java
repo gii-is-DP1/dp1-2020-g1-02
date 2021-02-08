@@ -117,6 +117,7 @@ public class ValoracionController {
 			modelMap.addAttribute("message", "Hay errores en el formulario");
 			return "valoraciones/newValoracion";
 		}else {
+			
 			try {
 				valoracionService.comprobarExcepciones(valoracion);
 				

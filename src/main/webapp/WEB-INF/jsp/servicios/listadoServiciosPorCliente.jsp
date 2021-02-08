@@ -58,8 +58,8 @@
 	              	<a href="${fn:escapeXml(reclamacionUrl)}">Poner reclamacion</a>
                 </td>
                 
-                <c:choose>
-				    <c:when test="${not fn:contains(serviciosV, servicio.id)}">
+            
+				    <c:if test="${not fn:contains(serviciosV, servicio.id)}">
 				      <td>
 	                	<spring:url value="/valoraciones/new/{oId}" var="reclamacionUrl">
 	              		<spring:param name="oId" value="${servicio.id}"/>
@@ -67,14 +67,12 @@
 		              	<a href="${fn:escapeXml(reclamacionUrl)}">Valorar</a>
 	                </td>
 				        
-				    </c:when>    
-				    <c:otherwise>
+				    </c:if>    
+				    <c:if test="${fn:contains(serviciosV, servicio.id)}" >
 				        <td> </td>
-				    </c:otherwise>
-				</c:choose>
-               <%--  <c:if test="${not fn:contains(serviciosV, servicio.id)}">
-	                
-                </c:if> --%>
+				    </c:if>
+				
+              
                 <td>
                 	<spring:url value="/servicios/{servicioId}/presupuestos" var="servicioUrl">
                 		<spring:param name="servicioId" value="${servicio.id}"/>
