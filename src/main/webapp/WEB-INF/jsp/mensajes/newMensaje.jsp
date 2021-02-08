@@ -25,7 +25,7 @@
 			    </c:when>    
 			    <c:otherwise>
 			    <Label for="receptores">  Para:</Label>  </br>
-			       <select name="receptores" size="10" multiple>
+			       <select class="form-control" name="receptores" size="10" multiple>
           			 <c:forEach items="${users}" var="user">
 			            <tr>
 			                <td>

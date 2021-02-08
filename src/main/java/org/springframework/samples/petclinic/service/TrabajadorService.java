@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
+import org.springframework.samples.petclinic.model.Servicio;
 import org.springframework.samples.petclinic.model.Trabajador;
 import org.springframework.samples.petclinic.repository.TrabajadorRepository;
 import org.springframework.stereotype.Service;
@@ -75,6 +76,9 @@ public class TrabajadorService {
 	@Transactional(readOnly=true)
 	public List<String> getNombres(){
 		return trabajadorRepo.findAllNames();
-
+	}
+	
+	public Iterable<Trabajador> findTrabajadoresNotInServicio(Servicio servicio){
+		return trabajadorRepo.trabajadoresByNotServicio(servicio.getTrabajadores());
 	}
 }

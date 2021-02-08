@@ -21,6 +21,8 @@ public interface ServicioRepository extends CrudRepository<Servicio, Integer> {
 	@Query("SELECT t.servicios FROM Trabajador t WHERE t.id=:trabajador")
 	Iterable<Servicio> serviciosByTrabajador(@Param("trabajador") Integer trabajador);
 	
+	
+	
 //	@Query("UPDATE Servicio s SET s.trabajadores=:trabajadores WHERE s.id=:id")
 //	void asignarTrabajadores(@Param("id") Integer id, @Param("trabajadores") List<Trabajador> trabajadores) throws DataAccessException;
 

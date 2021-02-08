@@ -81,8 +81,9 @@ public class ServicioController {
 	@GetMapping(path="/{sId}/asignarTrabajadores")
 	public String asignarTrabajadores(@PathVariable("sId") Integer sId,ModelMap modelMap) {
 		String view="servicios/asignarTrabajadores";
-		modelMap.addAttribute("servicio", servicioService.findServicioById(sId).get());
-		modelMap.addAttribute("trabajadores", trabajadorService.findAll());
+		Servicio s=servicioService.findServicioById(sId).get();
+		modelMap.addAttribute("servicio", s);
+		modelMap.addAttribute("trabajadores", trabajadorService.findTrabajadoresNotInServicio(s));
 		return view;
 		
 	}
