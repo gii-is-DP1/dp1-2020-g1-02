@@ -31,7 +31,6 @@
         <tr>
             <th style="width: 30%;">Lugar</th>
             <th style="width: 30%;">Dimension</th>
-            <th style="width: 30%;">ID Cliente</th>
         </tr>
         </thead>
         <tbody>
@@ -42,9 +41,6 @@
                 </td>
                 <td>
                     <c:out value="${instalacion.dimension}"/>
-                </td>
-                <td>
-                    <c:out value="${instalacion.cliente.id}"/>
                 </td>
             </tr>
         </c:forEach>
