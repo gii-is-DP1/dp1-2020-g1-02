@@ -31,27 +31,30 @@ public class ContratoServicioService {
 		return contratoServicioRepo.findAll();
 	}
 	
+	@Transactional
 	public void save(ContratoServicio contratoServicio) {
 		contratoServicioRepo.save(contratoServicio);
 //		Servicio s= contratoServicio.getServicio();
 //		s.setContrato(contratoServicio);
 //		servicioRepo.save(s);
 	}
-	
+	@Transactional
 	public void delete(ContratoServicio contratoServicio) {
 		contratoServicioRepo.delete(contratoServicio);
 	}
 	
+	@Transactional(readOnly=true)
 	public Iterable<ContratoServicio> buscaMorosos() {
 		return contratoServicioRepo.buscaMorosos();
 	}
 	
+	@Transactional(readOnly=true)
 	public Iterable<ContratoServicio> contratosQueCaducanEsteMes(){
 		LocalDate now = LocalDate.now();
 		return contratoServicioRepo.contratosQueCaducanEsteMes(now.getDayOfMonth(), now.getMonthValue(), now.getYear());
 	}
 
-	@Transactional
+	@Transactional(readOnly=true)
 	public Iterable<ContratoServicio> contratosByIdCliente(int idCliente) {
 		return contratoServicioRepo.contratosByIdCliente(idCliente);
 	}

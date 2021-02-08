@@ -1,13 +1,11 @@
 package org.springframework.samples.petclinic.service;
 
 import java.time.LocalDate;
-import java.util.Optional;
-
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.samples.petclinic.model.EstadoServicio;
 import org.springframework.samples.petclinic.model.TipoCategoria;
@@ -47,14 +45,7 @@ public class ValoracionService {
 	
 	@Transactional(readOnly=true)
 	public Optional<Valoracion> findValoracionById(int valoracionId) {
-		// TODO Auto-generated method stub
 		return valoracionRepo.findById(valoracionId);
-	}
-	
-	@Transactional(readOnly=true)
-	public Iterable<Valoracion> findValoracionByServicioId(String name) {
-		return null;
-		//return valoracionRepo.findValoracionByServicioId(name);
 	}
 	
 	@Transactional
@@ -62,11 +53,6 @@ public class ValoracionService {
 		Valoracion valoracionBorrar = findValoracionById(id).get();
 		delete(valoracionBorrar);
 	}
-
-//	@Transactional(readOnly=true)
-//	public Iterable<Valoracion> findValoracionByClienteName(String nombre) {
-//		return valoracionRepo.findAllByClienteName(nombre.toLowerCase());
-//	}
 	
 	@Transactional(readOnly=true)
 	public Integer getMediaValoracionTipo(TipoCategoria tipo) {
@@ -96,9 +82,9 @@ public class ValoracionService {
 		this.valoracionAntesComenzarServicio(valoracion);
 		this.save(valoracion);
 	}
-
+	
+	@Transactional(readOnly=true)
 	public Map<TipoCategoria, Integer> getMediaValoraciones(){
-
 		Integer valLimp = getMediaValoracionTipo(TipoCategoria.Limpieza);
 		Integer valJard = getMediaValoracionTipo(TipoCategoria.Jardineria);
 		Integer valCrist = getMediaValoracionTipo(TipoCategoria.Cristaleria);

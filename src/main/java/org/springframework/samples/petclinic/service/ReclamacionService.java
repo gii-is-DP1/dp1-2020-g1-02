@@ -41,7 +41,6 @@ public class ReclamacionService {
 
 	@Transactional(readOnly=true)
 	public Optional<Reclamacion> findReclamacionById(int reclamacionId) {
-		// TODO Auto-generated method stub
 		return reclamacionRepo.findById(reclamacionId);
 	}
 	

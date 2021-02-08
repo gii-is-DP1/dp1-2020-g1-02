@@ -3,6 +3,7 @@ package org.springframework.samples.petclinic.model;
 
 import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
@@ -28,8 +29,10 @@ public class PersonaEntity extends BaseEntity {
     @ContactNumberConstraint
     private String telefono;
     
+    @Size(min=3, max=50)
     private String direccion;
     
+    @Email
     @NotBlank
     private String correo;
 

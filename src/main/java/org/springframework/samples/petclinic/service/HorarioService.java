@@ -56,7 +56,7 @@ public class HorarioService {
 	public Iterable<Horario> findHorarioByTrabajadorId(Integer id) {
 		return horarioRepo.findHorariosByTrabajadorId(id);
 	}
-	
+	@Transactional(readOnly=true)
 	public Integer findHorasSolapadas(Horario horario) {
 		return horarioRepo.findHorasSolapadas(horario.getTrabajador().getId(), horario.getHora_inicio(), horario.getHora_fin(), horario.getFecha());
 	}
