@@ -84,6 +84,7 @@ public class ServicioController {
 		modelMap.addAttribute("servicio", servicioService.findServicioById(sId).get());
 		modelMap.addAttribute("trabajadores", trabajadorService.findAll());
 		return view;
+		
 	}
 	
 	@PostMapping(path="/asignar/save")
@@ -91,10 +92,11 @@ public class ServicioController {
 		String view="redirect:/trabajadores/servicio/" + servicio.getId();
 		if(result.hasErrors()) {
 			modelMap.addAttribute("servicio", servicio);
-			return "redirect:/servicios/" + servicio.getId() + "/asignarTrabajadores";
+			modelMap.addAttribute("trabajadores", trabajadorService.findAll());
+			return "servicios/asignarTrabajadores";
 		}else {
 			Servicio s=servicioService.findServicioById(servicio.getId()).get();
-			s.setTrabajadores(s.getTrabajadores());
+			s.setTrabajadores(servicio.getTrabajadores());
 			servicioService.asignarTrabajadores(s);
 		}
 		return view;
