@@ -11,7 +11,6 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.samples.petclinic.model.User;
 import org.springframework.samples.petclinic.repository.UserRepository;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -28,8 +27,8 @@ public class UserService {
 	
 	private UserRepository userRepository;
 	
-//	@Autowired
-//	private PasswordEncoder passwordEncoder;
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 	
 
 	@Autowired
@@ -41,9 +40,8 @@ public class UserService {
 	@Transactional
 	public void saveUser(User user) throws DataAccessException {
 		user.setEnabled(true);
-//		String pass = user.getPassword();
-//		user.setPassword(passwordEncoder.encode(pass));
-//		user.setPassword(pass);
+		String pass = user.getPassword();
+		user.setPassword(passwordEncoder.encode(pass));
 		userRepository.save(user);
 	}
 	
@@ -56,10 +54,12 @@ public class UserService {
 		return this.findUser(SecurityContextHolder.getContext().getAuthentication().getName()).get();
 	}
 
+	@Transactional(readOnly=true)
 	public Iterable<User> findAll(){
 		return userRepository.findAll();
 	}
 	
+	@Transactional(readOnly=true)
 	public List<String> findAllUsernames() {
 		List<String> list = new ArrayList<String>();
 		Iterable<User> users = findAll();

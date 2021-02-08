@@ -3,6 +3,7 @@ package org.springframework.samples.petclinic.web;
 import java.util.Optional;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.util.Pair;
 import org.springframework.samples.petclinic.model.RegistroHoras;
 import org.springframework.samples.petclinic.model.Trabajador;
 import org.springframework.samples.petclinic.model.User;
@@ -30,11 +31,12 @@ public class RegistroHorasController {
 	@Autowired
 	private UserService userService;
 	
-	@GetMapping()
-	public String listadoRegistroHoras(ModelMap modelMap) {
+	@GetMapping(path="/{tId}")
+	public String listadoRegistroHoras(@PathVariable("tId") Integer tId, ModelMap modelMap) {
 		String vista ="registroHoras/listadoRegistroHoras";
-		Iterable<RegistroHoras> registroHoras = registroHorasService.findAll();
-		modelMap.addAttribute("registro_horas", registroHoras);
+		Pair<Double, Iterable<RegistroHoras>>  pair = registroHorasService.findRegistroHorasByTrabajadorId(tId);
+		modelMap.addAttribute("registrohoras", pair.getSecond());
+		modelMap.addAttribute("total", pair.getFirst());
 		return vista;
 	}
 	

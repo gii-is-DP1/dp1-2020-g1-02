@@ -5,6 +5,7 @@ import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
 import lombok.Getter;
@@ -21,6 +22,7 @@ public class ContratoTrabajador extends Contrato {
     @JoinColumn(name="trabajador_id")
     private Trabajador trabajador;
     
+    @Min(0)
     @NotNull
     private Double sueldo;
     

@@ -5,20 +5,16 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.JoinTable;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
-import org.springframework.samples.petclinic.customvalidators.ConfirmPassword;
-import org.springframework.samples.petclinic.customvalidators.PasswordConstraint;
-
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -31,13 +27,13 @@ public class User{
 	@NotBlank
 	String username;
 	
-	@PasswordConstraint
+	@NotBlank
 	String password;
 	
-	@Transient 
-	private String retypePassword;
+	@Transient
+	String retypePassword;
 	 
-	
+	@NotNull
 	boolean enabled;
 	
 	@OneToOne(cascade = CascadeType.ALL, mappedBy = "user")

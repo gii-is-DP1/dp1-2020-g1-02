@@ -10,6 +10,9 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+import org.springframework.samples.petclinic.customvalidators.ConfirmPassword;
+import org.springframework.samples.petclinic.customvalidators.PasswordConstraint;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -26,6 +29,8 @@ public class Administrador extends PersonaEntity{
     //
 	@OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "username", referencedColumnName = "username")
+	@PasswordConstraint
+	@ConfirmPassword
 	private User user;
 	//
 	

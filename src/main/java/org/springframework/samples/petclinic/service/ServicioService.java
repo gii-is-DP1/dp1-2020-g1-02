@@ -1,23 +1,16 @@
 package org.springframework.samples.petclinic.service;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.samples.petclinic.model.EstadoServicio;
-import org.springframework.samples.petclinic.model.Horario;
 import org.springframework.samples.petclinic.model.Mensaje;
-import org.springframework.samples.petclinic.model.Presupuesto;
 import org.springframework.samples.petclinic.model.Servicio;
-import org.springframework.samples.petclinic.model.Trabajador;
 import org.springframework.samples.petclinic.model.User;
 import org.springframework.samples.petclinic.repository.ServicioRepository;
-import org.springframework.samples.petclinic.service.exceptions.SolapamientoFechasException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -26,9 +19,7 @@ public class ServicioService {
 	
 	@Autowired
 	private ServicioRepository servicioRepo;
-	
-	@Autowired
-	private TrabajadorService trabajadorService;
+
 	
 	@Autowired
 	private MensajesService mensajesService;
@@ -42,6 +33,7 @@ public class ServicioService {
 		return (int) servicioRepo.count();
 	}
 	
+	@Transactional(readOnly=true)
 	public Iterable<Servicio> findAll() {
 		return servicioRepo.findAll();
 	}
@@ -56,6 +48,7 @@ public class ServicioService {
 		servicioRepo.delete(servicio);
 	}
 	
+	@Transactional(readOnly=true)
 	public Optional<Servicio> findServicioById(int sId) {
 		return servicioRepo.findById(sId);
 	}
@@ -94,10 +87,12 @@ public class ServicioService {
 		mensajesService.save(m);
 	}
   
+	@Transactional(readOnly=true)
 	public Iterable<Servicio> serviciosByCliente(Integer id){
 		return servicioRepo.serviciosByCliente(id);
 	}
 	
+	@Transactional(readOnly=true)
 	public Iterable<Servicio> findServiciosByTrabajador(Integer trabajador) {
 		return servicioRepo.serviciosByTrabajador(trabajador);
 	}

@@ -1,16 +1,12 @@
 package org.springframework.samples.petclinic.service;
 
-import java.time.LocalDateTime;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
-import org.springframework.samples.petclinic.model.Horario;
 import org.springframework.samples.petclinic.model.Trabajador;
 import org.springframework.samples.petclinic.repository.TrabajadorRepository;
-import org.springframework.samples.petclinic.service.exceptions.SolapamientoFechasException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -45,12 +41,12 @@ public class TrabajadorService {
 		trabajadorRepo.delete(trabajador);
 	}
 
+	@Transactional(readOnly=true)
 	public Optional<Trabajador> findTrabajadorById(Integer trabajadorId) {
-		// TODO Auto-generated method stub
 		return trabajadorRepo.findById(trabajadorId);
 	}
 	
-	
+	@Transactional(readOnly=true)
 	public Optional<Trabajador> findTrabajadorByUsername(String trabajadorUsername) {
 		return trabajadorRepo.findTrabajadorByUsername(trabajadorUsername);
 	}
@@ -71,12 +67,12 @@ public class TrabajadorService {
 		trabajadorRepo.save(trabajador);
 	}
 	
-	
+	@Transactional(readOnly=true)
 	public Iterable<Trabajador> findTrabajadoresByServicio(Integer servicio) {
 		return trabajadorRepo.trabajadoresByServicio(servicio);
 	}
 	
-	@Transactional
+	@Transactional(readOnly=true)
 	public List<String> getNombres(){
 		return trabajadorRepo.findAllNames();
 
