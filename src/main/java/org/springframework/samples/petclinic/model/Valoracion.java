@@ -29,7 +29,7 @@ public class Valoracion extends BaseEntity {
 	
 	@Range(min=0, max=5)
 	@NotNull
-	private Integer valoracion;
+	private Integer valor;
 	
 	@OneToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="servicio_id")

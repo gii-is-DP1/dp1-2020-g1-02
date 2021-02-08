@@ -138,6 +138,10 @@ public class UserController {
 			modelMap.addAttribute("clienteForm", clienteForm);
 			return "clientes/newCliente";
 		}else {
+
+			cliente.getUser().setPassword(passwordEncoder.encode(cliente.getUser().getPassword()));
+			clienteService.saveCliente(cliente);
+
 			User newUser = new User();
 			newUser.setUsername(clienteForm.getUsername());
 			newUser.setPassword(clienteForm.getPassword());
@@ -152,6 +156,7 @@ public class UserController {
 			newCliente.setUser(newUser);
 			
 			clienteService.saveCliente(newCliente);
+
 			//modelMap.addAttribute("message", "Cliente actualizado!");
 		}
 		return view;
@@ -165,6 +170,7 @@ public class UserController {
 			modelMap.addAttribute("proveedorForm", proveedorForm);
 			return "proveedores/newProveedor";
 		}else {
+
 			User newUser = new User();
 			newUser.setUsername(proveedorForm.getUsername());
 			newUser.setPassword(proveedorForm.getPassword());
@@ -189,6 +195,7 @@ public class UserController {
 			modelMap.addAttribute("trabajadorForm", trabajadorForm);
 			return "trabajadores/editTrabajadores";
 		}else {
+
 			User newUser = new User();
 			newUser.setUsername(trabajadorForm.getUsername());
 			newUser.setPassword(trabajadorForm.getPassword());
@@ -217,6 +224,7 @@ public class UserController {
 			modelMap.addAttribute("result", result);
 			return "administradores/newAdministrador";
 		}else {
+
 			User newUser = new User();
 			newUser.setUsername(administradorForm.getUsername());
 			newUser.setPassword(administradorForm.getPassword());
@@ -232,6 +240,7 @@ public class UserController {
 			newAdministrador.setUser(newUser);
 			
 			administradorService.saveAdministrador(newAdministrador);
+
 			//modelMap.addAttribute("message", "Cliente actualizado!");
 		}
 		return view;

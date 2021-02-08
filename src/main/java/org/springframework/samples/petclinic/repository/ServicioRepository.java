@@ -1,5 +1,7 @@
 package org.springframework.samples.petclinic.repository;
 
+import org.springframework.data.jpa.repository.Modifying;
+
 import java.util.List;
 
 import org.springframework.dao.DataAccessException;
@@ -22,5 +24,10 @@ public interface ServicioRepository extends CrudRepository<Servicio, Integer> {
 //	@Query("UPDATE Servicio s SET s.trabajadores=:trabajadores WHERE s.id=:id")
 //	void asignarTrabajadores(@Param("id") Integer id, @Param("trabajadores") List<Trabajador> trabajadores) throws DataAccessException;
 
+//	@Modifying
+//	@Query("DELETE s.trabajadores FROM Servicio s WHERE s.id = :sid")
+//	void vaciarListaTrabajadores(@Param("sid") Integer sid);
+
+	
 	
 }

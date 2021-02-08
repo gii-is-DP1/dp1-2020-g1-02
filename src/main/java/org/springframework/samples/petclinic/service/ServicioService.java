@@ -46,6 +46,13 @@ public class ServicioService {
 		servicioRepo.save(servicio);
 	}
 	
+	
+	public void vaciarTrabajadores(Servicio servicio) {
+		List<Trabajador> trabajadores = (List<Trabajador>) trabajadorService.findTrabajadoresByServicio(servicio.getId());
+		for(Trabajador t : trabajadores) {
+			t.getServicios().remove(servicio);
+		}
+	}
 	@Transactional
 	public void asignarTrabajadores(Servicio servicio) {
 		servicioRepo.save(servicio);
@@ -58,6 +65,7 @@ public class ServicioService {
 	
 	@Transactional
 	public void delete(Servicio servicio) {
+		vaciarTrabajadores(servicio);
 		servicioRepo.delete(servicio);
 	}
 	

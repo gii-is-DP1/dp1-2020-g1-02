@@ -12,4 +12,6 @@ public interface MensajesRepository extends CrudRepository<Mensaje, Integer> {
 
 	@Query("SELECT u.mensajesRecibidos FROM User u WHERE u.username = :receptor")
 	Collection<Mensaje> findAllByReceptor(@Param("receptor") String receptor);
+
+	
 }

@@ -104,11 +104,11 @@ INSERT INTO contratoservicio(fechainicial, fechafinal, periodoprueba, presupuest
 INSERT INTO reclamacion(fecha, descripcion, cliente_id, servicio_id) VALUES ('2019-10-20', 'El servicio está incompleto', 1, 1);
 INSERT INTO reclamacion(fecha, descripcion, cliente_id, servicio_id) VALUES ('2019-10-20', 'El servicio está lamentable', 2, 2);
 
-INSERT INTO valoracion(fecha,valoracion, servicio_id) VALUES ('2019-10-20', 4, 1);
-INSERT INTO valoracion(fecha,valoracion, servicio_id) VALUES ('2020-10-12', 5, 2);
-INSERT INTO valoracion(fecha,valoracion, servicio_id) VALUES ('2019-10-20', 4, 3);
-INSERT INTO valoracion(fecha,valoracion, servicio_id) VALUES ('2020-10-12', 5, 4);
-INSERT INTO valoracion(fecha,valoracion, servicio_id) VALUES ('2020-10-12', 5, 6);
+INSERT INTO valoracion(fecha,valor, servicio_id) VALUES ('2019-10-20', 4, 1);
+INSERT INTO valoracion(fecha,valor, servicio_id) VALUES ('2020-10-12', 5, 2);
+INSERT INTO valoracion(fecha,valor, servicio_id) VALUES ('2019-10-20', 4, 3);
+INSERT INTO valoracion(fecha,valor, servicio_id) VALUES ('2020-10-12', 5, 4);
+INSERT INTO valoracion(fecha,valor, servicio_id) VALUES ('2020-10-12', 5, 6);
 
 
 

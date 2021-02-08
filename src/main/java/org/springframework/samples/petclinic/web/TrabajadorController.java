@@ -82,6 +82,7 @@ public class TrabajadorController {
 			modelmap.addAttribute("message", "Trabajador on encontrado");
 			view=listadoTrabajadores(modelmap);
 		}
+		
 		return view;
 	}
 	

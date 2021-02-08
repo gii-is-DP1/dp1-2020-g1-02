@@ -26,7 +26,8 @@
         <c:forEach items="${pedidos}" var="pedido">
             <tr>
                 <td>
-                    <c:out value="${pedido.fechaPedido}"/>
+                   <fmt:parseDate value="${pedido.fechaPedido}" pattern="yyyy-MM-dd" var="date"/>
+	               <fmt:formatDate value="${date}" type = "date" dateStyle="long"/>  
                 </td>
                 <td>
                     <c:out value="${pedido.cantidadProducto}"/>

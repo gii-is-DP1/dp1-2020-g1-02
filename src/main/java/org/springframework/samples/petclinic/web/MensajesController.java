@@ -89,7 +89,7 @@ public class MensajesController {
 		List<User> l = Arrays.asList(mensajeE.getEmisor());
 		mensajeR.setReceptores(l);
 		mensajeR.setFecha(LocalDate.now());
-		modelMap.addAttribute("mensajeR", mensajeR);
+		modelMap.addAttribute("mensaje", mensajeR);
 		return view;
 	}
 	

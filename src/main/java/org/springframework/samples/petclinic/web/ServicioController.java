@@ -59,9 +59,7 @@ public class ServicioController {
 		 Optional<Servicio> s=servicioService.findServicioById(servicioId);
 		if(s.isPresent()) {
 			servicioService.delete(s.get());
-			modelmap.addAttribute("message", "Servicio borrado correctamente");
-		}else {
-			modelmap.addAttribute("message", "Servicio no encontrado");
+			
 		}
 		return view;
 	}
@@ -154,6 +152,7 @@ public class ServicioController {
 		Iterable<Servicio> servicios = servicioService.serviciosByCliente(client.getId());
 		modelMap.addAttribute("serviciosV", valoracionService.serviciosConValoraciones());
 		modelMap.addAttribute("servicios", servicios);
+		
 		return vista;
 	}
 	

@@ -102,6 +102,7 @@ public class ReclamacionController {
 	@GetMapping(path="/delete/{reclamacionId}")
 	public String borrarReclamacion(@PathVariable("reclamacionId") Integer reclamacionId, ModelMap modelmap) {
 		String view = "redirect:/reclamaciones";
+		
 		Optional<Reclamacion> reclamacion = reclamacionService.findReclamacionById(reclamacionId);
 		reclamacionService.delete(reclamacion.get());
 		modelmap.addAttribute("message", "Reclamación borrada correctamente");

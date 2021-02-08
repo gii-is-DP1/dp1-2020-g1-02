@@ -62,19 +62,19 @@
 				                    Nada recomendable 
 				                </td>
 				                <td>
-				                    <input type="radio" value="1"  name="valoracion" /> <br/>
+				                    <input type="radio" value="1"  name="valor" /> <br/>
 				                </td>
 				                <td>
-				                    <input type="radio" value="2" name="valoracion" /> <br/>
+				                    <input type="radio" value="2" name="valor" /> <br/>
 				                </td>
 				                 <td>
-				                    <input type="radio"  value="3" name="valoracion" /> <br/>
+				                    <input type="radio"  value="3" name="valor" /> <br/>
 				                </td>
 				                <td>
-				                    <input type="radio" value="4" name="valoracion" /> <br/>
+				                    <input type="radio" value="4" name="valor" /> <br/>
 				                </td>
 				                <td>
-				                    <input type="radio" value="5" name="valoracion" /> <br/>
+				                    <input type="radio" value="5" name="valor" /> <br/>
 				                </td>
 				                <td>
 				                    Muy recomendable 
