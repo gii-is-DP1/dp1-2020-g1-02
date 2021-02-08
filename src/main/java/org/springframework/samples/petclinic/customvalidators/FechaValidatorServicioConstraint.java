@@ -8,11 +8,11 @@ import java.lang.annotation.Target;
 import javax.validation.Constraint;  
 import javax.validation.Payload;  
 
-@Constraint(validatedBy = FechaValidator.class)
+@Constraint(validatedBy = FechaValidatorServicio.class)
 @Target( { ElementType.METHOD, ElementType.FIELD , ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
-public @interface FechaValidatorConstraint {
-    String message() default "La fecha de inicio tiene que ser antes que la fecha de fin";
+public @interface FechaValidatorServicioConstraint {
+    String message() default "La fecha de inicio tiene que ser antes que la fecha";
     Class<?>[] groups() default {};
     Class<? extends Payload>[] payload() default {};
 }
