@@ -1,11 +1,9 @@
 package org.springframework.samples.petclinic.web;
 
 import java.security.Principal;
-import java.util.Collection;
 import java.util.Locale;
 import java.util.Optional;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,11 +19,8 @@ import org.springframework.samples.petclinic.service.CurriculumService;
 import org.springframework.samples.petclinic.service.ProveedorService;
 import org.springframework.samples.petclinic.service.TrabajadorService;
 import org.springframework.samples.petclinic.service.UserService;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -35,7 +30,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 @RequestMapping("/users")
@@ -140,10 +134,6 @@ public class UserController {
 			modelMap.addAttribute("cliente", cliente);
 			return "clientes/newCliente";
 		}else {
-			User user = cliente.getUser();
-			String password = user.getPassword();
-			user.setPassword(passwordEncoder.encode(password));
-			cliente.setUser(user);
 			clienteService.saveCliente(cliente);
 			//modelMap.addAttribute("message", "Cliente actualizado!");
 		}
@@ -157,10 +147,6 @@ public class UserController {
 			modelMap.addAttribute("trabajador", trabajador);
 			return "users/newTrabajador";
 		}else {
-			User user = trabajador.getUser();
-			String password = user.getPassword();
-			user.setPassword(passwordEncoder.encode(password));
-			trabajador.setUser(user);
 			trabajadorService.saveTrabajador(trabajador);
 			//modelMap.addAttribute("message", "Trabajador insertado correctamente!");
 		}
@@ -174,10 +160,6 @@ public class UserController {
 			modelMap.addAttribute("proveedor", proveedor);
 			return "users/newProveedor";
 		}else {
-			User user = proveedor.getUser();
-			String password = user.getPassword();
-			user.setPassword(passwordEncoder.encode(password));
-			proveedor.setUser(user);
 			proveedorService.saveProveedor(proveedor);
 			//modelMap.addAttribute("message", "Cliente actualizado!");
 		}
@@ -191,10 +173,6 @@ public class UserController {
 			modelMap.addAttribute("trabajador", trabajador);
 			return "users/newAdministrador";
 		}else {
-			User user = trabajador.getUser();
-			String password = user.getPassword();
-			user.setPassword(passwordEncoder.encode(password));
-			trabajador.setUser(user);
 			administradorService.saveAdministrador(trabajador);
 			//modelMap.addAttribute("message", "Cliente actualizado!");
 		}

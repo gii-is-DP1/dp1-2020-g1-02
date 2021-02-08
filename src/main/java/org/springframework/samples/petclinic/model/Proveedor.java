@@ -1,11 +1,8 @@
 package org.springframework.samples.petclinic.model;
 
 import java.util.List;
-import java.util.Set;
 
 import javax.persistence.CascadeType;
-import javax.persistence.Column;
-
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
@@ -13,7 +10,9 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 
+import org.springframework.samples.petclinic.customvalidators.ConfirmPassword;
 import org.springframework.samples.petclinic.customvalidators.ContactNumberConstraint;
+import org.springframework.samples.petclinic.customvalidators.PasswordConstraint;
 
 import lombok.Data;
 
@@ -41,6 +40,8 @@ public class Proveedor extends NamedEntity{
     //
 	@OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "username", referencedColumnName = "username")
+	@PasswordConstraint
+	@ConfirmPassword
 	private User user;
 	//
 	

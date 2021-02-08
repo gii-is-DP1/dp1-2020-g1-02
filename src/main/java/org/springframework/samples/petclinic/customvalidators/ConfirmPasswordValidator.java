@@ -14,6 +14,9 @@ ConstraintValidator<ConfirmPassword, User> {
 
   @Override
   public boolean isValid(User user, ConstraintValidatorContext cxt) {
+	  System.out.println(user.getRetypePassword());
+	  System.out.println(user.getPassword());
+	  System.out.println(user.getPassword().equals(user.getRetypePassword()));
       return user.getPassword().equals(user.getRetypePassword());
   }
 
