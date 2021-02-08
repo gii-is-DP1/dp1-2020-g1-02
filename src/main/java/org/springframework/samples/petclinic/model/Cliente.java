@@ -9,6 +9,9 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.springframework.samples.petclinic.customvalidators.ConfirmPassword;
+import org.springframework.samples.petclinic.customvalidators.PasswordConstraint;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -27,6 +30,8 @@ public class Cliente extends PersonaEntity {
 	//
 	@OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "username", referencedColumnName = "username")
+	@PasswordConstraint
+	@ConfirmPassword
 	private User user;
 	//
 	

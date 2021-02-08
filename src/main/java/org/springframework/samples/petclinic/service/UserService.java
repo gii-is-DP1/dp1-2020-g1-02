@@ -28,8 +28,8 @@ public class UserService {
 	
 	private UserRepository userRepository;
 	
-//	@Autowired
-//	private PasswordEncoder passwordEncoder;
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 	
 
 	@Autowired
@@ -41,9 +41,8 @@ public class UserService {
 	@Transactional
 	public void saveUser(User user) throws DataAccessException {
 		user.setEnabled(true);
-//		String pass = user.getPassword();
-//		user.setPassword(passwordEncoder.encode(pass));
-//		user.setPassword(pass);
+		String pass = user.getPassword();
+		user.setPassword(passwordEncoder.encode(pass));
 		userRepository.save(user);
 	}
 	
