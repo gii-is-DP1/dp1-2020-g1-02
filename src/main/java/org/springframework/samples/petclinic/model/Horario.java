@@ -9,6 +9,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.FutureOrPresent;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 import org.springframework.format.annotation.DateTimeFormat;
@@ -42,7 +43,7 @@ public class Horario extends BaseEntity {
 	@JoinColumn(name="trabajador")
 	private Trabajador trabajador;
 	
-    @NotNull
+    @NotEmpty
     private String descripcion;
 
 }

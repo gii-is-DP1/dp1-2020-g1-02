@@ -1,5 +1,7 @@
 package org.springframework.samples.petclinic.web;
 
+import static org.hamcrest.Matchers.hasProperty;
+import static org.hamcrest.Matchers.is;
 import static org.mockito.BDDMockito.given;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -165,12 +167,13 @@ public class HorarioControllerTest {
 		mockMvc.perform(post("/horarios/save")
 						.with(csrf())
 						.param("fecha", "2000/10/03")
+						.param("hora_inicio", "10:30")
 						.param("hora_fin", "17:30")
 						.param("trabajador","1")
-						.param("descripcion", "Ese es tu horario de hoy"))
+						.param("descripcion", ""))
 			.andExpect(status().isOk())
 			.andExpect(model().attributeHasErrors("horario"))
-			.andExpect(model().attributeHasFieldErrors("horario", "hora_inicio"))
+			.andExpect(model().attributeHasFieldErrors("horario", "descripcion"))
 			.andExpect(view().name("horarios/newHorario"));
 	}
 }

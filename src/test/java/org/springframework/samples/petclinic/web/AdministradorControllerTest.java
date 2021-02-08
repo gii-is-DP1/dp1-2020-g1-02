@@ -156,6 +156,6 @@ public class AdministradorControllerTest {
 			.andExpect(status().isOk())
 			.andExpect(model().attributeHasErrors("administrador"))
 			.andExpect(model().attributeHasFieldErrors("administrador", "nombre"))
-			.andExpect(view().name("administradores/editAdministradores"));
+			.andExpect(view().name("administradores/newAdministradores"));
 	}
 }

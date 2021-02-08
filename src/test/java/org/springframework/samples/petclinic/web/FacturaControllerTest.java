@@ -125,14 +125,14 @@ public class FacturaControllerTest {
 		.andExpect(view().name("facturas/listadoFacturas"));
 	}
 	
-//	@WithMockUser(value = "spring")
-//	@Test
-//	void testListadoFacturasPorProveedor() throws Exception{
-//		mockMvc.perform(get("/facturas/misFacturas"))
-//		.andExpect(status().isOk())
-//		.andExpect(model().attributeExists("facturas"))
-//		.andExpect(view().name("facturas/listadoFacturas"));
-//	}
+	@WithMockUser(value = "spring")
+	@Test
+	void testListadoFacturasPorProveedor() throws Exception{
+		mockMvc.perform(get("/facturas/misFacturas"))
+		.andExpect(status().isOk())
+		.andExpect(model().attributeExists("facturas"))
+		.andExpect(view().name("facturas/listadoFacturas"));
+	}
 	
 	
 
