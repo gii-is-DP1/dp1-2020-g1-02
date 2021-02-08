@@ -55,6 +55,7 @@ public class MensajesController {
 		return view;
 	}
 	
+	
 	@PostMapping(path="/save")
 	public String salvarMensaje(@Valid Mensaje msj, BindingResult result,ModelMap modelMap) {
 		String view="redirect:/mensajes";

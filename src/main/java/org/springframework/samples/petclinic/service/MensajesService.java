@@ -25,7 +25,7 @@ public class MensajesService {
 		this.userRepo = userRepo;
 	}
 	@Transactional
-	public <S extends Mensaje> S save(S entity) {
+	public <S extends Mensaje> S save(S entity) throws DataAccessException{
 		Mensaje mensaje = mensajesRepo.save(entity);
 		User emisor = entity.getEmisor();
 		List<Mensaje> menEnviados = emisor.getMensajesEnviados();

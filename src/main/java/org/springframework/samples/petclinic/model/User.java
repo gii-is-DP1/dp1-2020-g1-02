@@ -36,7 +36,7 @@ public class User{
 	@OneToOne(cascade = CascadeType.PERSIST, mappedBy = "user")
 	private Authorities authorities;
 	
-	@ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
+	@ManyToMany(cascade = CascadeType.PERSIST)
 	@JoinTable(name = "aux", 
 			  joinColumns = @JoinColumn(name = "username"), 
 			  inverseJoinColumns = @JoinColumn(name = "mensaje_id"))
