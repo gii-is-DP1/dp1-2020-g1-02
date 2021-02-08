@@ -3,21 +3,17 @@ package org.springframework.samples.petclinic.customvalidators;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
-import org.springframework.samples.petclinic.model.User;
+import org.springframework.samples.petclinic.model.UserForm;
 
 public class ConfirmPasswordValidator implements 
-ConstraintValidator<ConfirmPassword, User> {
+ConstraintValidator<ConfirmPassword, UserForm> {
 
   @Override
   public void initialize(ConfirmPassword psw) {
   }
 
   @Override
-  public boolean isValid(User user, ConstraintValidatorContext cxt) {
-	  System.out.println(user.getRetypePassword());
-	  System.out.println(user.getPassword());
-	  System.out.println(user.getPassword().equals(user.getRetypePassword()));
+  public boolean isValid(UserForm user, ConstraintValidatorContext cxt) {
       return user.getPassword().equals(user.getRetypePassword());
   }
-
 }

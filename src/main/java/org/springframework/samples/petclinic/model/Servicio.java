@@ -15,6 +15,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.samples.petclinic.customvalidators.FechaValidatorServicioConstraint;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -23,6 +24,7 @@ import lombok.Setter;
 @Setter
 @Entity
 @Table(name = "servicio")
+@FechaValidatorServicioConstraint
 public class Servicio extends BaseEntity {
 	
 	@NotNull

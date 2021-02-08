@@ -47,8 +47,6 @@ public class Proveedor extends NamedEntity{
     //
 	@OneToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "username", referencedColumnName = "username")
-	@PasswordConstraint
-	@ConfirmPassword
 	private User user;
 	//
 	

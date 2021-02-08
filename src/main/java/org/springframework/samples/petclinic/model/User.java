@@ -29,9 +29,6 @@ public class User{
 	
 	@NotBlank
 	String password;
-	
-	@Transient
-	String retypePassword;
 	 
 	@NotNull
 	boolean enabled;

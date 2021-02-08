@@ -12,7 +12,7 @@
     <p>Registrar como:</p>
     <a href="/users/new"><button class="btn btn-default" type="submit">Cliente</button></a>
     <a href="/users/newProveedor"><button class="btn btn-default" type="submit">Proveedor</button></a>
-    <form:form modelAttribute="cliente" class="form-horizontal" id="add-cliente-form" action="/users/saveCliente">
+    <form:form modelAttribute="clienteForm" class="form-horizontal" id="add-cliente-form" action="/users/saveCliente">
         <div class="form-group has-feedback">
             <petclinic:inputField label="Nombre" name="nombre"/>
             <petclinic:inputField label="Apellidos" name="apellidos"/>
@@ -20,16 +20,16 @@
             <petclinic:inputField label="Direccion" name="direccion"/>
             <petclinic:inputField label="Dni" name="dni"/>
             <petclinic:inputField label="Correo" name="correo"/>
-            <petclinic:inputField label="Username" name="user.username"/>
-            <petclinic:inputPass  label="Contraseña" name="user.password" id="psw"/>
-            <div id="message">
-			  <h3>La contraseña debe contener:</h3>
-			  <p id="letter" class="invalid">Una letra <b>minúscula</b></p>
-			  <p id="capital" class="invalid">Una letra <b>mayúscula</b></p>
-			  <p id="number" class="invalid">Un <b>número</b></p>
-			  <p id="length" class="invalid">Mínimo <b>8 caracteres</b></p>
-			</div>
-            <petclinic:inputPass  label="Confirma Contraseña" name="user.retypePassword" id="cpsw"/>
+            <petclinic:inputField label="Username" name="username"/>
+           	<petclinic:inputPass  label="Contraseña" name="password" id="psw"/>
+	            <div id="message">
+				  <h3>La contraseña debe contener:</h3>
+				  <p id="letter" class="invalid">Una letra <b>minúscula</b></p>
+				  <p id="capital" class="invalid">Una letra <b>mayúscula</b></p>
+				  <p id="number" class="invalid">Un <b>número</b></p>
+				  <p id="length" class="invalid">Mínimo <b>8 caracteres</b></p>
+				</div>
+           <petclinic:inputPass  label="Confirme contraseña" name="retypePassword" id="cpsw"/>
         </div>
         <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">

@@ -8,7 +8,12 @@
 <%@ taglib prefix="petclinic" tagdir="/WEB-INF/tags" %>
 
 <petclinic:layout pageName="trabajadores">
-    <h2>Trabajadores del servicio: <c:out value="${servicio}"/></h2>
+	<spring:url value="/servicios/{sId}/asignarTrabajadores" var="asignarUrl">
+       	<spring:param name="sId" value="${servicio.id}"/>
+    </spring:url>
+   
+    <h2>Trabajadores del servicio: <c:out value="${servicio.lugar}"/></h2>
+     <a href="${fn:escapeXml(asignarUrl)}">Asignar trabajadores</a>
     <table id="eventsTable" class="table table-striped">
         <thead>
         <tr>

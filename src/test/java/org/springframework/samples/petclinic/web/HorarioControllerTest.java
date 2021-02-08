@@ -1,7 +1,5 @@
 package org.springframework.samples.petclinic.web;
 
-import static org.hamcrest.Matchers.hasProperty;
-import static org.hamcrest.Matchers.is;
 import static org.mockito.BDDMockito.given;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -11,11 +9,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -29,9 +25,11 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.FilterType;
 import org.springframework.samples.petclinic.configuration.SecurityConfiguration;
+import org.springframework.samples.petclinic.model.Authorities;
 import org.springframework.samples.petclinic.model.Horario;
 import org.springframework.samples.petclinic.model.TipoCategoria;
 import org.springframework.samples.petclinic.model.Trabajador;
+import org.springframework.samples.petclinic.model.User;
 import org.springframework.samples.petclinic.service.HorarioService;
 import org.springframework.samples.petclinic.service.TrabajadorService;
 import org.springframework.samples.petclinic.service.UserService;
@@ -66,6 +64,10 @@ public class HorarioControllerTest {
 	
 	@BeforeEach
 	void setup() throws ParseException {
+		User user=new User();
+		user.setUsername("francisco");
+		user.setPassword("admin");
+		
 		trabajador = new Trabajador();
 		trabajador.setId(1);
 		trabajador.setDni("36578363P");
@@ -75,6 +77,8 @@ public class HorarioControllerTest {
 		trabajador.setDireccion("Calle Santana 12");
 		trabajador.setCorreo("frangar@gmail.com");
 		trabajador.setTipocategoria(TipoCategoria.Cristaleria);
+		trabajador.setUser(user);
+		
 		
 		horario = new Horario();
 		horario.setId(1);
@@ -86,6 +90,8 @@ public class HorarioControllerTest {
 		horario.setTrabajador(trabajador);
 		
 		given(this.horarioService.findHorarioById(1)).willReturn(Optional.of(horario));
+		given(this.trabajadorService.findTrabajadorById(1)).willReturn(Optional.of(trabajador));
+//		given(this.trabajadorService.findTrabajadorByUsername("francisco")).willReturn(Optional.of(trabajador));
 		
 		List<Horario> horarios = new ArrayList<Horario>();
 		horarios.add(horario);
@@ -95,22 +101,45 @@ public class HorarioControllerTest {
 
 	@WithMockUser(value = "spring")
 	@Test
+	void testListadoHorarios() throws Exception{
+		mockMvc.perform(get("/horarios"))
+			.andExpect(status().isOk())
+			.andExpect(model().attributeExists("horarios"))
+			.andExpect(view().name("horarios/listadoHorarios"));
+	}
+	
+	@WithMockUser(value = "spring")
+	@Test
+	void testListadoHorariosPorTrabajadorLogueado() throws Exception{
+		mockMvc.perform(get("/horarios/misHorarios"))
+			.andExpect(status().isOk())
+			.andExpect(model().attributeExists("horarios"))
+			.andExpect(view().name("horarios/listadoHorariosPorTrabajador"));
+	}
+	
+
+	@WithMockUser(value = "spring")
+	@Test
+	void testListadoHorariosPorTrabajadorId() throws Exception{
+		mockMvc.perform(get("/horarios/{trabajadorId}", 1))
+			.andExpect(status().isOk())
+			.andExpect(model().attributeExists("horarios", "trabajador"))
+			.andExpect(view().name("horarios/listadoHorariosPorTrabajador"));
+	}
+	
+	
+	@WithMockUser(value = "spring")
+	@Test
 	void testNewHorario() throws Exception{
 		mockMvc.perform(get("/horarios/new/{trabajadorId}", 1)).andExpect(status().isOk()).andExpect(model().attributeExists("horario"))
 		.andExpect(view().name("horarios/newHorario"));
 	}
 	
-	@WithMockUser(value = "spring")
-	@Test
-	void testListadoHorarios() throws Exception{
-		mockMvc.perform(get("/horarios")).andExpect(status().isOk())
-		.andExpect(model().attributeExists("horarios"))
-		.andExpect(view().name("horarios/listadoHorarios"));
-	}
+	
 	
 	@WithMockUser(value = "spring")
     @Test
-    void testProcessCreationFormSuccess() throws Exception {
+    void testSaveHorario() throws Exception {
 		mockMvc.perform(post("/horarios/save")
 						.with(csrf())
 						.param("fecha", "2000/10/03")
@@ -121,14 +150,7 @@ public class HorarioControllerTest {
 			.andExpect(status().is2xxSuccessful())
 			.andExpect(view().name("horarios/newHorario"));
 	}
-	
-	@WithMockUser(value = "spring")
-	@Test
-	void testListadoHorariosPorTrabajador() throws Exception{
-		mockMvc.perform(get("/horarios/misHorarios")).andExpect(status().is2xxSuccessful())
-		.andExpect(view().name("horarios/listadoHorariosPorTrabajador"));
-	}
-	
+
 	@WithMockUser(value = "spring")
 	@Test
 	void DeleteHorario() throws Exception{
@@ -137,16 +159,12 @@ public class HorarioControllerTest {
 		.andExpect(view().name("redirect:/horarios"));
 	}
 	
-	
-	
-	
 	@WithMockUser(value = "spring")
     @Test
     void testProcessCreationFormHasErrors() throws Exception {
 		mockMvc.perform(post("/horarios/save")
 						.with(csrf())
 						.param("fecha", "2000/10/03")
-						.param("hora_inicio", "")
 						.param("hora_fin", "17:30")
 						.param("trabajador","1")
 						.param("descripcion", "Ese es tu horario de hoy"))

@@ -68,7 +68,7 @@ public class AdministradorController {
 		String view="redirect:/administradores";
 		if(result.hasErrors()) {
 			modelMap.addAttribute("administrador", administrador);
-			return "administradores/editAdministradores";
+			return "administradores/newAdministradores";
 		}else {
 			adminService.save(administrador);
 			modelMap.addAttribute("message", "Administrador actualizado!");

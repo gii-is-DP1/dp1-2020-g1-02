@@ -80,7 +80,7 @@ public class ValoracionControllerTest {
 		valoracion = new Valoracion();
 		valoracion.setId(1);
 		valoracion.setFecha(LocalDate.of(2019, 05, 15));
-//		valoracion.setNivelsatisfaccion(NivelSatisfaccion.Medio);
+		valoracion.setValoracion(4);
 		
 		authority = new Authorities();
 		user = new User();
@@ -114,7 +114,6 @@ public class ValoracionControllerTest {
 		given(this.entityManager.find(Valoracion.class, 1)).willReturn(valoracion);
 		given(this.entityManager.find(Cliente.class, 1)).willReturn(cliente);
 		given(this.servicioService.findServicioById(1)).willReturn(Optional.of(servicio));
-		
 		given(this.clienteService.findClienteByUsername(any())).willReturn(Optional.of(cliente));
 		given(this.userService.getLoggedUser()).willReturn(user);
 		
@@ -125,7 +124,15 @@ public class ValoracionControllerTest {
 	
 	@WithMockUser(value = "spring")
 	@Test
-	void testEditValoracion() throws Exception{
+	void testListadoValoraciones() throws Exception{
+		mockMvc.perform(get("/valoraciones")).andExpect(status().isOk())
+		.andExpect(model().attributeExists("valoraciones"))
+		.andExpect(view().name("valoraciones/listadoValoraciones"));
+	}
+	
+	@WithMockUser(value = "spring")
+	@Test
+	void testNewValoracion() throws Exception{
 		mockMvc.perform(get("/valoraciones/new/{oId}",1))
 		.andExpect(status().isOk())
 		.andExpect(model().attributeExists("valoracion"))
@@ -134,34 +141,25 @@ public class ValoracionControllerTest {
 	}
 	
 	@WithMockUser(value = "spring")
-	@Test
-	void testListadoValoraciones() throws Exception{
-		mockMvc.perform(get("/valoraciones")).andExpect(status().isOk())
-		.andExpect(model().attributeExists("valoraciones"))
-		.andExpect(view().name("valoraciones/listadoValoraciones"));
-	}
-	
-	
-	@WithMockUser(value = "spring")
     @Test
-    void testProcessCreationFormSuccess() throws Exception {
+    void testSaveValoracion() throws Exception {
 		mockMvc.perform(post("/valoraciones/save")
 						.with(csrf())
 						.param("fecha", "2020/04/09")
-						.param("nivelsatisfaccion", "Bajo")
+						.param("valor", "4")
 						.param("cliente", "1")
 						.param("servicio", "1"))	
 			.andExpect(status().is2xxSuccessful())
-			.andExpect(view().name("valoraciones/newValoracion"));
+			.andExpect(view().name("succesful"));
 	}
 	
 	@WithMockUser(value = "spring")
     @Test
-    void testProcessCreationFormHasErrors() throws Exception {
+    void testSaveValoracionErrors() throws Exception {
 		mockMvc.perform(post("/valoraciones/save")
 						.with(csrf())
 						.param("fecha", "")
-						.param("nivel_satisfaccion", "NivelSatisfaccion.Bajo"))	
+						.param("nivel_satisfaccion", "4"))	
 			.andExpect(status().isOk())
 			.andExpect(model().attributeHasErrors("valoracion"))
 			.andExpect(model().attributeHasFieldErrors("valoracion", "fecha"))
