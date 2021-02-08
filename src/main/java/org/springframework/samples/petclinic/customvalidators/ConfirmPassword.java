@@ -8,7 +8,7 @@ import javax.validation.Constraint;
 import javax.validation.Payload;
 
 @Constraint(validatedBy = ConfirmPasswordValidator.class)
-@Target( { ElementType.METHOD, ElementType.FIELD})
+@Target( { ElementType.METHOD, ElementType.FIELD, ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
 public @interface ConfirmPassword {
     String message() default "Las contraseñas no coinciden";

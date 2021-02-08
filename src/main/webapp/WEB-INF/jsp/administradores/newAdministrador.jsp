@@ -5,36 +5,41 @@
 <%@ taglib prefix="petclinic" tagdir="/WEB-INF/tags" %>
 
 
-<petclinic:layout pageName="Events">
-    <jsp:body>
+<petclinic:layout pageName="Trabajadores">
        <div class="container">
-       <h2><c:if test="${trabajador['new']}">Nuevo </c:if>Administrador</h2>
-       <form:form modelAttribute="trabajador" class="form-horizontal" action="/users/saveAdministrador">
-       		<div class="form-group has-feedback">
-       			<input type="hidden" id="id" name="id" value=' <c:out value="${trabajador.id}"/>'>
-       			<petclinic:inputField label="Nombre" name="nombre" />
-       			<petclinic:inputField label="Apellidos" name="apellidos" />
+       <h2>Nuevo Administrador</h2>
+       <form:form modelAttribute="administradorForm" class="form-horizontal" id="add-administrador-form" action="/users/saveAdministrador">
+	       <form:errors path = "*" cssClass = "errorblock" element = "div" />
+	        <div class="form-group has-feedback">
+       			<petclinic:inputField label="Nombre" name="nombre"/>
+       			<petclinic:inputField label="Apellidos" name="apellidos"/>
        			<petclinic:inputField label="DNI" name="dni"/>
        			<petclinic:inputField label="Telefono" name="telefono"/>
        			<petclinic:inputField label="Direccion" name="direccion"/>
        			<petclinic:inputField label="Correo" name="correo"/>
-       			<petclinic:inputField label="Username" name="user.username"/>
-           		<petclinic:inputField label="Password" name="user.password"/>
-       			<label for="tipocategoria">Categoria</label>
-  				<form:select path="tipocategoria">
-    				<option value='Limpieza'>Limpieza</option>
-				    <option value='Mantenimiento'>Mantenimiento</option>
+       			<petclinic:inputField label="Username" name="username"/>
+           		<petclinic:inputPass  label="Contraseña" name="password" id="psw"/>
+	            <div id="message">
+				  <h3>La contraseña debe contener:</h3>
+				  <p id="letter" class="invalid">Una letra <b>minúscula</b></p>
+				  <p id="capital" class="invalid">Una letra <b>mayúscula</b></p>
+				  <p id="number" class="invalid">Un <b>número</b></p>
+				  <p id="length" class="invalid">Mínimo <b>8 caracteres</b></p>
+				</div>
+				<petclinic:inputPass  label="Confirme contraseña" name="retypePassword" id="cpsw"/>
+				<label for="tipocategoria">Categoria</label>
+  				<select name="tipocategoria">
+    				<option value="Limpieza">Limpieza</option>
+				    <option value="Mantenimiento">Mantenimiento</option>
 				    <option value="Cristaleria">Cristaleria</option>
 				    <option value="Jardineria">Jardineria</option>
-  				</form:select>
-       		</div>
-            <div class="form-group">
-                <div class="col-sm-offset-2 col-sm-10">
-                    <button class="btn btn-default" type="submit">Guardar Trabajador</button>
-                </div>
-            </div>
-        </form:form>
+  				</select>
+	        </div>
+	        <div class="form-group">
+	            <div class="col-sm-offset-2 col-sm-10">
+	                        <button class="btn btn-default" type="submit" onclick="return Validate()">Añadir Administrador</button>
+	            </div>
+	        </div>
+    </form:form>
         </div>
-    </jsp:body>
-
 </petclinic:layout>
