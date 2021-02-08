@@ -376,3 +376,4 @@ public class UserController {
 			modelMap.addAttribute("error", "No tienes permisos para acceder a esta página");
 		}return view;
 	}
+}
