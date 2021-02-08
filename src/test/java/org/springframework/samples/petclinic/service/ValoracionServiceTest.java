@@ -7,8 +7,6 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.context.annotation.ComponentScan;
-import org.springframework.samples.petclinic.model.NivelSatisfaccion;
-import org.springframework.samples.petclinic.model.TipoCategoria;
 import org.springframework.samples.petclinic.model.Valoracion;
 import org.springframework.stereotype.Service;
 
@@ -23,7 +21,7 @@ public class ValoracionServiceTest {
 	@Test
 	public void testExistenValoraciones() {
 		int count = valoracionService.valoracionCount();
-		assertEquals(count, 2);
+		assertEquals(count, 5);
 	}
 	
 	@Test
@@ -41,7 +39,7 @@ public class ValoracionServiceTest {
 		valoracionService.save(valoracionNew);
 		
 		Integer cantidad = valoracionService.valoracionCount();
-		assertEquals(3, cantidad);
+		assertEquals(6, cantidad);
 	}
 	
 	@Test

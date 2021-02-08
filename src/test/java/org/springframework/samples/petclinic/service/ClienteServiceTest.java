@@ -2,7 +2,9 @@ package org.springframework.samples.petclinic.service;
 
 import static org.junit.Assert.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import java.util.Optional;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
@@ -48,7 +50,7 @@ public class ClienteServiceTest {
 		Cliente clienteNew = new Cliente();
 		clienteNew.setNombre("José");
 		clienteNew.setApellidos("García");
-		clienteNew.setDni("47524318G");
+		clienteNew.setDni("47390692C");
 		clienteNew.setTelefono("639635963");
 		clienteNew.setDireccion("Sevilla");
 		clienteNew.setCorreo("joseg@gmail.com");
@@ -69,8 +71,8 @@ public class ClienteServiceTest {
 		
 		@Test
 		public void testNotFindClientByUsername() {
-			Cliente clienteFind= clienteService.findClienteByUsername("Ironman666").get(); //Introducir un username no registrado devuelve null
-			assertNotNull(clienteFind);
+			Optional<Cliente> clienteFind= clienteService.findClienteByUsername("Ironman666"); //Introducir un username no registrado devuelve null
+			assertEquals(false, clienteFind.isPresent());
 		}
 		
 }

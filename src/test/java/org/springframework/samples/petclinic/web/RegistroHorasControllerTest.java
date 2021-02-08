@@ -129,6 +129,15 @@ public class RegistroHorasControllerTest {
 	}
 	
 	@WithMockUser(value = "spring")
+	@Test
+	void DeleteAdministrador() throws Exception{
+		mockMvc.perform(get("/registroHoras/delete/{registroHorasId}", 1))
+		.andExpect(status().is3xxRedirection())
+		.andExpect(view().name("redirect:/registroHoras"));
+	}
+	
+	
+	@WithMockUser(value = "spring")
     @Test
     void testProcessCreationFormSuccess() throws Exception {
 		mockMvc.perform(post("/registroHoras/save")

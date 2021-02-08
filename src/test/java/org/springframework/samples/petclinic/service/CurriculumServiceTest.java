@@ -21,7 +21,7 @@ public class CurriculumServiceTest {
 	@Test
 	public void testExistenCurriculums() {
 		int count = curriculumService.curriculumCount();
-		assertEquals(count, 2);
+		assertEquals(count, 5);
 	}
 	
 	@Test
@@ -43,7 +43,7 @@ public class CurriculumServiceTest {
 		curriculumService.save(curriculumNew);
 		
 		Integer cantidad = curriculumService.curriculumCount();
-		assertEquals(3, cantidad);
+		assertEquals(6, cantidad);
 	}
 	
 	

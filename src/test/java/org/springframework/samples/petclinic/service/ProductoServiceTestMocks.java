@@ -37,7 +37,7 @@ public class ProductoServiceTestMocks {
 	@Test
 	public void testCountProductos() {
 		int count = productoService.productCount();
-		assertEquals("1", count);
+		assertEquals(9, count);
 	}
 	
 
