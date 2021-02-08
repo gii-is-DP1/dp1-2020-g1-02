@@ -55,7 +55,7 @@ public class Servicio extends BaseEntity {
     @OneToOne(cascade=CascadeType.ALL, mappedBy="servicio")
     private Valoracion valoracion;
 
-    @ManyToMany(mappedBy = "servicios")
+    @ManyToMany(mappedBy = "servicios", cascade=CascadeType.ALL)
 	private List<Trabajador> trabajadores;
 
 }

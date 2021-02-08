@@ -12,5 +12,6 @@ public interface ServicioRepository extends CrudRepository<Servicio, Integer> {
 	
 	@Query("SELECT t.servicios FROM Trabajador t WHERE t.id=:trabajador")
 	Iterable<Servicio> serviciosByTrabajador(@Param("trabajador") Integer trabajador);
+
 	
 }

@@ -48,7 +48,7 @@ public class Trabajador extends PersonaEntity {
 	@ConfirmPassword
 	  private User user;
 	
-	@ManyToMany
+	@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable(name = "aux_ts", 
 			  joinColumns = @JoinColumn(name = "trabajador_id"), 
 			  inverseJoinColumns = @JoinColumn(name = "servicio_id"))
