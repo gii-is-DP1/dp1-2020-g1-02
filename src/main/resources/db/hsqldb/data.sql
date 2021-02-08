@@ -80,7 +80,7 @@ INSERT INTO factura(fecha, precio_total, proveedor, pedido) VALUES ('2021-01-20'
 
 
 
-INSERT INTO administrador(id,nombre,apellidos,dni,telefono, direccion, correo, tipocategoria, username) VALUES (1,'CARLOS JESUS', 'VILLADIEGO GARCIA', '78461836B','666666666','C/Motorhead, 6', 'calvirgar@alum.us.es', 0, 'admin');
+INSERT INTO administrador(id,nombre,apellidos,dni,telefono, direccion, correo, tipocategoria, username) VALUES (1,'CARLOS JESUS', 'VILLADIEGO GARCIA', '78461836G','666666666','C/Motorhead, 6', 'calvirgar@alum.us.es', 0, 'admin');
 INSERT INTO administrador(nombre, apellidos, tipocategoria) VALUES ('Carlos','Borreguero', 0);
 
 
