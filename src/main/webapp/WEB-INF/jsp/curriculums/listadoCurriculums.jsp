@@ -58,7 +58,7 @@
                 			<spring:url value="/curriculums/delete/{curriculumId}" var="curriculumUrl">
                 				<spring:param name="curriculumId" value="${curriculum.id}"/>
                 			</spring:url>
-                			<a href="${fn:escapeXml(curriculumUrl)}"><img src="/resources/images/delete.jpg" width="30px"/></a>
+                			<a href="${fn:escapeXml(curriculumUrl)}"><img src="/resources/images/delete.png" width="30px"/></a>
                 			</c:if>		
                		 	</td>
 		            </tr>

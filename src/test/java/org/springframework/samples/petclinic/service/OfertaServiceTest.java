@@ -5,11 +5,14 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 import java.util.Optional;
 
+import org.assertj.core.util.Lists;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.samples.petclinic.model.Factura;
 import org.springframework.samples.petclinic.model.Oferta;
+import org.springframework.samples.petclinic.model.Proveedor;
 import org.springframework.stereotype.Service;
 
 @DataJpaTest(includeFilters = @ComponentScan.Filter(Service.class))
@@ -34,12 +37,21 @@ public class OfertaServiceTest {
 	
 	@Test
 	public void testGuardarOferta() {
+		Proveedor p=new Proveedor();
+		p.setId(1);
+		p.setName("Pablo");
+		p.setTelefono("633444555");
+		p.setEmail("pablog@gmail.com");
+		p.setDireccion("Calle Conventual 17");
+		p.setFacturas(Lists.list(new Factura()));
+		
 		Oferta ofertaGuardar = new Oferta();
 		ofertaGuardar.setName("lejia");
 		ofertaGuardar.setPrecioU(2.85);
+		ofertaGuardar.setProveedor(p);
 		ofertaService.save(ofertaGuardar);
 		int count = ofertaService.ofertasCount();
-		assertEquals(count, 3);
+		assertEquals(count, 5);
 	}
 	
 	@Test

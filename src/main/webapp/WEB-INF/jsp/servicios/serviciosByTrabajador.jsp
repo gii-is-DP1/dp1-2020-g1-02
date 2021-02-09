@@ -9,7 +9,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <petclinic:layout pageName="servicios">
-    <h2>Servicios en los que trabaja: <c:out value="${trabajador.nombre}"/> &nbsp<c:out value="${trabajador.apellidos}"/></h2>
+    <h2>Servicios en los que trabaja: <c:out value="${trabajador.nombre} ${trabajador.apellidos}"/></h2>
 
     <table id="eventsTable" class="table table-striped">
         <thead>

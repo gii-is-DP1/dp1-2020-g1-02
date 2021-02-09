@@ -6,9 +6,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="petclinic" tagdir="/WEB-INF/tags" %>
-<spring:url value="/resources/images/delete.jpg" var="delete"/>
+<spring:url value="/resources/images/delete.png" var="delete"/>
 <petclinic:layout pageName="registro_horas">
-    <h2>Registro de Horas del trabajador: <c:out value="${registrohoras[0].trabajador.nombre}"/>&nbsp<c:out value="${registrohoras[0].trabajador.apellidos}"/></h2>
+    <h2>Registro de Horas del trabajador: <c:out value="${registrohoras[0].trabajador.nombre} ${registrohoras[0].trabajador.apellidos}"/></h2>
     
 
     <table id="registro_horastable" class="table table-striped">
