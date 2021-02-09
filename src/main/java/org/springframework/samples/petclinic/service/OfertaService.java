@@ -11,9 +11,15 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class OfertaService {
 
-	@Autowired
+	
 	private OfertaRepository ofertaRepo;
 	
+	@Autowired
+	public OfertaService(OfertaRepository ofertaRepo) {
+		super();
+		this.ofertaRepo = ofertaRepo;
+	}
+
 	@Transactional(readOnly=true)
 	public int ofertasCount() {
 		return (int) ofertaRepo.count();

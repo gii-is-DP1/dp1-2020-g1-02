@@ -11,10 +11,16 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class RegistroHorasService {
-	
-	@Autowired
+
 	private RegistroHorasRepository registroHorasRepo;
 	
+	
+	@Autowired
+	public RegistroHorasService(RegistroHorasRepository registroHorasRepo) {
+		super();
+		this.registroHorasRepo = registroHorasRepo;
+	}
+
 	@Transactional(readOnly=true)
 	public int RegistroHorasCount() {
 		return (int) registroHorasRepo.count();

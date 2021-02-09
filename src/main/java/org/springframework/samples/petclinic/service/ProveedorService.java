@@ -14,24 +14,28 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class ProveedorService {
 	
-	@Autowired
+
 	private ProveedorRepository proveedorRepo;
 	
-	
-	@Autowired
 	private UserService userService;
-	
-	@Autowired
+
 	private AuthoritiesService authoritiesService;
 	
 	@Autowired
-	private FacturaService facturaService;
+	public ProveedorService(ProveedorRepository proveedorRepo, UserService userService,
+			AuthoritiesService authoritiesService, FacturaService facturaService) {
+		super();
+		this.proveedorRepo = proveedorRepo;
+		this.userService = userService;
+		this.authoritiesService = authoritiesService;
+	}
 	
+
 	@Transactional
 	public int proveedorCount() {
 		return (int) proveedorRepo.count();
 	}
-	
+
 	@Transactional
 	public Iterable<Proveedor> findAll(){
 		return proveedorRepo.findAll();

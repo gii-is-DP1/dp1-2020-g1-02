@@ -11,14 +11,20 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class InstalacionService {
-	@Autowired
+
 	private InstalacionRepository instalacionRepo;
+	
+	@Autowired
+	public InstalacionService(InstalacionRepository instalacionRepo) {
+		super();
+		this.instalacionRepo = instalacionRepo;
+	}
 	
 	@Transactional(readOnly=true)
 	public int instalacionCount() {
 		return (int) instalacionRepo.count();
 	}
-	
+
 	@Transactional(readOnly=true)
 	public Iterable<Instalacion> findAll(){
 		return instalacionRepo.findAll();

@@ -14,19 +14,26 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class PedidoService {
 
-	@Autowired
+
 	private PedidoRepository pedidoRepo;
+
+	private ProductoService productoService;
+
+	private FacturaService facturaService;
 	
 	@Autowired
-	private ProductoService productoService;
-	@Autowired
-	private FacturaService facturaService;
+	public PedidoService(PedidoRepository pedidoRepo, ProductoService productoService, FacturaService facturaService) {
+		super();
+		this.pedidoRepo = pedidoRepo;
+		this.productoService = productoService;
+		this.facturaService = facturaService;
+	}
 	
 	@Transactional(readOnly=true)
 	public int pedidoCount() {
 		return (int) pedidoRepo.count();
 	}
-	
+
 	@Transactional(readOnly=true)
 	public Iterable<Pedido> findAll() {
 		return pedidoRepo.findAll();

@@ -15,9 +15,15 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class ReclamacionService {
-	@Autowired
+
 	private ReclamacionRepository reclamacionRepo;
 	
+	@Autowired
+	public ReclamacionService(ReclamacionRepository reclamacionRepo) {
+		super();
+		this.reclamacionRepo = reclamacionRepo;
+	}
+
 	@Transactional(readOnly=true)
 	public int reclamacionCount() {
 		return (int) reclamacionRepo.count();

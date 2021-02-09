@@ -13,15 +13,22 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class ClienteService {
 
-	@Autowired
 	private ClienteRepository clienteRepo;
 	
-	@Autowired
 	private UserService userService;
 	
-	@Autowired
+	
 	private AuthoritiesService authoritiesService;
 	
+	@Autowired
+	public ClienteService(ClienteRepository clienteRepo, UserService userService,
+			AuthoritiesService authoritiesService) {
+		super();
+		this.clienteRepo = clienteRepo;
+		this.userService = userService;
+		this.authoritiesService = authoritiesService;
+	}
+
 	@Transactional(readOnly=true)
 	public int clienteCount() {
 		return (int) clienteRepo.count();

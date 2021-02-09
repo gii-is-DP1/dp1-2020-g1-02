@@ -10,14 +10,23 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class CurriculumService {
 
-	@Autowired
+	
 	private CurriculumRepository curriculumRepo;
+	
+	@Autowired
+	public CurriculumService(CurriculumRepository curriculumRepo) {
+		super();
+		this.curriculumRepo = curriculumRepo;
+	}
+	
 	
 	@Transactional(readOnly=true)
 	public int curriculumCount() {
 		return (int) curriculumRepo.count();
 	}
 	
+	
+
 	@Transactional(readOnly=true)
 	public Iterable<Curriculum> findAll(){
 		return curriculumRepo.findAll();

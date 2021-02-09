@@ -16,11 +16,15 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class ContratoServicioService {
 	
-	@Autowired
-	private ContratoServicioRepository contratoServicioRepo;
-//	@Autowired
-//	private ServicioRepository servicioRepo;
 	
+	private ContratoServicioRepository contratoServicioRepo;
+	
+	@Autowired
+	public ContratoServicioService(ContratoServicioRepository contratoServicioRepo) {
+		super();
+		this.contratoServicioRepo = contratoServicioRepo;
+	}
+
 	@Transactional
 	public int contratoServicioCount() {
 		return (int) contratoServicioRepo.count();
@@ -34,9 +38,6 @@ public class ContratoServicioService {
 	@Transactional
 	public void save(ContratoServicio contratoServicio) {
 		contratoServicioRepo.save(contratoServicio);
-//		Servicio s= contratoServicio.getServicio();
-//		s.setContrato(contratoServicio);
-//		servicioRepo.save(s);
 	}
 	@Transactional
 	public void delete(ContratoServicio contratoServicio) {

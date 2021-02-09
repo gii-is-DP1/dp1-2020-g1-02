@@ -29,21 +29,19 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class UserService {
-	@Autowired
+
 	private UserRepository userRepository;
 
-	@Autowired
 	private MensajesService mensajesService;
 
-
 	private static BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-	
 
 	@Autowired
-	public UserService(UserRepository userRepository) {
+	public UserService(UserRepository userRepository, MensajesService mensajesService) {
+		super();
 		this.userRepository = userRepository;
+		this.mensajesService = mensajesService;
 	}
-
 
 	@Transactional
 	public void saveUser(User user) throws DataAccessException {
