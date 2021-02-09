@@ -76,7 +76,7 @@ public class ServicioService {
 	}
 	
 	@Transactional(readOnly=true)
-	public Optional<Servicio> findServicioById(int sId) {
+	public Optional<Servicio> findServicioById(Integer sId) {
 		return servicioRepo.findById(sId);
 	}
 

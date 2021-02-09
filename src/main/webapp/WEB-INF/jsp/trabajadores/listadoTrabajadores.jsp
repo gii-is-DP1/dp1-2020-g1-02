@@ -24,19 +24,19 @@
     <table id="eventsTable" class="table table-striped">
         <thead>
         <tr>
-            <th style="width: 150px;">NOMBRE</th>
-            <th style="width: 150px;">APELLIDOS</th>
-            <th style="width: 150px;">DNI</th>
-            <th style="width: 150px;">DIRECCIÓN</th>
-            <th style="width: 150px;">CORREO</th>
-            <th style="width: 150px;">TELEFONO</th>
-            <th style="width: 150px;">CATEGORIA</th>
-            <th style="width: 150px;"></th>
-            <th style="width: 150px;"></th>
-            <th style="width: 150px;"></th>
-            <th style="width: 150px;"></th>
-            <th style="width: 150px;"></th>
-            <th style="width: 150px;"></th>
+            <th style="width: 7%;">NOMBRE</th>
+            <th style="width: 7%;">APELLIDOS</th>
+            <th style="width: 7%;">DNI</th>
+            <th style="width: 7%;">DIRECCIÓN</th>
+            <th style="width: 7%;">CORREO</th>
+            <th style="width: 7%;">TELEFONO</th>
+            <th style="width: 7%;">CATEGORIA</th>
+            <th style="width: 7%;"></th>
+            <th style="width: 7%;"></th>
+            <th style="width: 7%;"></th>
+            <th style="width: 7%;"></th>
+            <th style="width: 7%;"></th>
+            <th style="width: 7%;"></th>
             
         </tr>
         </thead>

@@ -8,8 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.samples.petclinic.model.Servicio;
 import org.springframework.samples.petclinic.model.Trabajador;
 import org.springframework.samples.petclinic.service.HorarioService;
-import org.springframework.samples.petclinic.service.InstalacionService;
-import org.springframework.samples.petclinic.service.RegistroHorasService;
 import org.springframework.samples.petclinic.service.ServicioService;
 import org.springframework.samples.petclinic.service.TrabajadorService;
 import org.springframework.stereotype.Controller;
@@ -27,11 +25,7 @@ public class TrabajadorController {
 	@Autowired
 	private TrabajadorService trabajadorService;
 	@Autowired
-	private RegistroHorasService registroHorasService;
-	@Autowired
 	private HorarioService horarioService;
-	@Autowired
-	private InstalacionService instalacionService;
 	@Autowired
 	private ServicioService servicioService;
 	
@@ -100,7 +94,6 @@ public class TrabajadorController {
 			modelmap.addAttribute("message", "Trabajador borrado correctamente");
 		}else {
 			modelmap.addAttribute("message", "Trabajador no encontrado");
-			view=listadoTrabajadores(modelmap);
 		}
 		
 		return view;
@@ -112,14 +105,6 @@ public class TrabajadorController {
 		String view="horarios/listadoHorarios";
 		modelMap.addAttribute("horariosTrabajador", nombreTrab);
 		modelMap.addAttribute("horarios", horarioService.findHorarioByTrabajadorName(nombreTrab));
-		return view;
-	}
-	
-	@GetMapping(path="/instalacionesCliente")
-	public String instalacionesCliente(ModelMap modelMap, String nombreCli) {
-		String view="trabajadores/listadoTrabajadores";
-		modelMap.addAttribute("instalacionesCliente", nombreCli);
-		modelMap.addAttribute("instalaciones", instalacionService.findInstalacionByClienteName(nombreCli));
 		return view;
 	}
 	
