@@ -108,6 +108,9 @@ public class ValoracionControllerTest {
 		servicio.setEstado(EstadoServicio.Aceptado);
 		servicio.setFechainicio(LocalDate.of(2020, 12, 31));
 		servicio.setFechafin(LocalDate.of(2021, 01, 12));
+		servicio.setValoracion(valoracion);
+		valoracion.setServicio(servicio);
+		servicio.setCliente(cliente);
 		
 		given(this.valoracionService.findValoracionById(1)).willReturn(Optional.of(valoracion));
 		given(this.clienteService.findClienteById(1)).willReturn(Optional.of(cliente));
@@ -116,6 +119,7 @@ public class ValoracionControllerTest {
 		given(this.servicioService.findServicioById(1)).willReturn(Optional.of(servicio));
 		given(this.clienteService.findClienteByUsername(any())).willReturn(Optional.of(cliente));
 		given(this.userService.getLoggedUser()).willReturn(user);
+
 		
 		List<Valoracion> valoraciones = new ArrayList<Valoracion>();
 		valoraciones.add(valoracion);
