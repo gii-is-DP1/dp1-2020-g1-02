@@ -12,14 +12,22 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class ContratoTrabajadorService {
-	@Autowired
+
 	private ContratoTrabajadorRepository contratoTrabajadorRepo;
+	
+	@Autowired
+	public ContratoTrabajadorService(ContratoTrabajadorRepository contratoTrabajadorRepo) {
+		super();
+		this.contratoTrabajadorRepo = contratoTrabajadorRepo;
+	}
 	
 	@Transactional
 	public int contratoTrabajadorCount() {
 		return (int) contratoTrabajadorRepo.count();
 	}
 	
+	
+
 	@Transactional
 	public Iterable<ContratoTrabajador> findAll(){
 		return contratoTrabajadorRepo.findAll();

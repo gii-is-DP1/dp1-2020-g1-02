@@ -13,15 +13,22 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class TrabajadorService {
-	@Autowired
+
 	private TrabajadorRepository trabajadorRepo;
 	
-	@Autowired
 	private UserService userService;
 	
-	@Autowired
 	private AuthoritiesService authoritiesService;
 	
+	@Autowired
+	public TrabajadorService(TrabajadorRepository trabajadorRepo, UserService userService,
+			AuthoritiesService authoritiesService) {
+		super();
+		this.trabajadorRepo = trabajadorRepo;
+		this.userService = userService;
+		this.authoritiesService = authoritiesService;
+	}
+
 	@Transactional
 	public int eventCount() {
 		return (int) trabajadorRepo.count();

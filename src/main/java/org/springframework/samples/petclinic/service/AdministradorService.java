@@ -12,15 +12,24 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class AdministradorService {
 	
-	@Autowired
+
 	private AdministradorRepository administradorRepo;
 	
-	@Autowired
+
 	private UserService userService;
 	
-	@Autowired
+	
 	private AuthoritiesService authoritiesService;
 	
+	@Autowired
+	public AdministradorService(AdministradorRepository administradorRepo, UserService userService,
+			AuthoritiesService authoritiesService) {
+		super();
+		this.administradorRepo = administradorRepo;
+		this.userService = userService;
+		this.authoritiesService = authoritiesService;
+	}
+
 	@Transactional(readOnly=true)
 	public int administradorCount() {
 		return (int) administradorRepo.count();

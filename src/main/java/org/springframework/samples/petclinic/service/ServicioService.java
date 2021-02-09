@@ -18,19 +18,25 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class ServicioService {
 	
-	@Autowired
+
 	private ServicioRepository servicioRepo;
 
-	@Autowired
 	private TrabajadorService trabajadorService;
 	
-	@Autowired
 	private MensajesService mensajesService;
 	
-	@Autowired
 	private UserService	userService;
 
-	
+	@Autowired
+	public ServicioService(ServicioRepository servicioRepo, TrabajadorService trabajadorService,
+			MensajesService mensajesService, UserService userService) {
+		super();
+		this.servicioRepo = servicioRepo;
+		this.trabajadorService = trabajadorService;
+		this.mensajesService = mensajesService;
+		this.userService = userService;
+	}
+
 	@Transactional
 	public int servicioCount() {
 		return (int) servicioRepo.count();

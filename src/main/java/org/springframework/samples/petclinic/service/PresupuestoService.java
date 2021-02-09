@@ -21,14 +21,22 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class PresupuestoService {
 	
-	@Autowired
+
 	private PresupuestoRepository presupuestoRepo;
-	
-	@Autowired
+
 	private MensajesService mensajesService;
+
+	private UserService	userService;
+	
 	
 	@Autowired
-	private UserService	userService;
+	public PresupuestoService(PresupuestoRepository presupuestoRepo, MensajesService mensajesService,
+			UserService userService) {
+		super();
+		this.presupuestoRepo = presupuestoRepo;
+		this.mensajesService = mensajesService;
+		this.userService = userService;
+	}
 
 	@Transactional
 	public int presupuestoCount() {

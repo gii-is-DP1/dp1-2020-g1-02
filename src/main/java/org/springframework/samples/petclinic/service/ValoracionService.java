@@ -18,10 +18,15 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class ValoracionService {
-	
-	@Autowired
+
 	private ValoracionRepository valoracionRepo;
 	
+	@Autowired
+	public ValoracionService(ValoracionRepository valoracionRepo) {
+		super();
+		this.valoracionRepo = valoracionRepo;
+	}
+
 	@Transactional(readOnly=true)
 	public int valoracionCount() {
 		return (int) valoracionRepo.count();

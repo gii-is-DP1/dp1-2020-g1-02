@@ -13,9 +13,15 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class HorarioService {
-	@Autowired
+
 	private HorarioRepository horarioRepo;
 	
+	@Autowired
+	public HorarioService(HorarioRepository horarioRepo) {
+		super();
+		this.horarioRepo = horarioRepo;
+	}
+
 	@Transactional(readOnly=true)
 	public int horarioCount() {
 		return (int) horarioRepo.count();
