@@ -36,7 +36,6 @@ public class Servicio extends BaseEntity {
 	
 	@DateTimeFormat(pattern = "yyyy/MM/dd")
 	@NotNull
-	@FutureOrPresent
 	private LocalDate fechainicio;
 	
 	@DateTimeFormat(pattern = "yyyy/MM/dd")
