@@ -2,6 +2,7 @@ package org.springframework.samples.petclinic.web;
 
 import static org.hamcrest.Matchers.hasProperty;
 import static org.hamcrest.Matchers.is;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -19,6 +20,7 @@ import java.util.Optional;
 
 import javax.persistence.EntityManager;
 
+import org.assertj.core.util.Lists;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -92,12 +94,13 @@ public class HorarioControllerTest {
 		horario.setTrabajador(trabajador);
 		
 		given(this.horarioService.findHorarioById(1)).willReturn(Optional.of(horario));
+		given(this.horarioService.findHorarioByTrabajadorName(any())).willReturn(Lists.list(horario));
 		given(this.trabajadorService.findTrabajadorById(1)).willReturn(Optional.of(trabajador));
-//		given(this.trabajadorService.findTrabajadorByUsername("francisco")).willReturn(Optional.of(trabajador));
+		given(this.trabajadorService.findTrabajadorByUsername(any())).willReturn(Optional.of(trabajador));
 		
 		List<Horario> horarios = new ArrayList<Horario>();
 		horarios.add(horario);
-		given(this.horarioService.findAll()).willReturn(horarios);
+		given(this.horarioService.findAll()).willReturn(Lists.list(horario));
 		given(this.entityManager.find(Trabajador.class, 1)).willReturn(trabajador);
 	}
 

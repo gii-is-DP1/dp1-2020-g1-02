@@ -18,6 +18,8 @@ import java.util.Optional;
 
 import javax.persistence.EntityManager;
 
+import org.assertj.core.internal.Iterables;
+import org.assertj.core.util.Lists;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +27,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.FilterType;
+import org.springframework.data.util.Pair;
 import org.springframework.samples.petclinic.configuration.SecurityConfiguration;
 import org.springframework.samples.petclinic.model.Authorities;
 import org.springframework.samples.petclinic.model.RegistroHoras;
@@ -96,6 +99,7 @@ public class RegistroHorasControllerTest {
 		
 		
 		given(this.registroHorasService.findRegistroHorasById(1)).willReturn(Optional.of(registroHora));
+		given(this.registroHorasService.findRegistroHorasByTrabajadorId(any())).willReturn(Pair.of(5.0, Lists.list(registroHora)));
 		given(this.trabajadorService.findTrabajadorById(1)).willReturn(Optional.of(trabajador));
 		given(this.entityManager.find(RegistroHoras.class, 1)).willReturn(registroHora);
 		given(this.entityManager.find(Trabajador.class, 1)).willReturn(trabajador);
@@ -108,7 +112,7 @@ public class RegistroHorasControllerTest {
 		
 		List<RegistroHoras> registroHoras = new ArrayList<RegistroHoras>();
 		registroHoras.add(registroHora);
-		given(this.registroHorasService.findAll()).willReturn(registroHoras);
+		given(this.registroHorasService.findAll()).willReturn(Lists.list(registroHora));
 		
 	}
 
@@ -118,7 +122,6 @@ public class RegistroHorasControllerTest {
 		mockMvc.perform(get("/registroHoras/{tId}",1))
 		.andExpect(status().isOk())
 		.andExpect(model().attributeExists("registrohoras"))
-		.andExpect(status().is2xxSuccessful())
 		.andExpect(view().name("registroHoras/listadoRegistroHoras"));
 	}
 	

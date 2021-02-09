@@ -199,7 +199,7 @@ public class ContratoServicioControllerTest {
 						.param("fechapago", "2017/12/10")
 						.param("periodoPrueba", "true")
 						.param("presupuesto", "1"))
-			.andExpect(status().is3xxRedirection())
+			.andExpect(status().is2xxSuccessful())
 			.andExpect(model().attributeHasErrors("contratoServicio"))
 			.andExpect(model().attributeHasFieldErrors("contratoServicio", "fechafinal"))
 			.andExpect(view().name("contratosServicios/editContratoServicio"));

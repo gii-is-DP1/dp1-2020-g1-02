@@ -91,6 +91,7 @@ public class FacturaControllerTest {
 		given(this.facturaService.findFacturaById(1)).willReturn(Optional.of(factura));
 		given(this.facturaService.findAll()).willReturn(Lists.list(factura));
 		given(this.facturaService.findFacturaByProveedorName(any())).willReturn(Lists.list(factura));
+		given(this.provService.findProveedorByUsername(any())).willReturn(Optional.of(proveedor));
 	}
 
 	
@@ -131,6 +132,7 @@ public class FacturaControllerTest {
 		mockMvc.perform(get("/facturas/misFacturas"))
 		.andExpect(status().isOk())
 		.andExpect(model().attributeExists("facturas"))
+		.andExpect(model().attribute("facturas", is(Lists.list(factura))))
 		.andExpect(view().name("facturas/listadoFacturas"));
 	}
 	
