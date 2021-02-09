@@ -6,7 +6,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="petclinic" tagdir="/WEB-INF/tags" %>
-<spring:url value="/resources/images/delete.jpg" var="delete"/>
+<spring:url value="/resources/images/delete.png" var="delete"/>
 <petclinic:layout pageName="proveedores">
     
     <h2>Proveedores</h2>

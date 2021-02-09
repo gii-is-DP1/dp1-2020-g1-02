@@ -7,7 +7,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="petclinic" tagdir="/WEB-INF/tags" %>
 
-<spring:url value="/resources/images/delete.jpg" var="delete"/>
+<spring:url value="/resources/images/delete.png" var="delete"/>
 
 <petclinic:layout pageName="contratosTrabajadores">
     <h2>Contratos del trabajador: <c:out value="${contratos[0].trabajador.nombre}"/>&nbsp<c:out value="${contratos[0].trabajador.apellidos}"/></h2>

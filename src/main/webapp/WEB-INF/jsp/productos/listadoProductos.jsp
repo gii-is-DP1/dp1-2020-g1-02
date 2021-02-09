@@ -45,19 +45,19 @@
                 	<spring:url value="/productos/{productId}/sumar" var="productUrl">
                 		<spring:param name="productId" value="${producto.id}"/>
                 	</spring:url>
-                	<a href="${fn:escapeXml(productUrl)}"><img src="/resources/images/sumar.png" width="30px"/></a>
+                	<a href="${fn:escapeXml(productUrl)}"><img src="/resources/images/sumar.png" width="20px"/></a>
                 </td>
                 <td>
                 	<spring:url value="/productos/{productId}/restar" var="productUrl">
                 		<spring:param name="productId" value="${producto.id}"/>
                 	</spring:url>
-                	<a href="${fn:escapeXml(productUrl)}"><img src="/resources/images/restar.png" width="30px"/></a>
+                	<a href="${fn:escapeXml(productUrl)}"><img src="/resources/images/restar.png" width="20px"/></a>
                 </td>
                 <td>
                 	<spring:url value="/productos/delete/{productoId}" var="productUrl">
                 		<spring:param name="productoId" value="${producto.id}"/>
                 	</spring:url>
-                	<a href="${fn:escapeXml(productUrl)}"><img src="/resources/images/delete.jpg" width="30px"/></a>
+                	<a href="${fn:escapeXml(productUrl)}"><img src="/resources/images/delete.png" width="30px"/></a>
                 </td>
             </tr>
         </c:forEach>

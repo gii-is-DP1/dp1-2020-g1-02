@@ -9,7 +9,7 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 
 <petclinic:layout pageName="contratosServicios"> 
-<spring:url value="/resources/images/delete.jpg" var="delete"/>
+<spring:url value="/resources/images/delete.png" var="delete"/>
 
  <c:if test="${avisoServicio.size() >0 }">
     <h2>Contratos que expiran el  próximo mes</h2>

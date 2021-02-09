@@ -4,7 +4,7 @@
 <%@ taglib prefix="petclinic" tagdir="/WEB-INF/tags" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<spring:url value="/resources/images/star.jpg" var="star"/>
+<spring:url value="/resources/images/star.png" var="star"/>
 <c:set var="user" value="${pageContext.request.userPrincipal.name}" />
 
 <petclinic:layout pageName="home">

@@ -1,5 +1,6 @@
 package org.springframework.samples.petclinic.service;
 
+import static org.junit.Assert.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.text.ParseException;
@@ -24,7 +25,7 @@ public class RegistroHorasServiceTest {
 	@Test
 	public void testExistenRegistroHoras() {
 		int count = registroHorasService.RegistroHorasCount();
-		assertEquals(count, 2);
+		assertNotEquals(count, 0);
 	}
 	
 	@Test
@@ -45,7 +46,7 @@ public class RegistroHorasServiceTest {
 		registroHorasService.saveRegistroHoras(registroHorasNew);
 		
 		Integer cantidad = registroHorasService.RegistroHorasCount();
-		assertEquals(3, cantidad);
+		assertEquals(5, cantidad);
 	}
 	
 	

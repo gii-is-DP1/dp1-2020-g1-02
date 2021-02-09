@@ -9,7 +9,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <petclinic:layout pageName="servicios">
-<spring:url value="/resources/images/delete.jpg" var="delete"/>
+<spring:url value="/resources/images/delete.png" var="delete"/>
     <h2>Servicios</h2>
     
     	<spring:url value="/valoraciones" var="valoracionesUrl">

@@ -3,6 +3,7 @@ package org.springframework.samples.petclinic.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
+
 import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
@@ -10,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.samples.petclinic.model.Proveedor;
+import org.springframework.samples.petclinic.model.User;
 import org.springframework.stereotype.Service;
 
 @DataJpaTest(includeFilters = @ComponentScan.Filter(Service.class))
@@ -34,16 +36,22 @@ public class ProveedorServiceTest {
 	
 	@Test
 	public void testSaveProveedor() {
+		User user=new User();
+		user.setEnabled(true);
+		user.setUsername("roberto");
+		user.setPassword("admin");
+		
 		Proveedor proveedorNew = new Proveedor();
 		proveedorNew.setName("Roberto");
-		proveedorNew.setEmail("robertito@gamil.com");
+		proveedorNew.setEmail("robertito@gmail.com");
 		proveedorNew.setDireccion("Calle Holanda 16");
 		proveedorNew.setTelefono("645101010");
-
+		proveedorNew.setUser(user);
+		
 		proveedorService.saveProveedor(proveedorNew);
 		
 		Integer cantidad = proveedorService.proveedorCount();
-		assertEquals(3, cantidad);
+		assertEquals(4, cantidad);
 	}
 	
 	@Test

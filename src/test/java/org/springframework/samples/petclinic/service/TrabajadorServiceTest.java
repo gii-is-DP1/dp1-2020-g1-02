@@ -71,7 +71,7 @@ public class TrabajadorServiceTest {
 		trabajadorService.delete(trabajador.get());
 		int count = trabajadorService.eventCount();
 		//Assert
-		assertEquals(count, 3);
+		assertEquals(count, 2);
 		
 	}
 	
@@ -85,11 +85,6 @@ public class TrabajadorServiceTest {
 		Optional<Trabajador> trabajadorActualizado = trabajadorService.findTrabajadorById(id);
 		//Assert
 		assertEquals(trabajadorActualizado.get().getNombre(), "Manolo");
-		
-	}
-	
-	@Test
-	public void testContratosTrabajador() {
 		
 	}
 }
