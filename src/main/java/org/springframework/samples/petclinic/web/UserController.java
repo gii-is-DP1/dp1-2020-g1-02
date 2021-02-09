@@ -108,7 +108,7 @@ public class UserController {
 		String vista ="users/editContrasenya";
 		if(principal == null) {
 			modelMap.addAttribute("error", "No has iniciado sesión");
-			throw new UsernameNotFoundException("No has iniciado sesión");
+			vista = EXCEPTION_VIEW;
 		}
 		Optional<User> user = this.userService.findUser(principal.getName());
 		modelMap.addAttribute("actualPass", user.get().getPassword());
@@ -116,19 +116,25 @@ public class UserController {
 	}
 	
 	@PostMapping("/updatePassword")
-	public String changeUserPassword(Locale locale,RedirectAttributes attributes, 
+	public String changeUserPassword(Principal principal, ModelMap modelMap, 
 	  @RequestParam("psw") String password, @RequestParam("cpsw") String cpassword, @RequestParam("oldpass") String oldPassword) {
-	    User user = userService.findUser(
-	      SecurityContextHolder.getContext().getAuthentication().getName()).get();
-	    
-		  if (!passwordEncoder.matches(oldPassword, user.getPassword()) || !password.equals(cpassword)) { 
-			  throw new IllegalAccessError(); 
-		  }
-		 
-	    user.setPassword(password);
-	    userService.saveUser(user);
-	    attributes.addAttribute("message", "Contraseña actualizada con éxito!");
-	    return "redirect:/users/" + user.getUsername();
+		User user = userService.findUser(principal.getName()).get();
+		String vista = "redirect:/users/" + user.getUsername();
+		  
+		if (!passwordEncoder.matches(oldPassword, user.getPassword()) || !password.equals(cpassword)) { 
+			 vista = "users/editContrasenya";
+			 modelMap.addAttribute("message", "Parace que no has introducido bien los valores, vuelve a intentarlo");
+		 }else {
+			 try {
+				user.setPassword(password);
+			    userService.saveUser(user);
+			    modelMap.addAttribute("message", "Contraseña actualizada con éxito!");
+			}catch (Exception e) {
+				modelMap.addAttribute("error", "Parece que hemos tenido un error, vuelve a intentarlo más tarde o póngase en contacto con un administrador");
+				vista = EXCEPTION_VIEW;
+			}
+	    }
+	    return vista;
 	}
 	
 	@PostMapping(path="/saveCliente")
@@ -138,21 +144,27 @@ public class UserController {
 			modelMap.addAttribute("clienteForm", clienteForm);
 			return "users/newCliente";
 		}else {
-			User newUser = new User();
-			newUser.setUsername(clienteForm.getUsername());
-			newUser.setPassword(clienteForm.getPassword());
+			try {
+				User newUser = new User();
+				newUser.setUsername(clienteForm.getUsername());
+				newUser.setPassword(clienteForm.getPassword());
+				
+				Cliente  newCliente = new Cliente();
+				newCliente.setNombre(clienteForm.getNombre());
+				newCliente.setApellidos(clienteForm.getApellidos());
+				newCliente.setDni(clienteForm.getDni());
+				newCliente.setCorreo(clienteForm.getCorreo());
+				newCliente.setDireccion(clienteForm.getDireccion());
+				newCliente.setTelefono(clienteForm.getTelefono());
+				newCliente.setUser(newUser);
+				
+				clienteService.saveCliente(newCliente);
+				//modelMap.addAttribute("message", "Cliente actualizado!");
+			}catch (Exception e) {
+				view = EXCEPTION_VIEW;
+				modelMap.addAttribute("error", "Parece que hemos tenido un error, vuelve a intentarlo más tarde o póngase en contacto con un administrador");
+			}
 			
-			Cliente  newCliente = new Cliente();
-			newCliente.setNombre(clienteForm.getNombre());
-			newCliente.setApellidos(clienteForm.getApellidos());
-			newCliente.setDni(clienteForm.getDni());
-			newCliente.setCorreo(clienteForm.getCorreo());
-			newCliente.setDireccion(clienteForm.getDireccion());
-			newCliente.setTelefono(clienteForm.getTelefono());
-			newCliente.setUser(newUser);
-			
-			clienteService.saveCliente(newCliente);
-			//modelMap.addAttribute("message", "Cliente actualizado!");
 		}
 		return view;
 	}
@@ -165,19 +177,25 @@ public class UserController {
 			modelMap.addAttribute("proveedorForm", proveedorForm);
 			return "users/newProveedor";
 		}else {
-			User newUser = new User();
-			newUser.setUsername(proveedorForm.getUsername());
-			newUser.setPassword(proveedorForm.getPassword());
+			try {
+				User newUser = new User();
+				newUser.setUsername(proveedorForm.getUsername());
+				newUser.setPassword(proveedorForm.getPassword());
+				
+				Proveedor  newProveedor = new Proveedor();
+				newProveedor.setName(proveedorForm.getNombre());
+				newProveedor.setEmail(proveedorForm.getCorreo());
+				newProveedor.setDireccion(proveedorForm.getDireccion());
+				newProveedor.setTelefono(proveedorForm.getTelefono());
+				newProveedor.setUser(newUser);
+				
+				proveedorService.saveProveedor(newProveedor);
+				//modelMap.addAttribute("message", "Cliente actualizado!");
+			}catch (Exception e) {
+				view = EXCEPTION_VIEW;
+				modelMap.addAttribute("error", "Parece que hemos tenido un error, vuelve a intentarlo más tarde o póngase en contacto con un administrador");
+			}
 			
-			Proveedor  newProveedor = new Proveedor();
-			newProveedor.setName(proveedorForm.getNombre());
-			newProveedor.setEmail(proveedorForm.getCorreo());
-			newProveedor.setDireccion(proveedorForm.getDireccion());
-			newProveedor.setTelefono(proveedorForm.getTelefono());
-			newProveedor.setUser(newUser);
-			
-			proveedorService.saveProveedor(newProveedor);
-			//modelMap.addAttribute("message", "Cliente actualizado!");
 		}
 		return view;
 	}
@@ -189,22 +207,28 @@ public class UserController {
 			modelMap.addAttribute("trabajadorForm", trabajadorForm);
 			return "users/editTrabajadores";
 		}else {
-			User newUser = new User();
-			newUser.setUsername(trabajadorForm.getUsername());
-			newUser.setPassword(trabajadorForm.getPassword());
+			try {
+				User newUser = new User();
+				newUser.setUsername(trabajadorForm.getUsername());
+				newUser.setPassword(trabajadorForm.getPassword());
+				
+				Trabajador  newTrabajador = new Trabajador();
+				newTrabajador.setNombre(trabajadorForm.getNombre());
+				newTrabajador.setApellidos(trabajadorForm.getApellidos());
+				newTrabajador.setDni(trabajadorForm.getDni());
+				newTrabajador.setCorreo(trabajadorForm.getCorreo());
+				newTrabajador.setDireccion(trabajadorForm.getDireccion());
+				newTrabajador.setTelefono(trabajadorForm.getTelefono());
+				newTrabajador.setTipocategoria(trabajadorForm.getTipocategoria());
+				newTrabajador.setUser(newUser);
+				
+				trabajadorService.saveTrabajador(newTrabajador);
+				//modelMap.addAttribute("message", "Cliente actualizado!");
+			}catch (Exception e) {
+				view = EXCEPTION_VIEW;
+				modelMap.addAttribute("error", "Parece que hemos tenido un error, vuelve a intentarlo más tarde o póngase en contacto con un administrador");
+			}
 			
-			Trabajador  newTrabajador = new Trabajador();
-			newTrabajador.setNombre(trabajadorForm.getNombre());
-			newTrabajador.setApellidos(trabajadorForm.getApellidos());
-			newTrabajador.setDni(trabajadorForm.getDni());
-			newTrabajador.setCorreo(trabajadorForm.getCorreo());
-			newTrabajador.setDireccion(trabajadorForm.getDireccion());
-			newTrabajador.setTelefono(trabajadorForm.getTelefono());
-			newTrabajador.setTipocategoria(trabajadorForm.getTipocategoria());
-			newTrabajador.setUser(newUser);
-			
-			trabajadorService.saveTrabajador(newTrabajador);
-			//modelMap.addAttribute("message", "Cliente actualizado!");
 		}
 		return view;
 	}
@@ -217,22 +241,28 @@ public class UserController {
 			modelMap.addAttribute("result", result);
 			return "users/newAdministrador";
 		}else {
-			User newUser = new User();
-			newUser.setUsername(administradorForm.getUsername());
-			newUser.setPassword(administradorForm.getPassword());
+			try {
+				User newUser = new User();
+				newUser.setUsername(administradorForm.getUsername());
+				newUser.setPassword(administradorForm.getPassword());
+				
+				Administrador newAdministrador = new Administrador();
+				newAdministrador.setNombre(administradorForm.getNombre());
+				newAdministrador.setApellidos(administradorForm.getApellidos());
+				newAdministrador.setDni(administradorForm.getDni());
+				newAdministrador.setCorreo(administradorForm.getCorreo());
+				newAdministrador.setDireccion(administradorForm.getDireccion());
+				newAdministrador.setTelefono(administradorForm.getTelefono());
+				newAdministrador.setTipocategoria(administradorForm.getTipocategoria());
+				newAdministrador.setUser(newUser);
+				
+				administradorService.saveAdministrador(newAdministrador);
+				//modelMap.addAttribute("message", "Cliente actualizado!");
+			}catch (Exception e) {
+				view = EXCEPTION_VIEW;
+				modelMap.addAttribute("error", "Parece que hemos tenido un error, vuelve a intentarlo más tarde o póngase en contacto con un administrador");
+			}
 			
-			Administrador newAdministrador = new Administrador();
-			newAdministrador.setNombre(administradorForm.getNombre());
-			newAdministrador.setApellidos(administradorForm.getApellidos());
-			newAdministrador.setDni(administradorForm.getDni());
-			newAdministrador.setCorreo(administradorForm.getCorreo());
-			newAdministrador.setDireccion(administradorForm.getDireccion());
-			newAdministrador.setTelefono(administradorForm.getTelefono());
-			newAdministrador.setTipocategoria(administradorForm.getTipocategoria());
-			newAdministrador.setUser(newUser);
-			
-			administradorService.saveAdministrador(newAdministrador);
-			//modelMap.addAttribute("message", "Cliente actualizado!");
 		}
 		return view;
 	}
@@ -245,17 +275,23 @@ public class UserController {
 			modelMap.addAttribute("cliente", cliente);
 		}else {
 			if(principal != null && principal.getUsername().equals(cliente.getUser().getUsername())) {
-				Cliente clientToUpDate = clienteService.findClienteById(cliente.getId()).get();
+				try {
+					Cliente clientToUpDate = clienteService.findClienteById(cliente.getId()).get();
+					
+					clientToUpDate.setCorreo(cliente.getCorreo());
+					clientToUpDate.setDireccion(cliente.getDireccion());
+					clientToUpDate.setTelefono(cliente.getTelefono());
+					
+					
+					clienteService.actualizarCliente(clientToUpDate);
+					
+					modelMap.addAttribute("cliente", clientToUpDate);
+					modelMap.addAttribute("message", "Perfil actualizaddo con éxito!");
+				}catch (Exception e) {
+					view = EXCEPTION_VIEW;
+					modelMap.addAttribute("error", "Parece que hemos tenido un error, vuelve a intentarlo más tarde o póngase en contacto con un administrador");
+				}
 				
-				clientToUpDate.setCorreo(cliente.getCorreo());
-				clientToUpDate.setDireccion(cliente.getDireccion());
-				clientToUpDate.setTelefono(cliente.getTelefono());
-				
-				
-				clienteService.actualizarCliente(clientToUpDate);
-				
-				modelMap.addAttribute("cliente", clientToUpDate);
-				modelMap.addAttribute("message", "Perfil actualizaddo con éxito!");
 			}else {
 				view = EXCEPTION_VIEW;
 				modelMap.addAttribute("error", "No tienes permisos para acceder a esta página");
@@ -272,17 +308,22 @@ public class UserController {
 			modelMap.addAttribute("trabajador", trabajador);
 		}else {
 			if(principal != null && principal.getUsername().equals(trabajador.getUser().getUsername())) {
-				Trabajador employeeToUpDate = trabajadorService.findTrabajadorById(trabajador.getId()).get();
-				
-				employeeToUpDate.setCorreo(trabajador.getCorreo());
-				employeeToUpDate.setDireccion(trabajador.getDireccion());
-				employeeToUpDate.setTelefono(trabajador.getTelefono());
-				
-				
-				trabajadorService.actualizarTrabajador(employeeToUpDate);
-				
-				modelMap.addAttribute("trabajador", employeeToUpDate);
-				modelMap.addAttribute("message", "Perfil actualizaddo con éxito!");
+				try {
+					Trabajador employeeToUpDate = trabajadorService.findTrabajadorById(trabajador.getId()).get();
+					
+					employeeToUpDate.setCorreo(trabajador.getCorreo());
+					employeeToUpDate.setDireccion(trabajador.getDireccion());
+					employeeToUpDate.setTelefono(trabajador.getTelefono());
+					
+					
+					trabajadorService.actualizarTrabajador(employeeToUpDate);
+					
+					modelMap.addAttribute("trabajador", employeeToUpDate);
+					modelMap.addAttribute("message", "Perfil actualizaddo con éxito!");
+				}catch (Exception e) {
+					view = EXCEPTION_VIEW;
+					modelMap.addAttribute("error", "Parece que hemos tenido un error, vuelve a intentarlo más tarde o póngase en contacto con un administrador");
+				}
 			}else {
 				view = EXCEPTION_VIEW;
 				modelMap.addAttribute("error", "No tienes permisos para acceder a esta página");
@@ -299,17 +340,22 @@ public class UserController {
 			modelMap.addAttribute("proveedor", proveedor);
 		}else {
 			if(principal != null && principal.getUsername().equals(proveedor.getUser().getUsername())) {
-				Proveedor supplierToUpDate = proveedorService.findProveedorById(proveedor.getId()).get();
-		
-				supplierToUpDate.setEmail(proveedor.getEmail());
-				supplierToUpDate.setDireccion(proveedor.getDireccion());
-				supplierToUpDate.setTelefono(proveedor.getTelefono());
-				
-				
-				proveedorService.actualizarProveedor(supplierToUpDate);
-				
-				modelMap.addAttribute("proveedor", supplierToUpDate);
-				modelMap.addAttribute("message", "Perfil actualizado con éxito!");
+				try {
+					Proveedor supplierToUpDate = proveedorService.findProveedorById(proveedor.getId()).get();
+					
+					supplierToUpDate.setEmail(proveedor.getEmail());
+					supplierToUpDate.setDireccion(proveedor.getDireccion());
+					supplierToUpDate.setTelefono(proveedor.getTelefono());
+					
+					
+					proveedorService.actualizarProveedor(supplierToUpDate);
+					
+					modelMap.addAttribute("proveedor", supplierToUpDate);
+					modelMap.addAttribute("message", "Perfil actualizado con éxito!");
+				}catch (Exception e) {
+					view = EXCEPTION_VIEW;
+					modelMap.addAttribute("error", "Parece que hemos tenido un error, vuelve a intentarlo más tarde o póngase en contacto con un administrador");
+				}
 			}else {
 				view = EXCEPTION_VIEW;
 				modelMap.addAttribute("error", "No tienes permisos para acceder a esta página");
@@ -326,16 +372,22 @@ public class UserController {
 			modelMap.addAttribute("trabajador", trabajador);
 		}else {
 			if(principal != null && principal.getUsername().equals(trabajador.getUser().getUsername())) {
-				Administrador adminToUpDate = administradorService.findAdministradorById(trabajador.getId()).get();
+				try {
+					Administrador adminToUpDate = administradorService.findAdministradorById(trabajador.getId()).get();
+					
+					adminToUpDate.setCorreo(trabajador.getCorreo());
+					adminToUpDate.setDireccion(trabajador.getDireccion());
+					adminToUpDate.setTelefono(trabajador.getTelefono());
+					
+					administradorService.actualizarAdministrador(adminToUpDate);
+					
+					modelMap.addAttribute("trabajador", adminToUpDate);
+					modelMap.addAttribute("message", "Perfil actualizado con éxito!");
+				}catch (Exception e) {
+					view = EXCEPTION_VIEW;
+					modelMap.addAttribute("error", "Parece que hemos tenido un error, vuelve a intentarlo más tarde o póngase en contacto con un administrador");
+				}
 				
-				adminToUpDate.setCorreo(trabajador.getCorreo());
-				adminToUpDate.setDireccion(trabajador.getDireccion());
-				adminToUpDate.setTelefono(trabajador.getTelefono());
-				
-				administradorService.actualizarAdministrador(adminToUpDate);
-				
-				modelMap.addAttribute("trabajador", adminToUpDate);
-				modelMap.addAttribute("message", "Perfil actualizado con éxito!");
 			}else {
 				view = EXCEPTION_VIEW;
 				modelMap.addAttribute("error", "No tienes permisos para acceder a esta página");

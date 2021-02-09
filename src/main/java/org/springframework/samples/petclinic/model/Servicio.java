@@ -13,6 +13,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.FutureOrPresent;
 import javax.validation.constraints.NotNull;
 
 import org.springframework.format.annotation.DateTimeFormat;
@@ -36,6 +37,7 @@ public class Servicio extends BaseEntity {
 	
 	@DateTimeFormat(pattern = "yyyy/MM/dd")
 	@NotNull
+	@FutureOrPresent
 	private LocalDate fechainicio;
 	
 	@DateTimeFormat(pattern = "yyyy/MM/dd")

@@ -107,8 +107,8 @@
             <div class="row">
                <div class="col-md-8 offset-md-2">
                   <div class="title">
-                     <h2>Service <strong class="black">Process</strong></h2>
-                     <span>Easy and effective way to get your device repair</span>
+                     <h2>Calidad<strong class="black"> Garantizada</strong></h2>
+                     <span>Limpie sus instalaciones de la manera más rápida y sencilla</span>
                   </div>
                </div>
             </div>
