@@ -53,6 +53,11 @@ public class UserService {
 	}
 	
 	@Transactional
+	public int eventCount() {
+		return (int) userRepository.count();
+	}
+	
+	@Transactional
 	public Optional<User> findUser(String username) {
 		return userRepository.findById(username);
 	}
