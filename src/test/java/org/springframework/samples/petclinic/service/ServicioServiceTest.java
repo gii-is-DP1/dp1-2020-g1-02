@@ -77,7 +77,7 @@ public class ServicioServiceTest {
 		servicioService.delete(servicio);
 		int count = servicioService.servicioCount();
 		//Assert
-		assertEquals(count, 3);
+		assertEquals(count, 5);
 		
 	}
 	

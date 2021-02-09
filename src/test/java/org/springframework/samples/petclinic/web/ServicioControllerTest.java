@@ -1,6 +1,7 @@
 package org.springframework.samples.petclinic.web;
 
 import static org.mockito.BDDMockito.given;
+import static org.mockito.BDDMockito.any;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -13,6 +14,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import javax.persistence.EntityManager;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,13 +24,15 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.FilterType;
 import org.springframework.samples.petclinic.configuration.SecurityConfiguration;
+import org.springframework.samples.petclinic.model.Cliente;
 import org.springframework.samples.petclinic.model.EstadoServicio;
+import org.springframework.samples.petclinic.model.Oferta;
 import org.springframework.samples.petclinic.model.Presupuesto;
 import org.springframework.samples.petclinic.model.Servicio;
 import org.springframework.samples.petclinic.model.TipoCategoria;
 import org.springframework.samples.petclinic.model.TipoPresupuesto;
+import org.springframework.samples.petclinic.model.User;
 import org.springframework.samples.petclinic.service.ClienteService;
-import org.springframework.samples.petclinic.service.InstalacionService;
 import org.springframework.samples.petclinic.service.PresupuestoService;
 import org.springframework.samples.petclinic.service.ServicioService;
 import org.springframework.samples.petclinic.service.TrabajadorService;
@@ -63,11 +68,31 @@ public class ServicioControllerTest {
 	@MockBean
 	private UserService userService;
 	
+	@MockBean
+	private EntityManager entityManager;
+	
 	private Servicio servicio;
 	private Presupuesto presupuesto;
+	private User user;
+	private Cliente cliente;
 	
 	@BeforeEach
 	void setup() {
+		user = new User();
+		user.setEnabled(true);
+		user.setPassword("admin");
+		user.setUsername("pabgonmon");
+		
+		cliente = new Cliente();
+		cliente.setId(1);
+		cliente.setDni("53985965D");
+		cliente.setNombre("Pablo");
+		cliente.setApellidos("Gonzalez");
+		cliente.setTelefono("633444555");
+		cliente.setDireccion("Calle Ave");
+		cliente.setCorreo("pablog@gmail.com");
+		cliente.setUser(user);
+		
 		servicio = new Servicio();
 		servicio.setId(1);
 		servicio.setLugar("Acuario de Sevilla");
@@ -75,6 +100,7 @@ public class ServicioControllerTest {
 		servicio.setEstado(EstadoServicio.Aceptado);
 		servicio.setFechainicio(LocalDate.of(2020, 12, 31));
 		servicio.setFechafin(LocalDate.of(2021, 01, 12));
+		servicio.setCliente(cliente);
 		
 		given(this.servicioService.findServicioById(1)).willReturn(Optional.of(servicio));
 		List<Servicio> servicios = new ArrayList<Servicio>();
@@ -92,6 +118,9 @@ public class ServicioControllerTest {
 		List<Presupuesto> presupuestos= new ArrayList<Presupuesto>();
 		presupuestos.add(presupuesto);
 		given(this.presupuestoService.findAll()).willReturn(presupuestos);
+		given(this.userService.getLoggedUser()).willReturn(user);
+		given(this.clienteService.findClienteByUsername(user.getUsername())).willReturn(Optional.of(cliente));
+		given(this.entityManager.find(Servicio.class, 1)).willReturn(servicio);
 	}
 
 	@WithMockUser(value = "spring")
@@ -118,7 +147,7 @@ public class ServicioControllerTest {
 			.param("tipocategoria", "Limpieza")
 			.param("fechainicio", "2020/01/01")
 			.param("fechafin", "2020/02/01"))
-		.andExpect(status().is2xxSuccessful()).andExpect(view().name("redirect:/servicios/misServicios"));
+		.andExpect(status().is3xxRedirection()).andExpect(view().name("redirect:/servicios/misServicios"));
 	}
 	
 
@@ -145,16 +174,16 @@ public class ServicioControllerTest {
 		mockMvc.perform(get("/servicios/{servicioId}/presupuestos/new", 1)).andExpect(status().isOk()).andExpect(model().attributeExists("presupuesto")).andExpect(view().name("presupuestos/editPresupuesto"));
 	}
 	
-//	@WithMockUser(value="spring")
-//	@Test
-//	void testSavePresupuesto() throws Exception {
-//		mockMvc.perform(post("/servicios/presupuestos/save").with(csrf())
-//				.param("estado", "Espera")
-//				.param("precio", "12.0")
-//				.param("tipopresupuesto", "PorHoras")
-//				.param("servicio", "1"))
-//		.andExpect(status().is3xxRedirection()).andExpect(view().name("redirect:/servicios/1/presupuestos"));
-//	}
+	@WithMockUser(value="spring")
+	@Test
+	void testSavePresupuesto() throws Exception {
+		mockMvc.perform(post("/servicios/presupuestos/save").with(csrf())
+				.param("estado", "Espera")
+				.param("precio", "12.0")
+				.param("tipopresupuesto", "PorHoras")
+				.param("servicio", "1"))
+		.andExpect(status().is3xxRedirection()).andExpect(view().name("redirect:/servicios/1/presupuestos"));
+	}
 	
 	@WithMockUser(value="spring")
 	@Test
