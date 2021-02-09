@@ -13,7 +13,11 @@ public class FechaValidator implements ConstraintValidator<FechaValidatorConstra
 	
 	@Override
 	public boolean isValid(Contrato contrato, ConstraintValidatorContext context) {
-		return contrato.getFechafinal().isAfter(contrato.getFechainicial());
+		if(contrato.getFechainicial() == null || contrato.getFechafinal() == null) {
+			return false;
+		} else {
+			return contrato.getFechafinal().isAfter(contrato.getFechainicial());
+		}
 	}
 
 }

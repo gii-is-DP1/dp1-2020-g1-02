@@ -90,12 +90,14 @@ INSERT INTO servicio(lugar, tipocategoria, fechainicio, fechafin, estado, client
 INSERT INTO servicio(lugar, tipocategoria, fechainicio, fechafin, estado, cliente_id) VALUES ('Oficinas Sabadell', 2, '2019-10-20', '2020-12-31', 1, 2);
 INSERT INTO servicio(lugar, tipocategoria, fechainicio, fechafin, estado, cliente_id) VALUES ('Teatro la Maestranza', 2, '2019-10-20', '2020-12-31', 0, 2);
 INSERT INTO servicio(lugar, tipocategoria, fechainicio, fechafin, estado, cliente_id) VALUES ('Ayuntamiento Sanlucar la Mayor', 3, '2019-10-20', '2021-02-28', 2, 3);
+INSERT INTO servicio(lugar, tipocategoria, fechainicio, fechafin, estado, cliente_id) VALUES ('Ramon Sanchez Pizjuan', 3, '2019-10-20', '2021-02-28', 1, 3);
 
 INSERT INTO presupuesto(precio, tipopresupuesto, servicio_id, estado) VALUES (4579.5, 1, 1, 2);
 INSERT INTO presupuesto(precio, tipopresupuesto, servicio_id, estado) VALUES (50.0, 0, 1, 1);
 INSERT INTO presupuesto(precio, tipopresupuesto, servicio_id, estado) VALUES (123.12, 0, 2, 0);
 INSERT INTO presupuesto(precio, tipopresupuesto, servicio_id, estado) VALUES (18000.0, 1, 2, 1);
 INSERT INTO presupuesto(precio, tipopresupuesto, servicio_id, estado) VALUES (100.0, 1, 4, 1);
+INSERT INTO presupuesto(precio, tipopresupuesto, servicio_id, estado) VALUES (50.0, 1, 7, 1);
 
 INSERT INTO contratoservicio(fechainicial, fechafinal, fechapago,  periodoprueba, presupuesto) VALUES ('2019-10-20', '2020-12-31', '2020-12-10',0, 2);
 INSERT INTO contratoservicio(fechainicial, fechafinal, fechapago, periodoprueba, presupuesto) VALUES ('2019-10-20', '2021-02-26', '2020-12-10', 0, 4);

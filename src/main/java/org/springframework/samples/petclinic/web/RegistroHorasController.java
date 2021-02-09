@@ -62,6 +62,7 @@ public class RegistroHorasController {
 			Trabajador trabajador = trabajadorService.findTrabajadorByUsername(userService.getLoggedUser().getUsername()).get();
 			modelMap.addAttribute("trabajador", trabajador);
 			modelMap.addAttribute("registro_horas", registroHora);
+			modelMap.addAttribute("message", "La hora de inicio tiene que ser antes que la hora de fin");
 			return "registroHoras/newRegistroHoras";
 		}else {
 				registroHorasService.saveRegistroHoras(registroHora);

@@ -26,7 +26,7 @@ public class ServicioServiceTest {
 	@Test
 	public void testCountWithInitialData() {
 		int count = servicioService.servicioCount();
-		assertEquals(count, 6);
+		assertEquals(count, 7);
 	}
 	
 	@Test
@@ -42,7 +42,7 @@ public class ServicioServiceTest {
 		servicioService.save(ser1);
 		int count = servicioService.servicioCount();
 		//Assert
-		assertEquals(count, 6);
+		assertEquals(count, 7);
 		
 	}
 	
@@ -77,7 +77,7 @@ public class ServicioServiceTest {
 		servicioService.delete(servicio);
 		int count = servicioService.servicioCount();
 		//Assert
-		assertEquals(count, 5);
+		assertEquals(count, 6);
 		
 	}
 	

@@ -13,6 +13,7 @@
     	<div class="col-6 text-center">
     		<h2 style="color: red;">Ha surgido un problema.</h2>
     		<p>${exception.message}</p>
+    		<p>${hola}</p>
     		 <h1><c:out value="${error}"/></h1>
     	</div>
     </div>

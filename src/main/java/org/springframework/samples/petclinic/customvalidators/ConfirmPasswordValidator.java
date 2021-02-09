@@ -14,6 +14,7 @@ ConstraintValidator<ConfirmPassword, UserForm> {
 
   @Override
   public boolean isValid(UserForm user, ConstraintValidatorContext cxt) {
-      return user.getPassword().equals(user.getRetypePassword());
+      return user.getRetypePassword() != null && user.getPassword()!= null 
+    		  && user.getPassword().equals(user.getRetypePassword());
   }
 }
