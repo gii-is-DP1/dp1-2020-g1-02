@@ -2,16 +2,14 @@ package org.springframework.samples.petclinic.web;
 
 import static org.mockito.BDDMockito.given;
 import static org.mockito.BDDMockito.any;
-import static org.mockito.BDDMockito.anyInt;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
-
 import java.util.Optional;
-
+import javax.persistence.EntityManager;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,16 +21,21 @@ import org.springframework.samples.petclinic.configuration.SecurityConfiguration
 import org.springframework.samples.petclinic.model.Administrador;
 import org.springframework.samples.petclinic.model.Authorities;
 import org.springframework.samples.petclinic.model.Cliente;
+import org.springframework.samples.petclinic.model.ClienteForm;
 import org.springframework.samples.petclinic.model.Proveedor;
+import org.springframework.samples.petclinic.model.ProveedorForm;
 import org.springframework.samples.petclinic.model.TipoCategoria;
 import org.springframework.samples.petclinic.model.Trabajador;
+import org.springframework.samples.petclinic.model.TrabajadorForm;
 import org.springframework.samples.petclinic.model.User;
 import org.springframework.samples.petclinic.service.AdministradorService;
 import org.springframework.samples.petclinic.service.ClienteService;
+import org.springframework.samples.petclinic.service.CurriculumService;
 import org.springframework.samples.petclinic.service.ProveedorService;
 import org.springframework.samples.petclinic.service.TrabajadorService;
 import org.springframework.samples.petclinic.service.UserService;
 import org.springframework.security.config.annotation.web.WebSecurityConfigurer;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -56,12 +59,22 @@ public class UserControllerTest {
 	private ClienteService clienteService;
 	@MockBean
 	private ProveedorService provService;
+	@MockBean
+	private CurriculumService curriculumService;
+	@MockBean
+	private PasswordEncoder passEnconder;
+	@MockBean
+	private EntityManager entityManager;
 
 	private User user;
-	private Administrador admin;
-	private Proveedor proveedor;
-	private Cliente cliente;
-	private Trabajador trabajador;
+	private TrabajadorForm admin;
+	private ProveedorForm proveedor;
+	private ClienteForm cliente;
+	private TrabajadorForm trabajador;
+	private Administrador admin2;
+	private Proveedor proveedor2;
+	private Cliente cliente2;
+	private Trabajador trabajador2;
 	private Authorities auth;
 	
 	@BeforeEach
@@ -70,45 +83,83 @@ public class UserControllerTest {
 		auth = new Authorities();
 		user = new User();
 		
-		proveedor = new Proveedor();
-		proveedor.setId(1);
-		proveedor.setName("Lejias SL");
-		proveedor.setTelefono("666555444");
-		proveedor.setEmail("lejiassl@gmail.com");
-		proveedor.setDireccion("calle rodolfo, n12");
+		proveedor = new ProveedorForm();
+		proveedor.setNombre("Carlos Jesus");
+		proveedor.setTelefono("666666666");
+		proveedor.setCorreo("carvilgar1@alum.es");
+		proveedor.setDireccion("C/ Sobressaliente, 10");
+		proveedor.setUsername("carvilgar1");
+		proveedor.setPassword("aaaaaaaaA1");
+		proveedor.setRetypePassword("aaaaaaaaA1");
 		
-		admin = new Administrador();
-		admin.setId(1);
-		admin.setNombre("Wilfredo");
-		admin.setApellidos("Garcia");
-		admin.setDni("44444444A");
-		admin.setCorreo("wilfredog@gmail.com");
-		admin.setDireccion("calle macarena");
-		admin.setTelefono("666777888");
+		admin = new TrabajadorForm();
+		admin.setNombre("Carlos Jesus");
+		admin.setApellidos("Villadiego García");
+		admin.setTelefono("666666666");
+		admin.setCorreo("carvilgar1@alum.es");
+		admin.setDni("21150498C");
+		admin.setDireccion("C/ Sobressaliente, 10");
 		admin.setTipocategoria(TipoCategoria.Limpieza);
+		admin.setUsername("carvilgar1");
+		admin.setPassword("aaaaaaaaA1");
+		admin.setRetypePassword("aaaaaaaaA1");
 		
-		cliente = new Cliente();
-		cliente.setId(1);
-		cliente.setNombre("Rodolfo");
-		cliente.setApellidos("Rodriguez");
-		cliente.setDni("55555555R");
-		cliente.setCorreo("rodolfor@gmail.com");
-		cliente.setDireccion("calle patin");
-		cliente.setTelefono("666555444");
+		cliente = new ClienteForm();
+		cliente.setNombre("Carlos Jesus");
+		cliente.setApellidos("Villadiego García");
+		cliente.setTelefono("666666666");
+		cliente.setCorreo("carvilgar1@alum.es");
+		cliente.setDni("21150498C");
+		cliente.setDireccion("C/ Sobressaliente, 10");
+		cliente.setUsername("carvilgar1");
+		cliente.setPassword("aaaaaaaaA1");
+		cliente.setRetypePassword("aaaaaaaaA1");
 		
-		trabajador = new Trabajador();
-		trabajador.setId(1);
-		trabajador.setNombre("David");
-		trabajador.setApellidos("Gutierrez");
-		trabajador.setDni("66666666D");
-		trabajador.setCorreo("davidg@gmail.com");
-		trabajador.setDireccion("calle mariposa");
-		trabajador.setTelefono("666333222");
+		trabajador = new TrabajadorForm();
+		trabajador.setNombre("Carlos Jesus");
+		trabajador.setApellidos("Villadiego García");
+		trabajador.setTelefono("666666666");
+		trabajador.setCorreo("carvilgar1@alum.es");
+		trabajador.setDni("21150498C");
+		trabajador.setDireccion("C/ Sobressaliente, 10");
 		trabajador.setTipocategoria(TipoCategoria.Limpieza);
+		trabajador.setUsername("carvilgar1");
+		trabajador.setPassword("aaaaaaaaA1");
+		trabajador.setRetypePassword("aaaaaaaaA1");
+		
+		cliente2 = new Cliente();
+		cliente2.setNombre("Carlos Jesus");
+		cliente2.setApellidos("Villadiego García");
+		cliente2.setTelefono("666666666");
+		cliente2.setCorreo("carvilgar1@alum.es");
+		cliente2.setDni("21150498C");
+		cliente2.setDireccion("C/ Sobressaliente, 10");
+		
+		proveedor2 = new Proveedor();
+		proveedor2.setName("Carlos Jesus");
+		proveedor2.setTelefono("666666666");
+		proveedor2.setEmail("carvilgar1@alum.es");
+		proveedor2.setDireccion("C/ Sobressaliente, 10");
+		
+		admin2 = new Administrador();
+		admin2.setNombre("Carlos Jesus");
+		admin2.setApellidos("Villadiego García");
+		admin2.setTelefono("666666666");
+		admin2.setCorreo("carvilgar1@alum.es");
+		admin2.setDni("21150498C");
+		admin2.setDireccion("C/ Sobressaliente, 10");
+		admin2.setTipocategoria(TipoCategoria.Limpieza);
+		
+		trabajador2 = new Trabajador();
+		trabajador2.setNombre("Carlos Jesus");
+		trabajador2.setApellidos("Villadiego García");
+		trabajador2.setTelefono("666666666");
+		trabajador2.setCorreo("carvilgar1@alum.es");
+		trabajador2.setDni("21150498C");
+		trabajador2.setDireccion("C/ Sobressaliente, 10");
+		trabajador2.setTipocategoria(TipoCategoria.Limpieza);
 		
 		given(this.userService.getLoggedUser()).willReturn(user);
-		given(this.clienteService.findClienteById(any())).willReturn(Optional.of(cliente));
-		given(this.trabajadorService.findTrabajadorById(anyInt())).willReturn(Optional.of(trabajador));
 		
 	}
 	
@@ -116,32 +167,32 @@ public class UserControllerTest {
 	@Test
 	void testNuevoCliente() throws Exception {
 		mockMvc.perform(get("/users/new")).andExpect(status().isOk())
-		.andExpect(model().attributeExists("cliente"))
-		.andExpect(view().name("clientes/newCliente"));
+		.andExpect(model().attributeExists("clienteForm"))
+		.andExpect(view().name("users/newCliente"));
 	}
 	
 	@WithMockUser(value = "spring")
 	@Test
 	void testNuevoProveedor() throws Exception {
 		mockMvc.perform(get("/users/newProveedor")).andExpect(status().isOk())
-		.andExpect(model().attributeExists("proveedor"))
-		.andExpect(view().name("proveedores/newProveedor"));
+		.andExpect(model().attributeExists("proveedorForm"))
+		.andExpect(view().name("users/newProveedor"));
 	}
 	
 	@WithMockUser(value = "spring")
 	@Test
 	void testNuevoAdmin() throws Exception {
 		mockMvc.perform(get("/users/newAdministrador")).andExpect(status().isOk())
-		.andExpect(model().attributeExists("trabajador"))
-		.andExpect(view().name("administradores/newAdministrador"));
+		.andExpect(model().attributeExists("administradorForm"))
+		.andExpect(view().name("users/newAdministrador"));
 	}
 	
 	@WithMockUser(value = "spring")
 	@Test
 	void testNuevoTrabajador() throws Exception {
 		mockMvc.perform(get("/users/newTrabajador")).andExpect(status().isOk())
-		.andExpect(model().attributeExists("trabajador"))
-		.andExpect(view().name("trabajadores/editTrabajadores"));
+		.andExpect(model().attributeExists("trabajadorForm"))
+		.andExpect(view().name("users/editTrabajadores"));
 	}
 	
 	@WithMockUser(value = "spring")
@@ -153,12 +204,14 @@ public class UserControllerTest {
 						.param("apellidos", "Rodriguez")
 						.param("telefono", "666555444")
 						.param("direccion", "calle patin")
-						.param("dni", "55555555R")
+						.param("dni", "55555555K")
 						.param("correo", "rodolfor@gmail.com")
-						.param("user.username", "rodo")
-						.param("user.password", "rodo"))
+						.param("username", "rodo")
+						.param("password", "aaaaaaaaA1")
+						.param("retypePassword", "aaaaaaaaA1"))
 			.andExpect(status().is3xxRedirection())
 			.andExpect(view().name("redirect:/"));
+		
 	}
 	
 	@WithMockUser(value = "spring")
@@ -172,12 +225,13 @@ public class UserControllerTest {
 				.param("direccion", "calle patin")
 				.param("dni", "55555555R")
 				.param("correo", "rodolfor@gmail.com")
-				.param("user.username", "rodo")
-				.param("user.password", "123asd"))
-		.andExpect(model().attributeHasErrors("cliente"))
-		.andExpect(model().attributeHasFieldErrors("cliente", "nombre"))
+				.param("username", "rodo")
+				.param("password", "aaaaaaaaA1")
+				.param("retypePassword", "dadwdawd"))
+		.andExpect(model().attributeHasErrors("clienteForm"))
+		.andExpect(model().attributeHasFieldErrors("clienteForm", "nombre"))
 		.andExpect(status().isOk())
-		.andExpect(view().name("clientes/newCliente"));
+		.andExpect(view().name("users/newCliente"));
 	}
 	
 	@WithMockUser(value = "spring")
@@ -189,11 +243,12 @@ public class UserControllerTest {
 						.param("apellidos", "Gutierrez")
 						.param("telefono", "666333222")
 						.param("direccion", "calle mariposa")
-						.param("dni", "66666666D")
+						.param("dni", "44444444A")
 						.param("correo", "davidg@gmail.com")
 						.param("tipocategoria", "Mantenimiento")
-						.param("user.username", "david")
-						.param("user.password", "david"))
+						.param("username", "david")
+						.param("password", "daaaAvid1")
+						.param("retypePassword", "daaaAvid1"))
 			.andExpect(status().is3xxRedirection())
 			.andExpect(view().name("redirect:/"));
 	}
@@ -207,15 +262,16 @@ public class UserControllerTest {
 				.param("apellidos", "")
 				.param("telefono", "666333222")
 				.param("direccion", "calle mariposa")
-				.param("dni", "66666666D")
+				.param("dni", "44444444A")
 				.param("correo", "davidg@gmail.com")
 				.param("tipocategoria", "Mantenimiento")
-				.param("user.username", "david")
-				.param("user.password", "david"))
-		.andExpect(model().attributeHasErrors("trabajador"))
-		.andExpect(model().attributeHasFieldErrors("trabajador", "apellidos"))
+				.param("username", "david")
+				.param("password", "daaaAvid1")
+				.param("retypePassword", "daaaAvid1"))
+		.andExpect(model().attributeHasErrors("trabajadorForm"))
+		.andExpect(model().attributeHasFieldErrors("trabajadorForm", "apellidos"))
 		.andExpect(status().isOk())
-		.andExpect(view().name("users/newTrabajador"));
+		.andExpect(view().name("users/editTrabajadores"));
 	}
 	
 	@WithMockUser(value = "spring")
@@ -226,9 +282,10 @@ public class UserControllerTest {
 						.param("nombre", "Lejias SL")
 						.param("telefono", "666555444")
 						.param("direccion", "calle rodolfo, n12")
-						.param("email", "lejiassl@gmail.com")
-						.param("user.username", "lejiassl")
-						.param("user.password", "123asd"))
+						.param("correo", "lejiassl@gmail.com")
+						.param("username", "lejiassl")
+						.param("password", "aaaaaaaaA1")
+						.param("retypePassword", "aaaaaaaaA1"))
 			.andExpect(status().is3xxRedirection())
 			.andExpect(view().name("redirect:/"));
 	}
@@ -239,13 +296,14 @@ public class UserControllerTest {
 		mockMvc.perform(post("/users/saveProveedor")
 				.with(csrf())
 				.param("nombre", "Lejias SL")
-				.param("telefono", "")
+				.param("telefono", "98")
 				.param("direccion", "calle rodolfo, n12")
 				.param("email", "lejiassl@gmail.com")
-				.param("user.username", "lejiassl")
-				.param("user.password", "123asd"))
-		.andExpect(model().attributeHasErrors("proveedor"))
-		.andExpect(model().attributeHasFieldErrors("proveedor", "telefono"))
+				.param("username", "lejiassl")
+				.param("password", "daaaAvid1")
+				.param("retypePassword", "daaaAvid1"))
+		.andExpect(model().attributeHasErrors("proveedorForm"))
+		.andExpect(model().attributeHasFieldErrors("proveedorForm", "telefono"))
 		.andExpect(status().isOk())
 		.andExpect(view().name("users/newProveedor"));
 	}
@@ -262,8 +320,9 @@ public class UserControllerTest {
 						.param("dni", "44444444A")
 						.param("correo", "wilfredog@gmail.com")
 						.param("tipocategoria", "Limpieza")
-						.param("user.username", "wilgar")
-						.param("user.password", "wilgar"))
+						.param("username", "wilgar")
+						.param("password", "daaaAvid1")
+						.param("retypePassword", "daaaAvid1"))
 			.andExpect(status().is3xxRedirection())
 			.andExpect(view().name("redirect:/"));
 	}
@@ -280,10 +339,11 @@ public class UserControllerTest {
 				.param("dni", "44444444A")
 				.param("correo", "")
 				.param("tipocategoria", "Limpieza")
-				.param("user.username", "wilgar")
-				.param("user.password", "wilgar"))
-		.andExpect(model().attributeHasErrors("administrador"))
-		.andExpect(model().attributeHasFieldErrors("administrador", "correo"))
+				.param("username", "wilgar")
+				.param("password", "daaaAvid1")
+				.param("retypePassword", "daaaAvid1"))
+		.andExpect(model().attributeHasErrors("trabajadorForm"))
+		.andExpect(model().attributeHasFieldErrors("trabajadorForm", "correo"))
 		.andExpect(status().isOk())
 		.andExpect(view().name("users/newAdministrador"));
 	}
@@ -294,47 +354,22 @@ public class UserControllerTest {
 		auth.setId(1);
 		auth.setAuthority("cliente");
 		user.setUsername("rodo");
-		user.setPassword("rodo");
+		user.setPassword("daaaAvid1");
 		auth.setUser(user);
-		cliente.setUser(user);
-		given(this.clienteService.findClienteById(any())).willReturn(Optional.of(cliente));
+		cliente2.setUser(user);
+		given(entityManager.find(User.class, "rodo")).willReturn(user);
+		given(this.clienteService.findClienteById(any())).willReturn(Optional.of(cliente2));
 		mockMvc.perform(post("/users/actualizarCliente")
 				.with(csrf())
 				.param("nombre", "Rodolfo")
 				.param("apellidos", "Rodriguez")
 				.param("telefono", "666555444")
 				.param("direccion", "calle patin")
-				.param("dni", "55555555R")
+				.param("dni", "55555555K")
 				.param("correo", "rodolfor@gmail.com")
-				.param("user.username", "rodo")
-				)
-			.andExpect(status().is3xxRedirection())
-			.andExpect(view().name("redirect:/users/rodo"));
-	}
-	
-	@WithMockUser(value = "spring")
-    @Test
-    void testActualizarTrabajador() throws Exception {
-		auth.setId(1);
-		auth.setAuthority("trabajador");
-		user.setUsername("davidg");
-		user.setPassword("davidg");
-		auth.setUser(user);
-		trabajador.setUser(user);
-		given(this.trabajadorService.findTrabajadorById(any())).willReturn(Optional.of(trabajador));
-		mockMvc.perform(post("/users/actualizarTrabajador")
-				.with(csrf())
-				.param("nombre", "David")
-				.param("apellidos", "Gutierrez")
-				.param("telefono", "666333222")
-				.param("direccion", "calle mariposa")
-				.param("dni", "66666666D")
-				.param("correo", "davidg@gmail.com")
-				.param("tipocategoria", "Mantenimiento")
-				.param("user.username", "davidg")
-				)
-			.andExpect(status().is3xxRedirection())
-			.andExpect(view().name("redirect:/users/davidg"));
+				.param("user", "rodo"))
+			.andExpect(status().is2xxSuccessful())
+			.andExpect(view().name("users/perfilView"));
 	}
 	
 	@WithMockUser(value = "spring")
@@ -345,18 +380,19 @@ public class UserControllerTest {
 		user.setUsername("lejiassl");
 		user.setPassword("123asd");
 		auth.setUser(user);
-		proveedor.setUser(user);
-		given(this.provService.findProveedorById(any())).willReturn(Optional.of(proveedor));
+		proveedor2.setUser(user);
+		given(this.provService.findProveedorById(any())).willReturn(Optional.of(proveedor2));
+		given(entityManager.find(User.class, "lejiassl")).willReturn(user);
 		mockMvc.perform(post("/users/actualizarProveedor")
 				.with(csrf())
 				.param("name", "Lejias SL")
 				.param("telefono", "666777888")
 				.param("direccion", "calle rodolfo, n12")
 				.param("email", "lejiassl@gmail.com")
-				.param("user.username", "lejiassl")
+				.param("user", "lejiassl")
 				)
-			.andExpect(status().is3xxRedirection())
-			.andExpect(view().name("redirect:/users/lejiassl"));
+			.andExpect(status().is2xxSuccessful())
+			.andExpect(view().name("users/perfilView"));
 	}
 	
 	@WithMockUser(value = "spring")
@@ -367,8 +403,9 @@ public class UserControllerTest {
 		user.setUsername("wilgar");
 		user.setPassword("wilgar");
 		auth.setUser(user);
-		admin.setUser(user);
-		given(this.adminService.findAdministradorById(any())).willReturn(Optional.of(admin));
+		admin2.setUser(user);
+		given(this.adminService.findAdministradorById(any())).willReturn(Optional.of(admin2));
+		given(entityManager.find(User.class, "wilgar")).willReturn(user);
 		mockMvc.perform(post("/users/actualizarAdministrador")
 				.with(csrf())
 				.param("nombre", "Wilfredo")
@@ -378,10 +415,36 @@ public class UserControllerTest {
 				.param("dni", "44444444A")
 				.param("correo", "wilfredog@gmail.com")
 				.param("tipocategoria", "Limpieza")
-				.param("user.username", "wilgar")
+				.param("user", "wilgar")
 				)
-			.andExpect(status().is3xxRedirection())
-			.andExpect(view().name("redirect:/users/wilgar"));
+		.andExpect(status().is2xxSuccessful())
+		.andExpect(view().name("users/perfilView"));
+	}
+	
+	@WithMockUser(value = "spring")
+    @Test
+    void testActualizarTrabajador() throws Exception {
+		auth.setId(1);
+		auth.setAuthority("trabajador");
+		user.setUsername("davidg");
+		user.setPassword("davidg");
+		auth.setUser(user);
+		trabajador2.setUser(user);
+		given(this.trabajadorService.findTrabajadorById(any())).willReturn(Optional.of(trabajador2));
+		given(entityManager.find(User.class, "davidg")).willReturn(user);
+		mockMvc.perform(post("/users/actualizarTrabajador")
+				.with(csrf())
+				.param("nombre", "David")
+				.param("apellidos", "Gutierrez")
+				.param("telefono", "666333222")
+				.param("direccion", "calle mariposa")
+				.param("dni", "66666666D")
+				.param("correo", "davidg@gmail.com")
+				.param("tipocategoria", "Mantenimiento")
+				.param("user", "davidg")
+				)
+		.andExpect(status().is2xxSuccessful())
+		.andExpect(view().name("users/perfilView"));
 	}
 	
 }
