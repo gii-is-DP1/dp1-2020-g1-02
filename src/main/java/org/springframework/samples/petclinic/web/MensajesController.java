@@ -47,7 +47,6 @@ public class MensajesController {
 		String view="mensajes/newMensaje";
 		modelMap.addAttribute("principal", userService.getLoggedUser());
 		modelMap.addAttribute("users", userService.findAllUsernames());
-		modelMap.addAttribute("size", userService.findAllUsernames().size());
 		Mensaje mensaje = new Mensaje();
 		mensaje.setFecha(LocalDate.now());
 		mensaje.setEmisor(userService.getLoggedUser());
@@ -61,11 +60,17 @@ public class MensajesController {
 		String view="redirect:/mensajes";
 		if(result.hasErrors()) {
 			modelMap.addAttribute("mensaje", msj);
-			return "administradores/newMensaje";
+			modelMap.addAttribute("message", "Ningún campo puede estar vacío");
+			modelMap.addAttribute("users", userService.findAllUsernames());
+			return "mensajes/newMensaje";
 		}else {
-			mensajesService.save(msj);
-			modelMap.addAttribute("message", "Mensaje enviado!");
-//			view=listadoProv(modelMap);
+			try {
+				mensajesService.save(msj);
+				modelMap.addAttribute("message", "Mensaje enviado!");
+			} catch (Exception e) {
+				view = "mensajes/newMensaje";
+				modelMap.addAttribute("message", "El emisor y receptor no pueden estar vacíos");
+			}
 		}
 		return view;
 	}

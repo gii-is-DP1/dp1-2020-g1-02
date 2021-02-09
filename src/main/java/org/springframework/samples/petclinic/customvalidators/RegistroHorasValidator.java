@@ -13,7 +13,8 @@ public class RegistroHorasValidator implements ConstraintValidator<RegistroHoras
 	
 	@Override
 	public boolean isValid(RegistroHoras horas, ConstraintValidatorContext context) {
-		return horas.getHora_fin().isAfter(horas.getHora_inicio());
+		return horas.getHora_inicio() != null && horas.getHora_fin() != null &&
+				horas.getHora_fin().isAfter(horas.getHora_inicio());
 	}
 
 }

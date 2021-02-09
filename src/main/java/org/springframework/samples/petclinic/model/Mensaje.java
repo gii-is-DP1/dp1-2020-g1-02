@@ -10,18 +10,24 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.FutureOrPresent;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import org.springframework.samples.petclinic.customvalidators.MensajeConstraint;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
-@Data
+@Getter
+@Setter
 @Table(name="mensaje")
+//@MensajeConstraint
 public class Mensaje extends BaseEntity{
 	
 	@NotNull
+	@FutureOrPresent
 	private LocalDate fecha;
 	
 	@Size(min=0, max=50)
@@ -35,11 +41,13 @@ public class Mensaje extends BaseEntity{
 	private Boolean leido;
 	
 	@ManyToMany(mappedBy = "mensajesRecibidos", cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
+	@NotNull
 	private List<User> receptores;
 	
 	
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="emisor")
+	@NotNull
 	private User emisor;
 	
 }

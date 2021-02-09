@@ -13,7 +13,8 @@ public class FechaValidatorServicio implements ConstraintValidator<FechaValidato
 	
 	@Override
 	public boolean isValid(Servicio servicio, ConstraintValidatorContext context) {
-		return servicio.getFechafin().isAfter(servicio.getFechainicio());
+		return servicio.getFechafin() != null && servicio.getFechainicio() != null &&
+				servicio.getFechafin().isAfter(servicio.getFechainicio());
 	}
 
 }

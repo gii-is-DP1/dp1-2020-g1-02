@@ -13,7 +13,8 @@ public class HorarioValidator implements ConstraintValidator<HorarioValidatorCon
 	
 	@Override
 	public boolean isValid(Horario horario, ConstraintValidatorContext context) {
-		return horario.getHora_fin().isAfter(horario.getHora_inicio());
+		return horario.getHora_inicio() != null && horario.getHora_fin() != null &&
+				horario.getHora_fin().isAfter(horario.getHora_inicio());
 	}
 
 }
