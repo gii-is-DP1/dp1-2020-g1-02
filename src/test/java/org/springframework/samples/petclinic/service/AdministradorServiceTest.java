@@ -1,6 +1,7 @@
 package org.springframework.samples.petclinic.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.Optional;
 
@@ -8,6 +9,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.samples.petclinic.model.Administrador;
 import org.springframework.samples.petclinic.model.Authorities;
 import org.springframework.samples.petclinic.model.TipoCategoria;
@@ -61,7 +63,6 @@ public class AdministradorServiceTest {
 		assertEquals(3, cantidad);
 	}
 	
-	
 	@Test
 	public void testAdministradorFindById() {
 		Administrador administradorFind = administradorService.findAdministradorById(1).get();
@@ -76,5 +77,26 @@ public class AdministradorServiceTest {
 		assertEquals(false, adminFind.isPresent());
 	}
 	
+	@Test
+	public void testSaveAdministradorConUserNameRepetido() {
+		User user = new User();
+		Authorities a = new Authorities();
+		a.setAuthority("administrador");
+		user.setUsername("admin");
+		user.setPassword("aaaaaaaaaaA1");
+		user.setAuthorities(a);
+		user.setEnabled(true);
+		
+		Administrador administradorNew = new Administrador();
+		administradorNew.setNombre("Pablo");
+		administradorNew.setApellidos("Sánchez");
+		administradorNew.setCorreo("pablo2@gmail.com");
+		administradorNew.setDireccion("Calle Sevilla");
+		administradorNew.setDni("47390692C");
+		administradorNew.setTelefono("678345901");
+		administradorNew.setTipocategoria(TipoCategoria.Mantenimiento);
+		administradorNew.setUser(user);
+		assertThrows(DataIntegrityViolationException.class, ()->administradorService.save(administradorNew));
+	}
 
 }

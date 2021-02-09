@@ -35,8 +35,8 @@ public class ServicioServiceTest {
 		Servicio ser1 = new Servicio();
 		ser1.setId(1);
 		ser1.setLugar("Lope de Vega");
-		ser1.setFechafin(LocalDate.of(2020, 12, 12));
-		ser1.setFechainicio(LocalDate.of(2019, 12, 12));
+		ser1.setFechafin(LocalDate.of(2050, 12, 12));
+		ser1.setFechainicio(LocalDate.now());
 		ser1.setEstado(EstadoServicio.Espera);
 		ser1.setTipocategoria(TipoCategoria.Jardineria);
 		servicioService.save(ser1);

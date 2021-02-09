@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/contratosServicios")
 public class ContratoServicioController {
+	
 	@Autowired
 	private ClienteService clienteService;
 	@Autowired
@@ -40,7 +41,6 @@ public class ContratoServicioController {
 		return vista;
 	}
 	
-	
 	@GetMapping(value = "/misContratos")
 	public String listadoContratosPorClienteUsername(ModelMap modelMap) {
 		String vista ="contratosServicios/listadoContratosServicios";
@@ -50,6 +50,7 @@ public class ContratoServicioController {
 		modelMap.addAttribute("contratosServicios", contratos);
 		return vista;
 	}
+	
 	@GetMapping(path="/{pId}/new")
 	public String crearContratoServicio(@PathVariable("pId") Integer pId, ModelMap modelMap) {
 		String view="contratosServicios/editContratoServicio";
@@ -59,7 +60,6 @@ public class ContratoServicioController {
 		modelMap.addAttribute("contratoServicio", cS);
 		return view;
 	}
-	
 	
 	@PostMapping(path="/save")
 	public String salvarContratoServicio(@Valid ContratoServicio contratoServicio, BindingResult result, ModelMap modelMap) {

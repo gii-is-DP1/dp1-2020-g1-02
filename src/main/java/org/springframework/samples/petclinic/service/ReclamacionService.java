@@ -6,7 +6,6 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.samples.petclinic.model.EstadoServicio;
 import org.springframework.samples.petclinic.model.Reclamacion;
-import org.springframework.samples.petclinic.model.Valoracion;
 import org.springframework.samples.petclinic.repository.ReclamacionRepository;
 import org.springframework.samples.petclinic.service.exceptions.NoDuranteServicioException;
 import org.springframework.samples.petclinic.service.exceptions.ServicioNoAceptadoException;
@@ -42,7 +41,6 @@ public class ReclamacionService {
 	@Transactional
 	public void delete(Reclamacion reclamacion) {
 		reclamacionRepo.delete(reclamacion);
-		
 	}
 
 	@Transactional(readOnly=true)

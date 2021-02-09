@@ -17,7 +17,6 @@ public class ClienteValidator implements Validator {
 	@Autowired
 	private ClienteService clienteService;
 	
-	
 	public Boolean clienteConMismoDNI(String dni) {
 		dni = dni.toLowerCase();
 		Boolean result = false;
@@ -51,7 +50,6 @@ public class ClienteValidator implements Validator {
 			errors.rejectValue("telefono", REQUIRED + " debe tener 9 digitos", REQUIRED + " debe tener 9 digitos");
 		}
 	}
-
 	
 	@Override
 	public boolean supports(Class<?> clazz) {

@@ -3,14 +3,13 @@ package org.springframework.samples.petclinic.model;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.List;
-import java.util.Locale;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.Validator;
+
 import org.junit.jupiter.api.Test;
-import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 
 public class TrabajadorFormTest {
@@ -36,8 +35,6 @@ public class TrabajadorFormTest {
 		formTest.setPassword("aaaaaaaaA1");
 		formTest.setRetypePassword("aaaaaaaaA1");
 		
-		
-		
 		Validator validator = createValidator();
 		Set<ConstraintViolation<TrabajadorForm>> constraintViolations = validator.validate(formTest);
 
@@ -59,8 +56,6 @@ public class TrabajadorFormTest {
 		formTest.setUsername("carvilgar1");
 		formTest.setPassword("aaaaaaaaA1");
 		formTest.setRetypePassword("aaaaaaaaA1");
-		
-		
 		
 		Validator validator = createValidator();
 		Set<ConstraintViolation<TrabajadorForm>> constraintViolations = validator.validate(formTest);
@@ -88,8 +83,6 @@ public class TrabajadorFormTest {
 		formTest.setPassword("aaaaaaaaA1");
 		formTest.setRetypePassword("aaaaaaaaA1");
 		
-		
-		
 		Validator validator = createValidator();
 		Set<ConstraintViolation<TrabajadorForm>> constraintViolations = validator.validate(formTest);
 
@@ -115,9 +108,7 @@ public class TrabajadorFormTest {
 		formTest.setUsername("carvilgar1");
 		formTest.setPassword("123");
 		formTest.setRetypePassword("123");
-		
-		
-		
+
 		Validator validator = createValidator();
 		Set<ConstraintViolation<TrabajadorForm>> constraintViolations = validator.validate(formTest);
 
@@ -143,9 +134,7 @@ public class TrabajadorFormTest {
 		formTest.setUsername("carvilgar1");
 		formTest.setPassword("aaaaaaaA1");
 		formTest.setRetypePassword("123");
-		
-		
-		
+	
 		Validator validator = createValidator();
 		Set<ConstraintViolation<TrabajadorForm>> constraintViolations = validator.validate(formTest);
 
@@ -170,9 +159,7 @@ public class TrabajadorFormTest {
 		formTest.setUsername("carvilgar1");
 		formTest.setPassword("aaaaaaaA1");
 		formTest.setRetypePassword("");
-		
-		
-		
+
 		Validator validator = createValidator();
 		List<ConstraintViolation<TrabajadorForm>> constraintViolations = validator.validate(formTest).stream().collect(Collectors.toList());
 
@@ -184,6 +171,4 @@ public class TrabajadorFormTest {
 		assertThat(violation.getMessage()).isEqualTo("Las contraseñas no coinciden");
 		assertThat(violation2.getPropertyPath().toString()).isEqualTo("retypePassword");
 	}
-
-
 }

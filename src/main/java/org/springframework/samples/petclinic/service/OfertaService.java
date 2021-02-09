@@ -11,7 +11,6 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class OfertaService {
 
-	
 	private OfertaRepository ofertaRepo;
 	
 	@Autowired
@@ -29,14 +28,17 @@ public class OfertaService {
 	public Iterable<Oferta> findAll() {
 		return ofertaRepo.findAll();
 	}
+	
 	@Transactional
 	public void save(Oferta product) {
 		ofertaRepo.save(product);
 	}
+	
 	@Transactional
 	public void delete(Oferta product) {
 		ofertaRepo.delete(product);
 	}
+	
 	@Transactional(readOnly=true)
 	public Iterable<Oferta> findAllById(Iterable<Integer> ids) {
 		return ofertaRepo.findAllById(ids);

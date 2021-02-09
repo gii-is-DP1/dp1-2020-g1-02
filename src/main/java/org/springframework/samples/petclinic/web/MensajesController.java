@@ -7,11 +7,7 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.samples.petclinic.model.Cliente;
 import org.springframework.samples.petclinic.model.Mensaje;
-import org.springframework.samples.petclinic.model.Proveedor;
-import org.springframework.samples.petclinic.model.Reclamacion;
-import org.springframework.samples.petclinic.model.Servicio;
 import org.springframework.samples.petclinic.model.User;
 import org.springframework.samples.petclinic.service.MensajesService;
 import org.springframework.samples.petclinic.service.UserService;
@@ -27,7 +23,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/mensajes")
 public class MensajesController {
 
-	
 	@Autowired
 	private MensajesService mensajesService;
 	@Autowired
@@ -53,7 +48,6 @@ public class MensajesController {
 		modelMap.addAttribute("mensaje", mensaje);
 		return view;
 	}
-	
 	
 	@PostMapping(path="/save")
 	public String salvarMensaje(@Valid Mensaje msj, BindingResult result,ModelMap modelMap) {
@@ -86,9 +80,7 @@ public class MensajesController {
 	@GetMapping(path="/new/{mId}")
 	public String responderMensaje(@PathVariable("mId") int mId, ModelMap modelMap) {
 		String view="mensajes/newMensaje";
-//		modelMap.addAttribute("principal", userService.getLoggedUser());
 		modelMap.addAttribute("users", userService.findAllUsernames());
-//		modelMap.addAttribute("size", userService.findAllUsernames().size());
 		Mensaje mensajeE = mensajesService.findById(mId).get();
 		Mensaje mensajeR = new Mensaje();
 		mensajeR.setEmisor(userService.getLoggedUser());

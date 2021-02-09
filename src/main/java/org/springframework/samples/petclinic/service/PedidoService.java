@@ -14,7 +14,6 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class PedidoService {
 
-
 	private PedidoRepository pedidoRepo;
 
 	private ProductoService productoService;
@@ -38,10 +37,12 @@ public class PedidoService {
 	public Iterable<Pedido> findAll() {
 		return pedidoRepo.findAll();
 	}
+	
 	@Transactional
 	public void save(Pedido pedido) {
 		pedidoRepo.save(pedido);
 	}
+	
 	@Transactional
 	public void deletePedido(Pedido pedido) {
 		pedidoRepo.delete(pedido);
@@ -70,6 +71,7 @@ public class PedidoService {
 			throw new LimitePedidoException();
 		}
 	}
+	
 	@Transactional(readOnly=true)
 	public Optional<Pedido> findById(Integer id) {
 		return pedidoRepo.findById(id);

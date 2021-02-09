@@ -36,20 +36,6 @@ public class FacturaServiceTest {
 		Factura facturaFind = facturaService.findFacturaById(2).get();
 		assertEquals(137.89, facturaFind.getPrecio_total());
 	}
-	
-//	@Test
-//	@Transactional
-//	public void testCreaFactura() {
-//		Oferta o = ofertaService.findOfertaById(1).get();
-//		Pedido p = new Pedido();
-//		p.setId(1);
-//		p.setFechaPedido(LocalDate.now());
-//		p.setCantidadProducto(7);
-//		p.setOferta(o);
-//		facturaService.creaFactura(p);
-//		Double precioTotal = Double.parseDouble(p.getOferta().getPrecioU()) * p.getCantidadProducto();
-//		assertEquals(precioTotal, 17.5);
-//	}
 
 	@Test
 	public void testFindAllFacturasByProveedor() {

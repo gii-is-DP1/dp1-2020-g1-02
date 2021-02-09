@@ -48,12 +48,6 @@ public class ValoracionServiceTest {
 		assertEquals(Valoracion.class, valoracionFind.getClass());
 	}
 	
-//	@Test 
-//	public void testGetMediaValoracion() {
-//		Integer media = valoracionService.getMediaValoraciones(TipoCategoria.Limpieza);
-//		
-//	}
-	
 	//Test negativos
 	
 	@Test

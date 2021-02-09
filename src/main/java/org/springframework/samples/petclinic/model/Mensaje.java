@@ -10,7 +10,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.FutureOrPresent;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -25,7 +24,6 @@ import lombok.Setter;
 public class Mensaje extends BaseEntity{
 	
 	@NotNull
-	@FutureOrPresent
 	private LocalDate fecha;
 	
 	@Size(min=0, max=50)

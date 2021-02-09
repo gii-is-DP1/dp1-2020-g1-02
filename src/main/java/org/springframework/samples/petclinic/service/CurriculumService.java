@@ -9,7 +9,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class CurriculumService {
-
 	
 	private CurriculumRepository curriculumRepo;
 	
@@ -19,14 +18,11 @@ public class CurriculumService {
 		this.curriculumRepo = curriculumRepo;
 	}
 	
-	
 	@Transactional(readOnly=true)
 	public int curriculumCount() {
 		return (int) curriculumRepo.count();
 	}
 	
-	
-
 	@Transactional(readOnly=true)
 	public Iterable<Curriculum> findAll(){
 		return curriculumRepo.findAll();
@@ -40,7 +36,6 @@ public class CurriculumService {
 	@Transactional
 	public void delete(Curriculum curriculum) {
 		curriculumRepo.delete(curriculum);
-		
 	}
 
 	@Transactional(readOnly=true)

@@ -30,7 +30,7 @@ public class PresupuestoServiceTest {
 	@Test
 	public void testCountWithInitialData() {
 		int count = presupuestoService.presupuestoCount();
-		assertEquals(count, 5);
+		assertEquals(count, 6);
 	}
 	
 	@Test
@@ -53,7 +53,7 @@ public class PresupuestoServiceTest {
 		presupuestoService.save(p);
 		int count = presupuestoService.presupuestoCount();
 		//Assert
-		assertEquals(count, 5);
+		assertEquals(count, 6);
 		
 	}
 		
@@ -85,7 +85,7 @@ public class PresupuestoServiceTest {
 		presupuestoService.delete(p);
 		int count = presupuestoService.presupuestoCount();
 		//Assert
-		assertEquals(count, 4);
+		assertEquals(count, 5);
 		
 	}
 	

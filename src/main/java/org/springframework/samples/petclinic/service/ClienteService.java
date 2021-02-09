@@ -17,7 +17,6 @@ public class ClienteService {
 	
 	private UserService userService;
 	
-	
 	private AuthoritiesService authoritiesService;
 	
 	@Autowired
@@ -81,7 +80,5 @@ public class ClienteService {
 	public void actualizarCliente(Cliente client) throws DataAccessException {
 		clienteRepo.save(client);
 	}
-	
-	
 
 }

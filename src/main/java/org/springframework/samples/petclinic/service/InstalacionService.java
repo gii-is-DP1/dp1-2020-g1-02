@@ -1,9 +1,7 @@
 package org.springframework.samples.petclinic.service;
 
-import java.util.Collection;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.samples.petclinic.model.Factura;
 import org.springframework.samples.petclinic.model.Instalacion;
 import org.springframework.samples.petclinic.repository.InstalacionRepository;
 import org.springframework.stereotype.Service;
@@ -38,7 +36,6 @@ public class InstalacionService {
 	@Transactional
 	public void delete(Instalacion instalacion) {
 		instalacionRepo.delete(instalacion);
-		
 	}
 
 	@Transactional(readOnly=true)

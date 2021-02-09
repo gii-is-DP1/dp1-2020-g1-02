@@ -1,20 +1,12 @@
 package org.springframework.samples.petclinic.web;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
-import java.util.Optional;
-import java.util.stream.Collector;
-import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.samples.petclinic.model.Cliente;
 
-import org.springframework.samples.petclinic.model.Factura;
-import org.springframework.samples.petclinic.model.Proveedor;
-import org.springframework.samples.petclinic.model.Servicio;
 import org.springframework.samples.petclinic.model.TipoCategoria;
 
 import org.springframework.samples.petclinic.model.User;
@@ -25,8 +17,6 @@ import org.springframework.samples.petclinic.service.UserService;
 import org.springframework.samples.petclinic.service.ValoracionService;
 import org.springframework.samples.petclinic.service.exceptions.AntesComenzarServicioException;
 import org.springframework.samples.petclinic.service.exceptions.ServicioNoAceptadoException;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -83,7 +73,6 @@ public class ValoracionController {
 		return view;
 	}
 	
-	
 	@PostMapping(path="/save")
 	public String salvarValoracion(@Valid Valoracion valoracion, BindingResult result,ModelMap modelMap) {
 		String view="succesful";
@@ -107,6 +96,4 @@ public class ValoracionController {
 		}
 		return view;
 	}
-	
-
 }

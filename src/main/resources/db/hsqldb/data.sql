@@ -1,4 +1,3 @@
-/* One admin user, named admin1 with passwor 4dm1n and authority admin*/
 INSERT INTO users(username,password,enabled) VALUES ('admin','$2a$10$scVXDdcGmWu8SNk/6EP/y.ox5UKp8eQoTpZTzYC6Q.Rgf0/gJW6C6',TRUE);
 INSERT INTO users(username,password,enabled) VALUES ('Nick Furia','$2a$10$scVXDdcGmWu8SNk/6EP/y.ox5UKp8eQoTpZTzYC6Q.Rgf0/gJW6C6',TRUE);
 INSERT INTO users(username,password,enabled) VALUES ('Ironman','$2a$10$scVXDdcGmWu8SNk/6EP/y.ox5UKp8eQoTpZTzYC6Q.Rgf0/gJW6C6',TRUE);
@@ -51,7 +50,6 @@ INSERT INTO proveedor(name,telefono,email,direccion,username) VALUES ('Lejias SL
 INSERT INTO proveedor(name,telefono,email,direccion) VALUES ('Jabones SA', '645681127', 'jabonessa@gmail.com', 'Calle Mercedes 14, Madrid'); 
 INSERT INTO proveedor(name,telefono,email,direccion,username) VALUES ('Jose Pablo SL', '644332211', 'josepablosl@gmail.com', 'Calle Palmas 33, Badajoz','JosePabloSL'); 
 
-
 INSERT INTO producto(name, cantidad) VALUES ('Lejia', 30);
 INSERT INTO producto(name, cantidad) VALUES ('jabon', 23);
 INSERT INTO producto(name, cantidad) VALUES ('Escoba', 13);
@@ -71,18 +69,12 @@ INSERT INTO pedido(fecha, cantidad, oferta_id) VALUES ('2020-04-20', 5, 1);
 INSERT INTO pedido(fecha, cantidad, oferta_id) VALUES ('2020-02-20', 2, 2);
 INSERT INTO pedido(fecha, cantidad, oferta_id) VALUES ('2021-01-20', 10, 4);
 
-
-
-
 INSERT INTO factura(fecha, precio_total, proveedor, pedido) VALUES ('2020-10-20', 10.0, 2, 1);
 INSERT INTO factura(fecha, precio_total, proveedor, pedido) VALUES ('2020-10-20', 137.89, 1, 2);
 INSERT INTO factura(fecha, precio_total, proveedor, pedido) VALUES ('2021-01-20', 56.01, 3, 3);
 
-
-
 INSERT INTO administrador(id,nombre,apellidos,dni,telefono, direccion, correo, tipocategoria, username) VALUES (1,'CARLOS JESUS', 'VILLADIEGO GARCIA', '78461836G','666666666','C/Motorhead, 6', 'calvirgar@alum.us.es', 0, 'admin');
 INSERT INTO administrador(nombre, apellidos, tipocategoria) VALUES ('Carlos','Borreguero', 0);
-
 
 INSERT INTO servicio(lugar, tipocategoria, fechainicio, fechafin, estado, cliente_id) VALUES ('Av Reina Mercedes', 0, '2019-10-20', '2020-12-31', 1, 1);
 INSERT INTO servicio(lugar, tipocategoria, fechainicio, fechafin, estado, cliente_id) VALUES ('Benito Villamarin', 0, '2021-10-20', '2022-12-31', 1, 1);
@@ -112,9 +104,6 @@ INSERT INTO valoracion(fecha,valor, servicio_id) VALUES ('2019-10-20', 4, 3);
 INSERT INTO valoracion(fecha,valor, servicio_id) VALUES ('2020-10-12', 5, 4);
 INSERT INTO valoracion(fecha,valor, servicio_id) VALUES ('2020-10-12', 5, 6);
 
-
-
-
 INSERT INTO mensaje(id, fecha, asunto, cuerpo, emisor, leido) VALUES (1, '2021-02-02', 'Hola que tal', 'Hola como estamos que tal', 'JosePabloSL', FALSE);
 INSERT INTO mensaje(id, fecha, asunto, cuerpo, emisor, leido) VALUES (2, '2021-02-02', 'Muy bien gracias', 'Genial, y tu?', 'admin', TRUE);
 
@@ -126,29 +115,3 @@ INSERT INTO aux_ts VALUES (1, 1);
 INSERT INTO aux_ts VALUES (2, 1);
 INSERT INTO aux_ts VALUES (2, 2);
 INSERT INTO aux_ts VALUES (3, 2);
-
-
-/*-- One owner user, named owner1 with passwor 0wn3r
-INSERT INTO users(username,password,enabled) VALUES ('owner1','0wn3r',TRUE);
-INSERT INTO authorities(id,username,authority) VALUES (2,'owner1','owner');
-
-INSERT INTO users(username,password,enabled) VALUES ('josbejpoz','0wn3r',TRUE);
-INSERT INTO authorities(id,username,authority) VALUES (14,'josbejpoz','owner');
-
-INSERT INTO users(username,password,enabled) VALUES ('pabgonmon2','asd123',TRUE);
-INSERT INTO authorities(id,username,authority) VALUES (11,'pabgonmon2','owner');
-
-INSERT INTO users(username,password,enabled) VALUES ('josmorbor3','zxc123',TRUE);
-INSERT INTO authorities(id,username,authority) VALUES (20,'josmorbor3','owner');
-
-INSERT INTO users(username,password,enabled) VALUES ('fervalnav','qwerty1',TRUE);
-INSERT INTO authorities(id,username,authority) VALUES (12,'fervalnav','owner');
-
-INSERT INTO users(username,password,enabled) VALUES ('carvilgar1','12345',TRUE);
-INSERT INTO authorities(id,username,authority) VALUES (32,'carvilgar1','owner');
-
--- One vet user, named vet1 with passwor v3t
-INSERT INTO users(username,password,enabled) VALUES ('vet1','v3t',TRUE);
-INSERT INTO authorities(id,username,authority) VALUES (3,'vet1','veterinarian');
-
-*/

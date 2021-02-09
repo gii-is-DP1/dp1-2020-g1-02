@@ -1,10 +1,7 @@
 package org.springframework.samples.petclinic.web;
 
 import java.util.Iterator;
-import java.util.List;
 import java.util.regex.Pattern;
-import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.samples.petclinic.model.Proveedor;

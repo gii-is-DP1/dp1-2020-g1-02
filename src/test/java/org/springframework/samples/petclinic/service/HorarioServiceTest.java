@@ -1,11 +1,14 @@
 package org.springframework.samples.petclinic.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.text.ParseException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Optional;
+
+import javax.validation.ConstraintViolationException;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -63,5 +66,16 @@ public class HorarioServiceTest {
 	public void testNotFindHorarioById() {
 		Optional<Horario> horarioFind = horarioService.findHorarioById(50);
 		assertEquals(false, horarioFind.isPresent());
+	}
+	
+	@Test
+	public void testSaveHorarioConError() throws ParseException {
+		Horario horarioNew = new Horario();
+		
+		horarioNew.setFecha(LocalDate.of(2021, 07,25));
+		horarioNew.setHora_inicio(LocalTime.of(15, 00));
+		horarioNew.setHora_fin(LocalTime.of(12, 00));
+		horarioNew.setDescripcion("En acuario de Sevilla");
+		assertThrows(ConstraintViolationException.class, ()->horarioService.save(horarioNew));
 	}
 }

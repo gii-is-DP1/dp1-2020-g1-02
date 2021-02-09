@@ -3,14 +3,12 @@ package org.springframework.samples.petclinic.model;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.List;
-import java.util.Locale;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.Validator;
 import org.junit.jupiter.api.Test;
-import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 
 public class ClienteFormTest {
@@ -57,8 +55,6 @@ public class ClienteFormTest {
 		formTest.setUsername("carvilgar1");
 		formTest.setPassword("aaaaaaaaA1");
 		formTest.setRetypePassword("aaaaaaaaA1");
-		
-		
 		
 		Validator validator = createValidator();
 		Set<ConstraintViolation<ClienteForm>> constraintViolations = validator.validate(formTest);
@@ -112,8 +108,6 @@ public class ClienteFormTest {
 		formTest.setPassword("123");
 		formTest.setRetypePassword("123");
 		
-		
-		
 		Validator validator = createValidator();
 		Set<ConstraintViolation<ClienteForm>> constraintViolations = validator.validate(formTest);
 
@@ -127,7 +121,7 @@ public class ClienteFormTest {
 	
 	@Test
 	public void FormContrasenyaNoCoincide() {
-ClienteForm formTest = new ClienteForm();
+		ClienteForm formTest = new ClienteForm();
 		
 		formTest.setNombre("Carlos Jesus");
 		formTest.setApellidos("Villadiego García");
@@ -138,8 +132,6 @@ ClienteForm formTest = new ClienteForm();
 		formTest.setUsername("carvilgar1");
 		formTest.setPassword("aaaaaaaaaaaaA1");
 		formTest.setRetypePassword("123");
-		
-		
 		
 		Validator validator = createValidator();
 		Set<ConstraintViolation<ClienteForm>> constraintViolations = validator.validate(formTest);
@@ -165,19 +157,15 @@ ClienteForm formTest = new ClienteForm();
 		formTest.setPassword("aaaaaaaaaaaA1");
 		formTest.setRetypePassword("");
 		
-		
-		
 		Validator validator = createValidator();
 		List<ConstraintViolation<ClienteForm>> constraintViolations = validator.validate(formTest).stream().collect(Collectors.toList());
 
 		assertThat(constraintViolations.size()).isEqualTo(2);
 			
-		ConstraintViolation<ClienteForm> violation2 = constraintViolations.get(0);
-		ConstraintViolation<ClienteForm> violation = constraintViolations.get(1);
+		ConstraintViolation<ClienteForm> violation = constraintViolations.get(0);
+		ConstraintViolation<ClienteForm> violation2 = constraintViolations.get(1);
 		assertThat(violation.getPropertyPath().toString()).isEqualTo("");
 		assertThat(violation.getMessage()).isEqualTo("Las contraseñas no coinciden");
 		assertThat(violation2.getPropertyPath().toString()).isEqualTo("retypePassword");
 	}
-
-
 }

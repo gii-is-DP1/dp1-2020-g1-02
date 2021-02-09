@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.samples.petclinic.model.Pedido;
 import org.springframework.samples.petclinic.model.Producto;
 import org.springframework.samples.petclinic.repository.ProductoRepository;
 import org.springframework.stereotype.Service;
@@ -19,6 +18,7 @@ public class ProductoService {
 	public ProductoService(ProductoRepository productoRepo) {
 		this.productRepo = productoRepo;
 	}
+	
 	@Transactional(readOnly=true)
 	public int productCount() {
 		return (int) productRepo.count();
@@ -28,10 +28,12 @@ public class ProductoService {
 	public Iterable<Producto> findAll() {
 		return productRepo.findAll();
 	}
+	
 	@Transactional
 	public void save(Producto product) {
 		productRepo.save(product);
 	}
+	
 	@Transactional
 	public void delete(Producto product) {
 		productRepo.delete(product);
@@ -58,6 +60,7 @@ public class ProductoService {
 	public Optional<Producto> findProductoById(Integer id) {
 		return productRepo.findById(id);
 	}
+	
 	@Transactional(readOnly=true)
 	public Optional<Producto> findByName(String name) {
 		return productRepo.findByName(name);

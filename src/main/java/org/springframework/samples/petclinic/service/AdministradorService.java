@@ -11,13 +11,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class AdministradorService {
-	
 
 	private AdministradorRepository administradorRepo;
-	
 
 	private UserService userService;
-	
 	
 	private AuthoritiesService authoritiesService;
 	
@@ -82,5 +79,3 @@ public class AdministradorService {
 		administradorRepo.save(administrador);
 	}
 }
-
-

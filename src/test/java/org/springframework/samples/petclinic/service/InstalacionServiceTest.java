@@ -1,7 +1,12 @@
 package org.springframework.samples.petclinic.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import java.util.Optional;
+
+import javax.validation.ConstraintViolationException;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
@@ -41,7 +46,6 @@ public class InstalacionServiceTest {
 		assertEquals(4, cantidad);
 	}
 	
-	
 	@Test
 	public void testInstalacionFindById() {
 		Instalacion instalacionFind = instalacionService.findInstalacionById(1).get();
@@ -54,6 +58,14 @@ public class InstalacionServiceTest {
 	public void testNotFindInstalacionById() {
 		Optional<Instalacion> instalacionFind = instalacionService.findInstalacionById(50);
 		assertEquals(false, instalacionFind.isPresent());
+	}
+	
+	@Test
+	public void testSaveInstalacionConError() {
+		Instalacion instalacionNew = new Instalacion();
+		instalacionNew.setLugar("");
+		instalacionNew.setDimension(3.87);
+		assertThrows(ConstraintViolationException.class, ()->instalacionService.save(instalacionNew));
 	}
 
 }

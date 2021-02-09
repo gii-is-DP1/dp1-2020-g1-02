@@ -72,7 +72,4 @@ public class ProductoController {
 		modelmap.addAttribute("message", "Producto borrado!");
 		return "redirect:/productos";
 	}
-	
-	
-
 }

@@ -3,8 +3,6 @@ package org.springframework.samples.petclinic.customvalidators;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
-import org.springframework.samples.petclinic.model.User;
-
 public class PasswordValidator implements 
 ConstraintValidator<PasswordConstraint, String> {
 

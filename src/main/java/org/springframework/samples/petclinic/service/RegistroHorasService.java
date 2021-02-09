@@ -14,7 +14,6 @@ public class RegistroHorasService {
 
 	private RegistroHorasRepository registroHorasRepo;
 	
-	
 	@Autowired
 	public RegistroHorasService(RegistroHorasRepository registroHorasRepo) {
 		super();

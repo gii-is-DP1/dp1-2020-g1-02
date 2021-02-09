@@ -1,7 +1,12 @@
 package org.springframework.samples.petclinic.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import java.util.Optional;
+
+import javax.validation.ConstraintViolationException;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
@@ -46,20 +51,6 @@ public class CurriculumServiceTest {
 		assertEquals(6, cantidad);
 	}
 	
-	
-//	@Test
-//	public void testFindAllCurriculumsByTrabajadorId() {
-//		Boolean i = true;
-//		Iterable<Curriculum> curriculumFind = curriculumService.findCurriculumByTrabajadorId("");
-//		Iterator<Curriculum> iterador = curriculumFind.iterator();
-//		while(iterador.hasNext()) {
-//			if(iterador.next().getId_trab() != 1) {
-//				i =false;
-//			}
-//		}	
-//		assertTrue(i);
-//	}
-	
 	@Test
 	public void testCurriculumFindById() {
 		Curriculum curriculumFind = curriculumService.findCurriculumById(1).get();
@@ -74,5 +65,15 @@ public class CurriculumServiceTest {
 		assertEquals(false, curriculumFind.isPresent());
 	}
 	
-	
+	@Test
+	public void testSaveCurriculumConError() {
+		Curriculum curriculumNew = new Curriculum();
+		curriculumNew.setNombre("Jesus");
+		curriculumNew.setApellidos("Villa");
+		curriculumNew.setTelefono("666666666");
+		curriculumNew.setCorreo("");
+		curriculumNew.setDescripcion("Holaaaaaaaaaaaa");
+		curriculumNew.setTipocategoria(TipoCategoria.Limpieza);
+		assertThrows(ConstraintViolationException.class, ()->curriculumService.save(curriculumNew));
+	}
 }

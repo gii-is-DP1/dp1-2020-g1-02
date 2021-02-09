@@ -156,17 +156,5 @@ public class PedidoControllerTest {
 		.andExpect(status().isOk())
 		.andExpect(view().name("administradores/editPedido"));
 	}
-	
-//	@WithMockUser(value = "spring")
-//    @Test
-//    void testSuperiorA100() throws Exception {
-//		mockMvc.perform(post("/pedidos/save")
-//						.with(csrf())
-//						.param("cantidadProducto", "1000")
-//						.param("fechaPedido", "2021/01/31")
-//						.param("oferta", "1"))
-//		.andExpect(status().is4xxClientError())
-//		.andExpect(view().name("administradores/editPedido"));
-//	}
 
 }

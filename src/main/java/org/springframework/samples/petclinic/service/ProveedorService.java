@@ -1,11 +1,9 @@
 package org.springframework.samples.petclinic.service;
 
-import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
-import org.springframework.samples.petclinic.model.Factura;
 import org.springframework.samples.petclinic.model.Proveedor;
 import org.springframework.samples.petclinic.repository.ProveedorRepository;
 import org.springframework.stereotype.Service;
@@ -14,7 +12,6 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class ProveedorService {
 	
-
 	private ProveedorRepository proveedorRepo;
 	
 	private UserService userService;
@@ -30,7 +27,6 @@ public class ProveedorService {
 		this.authoritiesService = authoritiesService;
 	}
 	
-
 	@Transactional
 	public int proveedorCount() {
 		return (int) proveedorRepo.count();
@@ -52,10 +48,12 @@ public class ProveedorService {
 		Proveedor proveedorBorrar = findProveedorById(id).get();
 		deleteProveedor(proveedorBorrar);
 	}
+	
 	@Transactional(readOnly=true)
 	public Optional<Proveedor> findProveedorByUsername(String username) {
 		return proveedorRepo.findProveedorByUsername(username);
 	}
+	
 	@Transactional(readOnly=true)
 	public Optional<Proveedor> findProveedorById(Integer id) {
 		return proveedorRepo.findById(id);
