@@ -1,7 +1,6 @@
 package org.springframework.samples.petclinic.web;
 
 import static org.mockito.BDDMockito.given;
-import static org.mockito.BDDMockito.any;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -26,7 +25,6 @@ import org.springframework.context.annotation.FilterType;
 import org.springframework.samples.petclinic.configuration.SecurityConfiguration;
 import org.springframework.samples.petclinic.model.Cliente;
 import org.springframework.samples.petclinic.model.EstadoServicio;
-import org.springframework.samples.petclinic.model.Oferta;
 import org.springframework.samples.petclinic.model.Presupuesto;
 import org.springframework.samples.petclinic.model.Servicio;
 import org.springframework.samples.petclinic.model.TipoCategoria;
@@ -145,13 +143,12 @@ public class ServicioControllerTest {
 			.param("estado", "Espera")
 			.param("lugar", "Promociones Sanlucar")
 			.param("tipocategoria", "Limpieza")
-			.param("fechainicio", "2020/01/01")
-			.param("fechafin", "2020/02/01"))
-		.andExpect(status().is3xxRedirection()).andExpect(view().name("redirect:/servicios/misServicios"));
+			.param("fechainicio", "2022/01/01")
+			.param("fechafin", "2030/02/01"))
+		.andExpect(status().is3xxRedirection())
+		.andExpect(view().name("redirect:/servicios/misServicios"));
 	}
-	
 
-	
 	@WithMockUser(value="spring")
 	@Test
 	void testAceptarServicio() throws Exception {

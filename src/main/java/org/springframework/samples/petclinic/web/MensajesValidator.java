@@ -1,9 +1,6 @@
 package org.springframework.samples.petclinic.web;
 
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.samples.petclinic.model.Mensaje;
-import org.springframework.samples.petclinic.service.MensajesService;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
@@ -12,9 +9,6 @@ import org.springframework.validation.Validator;
 public class MensajesValidator implements Validator {
 
 	private static final String REQUIRED = "required";
-	
-	@Autowired
-	private MensajesService mensajesAdminService;
 	
 	public Boolean mensajeConMismoAsunto(String name) {
 		return true;
@@ -33,10 +27,7 @@ public class MensajesValidator implements Validator {
 		if (mensaje == null || mensaje.trim().equals("")) {
 			errors.rejectValue("direccion", REQUIRED , REQUIRED );
 		}
-
-		
 	}
-
 
 	@Override
 	public boolean supports(Class<?> clazz) {

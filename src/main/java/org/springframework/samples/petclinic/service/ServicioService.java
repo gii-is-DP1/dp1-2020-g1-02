@@ -17,7 +17,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class ServicioService {
-	
 
 	private ServicioRepository servicioRepo;
 
@@ -52,13 +51,13 @@ public class ServicioService {
 		servicioRepo.save(servicio);
 	}
 	
-	
 	public void vaciarTrabajadores(Servicio servicio) {
 		List<Trabajador> trabajadores = (List<Trabajador>) trabajadorService.findTrabajadoresByServicio(servicio.getId());
 		for(Trabajador t : trabajadores) {
 			t.getServicios().remove(servicio);
 		}
 	}
+	
 	@Transactional
 	public void asignarTrabajadores(Servicio servicio) {
 		servicioRepo.save(servicio);
@@ -95,7 +94,6 @@ public class ServicioService {
 		m.setCuerpo("Gracias por su solicitud de Servicio, El administrar " + userService.getLoggedUser().getUsername() + " ha aceptado el servicio."
 				+ "Procedemos a enviarle un presupuesto para que pueda estudiarlo, este podras aceptarlo o rechazarlo desde la misma aplicacion");
 		mensajesService.save(m);
-		
 	}
 	
 	@Transactional

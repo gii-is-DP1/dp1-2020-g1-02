@@ -17,7 +17,6 @@ private static final String REQUIRED = "required";
 	@Autowired
 	private AdministradorService administradorService;
 	
-	
 	public Boolean administradorConMismoDNI(String dni) {
 		dni = dni.toLowerCase();
 		Boolean result = false;
@@ -51,7 +50,6 @@ private static final String REQUIRED = "required";
 			errors.rejectValue("telefono", REQUIRED + " debe tener 9 digitos", REQUIRED + " debe tener 9 digitos");
 		}
 	}
-
 	
 	@Override
 	public boolean supports(Class<?> clazz) {

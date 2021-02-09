@@ -59,7 +59,6 @@ public class TrabajadorService {
 		return trabajadorRepo.findTrabajadorByUsername(trabajadorUsername);
 	}
 
-	
 	@Transactional
 	public void saveTrabajador(Trabajador trabajador) throws DataAccessException {
 		//creating trabajador

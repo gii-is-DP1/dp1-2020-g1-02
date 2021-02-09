@@ -26,14 +26,8 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.FilterType;
 import org.springframework.samples.petclinic.configuration.SecurityConfiguration;
-import org.springframework.samples.petclinic.model.Cliente;
-import org.springframework.samples.petclinic.model.ContratoServicio;
 import org.springframework.samples.petclinic.model.ContratoTrabajador;
-import org.springframework.samples.petclinic.model.EstadoServicio;
-import org.springframework.samples.petclinic.model.Presupuesto;
-import org.springframework.samples.petclinic.model.Servicio;
 import org.springframework.samples.petclinic.model.TipoCategoria;
-import org.springframework.samples.petclinic.model.TipoPresupuesto;
 import org.springframework.samples.petclinic.model.Trabajador;
 import org.springframework.samples.petclinic.service.ContratoTrabajadorService;
 import org.springframework.samples.petclinic.service.TrabajadorService;
@@ -83,19 +77,12 @@ public class ContratoTrabajadorControllerTest {
 		cT.setSueldo(18.17);
 		cT.setTrabajador(trab);
 		
-		
-		//given(this.contratoServicioService.findAll()).willReturn(Optional.of(cS));
 		given(this.contratoTrabajadorService.findContratoTrabajadorById(1)).willReturn(Optional.of(cT));
 		given(this.trabajadorService.findTrabajadorById(1)).willReturn(Optional.of(trab));
 		given(this.entityManager.find(ContratoTrabajador.class, 1)).willReturn(cT);
 		given(this.entityManager.find(Trabajador.class, 1)).willReturn(trab);
 		
 		given(this.trabajadorService.findTrabajadorByUsername(any())).willReturn(Optional.of(trab));
-		//given(this.userService.getLoggedUser()).willReturn(user);
-//		((BDDMockito) when(this.user.getAuthorities().getAuthority().equalsIgnoreCase("proveedor"))).willReturn(true);
-		
-		
-		
 		
 		List<ContratoTrabajador> cTrabs = new ArrayList<ContratoTrabajador>();
 		cTrabs.add(cT);
@@ -136,8 +123,8 @@ public class ContratoTrabajadorControllerTest {
     void testProcessCreationFormSuccess() throws Exception {
 		mockMvc.perform(post("/contratosTrabajadores/save")
 						.with(csrf())
-						.param("fechainicial", "2020/11/17")
-						.param("fechafinal", "2020/12/19")
+						.param("fechainicial", "2021/11/17")
+						.param("fechafinal", "2030/12/19")
 						.param("sueldo", "20.8")
 						.param("trabajador", "1"))
 			.andExpect(status().is3xxRedirection())

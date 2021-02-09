@@ -1,7 +1,6 @@
 package org.springframework.samples.petclinic.web;
 
 import java.security.Principal;
-import java.util.Locale;
 import java.util.Optional;
 
 import javax.validation.Valid;
@@ -22,8 +21,6 @@ import org.springframework.samples.petclinic.service.CurriculumService;
 import org.springframework.samples.petclinic.service.ProveedorService;
 import org.springframework.samples.petclinic.service.TrabajadorService;
 import org.springframework.samples.petclinic.service.UserService;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -33,11 +30,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @RequestMapping("/users")
 public class UserController {
+	
 	@Autowired
 	private UserService userService;
 	@Autowired
@@ -52,7 +49,6 @@ public class UserController {
 	private ProveedorService proveedorService;
 	@Autowired
 	private PasswordEncoder passwordEncoder;
-	
 	
 	public static String EXCEPTION_VIEW = "/error";
 	public static String PERFIL_VIEW = "users/perfilView";
@@ -168,7 +164,6 @@ public class UserController {
 		}
 		return view;
 	}
-	
 	
 	@PostMapping(path="/saveProveedor")
 	public String salvarProveedor(@Valid ProveedorForm proveedorForm, BindingResult result,ModelMap modelMap) {

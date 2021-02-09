@@ -5,7 +5,6 @@ import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
@@ -14,12 +13,8 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
-import org.springframework.samples.petclinic.customvalidators.ConfirmPassword;
-import org.springframework.samples.petclinic.customvalidators.PasswordConstraint;
-
 import lombok.Getter;
 import lombok.Setter;
-
 
 @Entity
 @Getter

@@ -25,8 +25,6 @@ public class ContratoTrabajadorService {
 	public int contratoTrabajadorCount() {
 		return (int) contratoTrabajadorRepo.count();
 	}
-	
-	
 
 	@Transactional
 	public Iterable<ContratoTrabajador> findAll(){
@@ -41,12 +39,10 @@ public class ContratoTrabajadorService {
 	@Transactional
 	public void delete(ContratoTrabajador contratoTrabajador) {
 		contratoTrabajadorRepo.delete(contratoTrabajador);
-		
 	}
 
 	@Transactional(readOnly=true)
 	public Optional<ContratoTrabajador> findContratoTrabajadorById(int contratoId) {
-		// TODO Auto-generated method stub
 		return contratoTrabajadorRepo.findById(contratoId);
 	}
 	
@@ -73,6 +69,4 @@ public class ContratoTrabajadorService {
 	public Iterable<ContratoTrabajador> findContratoTrabajadorByTrabajador(Integer trabajador){
 		return contratoTrabajadorRepo.contratosTrabajadorPorTrabajador(trabajador);
 	}
-
-	
 }

@@ -24,6 +24,7 @@ public class MensajesService {
 		this.mensajesRepo = mensajesRepo;
 		this.userRepo = userRepo;
 	}
+	
 	@Transactional
 	public <S extends Mensaje> S save(S entity) throws DataAccessException{
 		Mensaje mensaje = mensajesRepo.save(entity);
@@ -44,14 +45,17 @@ public class MensajesService {
 		
 		return (S) mensaje;
 	}
+	
 	@Transactional
 	public <S extends Mensaje> Iterable<S> saveAll(Iterable<S> entities) {
 		return mensajesRepo.saveAll(entities);
 	}
+	
 	@Transactional(readOnly=true)
 	public Optional<Mensaje> findById(Integer id) {
 		return mensajesRepo.findById(id);
 	}
+	
 	@Transactional(readOnly=true)
 	public boolean existsById(Integer id) {
 		return mensajesRepo.existsById(id);
@@ -61,18 +65,22 @@ public class MensajesService {
 	public Iterable<Mensaje> findAll() {
 		return mensajesRepo.findAll();
 	}
+	
 	@Transactional(readOnly=true)
 	public Iterable<Mensaje> findAllById(Iterable<Integer> ids) {
 		return mensajesRepo.findAllById(ids);
 	}
+	
 	@Transactional(readOnly=true)
 	public Collection<Mensaje> findAllByReceptor(User receptor) throws DataAccessException {
 		return mensajesRepo.findAllByReceptor(receptor.getUsername());
 	}
+	
 	@Transactional(readOnly=true)
 	public long count() {
 		return mensajesRepo.count();
 	}
+	
 	@Transactional
 	public void deleteById(Integer id) {
 		mensajesRepo.deleteById(id);
@@ -84,17 +92,18 @@ public class MensajesService {
 			u.getMensajesRecibidos().remove(mensaje);
 		}
 	}
-	
 
 	@Transactional
 	public void delete(Mensaje mensaje) {
 		vaciarReceptores(mensaje);
 		mensajesRepo.delete(mensaje);
 	}
+	
 	@Transactional
 	public void deleteAll(Iterable<? extends Mensaje> entities) {
 		mensajesRepo.deleteAll(entities);
 	}
+	
 	@Transactional
 	public void deleteAll() {
 		mensajesRepo.deleteAll();
@@ -105,6 +114,4 @@ public class MensajesService {
 		m.setLeido(true);
 		mensajesRepo.save(m);
 	}
-	
-	
 }

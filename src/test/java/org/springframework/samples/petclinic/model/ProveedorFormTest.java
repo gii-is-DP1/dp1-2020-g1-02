@@ -32,8 +32,6 @@ public class ProveedorFormTest {
 		formTest.setPassword("aaaaaaaaA1");
 		formTest.setRetypePassword("aaaaaaaaA1");
 		
-		
-		
 		Validator validator = createValidator();
 		Set<ConstraintViolation<ProveedorForm>> constraintViolations = validator.validate(formTest);
 
@@ -51,8 +49,6 @@ public class ProveedorFormTest {
 		formTest.setUsername("carvilgar1");
 		formTest.setPassword("aaaaaaaaA1");
 		formTest.setRetypePassword("aaaaaaaaA1");
-		
-		
 		
 		Validator validator = createValidator();
 		Set<ConstraintViolation<ProveedorForm>> constraintViolations = validator.validate(formTest);
@@ -76,8 +72,6 @@ public class ProveedorFormTest {
 		formTest.setPassword("123");
 		formTest.setRetypePassword("123");
 		
-		
-		
 		Validator validator = createValidator();
 		Set<ConstraintViolation<ProveedorForm>> constraintViolations = validator.validate(formTest);
 
@@ -100,8 +94,6 @@ public class ProveedorFormTest {
 		formTest.setPassword("aaaaaaaaaaaaA1");
 		formTest.setRetypePassword("123");
 		
-		
-		
 		Validator validator = createValidator();
 		Set<ConstraintViolation<ProveedorForm>> constraintViolations = validator.validate(formTest);
 
@@ -123,15 +115,13 @@ public class ProveedorFormTest {
 		formTest.setPassword("aaaaaaaaaaaA1");
 		formTest.setRetypePassword("");
 		
-		
-		
 		Validator validator = createValidator();
 		List<ConstraintViolation<ProveedorForm>> constraintViolations = validator.validate(formTest).stream().collect(Collectors.toList());
 
 		assertThat(constraintViolations.size()).isEqualTo(2);
 			
-		ConstraintViolation<ProveedorForm> violation = constraintViolations.get(0);
-		ConstraintViolation<ProveedorForm> violation2 = constraintViolations.get(1);
+		ConstraintViolation<ProveedorForm> violation2 = constraintViolations.get(0);
+		ConstraintViolation<ProveedorForm> violation = constraintViolations.get(1);
 		assertThat(violation.getPropertyPath().toString()).isEqualTo("");
 		assertThat(violation.getMessage()).isEqualTo("Las contraseñas no coinciden");
 		assertThat(violation2.getPropertyPath().toString()).isEqualTo("retypePassword");

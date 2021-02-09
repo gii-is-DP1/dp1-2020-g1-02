@@ -19,7 +19,6 @@ public class ContratoController {
 	@Autowired
 	private ContratoTrabajadorService contratoTrabajadorService;
 	
-	
 	@GetMapping()
 	public String listadoContratosServicios(ModelMap modelMap) {
 		String view="contratos/listadoContratos";
@@ -33,6 +32,4 @@ public class ContratoController {
 		modelMap.addAttribute("contratosTrabajador", contratosT);
 		return view;
 	}
-	
-	
 }

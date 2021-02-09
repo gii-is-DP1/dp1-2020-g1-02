@@ -9,13 +9,10 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.samples.petclinic.model.Mensaje;
-import org.springframework.samples.petclinic.model.Servicio;
-import org.springframework.samples.petclinic.model.Trabajador;
 import org.springframework.samples.petclinic.model.User;
 import org.springframework.samples.petclinic.repository.UserRepository;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -82,6 +79,7 @@ public class UserService {
 		}
 		return list;
 	}
+	
 	@Transactional(readOnly=true)
 	public List<User> findReceptoresByMensaje(Mensaje mensaje) {
 		return userRepository.findReceptoresByMensaje(mensaje.getId());
@@ -93,12 +91,10 @@ public class UserService {
 			m.getReceptores().remove(user);
 		}
 	}
+	
 	@Transactional
 	public void delete(User user) {
 		vaciarMensajesRecibidos(user);
 		userRepository.delete(user);
 	}
-	
-	
-	
 }

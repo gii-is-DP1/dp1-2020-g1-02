@@ -49,9 +49,6 @@ public class ProductoControllerTest {
 		
 		given(this.productoService.findAll()).willReturn(Lists.list(producto));
 		given( productoService.findProductoById(1)).willReturn(Optional.of(producto));
-//		List<Oferta> ofertas = new ArrayList<Oferta>();
-//		ofertas.add(oferta);
-//		given(this.ofertaService.findAll()).willReturn(ofertas);
 	}
 
 	@WithMockUser(value = "spring")
@@ -98,7 +95,6 @@ public class ProductoControllerTest {
 	void testRestarStock() throws Exception{
 		mockMvc.perform(get("/productos/{productoId}/restar", 1))
 		.andExpect(status().is3xxRedirection())
-//		.andExpect(model().attributeExists("message")
 		.andExpect(view().name("redirect:/productos"));
 	}
 	
@@ -107,7 +103,6 @@ public class ProductoControllerTest {
 	void testSumarStock() throws Exception{
 		mockMvc.perform(get("/productos/{productoId}/sumar", 1))
 		.andExpect(status().is3xxRedirection())
-//		.andExpect(model().attributeExists("message")
 		.andExpect(view().name("redirect:/productos"));
 	}
 	

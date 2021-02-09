@@ -30,19 +30,14 @@ import org.springframework.samples.petclinic.model.Authorities;
 import org.springframework.samples.petclinic.model.Cliente;
 import org.springframework.samples.petclinic.model.ContratoServicio;
 import org.springframework.samples.petclinic.model.EstadoServicio;
-import org.springframework.samples.petclinic.model.Oferta;
 import org.springframework.samples.petclinic.model.Presupuesto;
-import org.springframework.samples.petclinic.model.Proveedor;
 import org.springframework.samples.petclinic.model.Servicio;
 import org.springframework.samples.petclinic.model.TipoCategoria;
 import org.springframework.samples.petclinic.model.TipoPresupuesto;
 import org.springframework.samples.petclinic.model.User;
 import org.springframework.samples.petclinic.service.ClienteService;
 import org.springframework.samples.petclinic.service.ContratoServicioService;
-import org.springframework.samples.petclinic.service.OfertaService;
 import org.springframework.samples.petclinic.service.PresupuestoService;
-import org.springframework.samples.petclinic.service.ProductoService;
-import org.springframework.samples.petclinic.service.ProveedorService;
 import org.springframework.samples.petclinic.service.UserService;
 import org.springframework.security.config.annotation.web.WebSecurityConfigurer;
 import org.springframework.security.test.context.support.WithMockUser;
@@ -125,8 +120,6 @@ public class ContratoServicioControllerTest {
 		
 		serv.setCliente(cliente);
 		
-		
-		//given(this.contratoServicioService.findAll()).willReturn(Optional.of(cS));
 		given(this.presupuestoService.findPresupuestoById(1)).willReturn(Optional.of(prep));
 		given(this.clienteService.findClienteById(1)).willReturn(Optional.of(cliente));
 		given(this.entityManager.find(ContratoServicio.class, 1)).willReturn(cS);
@@ -135,10 +128,6 @@ public class ContratoServicioControllerTest {
 		
 		given(this.clienteService.findClienteByUsername(any())).willReturn(Optional.of(cliente));
 		given(this.userService.getLoggedUser()).willReturn(user);
-//		((BDDMockito) when(this.user.getAuthorities().getAuthority().equalsIgnoreCase("proveedor"))).willReturn(true);
-		
-		
-		
 		
 		List<ContratoServicio> cServs = new ArrayList<ContratoServicio>();
 		cServs.add(cS);
@@ -179,9 +168,9 @@ public class ContratoServicioControllerTest {
     void testProcessCreationFormSuccess() throws Exception {
 		mockMvc.perform(post("/contratosServicios/save")
 						.with(csrf())
-						.param("fechainicial", "2020/11/17")
-						.param("fechafinal", "2020/12/10")
-						.param("fechapago", "2020/12/15")
+						.param("fechainicial", "2021/11/17")
+						.param("fechafinal", "2030/12/10")
+						.param("fechapago", "2025/12/15")
 						.param("periodoPrueba", "true")
 						.param("presupuesto", "1")
 						.param("id", "1"))

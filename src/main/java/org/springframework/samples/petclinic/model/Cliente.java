@@ -9,9 +9,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import org.springframework.samples.petclinic.customvalidators.ConfirmPassword;
-import org.springframework.samples.petclinic.customvalidators.PasswordConstraint;
-
 import lombok.Getter;
 import lombok.Setter;
 

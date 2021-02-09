@@ -1,6 +1,5 @@
 package org.springframework.samples.petclinic.web;
 
-import java.time.LocalTime;
 import java.util.Iterator;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +16,6 @@ public class HorarioValidator implements Validator {
 	
 	@Autowired
 	private HorarioService horarioService;
-	
 	
 	public Boolean horarioDeUnMismoTrabajador(String nombre) {
 		nombre = nombre.toLowerCase();
@@ -37,23 +35,11 @@ public class HorarioValidator implements Validator {
 	public void validate(Object obj, Errors errors) {
 		Horario horario = (Horario) obj;
 		String nombreTrab = horario.getTrabajador().getNombre();
-		LocalTime hora_inicio = horario.getHora_inicio();
-		LocalTime hora_fin = horario.getHora_fin();
-		
 		if (nombreTrab == null || nombreTrab.trim().equals("")) {
 			errors.rejectValue("nombreTrab", REQUIRED, REQUIRED);
 		}
-
-//		if (hora_inicio == null || !Pattern.matches("yyyy/MM/dd HH:mm", hora_inicio.format(Date.ofPattern("HH:mm")))) {
-//			errors.rejectValue("hora_inicio", REQUIRED + " debe tener 4 dígitos el año, 2 dígitos el mes, 2 dígitos el día y estar separados por barra. También debe de tener 2 dígitos la hora, 2 dígitos el minuto y estar separados por 2 puntos", REQUIRED + " debe tener 4 dígitos el año, 2 dígitos el mes, 2 dígitos el día y estar separados por barra. También debe de tener 2 dígitos la hora, 2 dígitos el minuto y estar separados por 2 puntos");
-//		}
-//
-//		if (hora_fin == null || !Pattern.matches("yyyy/MM/dd HH:mm", hora_fin.format(Date.ofPattern("HH:mm")))) {
-//			errors.rejectValue("hora_fin", REQUIRED + " debe tener 4 dígitos el año, 2 dígitos el mes, 2 dígitos el día y estar separados por barra. También debe de tener 2 dígitos la hora, 2 dígitos el minuto y estar separados por 2 puntos", REQUIRED + " debe tener 4 dígitos el año, 2 dígitos el mes, 2 dígitos el día y estar separados por barra. También debe de tener 2 dígitos la hora, 2 dígitos el minuto y estar separados por 2 puntos");
-//		}
 	}
 
-	
 	@Override
 	public boolean supports(Class<?> clazz) {
 		return Horario.class.isAssignableFrom(clazz);

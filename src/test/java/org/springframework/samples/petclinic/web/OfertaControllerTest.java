@@ -101,10 +101,6 @@ public class OfertaControllerTest {
 		
 		given(this.provService.findProveedorByUsername(any())).willReturn(Optional.of(proveedor));
 		given(this.userService.getLoggedUser()).willReturn(user);
-//		((BDDMockito) when(this.user.getAuthorities().getAuthority().equalsIgnoreCase("proveedor"))).willReturn(true);
-		
-		
-		
 		
 		List<Oferta> ofertas = new ArrayList<Oferta>();
 		ofertas.add(oferta);
@@ -154,20 +150,5 @@ public class OfertaControllerTest {
 			.andExpect(model().attributeHasFieldErrors("oferta", "precioU"))
 			.andExpect(view().name("ofertas/editOferta"));
 	}
-	
-//	@WithMockUser(value = "spring")
-//    @Test
-//    void testProcessCreationFormNoAuthority() throws Exception {
-//		mockMvc.perform(post("/ofertas/save")
-//						.with(csrf())
-//						.param("name", "Fregona")
-//						.param("precioU", "2.35")
-//						.param("proveedor", "1"))
-//			.andExpect(status().isOk())
-//			.andExpect(model().attributeExists("error"))
-//			.andExpect(model().attributeExists("oferta"))
-//			.andExpect(view().name("ofertas/editOferta"));
-//	}
-
 
 }

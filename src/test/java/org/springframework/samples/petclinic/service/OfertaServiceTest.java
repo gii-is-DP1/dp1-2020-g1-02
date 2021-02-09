@@ -2,8 +2,11 @@ package org.springframework.samples.petclinic.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.Optional;
+
+import javax.validation.ConstraintViolationException;
 
 import org.assertj.core.util.Lists;
 import org.junit.jupiter.api.Test;
@@ -61,13 +64,21 @@ public class OfertaServiceTest {
 		assertEquals(false, ofertaService.findOfertaById(1).isPresent());
 	}
 	
-	
-	
 	//Test negativos
 	@Test
 	public void testNoEncuentraOfertaById() {
 		Optional<Oferta> ofertaFind = ofertaService.findOfertaById(50);
 		assertEquals(false, ofertaFind.isPresent());
+	}
+	
+	@Test
+	public void testGuardarOfertaSinProveedor() {
+		
+		Oferta ofertaGuardar = new Oferta();
+		ofertaGuardar.setName("lejia");
+		ofertaGuardar.setPrecioU(2.85);
+		ofertaGuardar.setProveedor(null);
+		assertThrows(ConstraintViolationException.class, ()->ofertaService.save(ofertaGuardar));
 	}
 
 }

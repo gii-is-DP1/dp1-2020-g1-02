@@ -1,9 +1,7 @@
 package org.springframework.samples.petclinic.web;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
 import java.util.Iterator;
 import java.util.regex.Pattern;
 import org.springframework.beans.factory.annotation.Autowired;

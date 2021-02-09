@@ -1,10 +1,7 @@
 package org.springframework.samples.petclinic.web;
 
 import static org.mockito.BDDMockito.given;
-import static org.mockito.BDDMockito.any;
-import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
@@ -13,7 +10,6 @@ import java.time.LocalDate;
 
 import javax.persistence.EntityManager;
 
-import org.assertj.core.util.Lists;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -106,24 +102,8 @@ public class MensajesControllerTest {
 	void testNewPedido() throws Exception {
 		mockMvc.perform(get("/mensajes/new"))
 		.andExpect(status().isOk())
-		.andExpect(model().attributeExists("users", "size", "mensaje"))
+		.andExpect(model().attributeExists("users", "mensaje"))
 		.andExpect(view().name("mensajes/newMensaje"));
 	}
-	
-//	@WithMockUser(value = "spring")
-//    @Test
-//    void testSalvarMensaje() throws Exception {
-//		mockMvc.perform(post("/mensajes/save")
-//						.with(csrf())
-//						.param("receptores", "prueba2")
-//						.param("emisor", "prueba1")
-//						.param("fecha", "2021/02/08")
-//						.param("asunto", "Prueba")
-//						.param("cuerpo", "esto es una prueba")
-//						.param("leido", "false")
-//						)
-//			.andExpect(status().isOk())
-//			.andExpect(view().name("redirect:/mensajes"));
-//	}
 
 }
